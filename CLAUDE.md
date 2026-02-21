@@ -37,13 +37,19 @@ Each blog post is a self-contained HTML file with inline styles. There is no sha
 ### Dark Mode
 - Theme state is persisted in `localStorage` under key `theme`
 - Theme is applied via `dark-mode` class on the `body` element
-- `initTheme()` reads from localStorage on page load
-- Index page has a toggle button; individual blog posts only auto-load saved theme
+- **Index page**: `initTheme()` reads from localStorage AND checks system preference (`prefers-color-scheme: dark`); includes toggle button
+- **Individual blog posts**: Only auto-load saved theme from localStorage; no toggle button provided
 
 ### Homepage Layout
 - CSS Grid-based responsive card layout (`blog-list`)
 - Cards include cover image, category badge, title, excerpt, and metadata
 - Hover animations: `slideInUp` for entry, scale effect on cover images
+
+### Individual Blog Post Layout
+- Content wrapped in `.blog-post-content` div (max-width 800px)
+- Uses same design tokens and dark mode classes as homepage
+- No theme toggle button; theme auto-loads from localStorage
+- Content includes h3 headings, paragraphs, lists, and optionally tables
 
 ## Adding a New Blog Post
 
@@ -65,9 +71,6 @@ python3 -m http.server 8000
 # Option 3: Use Node.js http-server (if installed)
 npx http-server
 ```
-
-### Add a new blog post
-Create a new HTML file in the root directory following the structure of existing posts (serum-cholesterol.html is a good template).
 
 ## Notes
 
