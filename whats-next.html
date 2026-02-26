@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e293b" />
+    <title>5 Articles to figure out what's next - My Blog</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1e40af;
+        --accent: #f97316;
+        --success: #10b981;
+        --warning: #f59e0b;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        line-height: 1.6;
+        color: #1f2937;
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        min-height: 100vh;
+        padding: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      body.dark-mode {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #f1f5f9;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px 20px 30px;
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-family: 'Crimson Text', serif;
+        font-size: 3rem;
+        font-weight: 600;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 12px;
+        letter-spacing: -1px;
+      }
+
+      .blog-post-content {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(17, 24, 39, 0.08);
+      }
+
+      body.dark-mode .blog-post-content {
+        background: #1e293b;
+      }
+
+      .blog-post-content h3 {
+        font-family: 'Crimson Text', serif;
+        font-size: 1.8rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: #111827;
+      }
+
+      body.dark-mode .blog-post-content h3 {
+        color: #f1f5f9;
+      }
+
+      .blog-post-content p {
+        margin-bottom: 15px;
+        color: #4b5563;
+      }
+
+      body.dark-mode .blog-post-content p,
+      body.dark-mode .blog-post-content li {
+        color: #9ca3af;
+      }
+
+      .article-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .article-item {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f3f4f6;
+      }
+
+      body.dark-mode .article-item {
+        border-bottom-color: #334155;
+      }
+
+      .article-item:last-child {
+        border-bottom: none;
+      }
+
+      .article-title {
+        font-family: 'Crimson Text', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .article-title:hover {
+        text-decoration: underline;
+      }
+
+      .article-meta {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 30px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        text-align: center;
+        padding: 60px 20px;
+        color: #64748b;
+        border-top: 1px solid #e2e8f0;
+        margin-top: 40px;
+        font-size: 0.95rem;
+      }
+
+      body.dark-mode footer {
+        border-top-color: #334155;
+        color: #94a3b8;
+      }
+
+      footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+
+      footer a:hover {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="index.html" class="back-link">← Back to Blog</a>
+        <h1>5 Articles to figure out what's next</h1>
+      </header>
+      <main class="blog-post-content">
+        <p>A curated selection of articles to help you navigate your career, find your passion, and decide on your next big move.</p>
+        
+        <div class="article-list">
+          <div class="article-item">
+            <a href="https://paulgraham.com/love.html" target="_blank" rel="noopener noreferrer" class="article-title">How to Do What You Love</a>
+            <span class="article-meta">by Paul Graham</span>
+            <p>A deep exploration of how to find work that you are genuinely passionate about and the common pitfalls along the way.</p>
+          </div>
+
+          <div class="article-item">
+            <a href="https://sive.rs/hyn" target="_blank" rel="noopener noreferrer" class="article-title">Hell Yeah or No</a>
+            <span class="article-meta">by Derek Sivers</span>
+            <p>A simple but powerful framework for decision-making: if you're not saying "Hell Yeah!" about something, say no.</p>
+          </div>
+
+          <div class="article-item">
+            <a href="https://waitbutwhy.com/2018/04/picking-career.html" target="_blank" rel="noopener noreferrer" class="article-title">How to Pick a Career (That Actually Fits You)</a>
+            <span class="article-meta">by Wait But Why</span>
+            <p>An exhaustive, visual guide to deconstructing your "Yearning Octopus" and building a career path that aligns with your true self.</p>
+          </div>
+
+          <div class="article-item">
+            <a href="https://www.theatlantic.com/ideas/archive/2025/06/make-your-work-your-calling/683330/" target="_blank" rel="noopener noreferrer" class="article-title">Make Your Work Your Calling</a>
+            <span class="article-meta">by The Atlantic</span>
+            <p>Exploring the shift from seeing work as a job or career to viewing it as a meaningful calling.</p>
+          </div>
+
+          <div class="article-item">
+            <a href="https://pmarchive.com/guide_to_career_planning_part1.html" target="_blank" rel="noopener noreferrer" class="article-title">The Pmarca Guide to Career Planning</a>
+            <span class="article-meta">by Marc Andreessen</span>
+            <p>Practical and contrarian advice on how to plan your career in a rapidly changing world.</p>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          © 2026 My Blog |
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
+          <a href="#" target="_blank">Twitter</a>
+        </p>
+      </footer>
+    </div>
+    <script>
+      function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.body.classList.add('dark-mode');
+        }
+      }
+      document.addEventListener('DOMContentLoaded', initTheme);
+    </script>
+  </body>
+</html>
