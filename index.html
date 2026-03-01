@@ -40,6 +40,10 @@
         z-index: 100;
       }
 
+      body.dark-mode header {
+        background-color: #1e293b;
+      }
+
       .header-left {
         display: flex;
         align-items: center;
@@ -259,6 +263,13 @@
         background: #1a5c38;
         border-color: #1a5c38;
         color: #fff;
+      }
+
+      body.dark-mode .filter-pill:hover,
+      body.dark-mode .filter-pill.active {
+        background: #334155;
+        border-color: #475569;
+        color: #e2e8f0;
       }
 
       /* ── CARD GRID ── */
@@ -548,7 +559,7 @@
         </div>
       </div>
       <div class="toggle-wrap">
-        <span class="toggle-label" id="toggle-label">Dark</span>
+        <span class="toggle-label" id="toggle-label">☀️</span>
         <label class="switch">
           <input type="checkbox" id="theme-switch" onchange="toggleTheme()">
           <span class="slider"></span>
@@ -949,7 +960,7 @@
       function toggleTheme() {
         const isDark = document.getElementById('theme-switch').checked;
         document.body.classList.toggle('dark-mode', isDark);
-        document.getElementById('toggle-label').textContent = isDark ? 'Light' : 'Dark';
+        document.getElementById('toggle-label').textContent = isDark ? '🌙' : '☀️';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       }
 
@@ -959,7 +970,7 @@
         if (saved === 'dark' || (saved === null && prefersDark)) {
           document.getElementById('theme-switch').checked = true;
           document.body.classList.add('dark-mode');
-          document.getElementById('toggle-label').textContent = 'Light';
+          document.getElementById('toggle-label').textContent = '🌙';
         }
       }
 
