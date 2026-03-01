@@ -539,11 +539,101 @@
 
       body.dark-mode footer a { color: #7dd3a8; }
 
+      /* ── TICKER ── */
+      .ticker-bar {
+        display: flex;
+        align-items: stretch;
+        background: #245a36;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      body.dark-mode .ticker-bar {
+        background: #151e2d;
+        border-bottom-color: #1e293b;
+      }
+
+      .ticker-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 18px;
+        background: rgba(255,255,255,0.12);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff;
+        flex-shrink: 0;
+        border-right: 1px solid rgba(255,255,255,0.1);
+      }
+
+      body.dark-mode .ticker-label {
+        background: rgba(255,255,255,0.06);
+        color: #a7d7b8;
+        border-right-color: rgba(255,255,255,0.06);
+      }
+
+      .ticker-scroll-area {
+        overflow: hidden;
+        flex: 1;
+      }
+
+      .ticker-track {
+        display: inline-block;
+        white-space: nowrap;
+        animation: ticker-scroll 10s linear infinite;
+      }
+
+      .ticker-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes ticker-scroll {
+        0%   { transform: translateX(100vw); }
+        100% { transform: translateX(-100%); }
+      }
+
+      .ticker-link {
+        display: inline-block;
+        padding: 8px 48px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        letter-spacing: 0.2px;
+        transition: color 0.2s;
+      }
+
+      .ticker-link:hover {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255,255,255,0.3);
+      }
+
+      .ticker-spacer {
+        display: inline-block;
+        width: 60px;
+      }
+
+      body.dark-mode .ticker-link {
+        color: rgba(167,215,184,0.8);
+      }
+
+      body.dark-mode .ticker-link:hover {
+        color: #a7d7b8;
+        text-shadow: 0 0 8px rgba(167,215,184,0.25);
+      }
+
       /* ── RESPONSIVE ── */
       @media (max-width: 600px) {
         header { padding: 14px 16px; }
         .page { padding: 24px 14px 60px; }
         .blog-grid { grid-template-columns: 1fr; }
+        .ticker-track { animation-duration: 18s; }
+        .ticker-link { padding: 7px 32px; font-size: 0.78rem; }
+        .ticker-label { padding: 6px 12px; font-size: 0.68rem; letter-spacing: 0.5px; }
       }
     </style>
   </head>
@@ -566,6 +656,14 @@
         </label>
       </div>
     </header>
+
+    <!-- ── TICKER ── -->
+    <div class="ticker-bar" id="ticker-bar">
+      <div class="ticker-label">⭐ Blog of the Day</div>
+      <div class="ticker-scroll-area">
+        <div class="ticker-track" id="ticker-track"></div>
+      </div>
+    </div>
 
     <!-- ── PAGE ── -->
     <div class="page">
@@ -966,15 +1064,61 @@
 
       function initTheme() {
         const saved = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (saved === null && prefersDark)) {
+        // Default to dark mode unless user has explicitly saved 'light'
+        if (saved !== 'light') {
           document.getElementById('theme-switch').checked = true;
           document.body.classList.add('dark-mode');
           document.getElementById('toggle-label').textContent = '🌙';
         }
       }
 
-      document.addEventListener('DOMContentLoaded', initTheme);
+      /* ── TICKER ── */
+      function initTicker() {
+        const cards = document.querySelectorAll('.blog-card');
+        if (!cards.length) return;
+
+        // Collect blog data
+        const blogs = [];
+        cards.forEach(card => {
+          const title = card.dataset.title;
+          const linkEl = card.querySelector('.read-btn');
+          const href = linkEl ? linkEl.getAttribute('href') : '#';
+          if (title) blogs.push({ title, href });
+        });
+        if (!blogs.length) return;
+
+        // 24-hour rotation via localStorage
+        const DAY_MS = 24 * 60 * 60 * 1000;
+        const savedTs = parseInt(localStorage.getItem('ticker-ts'), 10);
+        const savedIdx = parseInt(localStorage.getItem('ticker-idx'), 10);
+        let chosen;
+
+        if (savedTs && !isNaN(savedIdx) && (Date.now() - savedTs) < DAY_MS && savedIdx < blogs.length) {
+          chosen = blogs[savedIdx];
+        } else {
+          const idx = Math.floor(Math.random() * blogs.length);
+          chosen = blogs[idx];
+          localStorage.setItem('ticker-idx', idx);
+          localStorage.setItem('ticker-ts', Date.now());
+        }
+
+        // Build single scrolling link
+        const track = document.getElementById('ticker-track');
+        const a = document.createElement('a');
+        a.className = 'ticker-link';
+        a.href = chosen.href;
+        if (chosen.href.startsWith('http')) {
+          a.target = '_blank';
+          a.rel = 'noopener';
+        }
+        a.textContent = '📌 ' + chosen.title + '  →  Read now';
+        track.appendChild(a);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        initTicker();
+      });
     </script>
   </body>
 </html>
