@@ -405,12 +405,20 @@ main {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
 }
 
 .post-card__media {
   min-height: 210px;
   background-size: cover;
   background-position: center;
+  transition:
+    transform 280ms ease,
+    filter 280ms ease;
 }
 
 .post-card__body {
@@ -418,6 +426,19 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.post-card:hover,
+.post-card:focus-within {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--accent-secondary) 38%, var(--border));
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.22);
+}
+
+.post-card:hover .post-card__media,
+.post-card:focus-within .post-card__media {
+  transform: scale(1.04);
+  filter: saturate(1.08) brightness(1.04);
 }
 
 .post-card h2 {

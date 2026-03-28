@@ -16,13 +16,12 @@ export function AiAgentsMasteryArticle() {
               person versus an extremely literal person.
             </blockquote>
             <ul>
-              <li>Write a detailed specification document before you begin.</li>
+              <li>Before starting any project, write a detailed specification document.</li>
               <li>
-                Ask Claude to interview you first, then let it draft the spec.
+                Ask Claude to interview you about what you want to build, then let it create the spec.
               </li>
               <li>
-                Treat prompts like a message in a bottle: they should work
-                without follow-up clarification.
+                The "message in a bottle" approach - your instructions must be detailed enough to work without clarification.
               </li>
             </ul>
           </div>
@@ -52,9 +51,9 @@ export function AiAgentsMasteryArticle() {
               I&apos;ve got my five agents being minded by another agent.
             </blockquote>
             <ul>
-              <li>Practice running multiple agent sessions in parallel.</li>
-              <li>Have one agent review or coordinate another&apos;s work.</li>
-              <li>Build specialized swarms for repeated workflows.</li>
+              <li>Practice running multiple Claude sessions in parallel.</li>
+              <li>Design workflows where one agent reviews another's work.</li>
+              <li>Build "swarms" - specialized agents for specialized tasks.</li>
             </ul>
           </div>
         </article>
@@ -64,20 +63,17 @@ export function AiAgentsMasteryArticle() {
           <div>
             <h2>Separate schlep work from creative work</h2>
             <blockquote>
-              Most people can do about two to four hours of genuinely useful
-              creative work a day.
+              Most people can do about two to four hours of genuinely useful creative work a day. After that, you're doing turn-your-brain-off schlep work.
             </blockquote>
             <ul>
               <li>
-                Use AI for documentation, boilerplate, synthesis, and
-                transformation.
+                Use AI for: documentation, boilerplate, research synthesis, data transformation.
               </li>
               <li>
-                Save your best energy for strategy, creative leaps, and
-                relationships.
+                Reserve YOUR energy for: strategic decisions, creative leaps, relationship building.
               </li>
               <li>
-                Optimize your day around your most valuable human thinking.
+                The goal: spend your 2-4 creative hours on actual hard thinking.
               </li>
             </ul>
           </div>
@@ -92,10 +88,10 @@ export function AiAgentsMasteryArticle() {
               system gives you advice.
             </blockquote>
             <ul>
-              <li>Keep a daily journaling practice without AI at first.</li>
-              <li>Understand your own biases before outsourcing judgment.</li>
+              <li>Maintain a daily journaling practice (without AI initially.</li>
+              <li>Understand your own biases before letting AI shape your thinking.</li>
               <li>
-                Stay grounded so AI advice does not define your personality.
+                If you discover yourself in partnership with AI, you're vulnerable to its failures and personality.
               </li>
             </ul>
           </div>
@@ -111,10 +107,10 @@ export function AiAgentsMasteryArticle() {
             </blockquote>
             <ul>
               <li>
-                Use AI to rehearse empathy before hard conversations.
+                Practice using AI to see situations from others' perspectives.
               </li>
-              <li>Explore how the other person may be experiencing events.</li>
-              <li>Let it sharpen your questions, not replace your judgment.</li>
+              <li>Use it for empathy exercises before difficult conversations.</li>
+              <li>Don't let it replace your judgment.</li>
             </ul>
           </div>
         </article>
@@ -145,10 +141,10 @@ export function AiAgentsMasteryArticle() {
               Maybe I&apos;m in the wrong place.
             </blockquote>
             <ul>
-              <li>Notice how agents think out loud and self-correct.</li>
-              <li>Write prompts that reward error detection and recovery.</li>
+              <li>Notice how agents "think out loud" and course-correct.</li>
+              <li>Learn to write prompts that encourage self-correction.</li>
               <li>
-                Structure tasks so agents can spot and fix their own mistakes.
+                Structure tasks so agents can recognize and recover from mistakes.
               </li>
             </ul>
           </div>
@@ -162,11 +158,10 @@ export function AiAgentsMasteryArticle() {
               We recently published a constitution for our AI system.
             </blockquote>
             <ul>
-              <li>Follow Import AI for regular research updates.</li>
-              <li>Study Anthropic&apos;s work on interpretability and behavior.</li>
+              <li>Follow Jack Clark's newsletter "Import AI" for weekly updates.</li>
+              <li>Study Anthropic's research on interpretability and AI personality emergence.</li>
               <li>
-                Understand evaluation gaming, alignment risks, and emergent
-                behavior.
+                Understand the risks: evaluation gaming, emergent behaviors, alignment challenges.
               </li>
             </ul>
           </div>
@@ -187,12 +182,13 @@ export function AiAgentsMasteryArticle() {
                 synthesis, and physical-world expertise.
               </li>
               <li>
-                Become great at translating human intent into agent-ready
-                instructions.
+                Become a translator: someone who can specify what humans want to AI systems.
               </li>
               <li>
-                Keep the discipline to do hard thinking even when shortcuts are
-                available.
+                Develop the discipline to do hard thinking even when AI makes shortcuts tempting.
+              </li>
+              <li>
+                Learn to evaluate AI output critically - don't just accept B+ reports 
               </li>
             </ul>
           </div>
