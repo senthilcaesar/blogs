@@ -12,8 +12,14 @@ async function copyPostLink(post) {
 
   try {
     await navigator.clipboard.writeText(target);
+    return true;
   } catch {
-    window.prompt('Copy this link:', target);
+    try {
+      window.prompt('Copy this link:', target);
+      return true;
+    } catch {
+      return false;
+    }
   }
 }
 
@@ -22,6 +28,18 @@ export function PostCard({ post }) {
     post.type === 'comingSoon'
       ? 'Coming soon'
       : 'Read now';
+
+  async function handleCopy() {
+    const success = await copyPostLink(post);
+    window.dispatchEvent(
+      new CustomEvent('app-toast', {
+        detail: {
+          message: success ? 'Copied' : 'Copy failed',
+          type: success ? 'success' : 'error',
+        },
+      }),
+    );
+  }
 
   return (
     <article className="post-card">
@@ -61,7 +79,7 @@ export function PostCard({ post }) {
               className="icon-button"
               type="button"
               title="Copy share link"
-              onClick={() => copyPostLink(post)}
+              onClick={handleCopy}
             >
               <Copy size={16} />
             </button>

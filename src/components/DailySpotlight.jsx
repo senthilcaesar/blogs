@@ -9,7 +9,6 @@ export function DailySpotlight({ post }) {
   return (
     <section className="spotlight-card">
       <div className="spotlight-card__meta">
-        <span className="spotlight-label">Spotlight of the day</span>
         <span className="post-meta">
           <CalendarRange size={14} />
           Rotates daily

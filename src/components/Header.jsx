@@ -1,12 +1,35 @@
 import { BookOpenText, Code2, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 
 export function Header({ isDark, onToggleTheme, onOpenTechStack }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function handleBrandClick(event) {
+    const resetAndScrollToArticles = () => {
+      window.dispatchEvent(new CustomEvent('app-reset-articles'));
+      window.requestAnimationFrame(() => {
+        const section = document.getElementById('articles');
+        section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    };
+
+    if (location.pathname === '/') {
+      event.preventDefault();
+      resetAndScrollToArticles();
+      return;
+    }
+
+    event.preventDefault();
+    window.sessionStorage.setItem('scroll-target', 'reset-articles');
+    navigate('/');
+  }
+
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <Link className="brand" to="/">
+        <Link className="brand" to="/" onClick={handleBrandClick}>
           <div className="brand__mark">
             <BookOpenText size={22} />
           </div>
