@@ -1,9 +1,12 @@
 {
   "name": "blogs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Personal knowledge hub rebuilt with React and Vite.",
+  "type": "module",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
@@ -15,14 +18,27 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/senthilcaesar/blogs/issues"
   },
-  "homepage": "https://github.com/senthilcaesar/blogs#readme",
+  "homepage": "https://senthilcaesar.github.io/blogs/",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.542.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0"
+  },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.7.0",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^5.0.0",
     "@vitest/ui": "^4.0.18",
     "jsdom": "^28.1.0",
+    "vite": "^8.0.0",
     "vitest": "^4.0.18"
   }
 }

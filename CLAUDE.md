@@ -4,23 +4,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a simple static HTML blog website - no build tools, package managers, or frameworks are used. The site can be served directly by opening `index.html` in a browser or using any static file server.
+This is now a React + Vite blog application. Legacy standalone HTML pages from the pre-migration site are kept in `legacy-html/` for reference.
 
 ## Project Structure
 
 ```
 /
-├── index.html              # Homepage with blog post card grid
-├── serum-cholesterol.html  # Individual blog post
-├── export-platforms.html   # Individual blog post
-├── eric-mosley-interview.html  # Individual blog post
+├── index.html              # Vite app entrypoint
+├── src/                    # React app source
+├── legacy-html/            # Archived standalone HTML pages from the old site
 └── images/                 # Static assets for blog post covers
 ```
 
 ## Architecture
 
-### Single-Page HTML Files
-Each blog post is a self-contained HTML file with inline styles. There is no shared CSS or JavaScript - styles are duplicated across files.
+### React App
+The active app lives under `src/` and is bundled with Vite. Shared CSS and components power the current site.
 
 ### Design System
 - **Colors**: Defined in CSS `:root` variables:
@@ -40,36 +39,25 @@ Each blog post is a self-contained HTML file with inline styles. There is no sha
 - **Index page**: `initTheme()` reads from localStorage AND checks system preference (`prefers-color-scheme: dark`); includes toggle button
 - **Individual blog posts**: Only auto-load saved theme from localStorage; no toggle button provided
 
-### Homepage Layout
-- CSS Grid-based responsive card layout (`blog-list`)
-- Cards include cover image, category badge, title, excerpt, and metadata
-- Hover animations: `slideInUp` for entry, scale effect on cover images
-
-### Individual Blog Post Layout
-- Content wrapped in `.blog-post-content` div (max-width 800px)
-- Uses same design tokens and dark mode classes as homepage
-- No theme toggle button; theme auto-loads from localStorage
-- Content includes h3 headings, paragraphs, lists, and optionally tables
+### Legacy HTML Files
+The archived files in `legacy-html/` reflect the old static site structure and are not the current runtime entrypoints.
 
 ## Adding a New Blog Post
 
-1. Create a new HTML file (e.g., `new-post.html`) following the pattern of existing posts
-2. Add a cover image to the `images/` directory
-3. Add a new `<article>` card to the blog grid in `index.html`
-4. Update the card's href and thumbnail path
+1. Add or update post data in `src/data/posts.js`
+2. Add a React article component under `src/content/articles/` if the post is local
+3. Add any needed cover image to `images/`
+4. Update routes or shared UI only if the new post needs new behavior
 
 ## Common Development Tasks
 
 ### View the site locally
 ```bash
-# Option 1: Open directly in browser
-open index.html
+# Start the Vite dev server
+npm run dev
 
-# Option 2: Use Python simple server (Python 3)
-python3 -m http.server 8000
-
-# Option 3: Use Node.js http-server (if installed)
-npx http-server
+# Build the production bundle
+npm run build
 ```
 
 ## Notes
