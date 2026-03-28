@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10 steps to master AI agents and Claude Code - AI Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #0b0f19;
+        --text-color: #f1f5f9;
+        --accent-cyan: #00f3ff;
+        --accent-magenta: #ff00ea;
+        --accent-violet: #7000ff;
+        --card-bg: rgba(15, 23, 42, 0.6);
+        --card-border: rgba(148, 163, 184, 0.1);
+        --gradient-mesh: radial-gradient(at 0% 0%, rgba(112,0,255,0.1) 0px, transparent 50%),
+                         radial-gradient(at 100% 0%, rgba(0,243,255,0.1) 0px, transparent 50%),
+                         radial-gradient(at 100% 100%, rgba(255,0,234,0.05) 0px, transparent 50%);
+      }
+
+      body.light-mode {
+        --bg-color: #f0f4f8;
+        --text-color: #1e293b;
+        --accent-cyan: #0284c7;
+        --accent-magenta: #db2777;
+        --accent-violet: #6d28d9;
+        --card-bg: rgba(255, 255, 255, 0.8);
+        --card-border: rgba(0, 0, 0, 0.1);
+        --gradient-mesh: radial-gradient(at 0% 0%, rgba(109,40,217,0.05) 0px, transparent 50%),
+                         radial-gradient(at 100% 0%, rgba(2,132,199,0.05) 0px, transparent 50%),
+                         radial-gradient(at 100% 100%, rgba(219,39,119,0.05) 0px, transparent 50%);
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+        background-color: var(--bg-color);
+        background-image: var(--gradient-mesh);
+        background-attachment: fixed;
+        color: var(--text-color);
+        line-height: 1.7;
+        min-height: 100vh;
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        transform: translateX(-5px);
+        text-shadow: 0 0 8px var(--accent-cyan);
+      }
+
+      header {
+        margin-bottom: 60px;
+        text-align: left;
+      }
+
+      .category {
+        display: inline-block;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 1.1;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 24px;
+      }
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 32px;
+        padding-top: 32px;
+        border-top: 1px solid var(--card-border);
+      }
+
+      .author-avatar {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+      }
+
+      .author-details p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      .author-name {
+        font-weight: 700;
+        color: var(--text-color);
+        font-size: 1.1rem;
+      }
+
+      .blog-content {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        padding: 48px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      }
+
+      .point {
+        margin-bottom: 48px;
+        position: relative;
+        padding-left: 48px;
+        border-bottom: 1px solid var(--card-border);
+        padding-bottom: 24px;
+      }
+      
+      .point:last-of-type {
+          border-bottom: none;
+      }
+
+      .point::before {
+        content: attr(data-number);
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--accent-cyan);
+        opacity: 0.5;
+      }
+
+      .point h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        margin-bottom: 16px;
+        line-height: 1.3;
+      }
+
+      .quote {
+        border-left: 4px solid var(--accent-magenta);
+        padding: 12px 20px;
+        background: rgba(255, 0, 234, 0.05);
+        border-radius: 0 12px 12px 0;
+        font-style: italic;
+        margin-bottom: 20px;
+        opacity: 0.9;
+        font-size: 1.05rem;
+      }
+
+      .point ul {
+        list-style-type: none;
+        margin-left: 0;
+      }
+
+      .point ul li {
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 12px;
+        opacity: 0.85;
+      }
+
+      .point ul li::before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--accent-cyan);
+        font-weight: bold;
+      }
+
+      .recommended-books {
+          margin-top: 40px;
+          padding: 32px;
+          background: rgba(112, 0, 255, 0.05);
+          border: 1px solid rgba(112, 0, 255, 0.2);
+          border-radius: 16px;
+      }
+
+      .recommended-books h2 {
+          font-family: 'Orbitron', sans-serif;
+          font-size: 1.5rem;
+          color: var(--accent-violet);
+          margin-bottom: 20px;
+      }
+
+      .books-list {
+          list-style: none;
+      }
+
+      .books-list li {
+          margin-bottom: 16px;
+          display: flex;
+          gap: 12px;
+      }
+
+      .book-number {
+          color: var(--accent-violet);
+          font-weight: 700;
+          font-family: 'Orbitron', sans-serif;
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 40px;
+        border-top: 1px solid var(--card-border);
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.6;
+      }
+
+      @media (max-width: 600px) {
+        .container { padding: 40px 16px; }
+        h1 { font-size: 2rem; }
+        .blog-content { padding: 24px; }
+        .point { padding-left: 32px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-link">← Back to Hub</a>
+      
+      <header>
+        <span class="category">AI Strategy</span>
+        <h1>10 steps to master AI agents and Claude Code</h1>
+        
+        <div class="author-info">
+          <div class="author-avatar">JC</div>
+          <div class="author-details">
+            <p class="author-name">Jack Clark</p>
+            <p>Co-Founder of Anthropic</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="blog-content">
+        <p style="margin-bottom: 32px; font-size: 1.1rem; opacity: 0.8;">Based on the insights from Jack Clark's discussion, here are 10 steps to master AI agents and Claude Code:</p>
+
+        <div class="point" data-number="1">
+          <h3>Master Specification Writing</h3>
+          <div class="quote">"The mistake is thinking Claude Code is like a knowledgeable person versus an extremely literal person."</div>
+          <ul>
+            <li>Before starting any project, write a detailed specification document</li>
+            <li>Use Claude's interview feature: Ask Claude to interview YOU about what you want to build, then let it create the spec</li>
+            <li>The "message in a bottle" approach - your instructions must be detailed enough to work without clarification</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="2">
+          <h3>Start Small, Build Complexity Gradually</h3>
+          <div class="quote">"In about 10 minutes it wrote a basic simulation... something that would take a skilled programmer several hours."</div>
+          <ul>
+            <li>Begin with small projects (species simulator, simple tools)</li>
+            <li>Each project teaches you how the system thinks and fails</li>
+            <li>Keep notes on what worked and what didn't</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="3">
+          <h3>Learn Multi-Agent Orchestration</h3>
+          <div class="quote">"I've seen colleagues who write a version of Claude that runs other Claudes... I've got my five agents being minded by another agent."</div>
+          <ul>
+            <li>Practice running multiple Claude sessions in parallel</li>
+            <li>Design workflows where one agent reviews another's work</li>
+            <li>Build "swarms" - specialized agents for specialized tasks</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="4">
+          <h3>Distinguish Schlep Work from Creative Work</h3>
+          <div class="quote">"Most people can do about two to four hours of genuinely useful creative work a day. After that, you're doing turn-your-brain-off schlep work."</div>
+          <ul>
+            <li>Use AI for: documentation, boilerplate, research synthesis, data transformation</li>
+            <li>Reserve YOUR energy for: strategic decisions, creative leaps, relationship building</li>
+            <li>The goal: spend your 2-4 creative hours on actual hard thinking</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="5">
+          <h3>Develop Self-Knowledge Outside AI</h3>
+          <div class="quote">"You have to know yourself... to be able to critique how this AI system gives you advice."</div>
+          <ul>
+            <li>Maintain a daily journaling practice (without AI initially)</li>
+            <li>Understand your own biases before letting AI shape your thinking</li>
+            <li>If you discover yourself in partnership with AI, you're vulnerable to its failures and personality</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="6">
+          <h3>Use AI as a Perspective-Taking Tool</h3>
+          <div class="quote">"I'm in conflict with someone... Could you ask me questions about how they're feeling?"</div>
+          <ul>
+            <li>Practice using AI to see situations from others' perspectives</li>
+            <li>Use it for empathy exercises before difficult conversations</li>
+            <li>"I talked to Claude and we came to understand you might be feeling this way..."</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="7">
+          <h3>Build Technical Foundations</h3>
+          <ul>
+            <li>Learn basic programming (Python, JavaScript)</li>
+            <li>Understand how agents use tools, files, and environments</li>
+            <li>Study the difference between chatbots (talkers) and agents (doers who work over time)</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="8">
+          <h3>Study Prompt Engineering Patterns</h3>
+          <div class="quote">"Claude asked me to go find this research paper, but when I look in the archive, I don't see it. Maybe I'm in the wrong place."</div>
+          <ul>
+            <li>Notice how agents "think out loud" and course-correct</li>
+            <li>Learn to write prompts that encourage self-correction</li>
+            <li>Structure tasks so agents can recognize and recover from mistakes</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="9">
+          <h3>Read the AI Safety & Interpretability Literature</h3>
+          <div class="quote">"We recently published a constitution for our AI system... a letter that a parent might write to a child."</div>
+          <ul>
+            <li>Follow Jack Clark's newsletter "Import AI" for weekly updates</li>
+            <li>Study Anthropic's research on interpretability and AI personality emergence</li>
+            <li>Understand the risks: evaluation gaming, emergent behaviors, alignment challenges</li>
+          </ul>
+        </div>
+
+        <div class="point" data-number="10">
+          <h3>Position Yourself for the Future</h3>
+          <div class="quote">"There will be people who have co-created their personality through AI... and people who worked on understanding themselves outside the bubble."</div>
+          <ul>
+            <li>Build skills AI can't easily replicate: deep relationships, physical world expertise, creative synthesis</li>
+            <li>Become a translator: someone who can specify what humans want to AI systems</li>
+            <li>Learn to evaluate AI output critically - don't just accept B+ reports</li>
+            <li>Develop the discipline to do hard thinking even when AI makes shortcuts tempting</li>
+          </ul>
+        </div>
+
+        <section class="recommended-books">
+            <h2>Recommended Books from the Interview</h2>
+            <ul class="books-list">
+                <li><span class="book-number">1.</span> <div><strong>"A Wizard of Earthsea" by Ursula Le Guin</strong> - Magic comes from knowing the true name of things</div></li>
+                <li><span class="book-number">2.</span> <div><strong>"The True Believer" by Eric Hoffer</strong> - Psychology of mass movements and strong beliefs</div></li>
+                <li><span class="book-number">3.</span> <div><strong>"There Is No Antimemetics Division" by qntm</strong> - Concepts that are dangerous just to think about</div></li>
+            </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>© 2026 Personal Knowledge Hub | Content based on Insights from Jack Clark</p>
+      </footer>
+    </div>
+
+    <script>
+      // Sync theme with localStorage
+      function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+          document.body.classList.add('light-mode');
+        } else if (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.body.classList.add('light-mode');
+        }
+      }
+      initTheme();
+    </script>
+  </body>
+</html>
