@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: 'Career Move Advice: Market, Company, Job',
+    slug: 'career-move-advice-andy-kofoid',
+    category: 'Career',
+    tags: ['career', 'strategy', 'advice'],
+    excerpt:
+      'Andy Kofoid, President of Databricks, shares why you should look at the market and company before focusing on your title or scope.',
+    image: imageUrl('andy.png'),
+    date: 'Apr 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/career-move-advice-andy-kofoid',
+    author: {
+      name: 'Andy Kofoid',
+      role: 'President of Databricks',
+      initials: 'AK',
+    },
+    hero: {
+      eyebrow: 'Career Strategy',
+      summary:
+        'Why the market and company trajectory matters more than your title or scope.',
+    },
+  },
+  {
     title: '10 steps to master AI agents and Claude Code',
     slug: 'ai-agents-mastery',
     category: 'AI',

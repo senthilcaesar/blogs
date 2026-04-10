@@ -4,6 +4,7 @@ import { ExportPlatformsArticle } from './ExportPlatformsArticle';
 import { SerumCholesterolArticle } from './SerumCholesterolArticle';
 import { SuccessfulInterviewArticle } from './SuccessfulInterviewArticle';
 import { WhatsNextArticle } from './WhatsNextArticle';
+import { AndyKofoidArticle } from './AndyKofoidArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -12,4 +13,5 @@ export const articleRegistry = {
   'serum-cholesterol': SerumCholesterolArticle,
   'eric-mosley-interview': EricMosleyArticle,
   'export-platforms': ExportPlatformsArticle,
+  'career-move-advice-andy-kofoid': AndyKofoidArticle,
 };
