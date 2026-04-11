@@ -57,6 +57,7 @@ function HomePage() {
                 setQuery(event.target.value);
               })
             }
+            onClear={() => startTransition(() => setQuery(''))}
           />
           <div className="view-toggle" role="group" aria-label="View mode">
             <button

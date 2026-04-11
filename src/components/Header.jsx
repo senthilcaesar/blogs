@@ -31,7 +31,7 @@ export function Header({ isDark, onToggleTheme, onOpenTechStack }) {
       <div className="site-header__inner">
         <Link className="brand" to="/" onClick={handleBrandClick}>
           <div className="brand__mark">
-            <BookOpenText size={22} />
+            <BookOpenText size={20} />
           </div>
           <div>
             <h1>My Blogs</h1>
@@ -39,7 +39,7 @@ export function Header({ isDark, onToggleTheme, onOpenTechStack }) {
         </Link>
         <div className="header-actions">
           <button className="header-secondary-button" type="button" onClick={onOpenTechStack}>
-            <Code2 size={16} />
+            <Code2 size={15} />
             Tech Stack
           </button>
           <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
