@@ -1,4 +1,4 @@
-import { BookOpenText, Code2, Sparkles } from 'lucide-react';
+import { BookOpenText, Code2 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -34,10 +34,6 @@ export function Header({ isDark, onToggleTheme, onOpenTechStack }) {
             <BookOpenText size={22} />
           </div>
           <div>
-            <p className="brand__eyebrow">
-              <Sparkles size={14} />
-              Personal Knowledge Hub
-            </p>
             <h1>My Blogs</h1>
           </div>
         </Link>

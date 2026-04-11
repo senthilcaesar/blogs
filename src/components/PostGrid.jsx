@@ -1,7 +1,7 @@
 import { FileSearch } from 'lucide-react';
 import { PostCard } from './PostCard';
 
-export function PostGrid({ posts }) {
+export function PostGrid({ posts, view = 'list' }) {
   if (!posts.length) {
     return (
       <div className="empty-state" role="status">
@@ -13,9 +13,12 @@ export function PostGrid({ posts }) {
   }
 
   return (
-    <section className="post-grid" aria-label="Post results">
+    <section
+      className={`post-grid post-grid--${view}`}
+      aria-label="Post results"
+    >
       {posts.map((post) => (
-        <PostCard key={post.slug} post={post} />
+        <PostCard key={post.slug} post={post} view={view} />
       ))}
     </section>
   );

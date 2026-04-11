@@ -23,11 +23,9 @@ async function copyPostLink(post) {
   }
 }
 
-export function PostCard({ post }) {
+export function PostCard({ post, view = 'list' }) {
   const cardStatus =
-    post.type === 'comingSoon'
-      ? 'Coming soon'
-      : 'Read now';
+    post.type === 'comingSoon' ? 'Coming soon' : 'Read now';
 
   async function handleCopy() {
     const success = await copyPostLink(post);
@@ -41,36 +39,47 @@ export function PostCard({ post }) {
     );
   }
 
+  const isGrid = view === 'grid';
+
   return (
-    <article className="post-card">
+    <article className={`post-card post-card--${view}`}>
+      {/* Thumbnail / Media */}
       <div
-        className="post-card__media"
+        className="post-card__thumb"
         style={{ backgroundImage: `url(${post.image})` }}
         aria-hidden="true"
       />
+
+      {/* Body */}
       <div className="post-card__body">
+        {/* Top row: category + priority */}
         <div className="post-card__topline">
           <span className="post-chip">{post.category}</span>
           <span className={`priority-badge priority-badge--${post.priority.toLowerCase()}`}>
-            <Sparkles size={14} />
+            <Sparkles size={12} />
             {post.priority}
           </span>
         </div>
 
-        <h2>{post.title}</h2>
+        {/* Title */}
+        <h2 className="post-card__title">{post.title}</h2>
+
+        {/* Excerpt — always show in grid, hide in list when space is tight */}
         <p className="post-card__excerpt">{post.excerpt}</p>
 
-        <div className="tag-row">
-          {post.tags.map((tag) => (
-            <span className="tag" key={tag}>
-              {tag}
-            </span>
-          ))}
-        </div>
+        {/* Tags — only in grid view */}
+        {isGrid && (
+          <div className="tag-row">
+            {post.tags.map((tag) => (
+              <span className="tag" key={tag}>{tag}</span>
+            ))}
+          </div>
+        )}
 
+        {/* Footer: date + actions */}
         <div className="post-card__footer">
           <span className="post-meta">
-            <Clock3 size={14} />
+            <Clock3 size={13} />
             {post.date}
           </span>
 
@@ -81,13 +90,13 @@ export function PostCard({ post }) {
               title="Copy share link"
               onClick={handleCopy}
             >
-              <Copy size={16} />
+              <Copy size={14} />
             </button>
 
             {post.type === 'local' && (
               <Link className="cta-link" to={post.route}>
                 {cardStatus}
-                <ArrowRight size={16} />
+                <ArrowRight size={14} />
               </Link>
             )}
 
@@ -99,14 +108,14 @@ export function PostCard({ post }) {
                 rel="noreferrer"
               >
                 {cardStatus}
-                <ExternalLink size={16} />
+                <ExternalLink size={14} />
               </a>
             )}
 
             {post.type === 'comingSoon' && (
               <span className="cta-link cta-link--muted">
                 {cardStatus}
-                <ArrowRight size={16} />
+                <ArrowRight size={14} />
               </span>
             )}
           </div>

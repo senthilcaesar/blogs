@@ -1,3 +1,4 @@
+import { LayoutGrid, LayoutList } from 'lucide-react';
 import { startTransition, useDeferredValue, useEffect, useState } from 'react';
 import { HashRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { CategoryFilters } from './components/CategoryFilters';
@@ -19,6 +20,7 @@ const techStack = getProjectTechStack();
 function HomePage() {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
+  const [view, setView] = useState('grid');
   const deferredQuery = useDeferredValue(query);
   const visiblePosts = filterPosts(posts, deferredQuery, activeCategory);
 
@@ -47,14 +49,34 @@ function HomePage() {
   return (
     <div className="page-shell">
       <section className="control-panel" id="articles">
-        <SearchBar
-          value={query}
-          onChange={(event) =>
-            startTransition(() => {
-              setQuery(event.target.value);
-            })
-          }
-        />
+        <div className="panel-header">
+          <SearchBar
+            value={query}
+            onChange={(event) =>
+              startTransition(() => {
+                setQuery(event.target.value);
+              })
+            }
+          />
+          <div className="view-toggle" role="group" aria-label="View mode">
+            <button
+              className={`view-toggle__btn${view === 'list' ? ' is-active' : ''}`}
+              type="button"
+              title="List view"
+              onClick={() => setView('list')}
+            >
+              <LayoutList size={18} />
+            </button>
+            <button
+              className={`view-toggle__btn${view === 'grid' ? ' is-active' : ''}`}
+              type="button"
+              title="Grid view"
+              onClick={() => setView('grid')}
+            >
+              <LayoutGrid size={18} />
+            </button>
+          </div>
+        </div>
         <CategoryFilters
           categories={categories}
           activeCategory={activeCategory}
@@ -66,7 +88,7 @@ function HomePage() {
         />
       </section>
 
-      <PostGrid posts={visiblePosts} />
+      <PostGrid posts={visiblePosts} view={view} />
     </div>
   );
 }
