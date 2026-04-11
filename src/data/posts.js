@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: "AI Changed the rules at Duolingo",
+    slug: 'duolingo-ai-culture',
+    category: 'AI',
+    tags: ['ai', 'culture', 'product'],
+    excerpt:
+      'How Duolingo uses "vibe coding," prototypes, and technical literacy to drive quality outcomes for learners.',
+    image: imageUrl('duolingo.avif'),
+    date: 'Apr 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/duolingo-ai-culture',
+    author: {
+      name: 'Luis von Ahn',
+      role: 'CEO of Duolingo',
+      initials: 'LA',
+    },
+    hero: {
+      eyebrow: 'AI Culture',
+      summary:
+        'Operating principles for a high-performance AI culture that focuses on outcomes over inputs.',
+    },
+  },
+  {
     title: 'Career Move Advice: Market, Company, Job',
     slug: 'career-move-advice-andy-kofoid',
     category: 'Career',

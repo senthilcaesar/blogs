@@ -5,6 +5,7 @@ import { SerumCholesterolArticle } from './SerumCholesterolArticle';
 import { SuccessfulInterviewArticle } from './SuccessfulInterviewArticle';
 import { WhatsNextArticle } from './WhatsNextArticle';
 import { AndyKofoidArticle } from './AndyKofoidArticle';
+import { DuolingoAICultureArticle } from './DuolingoAICultureArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -14,4 +15,5 @@ export const articleRegistry = {
   'eric-mosley-interview': EricMosleyArticle,
   'export-platforms': ExportPlatformsArticle,
   'career-move-advice-andy-kofoid': AndyKofoidArticle,
+  'duolingo-ai-culture': DuolingoAICultureArticle,
 };
