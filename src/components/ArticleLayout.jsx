@@ -1,7 +1,34 @@
-import { ArrowLeft, CalendarRange, UserRound } from 'lucide-react';
+import { ArrowLeft, CalendarRange, Copy, UserRound } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function ArticleLayout({ post, children }) {
+  const handleCopyLink = async () => {
+    const baseUrl = window.location.origin + window.location.pathname;
+    const target = `${baseUrl}#/posts/${post.slug}`;
+
+    let success = false;
+    try {
+      await navigator.clipboard.writeText(target);
+      success = true;
+    } catch {
+      try {
+        window.prompt('Copy this link:', target);
+        success = true;
+      } catch {
+        success = false;
+      }
+    }
+
+    window.dispatchEvent(
+      new CustomEvent('app-toast', {
+        detail: {
+          message: success ? 'Link copied to clipboard!' : 'Copy failed',
+          type: success ? 'success' : 'error',
+        },
+      }),
+    );
+  };
+
   return (
     <article className="article-page">
       <Link className="back-link" to="/">
@@ -41,6 +68,10 @@ export function ArticleLayout({ post, children }) {
               </span>
             ))}
           </div>
+          <button className="article-share-btn" type="button" onClick={handleCopyLink}>
+            <Copy size={15} />
+            Copy Link
+          </button>
         </aside>
       </header>
 
