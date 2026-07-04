@@ -1,6 +1,6 @@
 import { LayoutGrid, LayoutList } from 'lucide-react';
 import { startTransition, useDeferredValue, useEffect, useState } from 'react';
-import { HashRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import { CategoryFilters } from './components/CategoryFilters';
 import { Header } from './components/Header';
 import { PostGrid } from './components/PostGrid';
@@ -126,6 +126,15 @@ export function AppRoutes() {
 function AppShell() {
   const { isDark, toggleTheme } = useTheme();
   const [isTechStackOpen, setIsTechStackOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo?.({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
+  }, [pathname]);
 
   return (
     <div className="app-shell">
