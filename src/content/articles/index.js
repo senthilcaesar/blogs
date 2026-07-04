@@ -6,6 +6,7 @@ import { SuccessfulInterviewArticle } from './SuccessfulInterviewArticle';
 import { WhatsNextArticle } from './WhatsNextArticle';
 import { AndyKofoidArticle } from './AndyKofoidArticle';
 import { DuolingoAICultureArticle } from './DuolingoAICultureArticle';
+import { AiAgentsMicroservicesArticle } from './AiAgentsMicroservicesArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -16,4 +17,5 @@ export const articleRegistry = {
   'export-platforms': ExportPlatformsArticle,
   'career-move-advice-andy-kofoid': AndyKofoidArticle,
   'duolingo-ai-culture': DuolingoAICultureArticle,
+  'ai-agents-microservices-intelligence': AiAgentsMicroservicesArticle,
 };

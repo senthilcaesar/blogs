@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: "AI Agents are nothing but micro services with Intelligence",
+    slug: 'ai-agents-microservices-intelligence',
+    category: 'AI',
+    tags: ['ai', 'agents', 'microservices'],
+    excerpt:
+      'Thinking of AI agents as "smart microservices" gets you most of the way there, and it\'s a great mental model to use.',
+    image: imageUrl('ai-microservices.png'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/ai-agents-microservices-intelligence',
+    author: {
+      name: 'Tech Notes',
+      role: 'AI & Systems Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'AI Architecture',
+      summary:
+        'Thinking of AI agents as "smart microservices" gets you most of the way there, and it\'s a great mental model to use.',
+    },
+  },
+  {
     title: "AI Changed the rules at Duolingo",
     slug: 'duolingo-ai-culture',
     category: 'AI',

@@ -67,6 +67,19 @@ describe('blog app', () => {
     expect(screen.getByText(/watch the interview/i)).toBeInTheDocument();
   });
 
+  it('renders the new AI Agents microservices article correctly', () => {
+    renderRoutes(['/posts/ai-agents-microservices-intelligence']);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /AI Agents are nothing but micro services with Intelligence/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/Thinking of AI agents as "smart microservices" gets you most of the way there/i)[0]).toBeInTheDocument();
+    expect(screen.getByText(/The Big Difference: Rules vs. Goals/i)).toBeInTheDocument();
+  });
+
   it('persists theme values in localStorage', async () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     const user = userEvent.setup();
