@@ -80,6 +80,19 @@ describe('blog app', () => {
     expect(screen.getByText(/The Big Difference: Rules vs. Goals/i)).toBeInTheDocument();
   });
 
+  it('renders the new SQLAlchemy article correctly', () => {
+    renderRoutes(['/posts/python-orm-sqlalchemy']);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /Python ORM, SQLAlchemy/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/To understand SQLAlchemy, it helps to first understand the problem it solves/i)[0]).toBeInTheDocument();
+    expect(screen.getByText(/The ORM Mental Model/i)).toBeInTheDocument();
+  });
+
   it('persists theme values in localStorage', async () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     const user = userEvent.setup();

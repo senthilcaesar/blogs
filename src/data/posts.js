@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: "Python ORM, SQLAlchemy",
+    slug: 'python-orm-sqlalchemy',
+    category: 'Code',
+    tags: ['python', 'orm', 'sqlalchemy', 'database'],
+    excerpt:
+      'To understand SQLAlchemy, it helps to first understand the problem it solves.',
+    image: imageUrl('sqlalchemy-cover.png'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/python-orm-sqlalchemy',
+    author: {
+      name: 'Tech Notes',
+      role: 'Python & Systems Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Python Programming',
+      summary:
+        'To understand SQLAlchemy, it helps to first understand the problem it solves.',
+    },
+  },
+  {
     title: "AI Agents are nothing but micro services with Intelligence",
     slug: 'ai-agents-microservices-intelligence',
     category: 'AI',
