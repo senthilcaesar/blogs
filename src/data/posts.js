@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: "4 Prompts That Can Tell You What Chatbots Really Know About You",
+    slug: 'chatbots-know-about-you',
+    category: 'AI',
+    tags: ['ai', 'chatbots', 'prompts', 'privacy'],
+    excerpt:
+      '4 Prompts That Can Tell You What Chatbots Really Know About You',
+    image: imageUrl('agent.jpeg'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/chatbots-know-about-you',
+    author: {
+      name: 'AI Insights',
+      role: 'Prompt Explainer',
+      initials: 'AI',
+    },
+    hero: {
+      eyebrow: 'AI Prompts',
+      summary:
+        '4 Prompts That Can Tell You What Chatbots Really Know About You',
+    },
+  },
+  {
     title: "Python ORM, SQLAlchemy",
     slug: 'python-orm-sqlalchemy',
     category: 'Code',

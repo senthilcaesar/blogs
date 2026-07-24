@@ -8,6 +8,7 @@ import { AndyKofoidArticle } from './AndyKofoidArticle';
 import { DuolingoAICultureArticle } from './DuolingoAICultureArticle';
 import { AiAgentsMicroservicesArticle } from './AiAgentsMicroservicesArticle';
 import { PythonOrmsSqlalchemyArticle } from './PythonOrmsSqlalchemyArticle';
+import { ChatbotsKnowAboutYouArticle } from './ChatbotsKnowAboutYouArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -20,4 +21,5 @@ export const articleRegistry = {
   'duolingo-ai-culture': DuolingoAICultureArticle,
   'ai-agents-microservices-intelligence': AiAgentsMicroservicesArticle,
   'python-orm-sqlalchemy': PythonOrmsSqlalchemyArticle,
+  'chatbots-know-about-you': ChatbotsKnowAboutYouArticle,
 };

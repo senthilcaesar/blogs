@@ -93,6 +93,27 @@ describe('blog app', () => {
     expect(screen.getByText(/The ORM Mental Model/i)).toBeInTheDocument();
   });
 
+  it('renders the new 4 Prompts Chatbots article correctly', () => {
+    renderRoutes(['/posts/chatbots-know-about-you']);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /4 Prompts That Can Tell You What Chatbots Really Know About You/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Tell me everything you’ve figured out about me that I never actually stated/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /What have you figured out about me that is embarrassing or sensitive\?/i,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('persists theme values in localStorage', async () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     const user = userEvent.setup();
