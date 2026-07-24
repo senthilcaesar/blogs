@@ -1,17 +1,13 @@
-import { MoonStar, SunMedium } from 'lucide-react';
-
 export function ThemeToggle({ isDark, onToggle }) {
   return (
     <button
-      className="theme-toggle"
+      className={`theme-toggle ${isDark ? 'is-dark' : 'is-light'}`}
       type="button"
       onClick={onToggle}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >
-      <span className="theme-toggle__thumb" aria-hidden="true">
-        {isDark ? <MoonStar size={16} /> : <SunMedium size={16} />}
-      </span>
-      <span className="theme-toggle__label">{isDark ? 'Night' : 'Day'}</span>
+      <span className={`theme-toggle__option ${!isDark ? 'is-active' : ''}`}>Day</span>
+      <span className={`theme-toggle__option ${isDark ? 'is-active' : ''}`}>Night</span>
     </button>
   );
 }

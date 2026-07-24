@@ -2,7 +2,7 @@ export function ChatbotsKnowAboutYouArticle() {
   return (
     <>
       <p className="article-lead">
-        4 Prompts That Can Tell You What Chatbots Really Know About You
+        Copy and paste these 4 prompts into your AI chatbot to uncover what it has inferred about your background, future decisions, and blind spots.
       </p>
 
       <section className="article-stack">

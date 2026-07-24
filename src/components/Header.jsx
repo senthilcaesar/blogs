@@ -53,10 +53,10 @@ export function Header({ isDark, onToggleTheme, onOpenTechStack }) {
       <div className="site-header__inner">
         <Link className="brand" to="/" onClick={handleBrandClick}>
           <div className="brand__mark">
-            <BookOpenText size={18} />
+            <BookOpenText size={16} />
           </div>
           <div>
-            <h1>My Blogs</h1>
+            <h1>Blogs</h1>
           </div>
         </Link>
         <div className="header-actions">

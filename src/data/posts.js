@@ -7,8 +7,8 @@ export const posts = [
     category: 'AI',
     tags: ['ai', 'chatbots', 'prompts', 'privacy'],
     excerpt:
-      '4 Prompts That Can Tell You What Chatbots Really Know About You',
-    image: imageUrl('agent.jpeg'),
+      'Four prompts you can ask AI chatbots to discover what they have inferred about your background, personality, and blind spots.',
+    image: imageUrl('prompts.jpeg'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -21,7 +21,7 @@ export const posts = [
     hero: {
       eyebrow: 'AI Prompts',
       summary:
-        '4 Prompts That Can Tell You What Chatbots Really Know About You',
+        'Four prompts to discover what AI chatbots have inferred about your background, future decisions, blind spots, and sensitive information.',
     },
   },
   {

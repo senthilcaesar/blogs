@@ -4,7 +4,7 @@ const STORAGE_KEY = 'theme';
 
 function getPreferredTheme() {
   if (typeof window === 'undefined') {
-    return 'dark';
+    return 'light';
   }
 
   const savedTheme = window.localStorage.getItem(STORAGE_KEY);
@@ -12,13 +12,7 @@ function getPreferredTheme() {
     return savedTheme;
   }
 
-  if (typeof window.matchMedia === 'function') {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  }
-
-  return 'dark';
+  return 'light';
 }
 
 export function useTheme() {

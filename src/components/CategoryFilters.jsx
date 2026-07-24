@@ -29,15 +29,17 @@ export function CategoryFilters({ categories, activeCategory, onSelect }) {
     <div className="filter-bar" role="tablist" aria-label="Post categories">
       {categories.map((category) => {
         const Icon = iconByCategory[category] ?? LayoutGrid;
+        const isActive = activeCategory === category;
         return (
           <button
             key={category}
-            className={`filter-pill ${activeCategory === category ? 'is-active' : ''}`}
+            className={`filter-pill ${isActive ? 'is-active' : ''}`}
             type="button"
+            aria-pressed={isActive}
             onClick={() => onSelect(category)}
           >
-            <Icon size={15} />
-            {category}
+            <Icon size={14} className="filter-pill__icon" />
+            <span>{category}</span>
           </button>
         );
       })}

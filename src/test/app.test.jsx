@@ -120,9 +120,9 @@ describe('blog app', () => {
 
     render(<App />);
 
-    await user.click(screen.getByRole('button', { name: /light theme/i }));
+    await user.click(screen.getByRole('button', { name: /dark theme/i }));
 
-    expect(setItemSpy).toHaveBeenCalledWith('theme', 'light');
-    expect(document.body.dataset.theme).toBe('light');
+    expect(setItemSpy).toHaveBeenCalledWith('theme', 'dark');
+    expect(document.body.dataset.theme).toBe('dark');
   });
 });

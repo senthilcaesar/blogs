@@ -2,16 +2,17 @@ import { Search, X } from 'lucide-react';
 
 export function SearchBar({ value, onChange, onClear }) {
   return (
-    <label className="search-shell">
+    <div className="search-shell">
       <Search size={18} className="search-shell__icon" />
       <input
         type="search"
+        className="search-shell__input"
         value={value}
         onChange={onChange}
-        placeholder="Search by title, tags, category, or description"
+        placeholder="Search by title, tags, category, or description..."
         aria-label="Search posts"
       />
-      {value && (
+      {value ? (
         <button
           className="search-clear"
           type="button"
@@ -21,9 +22,13 @@ export function SearchBar({ value, onChange, onClear }) {
             onClear?.();
           }}
         >
-          <X size={15} />
+          <X size={14} />
         </button>
+      ) : (
+        <span className="search-shortcut-badge" aria-hidden="true">
+          ⌘K
+        </span>
       )}
-    </label>
+    </div>
   );
 }

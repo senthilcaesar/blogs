@@ -52,13 +52,9 @@ export function PostCard({ post, view = 'list' }) {
 
       {/* Body */}
       <div className="post-card__body">
-        {/* Top row: category + priority */}
+        {/* Top row: category */}
         <div className="post-card__topline">
           <span className="post-chip">{post.category}</span>
-          <span className={`priority-badge priority-badge--${post.priority.toLowerCase()}`}>
-            <Sparkles size={12} />
-            {post.priority}
-          </span>
         </div>
 
         {/* Title */}
@@ -66,15 +62,6 @@ export function PostCard({ post, view = 'list' }) {
 
         {/* Excerpt — always show in grid, hide in list when space is tight */}
         <p className="post-card__excerpt">{post.excerpt}</p>
-
-        {/* Tags — only in grid view */}
-        {isGrid && (
-          <div className="tag-row">
-            {post.tags.map((tag) => (
-              <span className="tag" key={tag}>{tag}</span>
-            ))}
-          </div>
-        )}
 
         {/* Footer: date + actions */}
         <div className="post-card__footer">
