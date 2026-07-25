@@ -1262,6 +1262,53 @@ blockquote {
   line-height: 1.45;
 }
 
+/* Table Styles */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-strong);
+}
+
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.table-wrap th {
+  background: var(--surface-soft);
+  color: var(--accent);
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border);
+}
+
+.table-wrap td {
+  padding: 14px 18px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+.table-wrap tr:last-child td {
+  border-bottom: none;
+}
+
+.table-wrap tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--surface-soft) 40%, transparent);
+}
+
+.table-wrap tr:hover td {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
 /* Footer */
 .site-footer {
   margin-top: auto;

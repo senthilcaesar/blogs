@@ -9,6 +9,10 @@ import { DuolingoAICultureArticle } from './DuolingoAICultureArticle';
 import { AiAgentsMicroservicesArticle } from './AiAgentsMicroservicesArticle';
 import { PythonOrmsSqlalchemyArticle } from './PythonOrmsSqlalchemyArticle';
 import { ChatbotsKnowAboutYouArticle } from './ChatbotsKnowAboutYouArticle';
+import { ReactServerComponentsAggregationArticle } from './ReactServerComponentsAggregationArticle';
+import { NextjsOpentelemetryBuildArticle } from './NextjsOpentelemetryBuildArticle';
+import { ReactUiPackagesArticle } from './ReactUiPackagesArticle';
+import { MongodbAtlasReactArticle } from './MongodbAtlasReactArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -22,4 +26,8 @@ export const articleRegistry = {
   'ai-agents-microservices-intelligence': AiAgentsMicroservicesArticle,
   'python-orm-sqlalchemy': PythonOrmsSqlalchemyArticle,
   'chatbots-know-about-you': ChatbotsKnowAboutYouArticle,
+  'react-server-components-aggregation-layer': ReactServerComponentsAggregationArticle,
+  '1-hour-nextjs-build-opentelemetry-cicd': NextjsOpentelemetryBuildArticle,
+  'how-to-build-react-ui-packages-that-dont-break': ReactUiPackagesArticle,
+  'mongodb-atlas-for-react-apps': MongodbAtlasReactArticle,
 };

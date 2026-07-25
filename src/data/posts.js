@@ -2,6 +2,98 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: 'Mongo DB Atlas for React Apps',
+    slug: 'mongodb-atlas-for-react-apps',
+    category: 'Data',
+    tags: ['mongodb', 'react', 'atlas', 'json', 'vector-search', 'ai'],
+    excerpt:
+      'Rethinking app state and database infrastructure: How a single data platform replaces ORMs, external search, and separate vector DBs.',
+    image: imageUrl('mongodb-atlas-react.png'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/mongodb-atlas-for-react-apps',
+    author: {
+      name: 'Tech Notes',
+      role: 'Database & Data Infrastructure Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Data Infrastructure',
+      summary:
+        'Why moving to a native JSON data platform with built-in search and vector storage eliminates ORMs and sync pipelines for React apps.',
+    },
+  },
+  {
+    title: "How to Build React UI Packages That Don't Break",
+    slug: 'how-to-build-react-ui-packages-that-dont-break',
+    category: 'Code',
+    tags: ['react', 'ui', 'css', 'tailwind', 'frontend'],
+    excerpt:
+      'Building a React UI package is tricky. Learn how to prevent CSS leakage using prefixes and scoped root containers.',
+    image: imageUrl('react-ui-packages.png'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/how-to-build-react-ui-packages-that-dont-break',
+    author: {
+      name: 'Tech Notes',
+      role: 'Frontend & UI Systems Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Frontend Architecture',
+      summary:
+        'Prevent CSS leakage and host app conflicts in reusable React UI components with Tailwind prefixes and scoped resets.',
+    },
+  },
+  {
+    title: 'The 1-Hour Next.js Build: How OpenTelemetry Shined a Light on CI/CD Bottlenecks',
+    slug: '1-hour-nextjs-build-opentelemetry-cicd',
+    category: 'Web Dev',
+    tags: ['nextjs', 'opentelemetry', 'cicd', 'performance', 'webpack'],
+    excerpt:
+      'If your team is suffering from sluggish Next.js builds, here is the step-by-step breakdown of how to stop guessing and start measuring.',
+    image: imageUrl('trace.png'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/1-hour-nextjs-build-opentelemetry-cicd',
+    author: {
+      name: 'Tech Notes',
+      role: 'CI/CD & Observability Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'CI/CD Observability',
+      summary:
+        'How OpenTelemetry, Thoth, and Oodle.ai uncovered Webpack as the 80% bottleneck in a 1-hour Next.js CI/CD build.',
+    },
+  },
+  {
+    title: 'Making Sense of React Server Components and the Aggregation Layer',
+    slug: 'react-server-components-aggregation-layer',
+    category: 'Web Dev',
+    tags: ['react', 'rsc', 'nextjs', 'architecture', 'bff'],
+    excerpt:
+      'React Server Components solve SPA and SSR challenges by shifting component rendering and data aggregation back to the server.',
+    image: imageUrl('rsc-aggregation.png'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/react-server-components-aggregation-layer',
+    author: {
+      name: 'Tech Notes',
+      role: 'Web Architecture Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Web Architecture',
+      summary:
+        'Understanding how React Server Components move heavy lifting and data aggregation from the browser back to the server.',
+    },
+  },
+  {
     title: "4 Prompts That Can Tell You What Chatbots Really Know About You",
     slug: 'chatbots-know-about-you',
     category: 'AI',
