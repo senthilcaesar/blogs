@@ -13,6 +13,7 @@ import { ReactServerComponentsAggregationArticle } from './ReactServerComponents
 import { NextjsOpentelemetryBuildArticle } from './NextjsOpentelemetryBuildArticle';
 import { ReactUiPackagesArticle } from './ReactUiPackagesArticle';
 import { MongodbAtlasReactArticle } from './MongodbAtlasReactArticle';
+import { PatrickWinstonSuccessArticle } from './PatrickWinstonSuccessArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -30,4 +31,5 @@ export const articleRegistry = {
   '1-hour-nextjs-build-opentelemetry-cicd': NextjsOpentelemetryBuildArticle,
   'how-to-build-react-ui-packages-that-dont-break': ReactUiPackagesArticle,
   'mongodb-atlas-for-react-apps': MongodbAtlasReactArticle,
+  'formula-for-success-patrick-winston': PatrickWinstonSuccessArticle,
 };

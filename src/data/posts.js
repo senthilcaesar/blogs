@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: 'Formula for Success: Quality = f(K,p,t)',
+    slug: 'formula-for-success-patrick-winston',
+    category: 'Career',
+    tags: ['career', 'success', 'knowledge', 'practice', 'talent'],
+    excerpt:
+      'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
+    image: imageUrl('kpt.jpeg'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/formula-for-success-patrick-winston',
+    author: {
+      name: 'Patrick Winston',
+      role: 'Professor & Author',
+      initials: 'PW',
+    },
+    hero: {
+      eyebrow: 'Career & Growth',
+      summary:
+        'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
+    },
+  },
+  {
     title: 'Mongo DB Atlas for React Apps',
     slug: 'mongodb-atlas-for-react-apps',
     category: 'Data',
