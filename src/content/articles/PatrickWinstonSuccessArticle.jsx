@@ -13,20 +13,20 @@ export function PatrickWinstonSuccessArticle() {
       <div style={{ margin: '2rem 0' }}>
         <img
           src={kptImg}
-          alt="Quality = f(K,p,t) formula by Patrick Winston"
+          alt="Quality = f(K,P,t) formula by Patrick Winston"
           style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
         />
       </div>
 
       <section className="article-panel">
         <p>It's determined by this formula</p>
-        <h2 style={{ marginTop: '1rem', marginBottom: '1rem' }}>Quality = f(K,p,t)</h2>
+        <h2 style={{ marginTop: '1rem', marginBottom: '1rem' }}>Quality = f(K,P,t)</h2>
         <ul className="bullet-list" style={{ marginTop: '1rem' }}>
           <li>
             <strong>K</strong> -&gt; How much knowledge you have
           </li>
           <li>
-            <strong>p</strong> -&gt; How much you practice with that knowledge
+            <strong>P</strong> -&gt; How much you practice with that knowledge
           </li>
           <li>
             <strong>t</strong> -&gt; Your inherent talent
@@ -40,9 +40,6 @@ export function PatrickWinstonSuccessArticle() {
         </p>
         <p style={{ marginTop: '1rem' }}>
           You can get a lot better than people who may have inherent talents if you have the right amount of knowledge
-        </p>
-        <p className="eyebrow" style={{ marginTop: '1.5rem', opacity: 0.8 }}>
-          Patrick Winston
         </p>
       </section>
 
