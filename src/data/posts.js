@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: 'The Engine Behind Autonomous AI: Agents, Harnesses, and Autoresearch',
+    slug: 'engine-behind-autonomous-ai-agents-harnesses-autoresearch',
+    category: 'AI',
+    tags: ['ai', 'agents', 'harness', 'autoresearch', 'autonomous'],
+    excerpt:
+      "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
+    image: imageUrl('agents.png'),
+    date: 'Aug 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/engine-behind-autonomous-ai-agents-harnesses-autoresearch',
+    author: {
+      name: 'Artem Lukoianov',
+      role: 'Author & Explainer',
+      initials: 'AL',
+    },
+    hero: {
+      eyebrow: 'Autonomous AI',
+      summary:
+        "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
+    },
+  },
+  {
     title: 'Formula for Success: Quality = f(K,p,t)',
     slug: 'formula-for-success-patrick-winston',
     category: 'Career',

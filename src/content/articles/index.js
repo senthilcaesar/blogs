@@ -14,6 +14,7 @@ import { NextjsOpentelemetryBuildArticle } from './NextjsOpentelemetryBuildArtic
 import { ReactUiPackagesArticle } from './ReactUiPackagesArticle';
 import { MongodbAtlasReactArticle } from './MongodbAtlasReactArticle';
 import { PatrickWinstonSuccessArticle } from './PatrickWinstonSuccessArticle';
+import { EngineBehindAutonomousAiArticle } from './EngineBehindAutonomousAiArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -32,4 +33,5 @@ export const articleRegistry = {
   'how-to-build-react-ui-packages-that-dont-break': ReactUiPackagesArticle,
   'mongodb-atlas-for-react-apps': MongodbAtlasReactArticle,
   'formula-for-success-patrick-winston': PatrickWinstonSuccessArticle,
+  'engine-behind-autonomous-ai-agents-harnesses-autoresearch': EngineBehindAutonomousAiArticle,
 };
