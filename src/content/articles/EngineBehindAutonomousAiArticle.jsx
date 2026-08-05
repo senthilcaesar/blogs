@@ -20,7 +20,22 @@ export function EngineBehindAutonomousAiArticle() {
         <p>
           An AI agent doesn&apos;t just work on its own out of nowhere. It needs a framework to operate. We call this the &quot;harness.&quot; In the tech industry, you might also hear it called an orchestrator or scaffolding, but the idea is exactly the same. The harness is the software layer that wraps around the AI model and gives it the structure it needs to be useful.
         </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>What Is AI Harness Engineering?</h3>
         <p style={{ marginTop: '1rem' }}>
+          A useful formula has emerged across the AI engineering community in the past few months:
+        </p>
+        <blockquote>
+          Agent = Model + Harness
+        </blockquote>
+        <p style={{ marginTop: '1rem' }}>
+          The model provides raw intelligence. The harness is everything else: the infrastructure that channels that intelligence into reliable, safe, repeatable behavior. Concretely, a harness consists of: Tools, Context management, Memory, Execution loop, Guardrails and permissions, Evals, Observability.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Harness engineering is the current frontier because AI has fundamentally changed both what it does and what it is asked to do. Models no longer just generate content &mdash; agents now take actions, and the tasks they perform have grown dramatically more complex: multi-step workflows, long-running sessions, tool orchestration, and decisions with real-world consequences.
+        </p>
+
+        <p style={{ marginTop: '1.5rem' }}>
           Here is what makes up a good harness:
         </p>
         <ul className="bullet-list" style={{ marginTop: '1rem' }}>
@@ -109,6 +124,11 @@ export function EngineBehindAutonomousAiArticle() {
           <li>
             <a href="https://artificialanalysis.ai/" target="_blank" rel="noreferrer">
               https://artificialanalysis.ai/
+            </a>
+          </li>
+          <li>
+            <a href="https://elliezhou16.substack.com/p/ai-harness-engineering-beyond-the" target="_blank" rel="noreferrer">
+              https://elliezhou16.substack.com/p/ai-harness-engineering-beyond-the
             </a>
           </li>
         </ul>
