@@ -8,7 +8,7 @@ export const posts = [
     tags: ['ai', 'agents', 'harness', 'autoresearch', 'autonomous'],
     excerpt:
       "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
-    image: imageUrl('agents.png'),
+    image: imageUrl('harness.jpeg'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',

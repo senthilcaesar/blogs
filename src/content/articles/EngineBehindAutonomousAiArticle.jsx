@@ -1,3 +1,5 @@
+const harnessImg = new URL('../../../images/harness.jpeg', import.meta.url).href;
+
 export function EngineBehindAutonomousAiArticle() {
   return (
     <>
@@ -71,6 +73,14 @@ export function EngineBehindAutonomousAiArticle() {
           </li>
         </ul>
       </section>
+
+      <div style={{ margin: '2rem 0' }}>
+        <img
+          src={harnessImg}
+          alt="The AI Harness"
+          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+        />
+      </div>
 
       <section className="article-panel">
         <h2>3. Autoresearch Loops</h2>
