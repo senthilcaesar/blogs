@@ -14,9 +14,9 @@ export const posts = [
     type: 'local',
     route: '/posts/engine-behind-autonomous-ai-agents-harnesses-autoresearch',
     author: {
-      name: 'Artem Lukoianov',
-      role: 'Author & Explainer',
-      initials: 'AL',
+      name: 'Tech Notes',
+      role: 'Autonomous AI Explainer',
+      initials: 'TN',
     },
     hero: {
       eyebrow: 'Autonomous AI',
