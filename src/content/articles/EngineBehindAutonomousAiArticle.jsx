@@ -20,7 +20,7 @@ export function EngineBehindAutonomousAiArticle() {
       <section className="article-panel">
         <h2>2. The Harness: Making It All Work</h2>
         <p>
-          An AI agent doesn&apos;t just work on its own out of nowhere. It needs a framework to operate. We call this the &quot;harness.&quot; In the tech industry, you might also hear it called an orchestrator or scaffolding, but the idea is exactly the same. The harness is the software layer that wraps around the AI model and gives it the structure it needs to be useful.
+          An AI agent doesn&apos;t just work on its own out of nowhere. It needs a framework to operate. We call this the &quot;harness.&quot; An AI harness is the infrastructure that gives an AI model tools and manages input/output behind the scenes, ensuring the model has the tools, context, and environment to do what&apos;s asked. It&apos;s the scaffolding that wraps around an LLM to make it useful for real-world tasks &mdash; not just answering one prompt, but doing actual work in a loop.
         </p>
 
         <h3 style={{ marginTop: '1.5rem' }}>What Is AI Harness Engineering?</h3>
@@ -31,10 +31,32 @@ export function EngineBehindAutonomousAiArticle() {
           Agent = Model + Harness
         </blockquote>
         <p style={{ marginTop: '1rem' }}>
-          The model provides raw intelligence. The harness is everything else: the infrastructure that channels that intelligence into reliable, safe, repeatable behavior. Concretely, a harness consists of: Tools, Context management, Memory, Execution loop, Guardrails and permissions, Evals, Observability.
+          The model provides raw intelligence. The harness is everything else: the infrastructure that channels that intelligence into reliable, safe, repeatable behavior. In practice, that means tool interfaces, context/memory handling, guardrails, verification steps, approval gates, logging, and recovery loops.
         </p>
         <p style={{ marginTop: '1rem' }}>
           Harness engineering is the current frontier because AI has fundamentally changed both what it does and what it is asked to do. Models no longer just generate content &mdash; agents now take actions, and the tasks they perform have grown dramatically more complex: multi-step workflows, long-running sessions, tool orchestration, and decisions with real-world consequences.
+        </p>
+
+        <p style={{ marginTop: '1rem' }}>
+          The term crystallized in February 2026 when Mitchell Hashimoto &mdash; co-founder of HashiCorp, creator of Terraform &mdash; published a blog post giving the practice a name:
+        </p>
+        <blockquote style={{ marginTop: '1rem' }}>
+          Whenever an agent makes a mistake, you engineer the environment so it won&apos;t make that mistake again.
+        </blockquote>
+
+        <p style={{ marginTop: '1rem' }}>
+          Days later, OpenAI used the same phrase describing how they built an internal beta product: roughly one million lines of code, written entirely by agents, shipped in five months, with no manually written source code. Their key insight:
+        </p>
+        <blockquote style={{ marginTop: '1rem' }}>
+          When something failed, the fix was almost never &quot;try harder.&quot; Human engineers always stepped in and asked: what capability is missing, and how do we make it both legible and enforceable for the agent?
+        </blockquote>
+
+        <p style={{ marginTop: '1rem' }}>
+          Harness engineering shifts the engineer&apos;s job from writing code to designing environments, specifying intent, and providing structured feedback. The harness is the moat. The model is rented.
+        </p>
+
+        <p style={{ marginTop: '1rem' }}>
+          Major AI labs use different terminology for this concept. Anthropic refers to their Claude Agent SDK as a &quot;general-purpose agent harness&quot; that provides built-in context management and tool use so Claude can function as a long-running assistant, while calling the context layer &quot;context engineering.&quot; OpenAI describes the same underlying idea as orchestration.
         </p>
 
         <p style={{ marginTop: '1.5rem' }}>
@@ -54,24 +76,28 @@ export function EngineBehindAutonomousAiArticle() {
             <strong>Memory:</strong> If an agent is working on a long task, it needs a long-term memory to remember what it did an hour or a week ago. The harness stores past actions and brings them up when relevant.
           </li>
           <li>
-            <strong>Tool Execution:</strong> Agents need tools to affect the outside world. The harness connects the AI to APIs, web browsers, or your local files, and executes the actions the AI decides to take.
+            <strong>Tool Execution &amp; Interfaces:</strong> Agents need tools to affect the outside world. The harness connects the AI to APIs, web browsers, or your local files, and executes the actions the AI decides to take.
           </li>
           <li>
             <strong>Skills:</strong> These are specialized abilities or routines you give the agent. Instead of figuring out how to search a database from scratch every time, the agent can just pull up a pre-written &quot;database search&quot; skill.
           </li>
           <li>
-            <strong>Loops:</strong> This is the core engine. The harness puts the agent in a loop: observe the current state, decide what to do, take action, and observe the results. It keeps looping until the job is done.
+            <strong>Loops &amp; Recovery:</strong> This is the core engine. The harness puts the agent in a loop: observe the current state, decide what to do, take action, and observe the results. It keeps looping until the job is done.
           </li>
           <li>
-            <strong>Guardrails:</strong> Agents need strict boundaries. The harness sets hard rules so the AI doesn’t take actions it shouldn&apos;t. This stops the agent from making costly mistakes, like accidentally deleting important files, spending too much money, or sharing sensitive information.
+            <strong>Guardrails &amp; Approval Gates:</strong> Agents need strict boundaries and human-in-the-loop checkpoints. The harness sets hard rules so the AI doesn’t take actions it shouldn&apos;t, stopping it from making costly mistakes.
           </li>
           <li>
-            <strong>Error Handling:</strong> Things break. APIs fail. The AI makes bad choices. A solid harness catches these errors and tells the agent to try a different approach instead of just crashing.
+            <strong>Error Handling &amp; Verification Steps:</strong> Things break. APIs fail. The AI makes bad choices. A solid harness verifies outcomes, catches errors, and tells the agent to try a different approach instead of crashing.
           </li>
           <li>
-            <strong>Observability:</strong> When an agent is working in the background, you need to see what it’s doing. The harness logs every step, tool call, and error. If something goes wrong, you can look under the hood and see exactly why the AI made a specific choice.
+            <strong>Observability &amp; Logging:</strong> When an agent is working in the background, you need to see what it’s doing. The harness logs every step, tool call, and error. If something goes wrong, you can look under the hood and see exactly why the AI made a specific choice.
           </li>
         </ul>
+
+        <blockquote style={{ marginTop: '1.5rem' }}>
+          Ultimately, LLMs are probabilistic; the harness surrounds them with deterministic boundaries and verification loops to guarantee reliable system outcomes.
+        </blockquote>
       </section>
 
       <div style={{ margin: '2rem 0' }}>
@@ -142,9 +168,6 @@ export function EngineBehindAutonomousAiArticle() {
             </a>
           </li>
         </ul>
-        <p style={{ marginTop: '1.5rem', fontWeight: 500 }}>
-          by Artem Lukoianov
-        </p>
       </section>
     </>
   );
