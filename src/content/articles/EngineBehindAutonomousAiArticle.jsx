@@ -167,6 +167,11 @@ export function EngineBehindAutonomousAiArticle() {
               https://elliezhou16.substack.com/p/ai-harness-engineering-beyond-the
             </a>
           </li>
+          <li>
+            <a href="https://www.databricks.com/blog/ai-harness" target="_blank" rel="noreferrer">
+              https://www.databricks.com/blog/ai-harness
+            </a>
+          </li>
         </ul>
       </section>
     </>
