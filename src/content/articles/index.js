@@ -15,6 +15,7 @@ import { ReactUiPackagesArticle } from './ReactUiPackagesArticle';
 import { MongodbAtlasReactArticle } from './MongodbAtlasReactArticle';
 import { PatrickWinstonSuccessArticle } from './PatrickWinstonSuccessArticle';
 import { EngineBehindAutonomousAiArticle } from './EngineBehindAutonomousAiArticle';
+import { AgentsForComplexWorkflowsArticle } from './AgentsForComplexWorkflowsArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -34,4 +35,5 @@ export const articleRegistry = {
   'mongodb-atlas-for-react-apps': MongodbAtlasReactArticle,
   'formula-for-success-patrick-winston': PatrickWinstonSuccessArticle,
   'engine-behind-autonomous-ai-agents-harnesses-autoresearch': EngineBehindAutonomousAiArticle,
+  'agents-for-complex-workflows': AgentsForComplexWorkflowsArticle,
 };

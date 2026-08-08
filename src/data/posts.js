@@ -2,6 +2,29 @@ const imageUrl = (fileName) => new URL(`../../images/${fileName}`, import.meta.u
 
 export const posts = [
   {
+    title: 'Agents for Complex Workflows',
+    slug: 'agents-for-complex-workflows',
+    category: 'AI',
+    tags: ['ai', 'agents', 'workflows', 'context-engineering', 'ast', 'subagents'],
+    excerpt:
+      "If you've built anything with AI agents, you've probably hit two walls pretty quickly: visual understanding and codebase navigation.",
+    image: imageUrl('complex.png'),
+    date: 'Aug 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/agents-for-complex-workflows',
+    author: {
+      name: 'Tech Notes',
+      role: 'AI Architecture Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'AI Architecture',
+      summary:
+        "If you've built anything with AI agents, you've probably hit two walls pretty quickly: visual understanding and codebase navigation.",
+    },
+  },
+  {
     title: 'The Engine Behind Autonomous AI: Agents, Harnesses, and Autoresearch',
     slug: 'engine-behind-autonomous-ai-agents-harnesses-autoresearch',
     category: 'AI',
