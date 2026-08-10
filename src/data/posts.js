@@ -3,6 +3,37 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: "Agent Evaluations: The Foundations",
+    slug: "agent-evaluations-foundations",
+    category: "AI",
+    tags: [
+      "ai",
+      "agents",
+      "evals",
+      "llm-as-judge",
+      "testing",
+      "reliability",
+      "metrics",
+    ],
+    excerpt:
+      "You can't tell whether an agent works by running it once. The vocabulary, the three things worth measuring, how to grade open-ended output, and the mistakes that cost the most time.",
+    image: imageUrl("agent-evaluations.jpeg"),
+    date: "Aug 2026",
+    priority: "High",
+    type: "local",
+    route: "/posts/agent-evaluations-foundations",
+    author: {
+      name: "Tech Notes",
+      role: "AI Architecture Explainer",
+      initials: "TN",
+    },
+    hero: {
+      eyebrow: "AI Engineering",
+      summary:
+        "An eval is not a test that proves your agent works — it is the instrument that makes changes in its behaviour visible. Here is what one is made of.",
+    },
+  },
+  {
     title: "Write your first SKILL.md",
     slug: "writing-your-first-skill-md-file",
     category: "AI",

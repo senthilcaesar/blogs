@@ -18,6 +18,7 @@ import { EngineBehindAutonomousAiArticle } from "./EngineBehindAutonomousAiArtic
 import { AgentsForComplexWorkflowsArticle } from "./AgentsForComplexWorkflowsArticle";
 import { StructuredAiSkillsArticle } from "./StructuredAiSkillsArticle";
 import { FirstSkillMdArticle } from "./FirstSkillMdArticle";
+import { AgentEvaluationsArticle } from "./AgentEvaluationsArticle";
 
 export const articleRegistry = {
   "ai-agents-mastery": AiAgentsMasteryArticle,
@@ -42,4 +43,5 @@ export const articleRegistry = {
   "agents-for-complex-workflows": AgentsForComplexWorkflowsArticle,
   "structured-formats-for-effective-ai-agent-skills": StructuredAiSkillsArticle,
   "writing-your-first-skill-md-file": FirstSkillMdArticle,
+  "agent-evaluations-foundations": AgentEvaluationsArticle,
 };
