@@ -50,7 +50,7 @@ export function AgentsForComplexWorkflowsArticle() {
         </ol>
 
         <p>
-          The talk tackles both of these problems &mdash; and then makes a sharp turn into a third, sneakier problem that shows up once you try to naively fix the first two. Let&apos;s walk through it in order.
+          The blog tackles both of these problems &mdash; and then makes a sharp turn into a third, sneakier problem that shows up once you try to naively fix the first two. Let&apos;s walk through it in order.
         </p>
       </section>
 
@@ -83,7 +83,7 @@ export function AgentsForComplexWorkflowsArticle() {
           <li>You burn through context window budget that could&apos;ve gone toward actual reasoning</li>
         </ul>
         <p style={{ marginTop: '1.5rem' }}>
-          So the real challenge isn&apos;t &quot;how do we give the agent more information&quot; &mdash; it&apos;s &quot;<mark className="highlight">how do we give the agent exactly the right information, at the right time, in the right structure</mark>.&quot; This is the discipline of context engineering, and the rest of the talk is really a toolkit for doing it well.
+          So the real challenge isn&apos;t &quot;how do we give the agent more information&quot; &mdash; it&apos;s &quot;<mark className="highlight">how do we give the agent exactly the right information, at the right time, in the right structure</mark>.&quot; This is the discipline of context engineering, and the rest of the blog is really a toolkit for doing it well.
         </p>
       </section>
 
@@ -147,7 +147,7 @@ export function AgentsForComplexWorkflowsArticle() {
 
         <h3 style={{ marginTop: '1.5rem' }}>2. Subagents &mdash; Divide and Conquer Across Context Windows</h3>
         <p style={{ marginTop: '0.5rem' }}>
-          One of the biggest structural ideas in the talk: instead of asking a single agent to do a large, multi-part task in one giant context window, break the task into a team of subagents, each operating in its own separate context window.
+          One of the biggest structural ideas in the blog: instead of asking a single agent to do a large, multi-part task in one giant context window, break the task into a team of subagents, each operating in its own separate context window.
         </p>
         <p style={{ marginTop: '0.75rem' }}>
           Why this matters: context windows aren&apos;t just size-limited, they&apos;re attention-limited. A single agent juggling five different subtasks in one context has to hold all of it in its head at once. Split into subagents, each one gets a clean, focused context &mdash; dramatically reducing noise and improving reliability, similar to how a human team divides work instead of one person trying to do everything simultaneously.
@@ -155,7 +155,7 @@ export function AgentsForComplexWorkflowsArticle() {
 
         <h3 style={{ marginTop: '1.5rem' }}>3. Writing Effective Skills</h3>
         <p style={{ marginTop: '0.5rem' }}>
-          &quot;Skills&quot; here refers to packaged, reusable capabilities you give an agent &mdash; instructions, scripts, and context bundled together for a specific kind of task. The talk emphasizes that how you write these skills matters as much as what they contain.
+          &quot;Skills&quot; here refers to packaged, reusable capabilities you give an agent &mdash; instructions, scripts, and context bundled together for a specific kind of task. The blog emphasizes that how you write these skills matters as much as what they contain.
         </p>
 
         <h3 style={{ marginTop: '1.5rem' }}>4. The Goldilocks Zone &mdash; Calibrating the System Prompt</h3>
@@ -178,7 +178,7 @@ export function AgentsForComplexWorkflowsArticle() {
 
         <h3 style={{ marginTop: '1.5rem' }}>6. Code-First Skills &mdash; Know What&apos;s Deterministic</h3>
         <p style={{ marginTop: '0.5rem' }}>
-          This is a subtle but important distinction the talk draws out: within any complex task, some sub-tasks are deterministic (there&apos;s one correct, mechanical way to do them &mdash; e.g., &quot;parse this file and extract imports&quot;) and some are non-deterministic (they require judgment, reasoning, or creativity &mdash; e.g., &quot;decide whether this UI change is a good idea&quot;).
+          This is a subtle but important distinction the blog draws out: within any complex task, some sub-tasks are deterministic (there&apos;s one correct, mechanical way to do them &mdash; e.g., &quot;parse this file and extract imports&quot;) and some are non-deterministic (they require judgment, reasoning, or creativity &mdash; e.g., &quot;decide whether this UI change is a good idea&quot;).
         </p>
         <p style={{ marginTop: '0.75rem' }}>
           The insight: deterministic tasks shouldn&apos;t be left to the LLM&apos;s judgment at all &mdash; they should be handled by actual code/scripts. Let the agent reason where reasoning is needed, and let deterministic scripts handle the parts that don&apos;t need a language model&apos;s guesswork. This saves context, saves cost, and is more reliable.
@@ -189,7 +189,7 @@ export function AgentsForComplexWorkflowsArticle() {
           This ties directly back to Problem 2 (bad codebase understanding). An AST (Abstract Syntax Tree) graph is a hierarchical, tree-like representation of a codebase&apos;s syntactic structure &mdash; essentially a structured map of how the code is organized, rather than a flat pile of text.
         </p>
         <p style={{ marginTop: '0.75rem' }}>
-          The talk gives a concrete, real-world example: the Razorpay team&apos;s approach. They built a script called <code>create_importMap.js</code> that:
+          The blog gives a concrete, real-world example: the Razorpay team&apos;s approach. They built a script called <code>create_importMap.js</code> that:
         </p>
         <ul className="bullet-list" style={{ marginTop: '0.5rem' }}>
           <li>Walks through the entire codebase</li>

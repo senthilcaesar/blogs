@@ -3,6 +3,36 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: "Write your first SKILL.md",
+    slug: "writing-your-first-skill-md-file",
+    category: "AI",
+    tags: [
+      "ai",
+      "agents",
+      "skills",
+      "agents-folder",
+      "progressive-disclosure",
+      "tutorial",
+    ],
+    excerpt:
+      "A hands-on walkthrough: build a working /greet skill from an empty folder, then split the detail into references/ and control who is allowed to fire it.",
+    image: imageUrl("skillmd-card.jpg"),
+    date: "Aug 2026",
+    priority: "High",
+    type: "local",
+    route: "/posts/writing-your-first-skill-md-file",
+    author: {
+      name: "Tech Notes",
+      role: "AI Architecture Explainer",
+      initials: "TN",
+    },
+    hero: {
+      eyebrow: "Agent Skills Tutorial",
+      summary:
+        "A skill is a folder with a Markdown file in it. Build one end to end, then learn the structural idea—progressive disclosure—that keeps it maintainable.",
+    },
+  },
+  {
     title: "Structured Formats for Writing Effective AI Agent Skills",
     slug: "structured-formats-for-effective-ai-agent-skills",
     category: "AI",
