@@ -1,6 +1,38 @@
+import { useState } from 'react';
+import { Check, Copy } from 'lucide-react';
+
 const complexImg = new URL('../../../images/complex.png', import.meta.url).href;
 
+const xmlPromptSnippet = `<context>
+You are an expert copyeditor who writes in a concise and clear style.
+</context>
+
+<constraints>
+- Do not use exclamation marks.
+- Keep the rewrite under 50 words.
+</constraints>
+
+<input>
+The project management team went ahead and scheduled the kickoff meeting for next Monday.
+</input>
+
+<task>
+Rewrite the input text to be active and concise.
+</task>`;
+
 export function AgentsForComplexWorkflowsArticle() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(xmlPromptSnippet);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
   return (
     <>
       <p className="article-lead">
@@ -67,6 +99,51 @@ export function AgentsForComplexWorkflowsArticle() {
         <p style={{ marginTop: '0.5rem' }}>
           Rather than writing prompts as unstructured prose, wrapping different parts of a prompt in XML-style tags (like <code className="xml-tag-context">&lt;context&gt;</code>, <code className="xml-tag-task">&lt;task&gt;</code>, <code className="xml-tag-constraints">&lt;constraints&gt;</code>) gives the model a clear structural map of the prompt. This isn&apos;t cosmetic &mdash; it measurably helps the model distinguish &quot;this is background info&quot; from &quot;this is the actual instruction&quot; from &quot;this is a hard rule to follow.&quot;
         </p>
+
+        <div className="code-card" style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
+          <div className="code-card__header">
+            <span>Example of an XML-Structured Prompt</span>
+            <div className="code-card__actions">
+              <span className="code-card__lang">xml</span>
+              <button
+                type="button"
+                className={`code-copy-btn ${copied ? 'code-copy-btn--copied' : ''}`}
+                onClick={handleCopy}
+                title="Copy code snippet to clipboard"
+                aria-label="Copy code snippet to clipboard"
+              >
+                {copied ? (
+                  <>
+                    <Check size={14} />
+                    <span>Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={14} />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+          <pre className="code-block">
+            <code>
+              <span className="xml-tag-context">&lt;context&gt;</span>{'\n'}
+              <span className="xml-code-content">You are an expert copyeditor who writes in a concise and clear style.</span>{'\n'}
+              <span className="xml-tag-context">&lt;/context&gt;</span>{'\n\n'}
+              <span className="xml-tag-constraints">&lt;constraints&gt;</span>{'\n'}
+              <span className="xml-code-content">- Do not use exclamation marks.</span>{'\n'}
+              <span className="xml-code-content">- Keep the rewrite under 50 words.</span>{'\n'}
+              <span className="xml-tag-constraints">&lt;/constraints&gt;</span>{'\n\n'}
+              <span className="xml-tag-input">&lt;input&gt;</span>{'\n'}
+              <span className="xml-code-content">The project management team went ahead and scheduled the kickoff meeting for next Monday.</span>{'\n'}
+              <span className="xml-tag-input">&lt;/input&gt;</span>{'\n\n'}
+              <span className="xml-tag-task">&lt;task&gt;</span>{'\n'}
+              <span className="xml-code-content">Rewrite the input text to be active and concise.</span>{'\n'}
+              <span className="xml-tag-task">&lt;/task&gt;</span>
+            </code>
+          </pre>
+        </div>
 
         <h3 style={{ marginTop: '1.5rem' }}>2. Subagents &mdash; Divide and Conquer Across Context Windows</h3>
         <p style={{ marginTop: '0.5rem' }}>
@@ -153,6 +230,107 @@ export function AgentsForComplexWorkflowsArticle() {
           style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
         />
       </div>
+
+      <style>{`
+        .code-card {
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          overflow: hidden;
+          background: var(--surface-strong);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .code-card__header {
+          padding: 10px 16px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          background: var(--surface-soft);
+          color: var(--text);
+          border-bottom: 1px solid var(--border);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .code-card__actions {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .code-card__lang {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 0.75rem;
+          text-transform: lowercase;
+          padding: 2px 8px;
+          border-radius: 4px;
+          background: var(--accent-glow);
+          color: var(--accent);
+          font-weight: 600;
+        }
+
+        .code-copy-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 10px;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: var(--text-soft);
+          background: var(--surface-strong);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 150ms ease;
+        }
+
+        .code-copy-btn:hover {
+          color: var(--accent);
+          background: var(--surface-soft);
+          border-color: var(--border-strong);
+        }
+
+        .code-copy-btn--copied {
+          color: #16a34a;
+          background: rgba(22, 163, 74, 0.12);
+          border-color: rgba(22, 163, 74, 0.3);
+        }
+
+        body[data-theme='dark'] .code-copy-btn--copied {
+          color: #4ade80;
+          background: rgba(74, 222, 128, 0.18);
+          border-color: rgba(74, 222, 128, 0.4);
+        }
+
+        .code-block {
+          margin: 0;
+          padding: 16px 20px;
+          background: #0f172a;
+          overflow-x: auto;
+        }
+
+        body[data-theme='dark'] .code-block {
+          background: #171b26;
+        }
+
+        .code-block code {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 0.92rem;
+          line-height: 1.7;
+          color: #e2e8f0;
+          background: none;
+          padding: 0;
+          border: none;
+          display: block;
+        }
+
+        .xml-code-content {
+          color: #cbd5e1;
+          display: inline-block;
+          margin-left: 0.75rem;
+        }
+      `}</style>
     </>
   );
 }

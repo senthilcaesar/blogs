@@ -16,6 +16,7 @@ import { MongodbAtlasReactArticle } from './MongodbAtlasReactArticle';
 import { PatrickWinstonSuccessArticle } from './PatrickWinstonSuccessArticle';
 import { EngineBehindAutonomousAiArticle } from './EngineBehindAutonomousAiArticle';
 import { AgentsForComplexWorkflowsArticle } from './AgentsForComplexWorkflowsArticle';
+import { StructuredAiSkillsArticle } from './StructuredAiSkillsArticle';
 
 export const articleRegistry = {
   'ai-agents-mastery': AiAgentsMasteryArticle,
@@ -36,4 +37,5 @@ export const articleRegistry = {
   'formula-for-success-patrick-winston': PatrickWinstonSuccessArticle,
   'engine-behind-autonomous-ai-agents-harnesses-autoresearch': EngineBehindAutonomousAiArticle,
   'agents-for-complex-workflows': AgentsForComplexWorkflowsArticle,
+  'structured-formats-for-effective-ai-agent-skills': StructuredAiSkillsArticle,
 };
