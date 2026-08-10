@@ -53,14 +53,14 @@ export const posts = [
     type: "local",
     route: "/posts/writing-your-first-skill-md-file",
     author: {
-      name: "Tech Notes",
+      name: "Senthil Palanivelu",
       role: "AI Architecture Explainer",
-      initials: "TN",
+      initials: "SP",
     },
     hero: {
       eyebrow: "Agent Skills Tutorial",
       summary:
-        "A skill is a folder with a Markdown file in it. Build one end to end, then learn the structural idea—progressive disclosure—that keeps it maintainable.",
+        "A skill is a set of instructions - packaged as a simple folder - that teaches an Agent how to handle specific tasks or workflows.",
     },
   },
   {

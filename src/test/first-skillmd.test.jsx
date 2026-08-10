@@ -40,11 +40,11 @@ describe("FirstSkillMdArticle", () => {
     expect(container.querySelectorAll(".sk-head").length).toBeGreaterThan(0);
   });
 
-  it("shows both walkthrough screenshots with captions", () => {
+  it("shows all walkthrough screenshots with captions", () => {
     const { container } = render(<FirstSkillMdArticle />);
     const figures = [...container.querySelectorAll("figure.sk-figure")];
 
-    expect(figures).toHaveLength(2);
+    expect(figures).toHaveLength(10);
     figures.forEach((figure) => {
       expect(figure.querySelector("img")?.getAttribute("alt")).toBeTruthy();
       expect(figure.querySelector("figcaption")?.textContent).toBeTruthy();
