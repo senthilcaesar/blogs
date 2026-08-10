@@ -47,7 +47,7 @@ export const posts = [
     ],
     excerpt:
       "A hands-on walkthrough: build a working /greet skill from an empty folder, then split the detail into references/ and control who is allowed to fire it.",
-    image: imageUrl("skillmd-card.jpg"),
+    image: imageUrl("skill.jpeg"),
     date: "Aug 2026",
     priority: "High",
     type: "local",
