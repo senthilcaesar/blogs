@@ -545,6 +545,19 @@ export function FirstSkillMdArticle() {
         </div>
       </section>
 
+      {/* REFERENCES */}
+      <section className="article-panel">
+        <h2>References</h2>
+        <ul className="bullet-list" style={{ marginTop: "0.75rem" }}>
+          <li>
+            <a href="https://agentskills.io/home" target="_blank" rel="noreferrer">
+              Agent Skills Documentation
+            </a>{" "}
+            — Learn more about open specifications and standards for agent skills.
+          </li>
+        </ul>
+      </section>
+
       <style>{`
         .sk-card {
           border: 1px solid var(--border);
