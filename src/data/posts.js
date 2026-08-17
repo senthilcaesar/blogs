@@ -3,6 +3,36 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: "How Companies Are Building Their Own AI",
+    slug: "how-companies-are-building-their-own-ai",
+    category: "AI",
+    tags: [
+      "ai",
+      "architecture",
+      "evals",
+      "post-training",
+      "harness",
+      "open-stack",
+    ],
+    excerpt:
+      "There is a big shift happening in tech. Instead of just renting generic AI models from big companies, businesses are starting to build their own. This is about taking control. It is about owning the intelligence that powers your products.",
+    image: imageUrl("intellect.jpeg"),
+    date: "Aug 2026",
+    priority: "High",
+    type: "local",
+    route: "/posts/how-companies-are-building-their-own-ai",
+    author: {
+      name: "Tech Notes",
+      role: "AI Architecture Explainer",
+      initials: "TN",
+    },
+    hero: {
+      eyebrow: "AI Engineering & Strategy",
+      summary:
+        "There is a big shift happening in tech. Instead of just renting generic AI models from big companies, businesses are starting to build their own. This is about taking control. It is about owning the intelligence that powers your products.",
+    },
+  },
+  {
     title: "Agent Evaluations: The Foundations",
     slug: "agent-evaluations-foundations",
     category: "AI",

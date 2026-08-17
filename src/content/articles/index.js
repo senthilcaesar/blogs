@@ -19,8 +19,10 @@ import { AgentsForComplexWorkflowsArticle } from "./AgentsForComplexWorkflowsArt
 import { StructuredAiSkillsArticle } from "./StructuredAiSkillsArticle";
 import { FirstSkillMdArticle } from "./FirstSkillMdArticle";
 import { AgentEvaluationsArticle } from "./AgentEvaluationsArticle";
+import { HowCompaniesBuildOwnAiArticle } from "./HowCompaniesBuildOwnAiArticle";
 
 export const articleRegistry = {
+  "how-companies-are-building-their-own-ai": HowCompaniesBuildOwnAiArticle,
   "ai-agents-mastery": AiAgentsMasteryArticle,
   "successful-interview": SuccessfulInterviewArticle,
   "whats-next": WhatsNextArticle,
