@@ -11,6 +11,7 @@ const step7Img = new URL("../../../images/skill-step-7.png", import.meta.url).hr
 const step8Img = new URL("../../../images/skill-step-8.png", import.meta.url).href;
 const step9Img = new URL("../../../images/skill-step-9.png", import.meta.url).href;
 const step10Img = new URL("../../../images/skill-step-10.png", import.meta.url).href;
+const skill1Img = new URL("../../../images/skill1.png", import.meta.url).href;
 
 const mkdirSnippet = `mkdir learn-skills
 cd learn-skills
@@ -556,6 +557,13 @@ export function FirstSkillMdArticle() {
             — Learn more about open specifications and standards for agent skills.
           </li>
         </ul>
+        <div style={{ marginTop: "1.5rem" }}>
+          <Figure
+            src={skill1Img}
+            alt="A skill is capability the agent loads on demand"
+            caption="Overview of how skills extend agent capabilities using progressive disclosure."
+          />
+        </div>
       </section>
 
       <style>{`

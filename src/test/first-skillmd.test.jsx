@@ -44,7 +44,7 @@ describe("FirstSkillMdArticle", () => {
     const { container } = render(<FirstSkillMdArticle />);
     const figures = [...container.querySelectorAll("figure.sk-figure")];
 
-    expect(figures).toHaveLength(10);
+    expect(figures).toHaveLength(11);
     figures.forEach((figure) => {
       expect(figure.querySelector("img")?.getAttribute("alt")).toBeTruthy();
       expect(figure.querySelector("figcaption")?.textContent).toBeTruthy();
