@@ -148,6 +148,11 @@ export function EngineBehindAutonomousAiArticle() {
         <h2>References</h2>
         <ul className="bullet-list" style={{ marginTop: '1rem' }}>
           <li>
+            <a href="https://blog.bytebytego.com/p/how-microsoft-ships-ai-agents-at" target="_blank" rel="noreferrer">
+              https://blog.bytebytego.com/p/how-microsoft-ships-ai-agents-at
+            </a>
+          </li>
+          <li>
             <a href="https://www.trychroma.com/research/context-rot" target="_blank" rel="noreferrer">
               https://www.trychroma.com/research/context-rot
             </a>
