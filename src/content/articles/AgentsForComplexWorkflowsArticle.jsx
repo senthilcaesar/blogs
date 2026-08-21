@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
 const complexImg = new URL('../../../images/complex.png', import.meta.url).href;
+const contextFailureImg = new URL('../../../images/context-failure.png', import.meta.url).href;
 
 const xmlPromptSnippet = `<context>
 You are an expert copyeditor who writes in a concise and clear style.
@@ -86,6 +87,14 @@ export function AgentsForComplexWorkflowsArticle() {
           So the real challenge isn&apos;t &quot;how do we give the agent more information&quot; &mdash; it&apos;s &quot;<mark className="highlight">how do we give the agent exactly the right information, at the right time, in the right structure</mark>.&quot; This is the discipline of context engineering, and the rest of the blog is really a toolkit for doing it well.
         </p>
       </section>
+
+      <div style={{ margin: '2rem 0' }}>
+        <img
+          src={contextFailureImg}
+          alt="Context Failure"
+          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+        />
+      </div>
 
       <section className="article-panel">
         <h2>The Toolkit: Precision Over Volume</h2>
