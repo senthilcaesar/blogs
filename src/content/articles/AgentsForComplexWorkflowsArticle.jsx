@@ -231,6 +231,19 @@ export function AgentsForComplexWorkflowsArticle() {
         />
       </div>
 
+      <section className="article-panel">
+        <h2>Large codebase understanding: RazorPay approach</h2>
+        <p>
+          One of the challenges they highlighted was large codebase understanding. A codebase is not just a collection of files - it is a network of imports, dependencies, and relationships that evolve over years. An agent that only sees one file at a time has very limited understanding of the overall structure.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          To address this, they built a script called <code>create_importMap.js</code> that scans the entire codebase, identifies imports, dependencies, and file-to-file relationships, and generates an <code>importMap.json</code> file. This file acts as a compact structural map of the codebase, allowing the agent to quickly understand how components are connected without having to load the entire codebase into context.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The idea is similar to using an AST (Abstract Syntax Tree) graph as a representation of the codebase structure. Instead of relying on the agent to discover relationships by searching through files, the relationships are precomputed and made available as context. This significantly improves the agent&apos;s ability to navigate and reason about large, complex codebases.
+        </p>
+      </section>
+
       <style>{`
         .code-card {
           border: 1px solid var(--border);
