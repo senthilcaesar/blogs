@@ -1,0 +1,37 @@
+[debug] [2026-08-23T17:43:01.717Z] ----------------------------------------------------------------------
+[debug] [2026-08-23T17:43:01.718Z] Command:       /opt/homebrew/Cellar/node/25.9.0_1/bin/node /opt/homebrew/bin/firebase projects:list
+[debug] [2026-08-23T17:43:01.718Z] CLI Version:   15.11.0
+[debug] [2026-08-23T17:43:01.718Z] Platform:      darwin
+[debug] [2026-08-23T17:43:01.718Z] Node Version:  v25.9.0
+[debug] [2026-08-23T17:43:01.718Z] Time:          Sun Aug 23 2026 23:13:01 GMT+0530 (India Standard Time)
+[debug] [2026-08-23T17:43:01.718Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-08-23T17:43:01.719Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-08-23T17:43:01.733Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-23T17:43:01.733Z] > authorizing via signed-in user (senthilcaesar@gmail.com)
+[debug] [2026-08-23T17:43:01.734Z] Checked if tokens are valid: true, expires at: 1787510518479
+[debug] [2026-08-23T17:43:01.734Z] Checked if tokens are valid: true, expires at: 1787510518479
+[debug] [2026-08-23T17:43:01.734Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-08-23T17:43:01.736Z] *** [apiv2] error from fetch(https://firebase-public.firebaseio.com/cli.json, {"headers":{},"method":"GET"}): FetchError: request to https://firebase-public.firebaseio.com/cli.json failed, reason: getaddrinfo ENOTFOUND firebase-public.firebaseio.com
+[warn] ⚠  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2026-08-23T17:43:01.736Z] Failed to fetch MOTD FirebaseError: Failed to make request to https://firebase-public.firebaseio.com/cli.json
+[debug] [2026-08-23T17:43:01.736Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects?pageSize=1000, {"headers":{},"method":"GET","signal":{"reason":""}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000 failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2026-08-23T17:43:01.736Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000
+[debug] [2026-08-23T17:43:01.738Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects?pageSize=1000
+    at RetryOperation._fn (/opt/homebrew/lib/node_modules/firebase-tools/lib/apiv2.js:282:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
+[debug] [2026-08-23T17:43:02.008Z] Error: EPERM: operation not permitted, open '/Users/senthilpalanivelu/.config/configstore/firebase-tools.json.3432905221'
+    at Object.openSync (node:fs:556:18)
+    at writeFile.writeFileSync [as sync] (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/write-file-atomic/index.js:205:13)
+    at set all (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/configstore/index.js:61:20)
+    at Configstore.delete (/opt/homebrew/lib/node_modules/firebase-tools/node_modules/configstore/index.js:101:12)
+    at process.<anonymous> (/opt/homebrew/lib/node_modules/firebase-tools/lib/bin/cli.js:65:45)
+    at process.emit (node:events:521:24)
+    at process.exit (node:internal/process/per_thread:236:15)
+    at Timeout._onTimeout (/opt/homebrew/lib/node_modules/firebase-tools/lib/errorOut.js:20:17)
+    at listOnTimeout (node:internal/timers:605:17)
+    at process.processTimers (node:internal/timers:541:7)
+[error] 
+[error] Error: An unexpected error has occurred.

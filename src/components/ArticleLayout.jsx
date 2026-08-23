@@ -1,6 +1,7 @@
 import { ArrowLeft, CalendarRange, Copy, UserRound } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CommentsSection } from './CommentsSection';
 
 export function ArticleLayout({ post, children }) {
   const [readingProgress, setReadingProgress] = useState(0);
@@ -8,9 +9,12 @@ export function ArticleLayout({ post, children }) {
   useEffect(() => {
     const updateScrollProgress = () => {
       const currentScroll = window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       if (scrollHeight > 0) {
-        setReadingProgress(Math.min(100, Math.max(0, (currentScroll / scrollHeight) * 100)));
+        setReadingProgress(
+          Math.min(100, Math.max(0, (currentScroll / scrollHeight) * 100)),
+        );
       }
     };
 
@@ -49,56 +53,66 @@ export function ArticleLayout({ post, children }) {
   return (
     <>
       <div
-        className="reading-progress-bar"
+        className='reading-progress-bar'
         style={{ width: `${readingProgress}%` }}
-        aria-hidden="true"
+        aria-hidden='true'
       />
-      <article className="article-page">
-        <Link className="back-link" to="/">
+      <article className='article-page'>
+        <Link className='back-link' to='/'>
           <ArrowLeft size={16} />
           Back to library
         </Link>
 
-        <header className="article-hero">
-          <div className="article-hero__copy">
-            <p className="article-hero__eyebrow">{post.hero?.eyebrow ?? post.category}</p>
+        <header className='article-hero'>
+          <div className='article-hero__copy'>
+            <p className='article-hero__eyebrow'>
+              {post.hero?.eyebrow ?? post.category}
+            </p>
             <h1>{post.title}</h1>
-            <p className="article-hero__summary">{post.hero?.summary ?? post.excerpt}</p>
+            <p className='article-hero__summary'>
+              {post.hero?.summary ?? post.excerpt}
+            </p>
           </div>
 
-          <aside className="article-hero__meta">
-            <div className="author-badge">
-              <div className="author-badge__mark">{post.author.initials}</div>
+          <aside className='article-hero__meta'>
+            <div className='author-badge'>
+              <div className='author-badge__mark'>{post.author.initials}</div>
               <div>
                 <strong>{post.author.name}</strong>
                 <span>{post.author.role}</span>
               </div>
             </div>
-            <div className="meta-row">
-              <span className="post-meta">
+            <div className='meta-row'>
+              <span className='post-meta'>
                 <CalendarRange size={14} />
                 {post.date}
               </span>
-              <span className="post-meta">
+              <span className='post-meta'>
                 <UserRound size={14} />
                 {post.category}
               </span>
             </div>
-            <div className="tag-row">
+            <div className='tag-row'>
               {post.tags.map((tag) => (
-                <span className="tag" key={tag}>
+                <span className='tag' key={tag}>
                   {tag}
                 </span>
               ))}
             </div>
-            <button className="article-share-btn" type="button" onClick={handleCopyLink}>
+            <button
+              className='article-share-btn'
+              type='button'
+              onClick={handleCopyLink}
+            >
               <Copy size={15} />
               Copy Link
             </button>
           </aside>
         </header>
 
-        <div className="article-content">{children}</div>
+        <div className='article-content'>{children}</div>
+
+        <CommentsSection postSlug={post.slug} />
       </article>
     </>
   );
