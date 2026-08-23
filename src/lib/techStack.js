@@ -16,7 +16,7 @@ export function getProjectTechStack() {
       key: 'react',
       icon: 'react',
       name: `React ${major(dependencies.react)}`,
-      description: 'Fast, modern, component-driven UI framework powering the app shell and pages.',
+      description: 'Fast, modern, component-driven UI framework powering the app shell, pages, and interactive features.',
       tone: 'sky',
     });
   }
@@ -26,8 +26,18 @@ export function getProjectTechStack() {
       key: 'vite',
       icon: 'zap',
       name: `Vite ${major(devDependencies.vite)}`,
-      description: 'Build tool and dev server for fast local development, HMR, and production bundling.',
+      description: 'Next-gen build tool and dev server for ultra-fast HMR and production bundling.',
       tone: 'amber',
+    });
+  }
+
+  if (dependencies.firebase) {
+    stack.push({
+      key: 'firebase',
+      icon: 'database',
+      name: `Firebase Cloud Firestore ${major(dependencies.firebase)}`,
+      description: 'Real-time cloud NoSQL database powering global live comment threads across all site visitors.',
+      tone: 'orange',
     });
   }
 
@@ -36,7 +46,7 @@ export function getProjectTechStack() {
       key: 'router',
       icon: 'route',
       name: 'React Router',
-      description: 'Handles hash-based navigation for the homepage and local article routes on GitHub Pages.',
+      description: 'Handles hash-based client navigation for the home page and article routes on GitHub Pages.',
       tone: 'violet',
     });
   }
@@ -46,7 +56,7 @@ export function getProjectTechStack() {
       key: 'lucide',
       icon: 'code',
       name: 'Lucide React',
-      description: 'Provides the icon system used across navigation, cards, filters, and modal actions.',
+      description: 'Provides the clean vector icon system used across navigation, cards, comments, and modals.',
       tone: 'rose',
     });
   }
@@ -55,7 +65,7 @@ export function getProjectTechStack() {
     key: 'css',
     icon: 'palette',
     name: 'Vanilla CSS',
-    description: 'Custom class-based styling and design tokens define the visual system without a UI framework.',
+    description: 'Custom CSS tokens and component classes define the design system without external UI framework overhead.',
     tone: 'emerald',
   });
 
@@ -63,7 +73,7 @@ export function getProjectTechStack() {
     key: 'motion',
     icon: 'sparkles',
     name: 'Native CSS Motion',
-    description: 'Hover states, transitions, and motion are implemented with CSS instead of a dedicated animation library.',
+    description: 'Smooth hover micro-interactions, modal dialog physics, and progress indicators built with pure CSS.',
     tone: 'cyan',
   });
 
@@ -72,7 +82,7 @@ export function getProjectTechStack() {
       key: 'deploy',
       icon: 'cloud',
       name: 'GitHub Pages',
-      description: 'The app is configured to publish as a static site, using the package homepage as the deployment base.',
+      description: 'Automated CI/CD static hosting directly from the repository source.',
       tone: 'slate',
     });
   }
@@ -82,7 +92,7 @@ export function getProjectTechStack() {
       key: 'tests',
       icon: 'shield',
       name: 'Vitest',
-      description: 'Runs component and behavior tests for filtering, routing, and theme persistence.',
+      description: 'Blazing-fast test runner validating routing, search filtering, comment hierarchy, and theme persistence.',
       tone: 'lime',
     });
   }

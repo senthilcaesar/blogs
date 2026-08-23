@@ -2,13 +2,26 @@ import { useState } from 'react';
 import { MessageSquareReply, CornerDownRight } from 'lucide-react';
 import { CommentForm } from './CommentForm';
 
-function getInitials(name) {
-  if (!name || name === 'Anonymous Reader') return 'AR';
-  const parts = name.trim().split(/\s+/);
-  if (parts.length >= 2) {
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+const PERSON_EMOJIS = [
+  '🧑‍💻', '👩‍💻', '👨‍💻', '👤', '🧑‍🎨', '👩‍🎨', '👨‍🎨',
+  '🧑‍🚀', '👩‍🚀', '👨‍🚀', '🧑‍🔬', '👩‍🔬', '👨‍🔬',
+  '🧑‍💼', '👩‍💼', '👨‍💼', '🧑‍🎓', '👩‍🎓', '👨‍🎓',
+  '🥷', '🧙‍♂️', '🧙‍♀️', '🕵️‍♂️', '🕵️‍♀️', '🦸‍♂️', '🦸‍♀️',
+  '🧔‍♂️', '👩‍🦰', '👨‍🦱', '👩‍🦱', '🧑‍🦲', '🧑‍🦳',
+  '🧑‍🍳', '👩‍🍳', '👨‍🍳', '🧑‍🌾', '👩‍🌾', '👨‍🌾',
+  '🧑‍🎤', '👩‍🎤', '👨‍🎤', '🧑‍🏫', '👩‍🏫', '👨‍🏫',
+];
+
+export function getPersonEmoji(name) {
+  if (!name || typeof name !== 'string') return '👤';
+  const cleanName = name.trim().toLowerCase();
+  let hash = 0;
+  for (let i = 0; i < cleanName.length; i++) {
+    hash = (hash << 5) - hash + cleanName.charCodeAt(i);
+    hash |= 0;
   }
-  return name.slice(0, 2).toUpperCase();
+  const index = Math.abs(hash) % PERSON_EMOJIS.length;
+  return PERSON_EMOJIS[index];
 }
 
 function formatDate(isoString) {
@@ -38,6 +51,7 @@ function formatDate(isoString) {
 
 export function CommentItem({ comment, onSubmitReply, submitting }) {
   const [isReplying, setIsReplying] = useState(false);
+  const emoji = getPersonEmoji(comment.author);
 
   const handleReplySubmit = async (data) => {
     const success = await onSubmitReply({
@@ -51,27 +65,31 @@ export function CommentItem({ comment, onSubmitReply, submitting }) {
   };
 
   return (
-    <div className='comment-item' id={`comment-${comment.id}`}>
-      <div className='comment-item__header'>
-        <div className='comment-item__avatar'>
-          {getInitials(comment.author)}
+    <div className="comment-item" id={`comment-${comment.id}`}>
+      <div className="comment-item__header">
+        <div
+          className="comment-item__avatar"
+          aria-hidden="true"
+          title={comment.author}
+        >
+          {emoji}
         </div>
-        <div className='comment-item__meta'>
-          <span className='comment-item__author'>{comment.author}</span>
-          <span className='comment-item__date'>
+        <div className="comment-item__meta">
+          <span className="comment-item__author">{comment.author}</span>
+          <span className="comment-item__date">
             {formatDate(comment.createdAt)}
           </span>
         </div>
       </div>
 
-      <div className='comment-item__body'>
+      <div className="comment-item__body">
         <p>{comment.content}</p>
       </div>
 
-      <div className='comment-item__footer'>
+      <div className="comment-item__footer">
         <button
-          type='button'
-          className='comment-item__reply-btn'
+          type="button"
+          className="comment-item__reply-btn"
           onClick={() => setIsReplying((prev) => !prev)}
         >
           <MessageSquareReply size={14} />
@@ -80,11 +98,15 @@ export function CommentItem({ comment, onSubmitReply, submitting }) {
       </div>
 
       {isReplying && (
-        <div className='comment-item__reply-form'>
-          <div className='reply-form__prefix'>
+        <div className="comment-item__reply-form">
+          <div className="reply-form__prefix">
             <CornerDownRight size={14} />
             <span>
-              Replying to <strong>{comment.author}</strong>
+              Replying to{' '}
+              <strong>
+                <span className="author-emoji">{emoji}</span>
+                {comment.author}
+              </strong>
             </span>
           </div>
           <CommentForm
@@ -92,14 +114,14 @@ export function CommentItem({ comment, onSubmitReply, submitting }) {
             onCancel={() => setIsReplying(false)}
             submitting={submitting}
             placeholder={`Reply to ${comment.author}...`}
-            buttonLabel='Post Reply'
+            buttonLabel="Post Reply"
             autoFocus
           />
         </div>
       )}
 
       {comment.replies && comment.replies.length > 0 && (
-        <div className='comment-item__replies'>
+        <div className="comment-item__replies">
           {comment.replies.map((reply) => (
             <CommentItem
               key={reply.id}
