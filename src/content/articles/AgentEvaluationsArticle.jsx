@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
+const evalImg1 = new URL("../../../images/agent-evaluations-1.png", import.meta.url).href;
+const evalImg2 = new URL("../../../images/agent-evaluations-2.png", import.meta.url).href;
+const evalImg3 = new URL("../../../images/agent-evaluations-3.png", import.meta.url).href;
+
 const caseSnippet = `{
   "id": "refund-002",
   "description": "Customer asks for a refund on an order that is 45 days old",
@@ -1274,6 +1278,39 @@ export function AgentEvaluationsArticle() {
           </p>
         </div>
       </section>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", margin: "2rem 0" }}>
+        <img
+          src={evalImg1}
+          alt="Agent Evaluations diagram 1"
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: "16px",
+            border: "1px solid var(--border)",
+          }}
+        />
+        <img
+          src={evalImg2}
+          alt="Agent Evaluations diagram 2"
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: "16px",
+            border: "1px solid var(--border)",
+          }}
+        />
+        <img
+          src={evalImg3}
+          alt="Agent Evaluations diagram 3"
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: "16px",
+            border: "1px solid var(--border)",
+          }}
+        />
+      </div>
 
       <style>{`
         .ev-card {
