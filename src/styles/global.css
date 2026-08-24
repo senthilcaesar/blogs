@@ -1673,6 +1673,23 @@ body[data-theme='dark'] .highlight {
   border-bottom: 2px solid #ff8a3d;
 }
 
+mark.highlight-green,
+.highlight-green {
+  background: rgba(22, 163, 74, 0.15);
+  color: #15803d;
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  border-bottom: 2px solid #16a34a;
+  font-weight: 600;
+}
+
+body[data-theme='dark'] mark.highlight-green,
+body[data-theme='dark'] .highlight-green {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+  border-bottom: 2px solid #22c55e;
+}
+
 /* ─────────────────────────────────────────────
    Comments Section & Threaded Comments
 ───────────────────────────────────────────── */

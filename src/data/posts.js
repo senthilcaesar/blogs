@@ -3,6 +3,29 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: "Context Engineering",
+    slug: "context-engineering",
+    category: "AI",
+    tags: ["ai", "context-engineering", "prompt-engineering", "llm"],
+    excerpt:
+      "Most people have heard of prompt engineering. It usually comes down to one question: How do I phrase my instructions to get exactly what I want from an AI? But there is a bigger picture. It is called context engineering.",
+    image: imageUrl("ce.png"),
+    date: "Aug 2026",
+    priority: "High",
+    type: "local",
+    route: "/posts/context-engineering",
+    author: {
+      name: "Tech Notes",
+      role: "AI Architecture Explainer",
+      initials: "TN",
+    },
+    hero: {
+      eyebrow: "AI Engineering",
+      summary:
+        "Beyond the Prompt: A Beginner’s Guide to Context Engineering.",
+    },
+  },
+  {
     title: "How Companies Are Building Their Own AI",
     slug: "how-companies-are-building-their-own-ai",
     category: "AI",
