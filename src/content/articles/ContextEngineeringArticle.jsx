@@ -1,5 +1,6 @@
 const img1 = new URL('../../../images/ce-1.png', import.meta.url).href;
 const img2 = new URL('../../../images/ce-2.png', import.meta.url).href;
+const memoryStackImg = new URL('../../../images/memory_stack.png', import.meta.url).href;
 
 export function ContextEngineeringArticle() {
   return (
@@ -155,6 +156,16 @@ export function ContextEngineeringArticle() {
         <img
           src={img2}
           alt="Context Engineering Takeaway"
+          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+        />
+      </div>
+
+      <h2 style={{ marginTop: '2.5rem', marginBottom: '1rem' }}>Agent Memory Stack</h2>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <img
+          src={memoryStackImg}
+          alt="Agent Memory Stack"
           style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
         />
       </div>
