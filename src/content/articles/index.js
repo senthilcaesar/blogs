@@ -1,3 +1,4 @@
+import { WritingLoopsArticle } from "./WritingLoopsArticle";
 import { ContextEngineeringArticle } from "./ContextEngineeringArticle";
 import { AiAgentsMasteryArticle } from "./AiAgentsMasteryArticle";
 import { EricMosleyArticle } from "./EricMosleyArticle";
@@ -23,6 +24,7 @@ import { AgentEvaluationsArticle } from "./AgentEvaluationsArticle";
 import { HowCompaniesBuildOwnAiArticle } from "./HowCompaniesBuildOwnAiArticle";
 
 export const articleRegistry = {
+  "writing-loops": WritingLoopsArticle,
   "context-engineering": ContextEngineeringArticle,
   "how-companies-are-building-their-own-ai": HowCompaniesBuildOwnAiArticle,
   "ai-agents-mastery": AiAgentsMasteryArticle,
@@ -49,4 +51,5 @@ export const articleRegistry = {
   "writing-your-first-skill-md-file": FirstSkillMdArticle,
   "agent-evaluations-foundations": AgentEvaluationsArticle,
 };
+
 

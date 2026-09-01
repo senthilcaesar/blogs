@@ -3,6 +3,29 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: "Writing Loops",
+    slug: "writing-loops",
+    category: "AI",
+    tags: ["ai", "agents", "loops", "autonomous", "workflows"],
+    excerpt:
+      "Instead of prompting an agent to build a feature or fix a specific problem and then supervising each step of the work, they hand the Al an ambitious goal.",
+    image: imageUrl("loop1.png"),
+    date: "Sep 2026",
+    priority: "High",
+    type: "local",
+    route: "/posts/writing-loops",
+    author: {
+      name: "Tech Notes",
+      role: "AI Architecture Explainer",
+      initials: "TN",
+    },
+    hero: {
+      eyebrow: "Autonomous AI Workflows",
+      summary:
+        "Instead of prompting an agent to build a feature or fix a specific problem and then supervising each step of the work, they hand the Al an ambitious goal.",
+    },
+  },
+  {
     title: "Context Engineering",
     slug: "context-engineering",
     category: "AI",
