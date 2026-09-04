@@ -1,10 +1,11 @@
-import { ArrowLeft, CalendarRange, Copy, UserRound } from 'lucide-react';
+import { ArrowLeft, CalendarRange, Check, Copy, UserRound } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CommentsSection } from './CommentsSection';
 
 export function ArticleLayout({ post, children }) {
   const [readingProgress, setReadingProgress] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const updateScrollProgress = () => {
@@ -40,6 +41,11 @@ export function ArticleLayout({ post, children }) {
       }
     }
 
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+
     window.dispatchEvent(
       new CustomEvent('app-toast', {
         detail: {
@@ -64,50 +70,79 @@ export function ArticleLayout({ post, children }) {
         </Link>
 
         <header className='article-hero'>
-          <div className='article-hero__copy'>
-            <p className='article-hero__eyebrow'>
-              {post.hero?.eyebrow ?? post.category}
-            </p>
-            <h1>{post.title}</h1>
+          <div className='article-byline'>
+            <div className='article-byline__left'>
+              <div className='article-byline__avatar'>
+                {post.author.initials}
+              </div>
+              <div className='article-byline__author-info'>
+                <div className='article-byline__primary'>
+                  <span className='article-byline__name'>{post.author.name}</span>
+                  {post.author.role && (
+                    <span className='article-byline__role'>
+                      <span className='article-byline__dot'>·</span>
+                      {post.author.role}
+                    </span>
+                  )}
+                </div>
+                <div className='article-byline__secondary'>
+                  <span className='article-byline__date'>
+                    <CalendarRange size={12} />
+                    {post.date}
+                  </span>
+                  <span className='article-byline__dot'>·</span>
+                  <span className='article-byline__category'>{post.category}</span>
+                  {post.tags && post.tags.length > 0 && (
+                    <>
+                      <span className='article-byline__dot'>·</span>
+                      <div className='article-byline__tags'>
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span className='article-byline__tag' key={tag}>
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className='article-byline__right'>
+              <button
+                className={`article-byline__share-btn ${copied ? 'article-byline__share-btn--copied' : ''}`}
+                type='button'
+                onClick={handleCopyLink}
+                title='Copy link to article'
+              >
+                {copied ? (
+                  <>
+                    <Check size={13} />
+                    <span>Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy size={13} />
+                    <span>Share</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div className='article-hero__header'>
+            <div className='article-hero__eyebrow-row'>
+              <span className='article-hero__eyebrow'>
+                {post.hero?.eyebrow ?? post.category}
+              </span>
+            </div>
+
+            <h1 className='article-hero__title'>{post.title}</h1>
+
             <p className='article-hero__summary'>
               {post.hero?.summary ?? post.excerpt}
             </p>
           </div>
-
-          <aside className='article-hero__meta'>
-            <div className='author-badge'>
-              <div className='author-badge__mark'>{post.author.initials}</div>
-              <div>
-                <strong>{post.author.name}</strong>
-                <span>{post.author.role}</span>
-              </div>
-            </div>
-            <div className='meta-row'>
-              <span className='post-meta'>
-                <CalendarRange size={14} />
-                {post.date}
-              </span>
-              <span className='post-meta'>
-                <UserRound size={14} />
-                {post.category}
-              </span>
-            </div>
-            <div className='tag-row'>
-              {post.tags.map((tag) => (
-                <span className='tag' key={tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <button
-              className='article-share-btn'
-              type='button'
-              onClick={handleCopyLink}
-            >
-              <Copy size={15} />
-              Copy Link
-            </button>
-          </aside>
         </header>
 
         <div className='article-content'>{children}</div>

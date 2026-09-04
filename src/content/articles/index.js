@@ -1,3 +1,4 @@
+import { WhatIsApiEndpointArticle } from "./WhatIsApiEndpointArticle";
 import { WritingLoopsArticle } from "./WritingLoopsArticle";
 import { ContextEngineeringArticle } from "./ContextEngineeringArticle";
 import { AiAgentsMasteryArticle } from "./AiAgentsMasteryArticle";
@@ -24,6 +25,7 @@ import { AgentEvaluationsArticle } from "./AgentEvaluationsArticle";
 import { HowCompaniesBuildOwnAiArticle } from "./HowCompaniesBuildOwnAiArticle";
 
 export const articleRegistry = {
+  "what-is-api-endpoint": WhatIsApiEndpointArticle,
   "writing-loops": WritingLoopsArticle,
   "context-engineering": ContextEngineeringArticle,
   "how-companies-are-building-their-own-ai": HowCompaniesBuildOwnAiArticle,

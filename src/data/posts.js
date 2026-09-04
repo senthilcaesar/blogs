@@ -3,6 +3,29 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: "What is API Endpoint",
+    slug: "what-is-api-endpoint",
+    category: "Web Dev",
+    tags: ["api", "webdev", "backend", "http", "endpoints"],
+    excerpt:
+      "An API endpoint is a specific digital location - usually a URL—where two software programs connect to share information or trigger an action. If an API is the entire menu of services a system offers, the endpoint is the specific address you use to order one of those services.",
+    image: imageUrl("api-card.png"),
+    date: "Sep 2026",
+    priority: "High",
+    type: "local",
+    route: "/posts/what-is-api-endpoint",
+    author: {
+      name: "Tech Notes",
+      role: "Web & API Architecture Explainer",
+      initials: "TN",
+    },
+    hero: {
+      eyebrow: "Web & API Fundamentals",
+      summary:
+        "An API endpoint is a specific digital location - usually a URL where two software programs connect to share information or trigger an action.",
+    },
+  },
+  {
     title: "Writing Loops",
     slug: "writing-loops",
     category: "AI",
