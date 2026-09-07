@@ -27,7 +27,10 @@ describe('blog app', () => {
       }),
     ).toBeInTheDocument();
 
-    await user.type(screen.getByRole('searchbox', { name: /search posts/i }), 'cholesterol');
+    await user.type(
+      screen.getByRole('searchbox', { name: /search posts/i }),
+      'cholesterol',
+    );
 
     expect(
       screen.getByRole('heading', { name: /what is serum cholesterol/i }),
@@ -76,8 +79,14 @@ describe('blog app', () => {
         name: /AI Agents are nothing but micro services with Intelligence/i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/Thinking of AI agents as "smart microservices" gets you most of the way there/i)[0]).toBeInTheDocument();
-    expect(screen.getByText(/The Big Difference: Rules vs. Goals/i)).toBeInTheDocument();
+    expect(
+      screen.getAllByText(
+        /Thinking of AI agents as "smart microservices" gets you most of the way there/i,
+      )[0],
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Big Difference: Rules vs. Goals/i),
+    ).toBeInTheDocument();
   });
 
   it('renders the new SQLAlchemy article correctly', () => {
@@ -89,7 +98,11 @@ describe('blog app', () => {
         name: /Python ORM, SQLAlchemy/i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText(/To understand SQLAlchemy, it helps to first understand the problem it solves/i)[0]).toBeInTheDocument();
+    expect(
+      screen.getAllByText(
+        /To understand SQLAlchemy, it helps to first understand the problem it solves/i,
+      )[0],
+    ).toBeInTheDocument();
     expect(screen.getByText(/The ORM Mental Model/i)).toBeInTheDocument();
   });
 
@@ -123,11 +136,19 @@ describe('blog app', () => {
         name: /Making Sense of React Server Components and the Aggregation Layer/i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/The Problem with Heavy Browsers/i)).toBeInTheDocument();
-    expect(screen.getByText(/A Practical Shift: React Server Components/i)).toBeInTheDocument();
-    expect(screen.getByText(/The Backend-for-Frontend \(BFF\) Pattern/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Problem with Heavy Browsers/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/A Practical Shift: React Server Components/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Backend-for-Frontend \(BFF\) Pattern/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Real Security/i)).toBeInTheDocument();
-    expect(screen.getByText(/The Right Tools for the Job/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Right Tools for the Job/i),
+    ).toBeInTheDocument();
   });
 
   it('renders the 1-Hour Next.js Build OpenTelemetry article correctly', () => {
@@ -139,13 +160,23 @@ describe('blog app', () => {
         name: /The 1-Hour Next.js Build: How OpenTelemetry Shined a Light on CI\/CD Bottlenecks/i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/The Problem: The CI\/CD Black Box/i)).toBeInTheDocument();
-    expect(screen.getByText(/Step 1: Measuring the Pipeline with Thoth/i)).toBeInTheDocument();
-    expect(screen.getByText(/Step 2: Unlocking Internal Next.js Traces/i)).toBeInTheDocument();
-    expect(screen.getByText(/Step 3: Visualizing the Bottleneck with Oodle.ai/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Problem: The CI\/CD Black Box/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 1: Measuring the Pipeline with Thoth/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 2: Unlocking Internal Next.js Traces/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 3: Visualizing the Bottleneck with Oodle.ai/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/The Culprit: Webpack/i)).toBeInTheDocument();
     expect(screen.getByText(/The Takeaway/i)).toBeInTheDocument();
-    expect(screen.getByAltText(/OpenTelemetry Trace Waterfall Visualization/i)).toBeInTheDocument();
+    expect(
+      screen.getByAltText(/OpenTelemetry Trace Waterfall Visualization/i),
+    ).toBeInTheDocument();
   });
 
   it('renders the React UI Packages article correctly', () => {
@@ -158,7 +189,9 @@ describe('blog app', () => {
       }),
     ).toBeInTheDocument();
     expect(screen.getByText(/The Problem: Global CSS/i)).toBeInTheDocument();
-    expect(screen.getByText(/The Solution: Prefixes and Scoped Containers/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Solution: Prefixes and Scoped Containers/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Why This Works/i)).toBeInTheDocument();
   });
 
@@ -172,9 +205,64 @@ describe('blog app', () => {
       }),
     ).toBeInTheDocument();
     expect(screen.getByText(/The Translation Problem/i)).toBeInTheDocument();
-    expect(screen.getByText(/Traditional Multi-Tool Stack/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Traditional Multi-Tool Stack/i),
+    ).toBeInTheDocument();
     expect(screen.getByText(/The Single Platform Shift/i)).toBeInTheDocument();
     expect(screen.getByText(/Why This Matters for AI/i)).toBeInTheDocument();
+  });
+
+  it('renders the Is Your Website Built for AI Agents article correctly', () => {
+    renderRoutes(['/posts/is-your-website-built-for-ai-agents']);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /Is Your Website Built for AI Agents\?/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Problem: Ambiguous Elements/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/The Fix: Semantic HTML and Explicit Context/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/How to Build for Agents and Humans Alike/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/The Payoff/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /When you build for accessibility, you build for the future of the web\./i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 2, name: /References/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'https://docs.copilotkit.ai/' }),
+    ).toHaveAttribute('href', 'https://docs.copilotkit.ai/');
+    expect(
+      screen.getByRole('link', {
+        name: 'https://developer.chrome.com/docs/ai/webmcp',
+      }),
+    ).toHaveAttribute('href', 'https://developer.chrome.com/docs/ai/webmcp');
+    expect(
+      screen.getByRole('link', {
+        name: 'https://jamesqquick.com/blog/a-beginners-guide-to-webmcp-with-react/',
+      }),
+    ).toHaveAttribute(
+      'href',
+      'https://jamesqquick.com/blog/a-beginners-guide-to-webmcp-with-react/',
+    );
+    expect(
+      screen.getByRole('link', {
+        name: 'https://modelcontextprotocol.io/extensions/client-matrix',
+      }),
+    ).toHaveAttribute(
+      'href',
+      'https://modelcontextprotocol.io/extensions/client-matrix',
+    );
   });
 
   it('persists theme values in localStorage', async () => {
