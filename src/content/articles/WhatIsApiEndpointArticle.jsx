@@ -1,4 +1,7 @@
 const api1Img = new URL('../../../images/api1.png', import.meta.url).href;
+const crudImg = new URL('../../../images/crud.png', import.meta.url).href;
+const getPostImg = new URL('../../../images/get-post.png', import.meta.url).href;
+const postPutImg = new URL('../../../images/post-put.png', import.meta.url).href;
 
 export function WhatIsApiEndpointArticle() {
   return (
@@ -94,6 +97,72 @@ export function WhatIsApiEndpointArticle() {
         <p style={{ marginTop: '1rem' }}>
           Notice that the exact same endpoint path can perform different actions depending on the method used: sending a <strong>GET</strong> to <code>/orders/93246</code> reads the data, while sending a <strong>DELETE</strong> to that identical address removes it.
         </p>
+      </section>
+
+      <div style={{ margin: '2rem 0' }}>
+        <img
+          src={crudImg}
+          alt="CRUD Operations and HTTP Methods"
+          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+        />
+      </div>
+
+      <div style={{ margin: '2rem 0' }}>
+        <img
+          src={getPostImg}
+          alt="HTTP Methods GET and POST"
+          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+        />
+      </div>
+
+      <div style={{ margin: '2rem 0' }}>
+        <img
+          src={postPutImg}
+          alt="HTTP Methods POST and PUT"
+          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+        />
+      </div>
+
+      <section className="article-panel">
+        <h2>Resources</h2>
+        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+          <li>
+            <a
+              href="https://car-fleet-management.herokuapp.com/swagger-ui.html"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Car Fleet Management Swagger UI
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.openapis.org/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              OpenAPI Initiative
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://docs.github.com/en/rest?api"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub REST API Documentation
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://serpapi.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              SerpApi: Search Engine Results API
+            </a>
+          </li>
+        </ul>
       </section>
     </>
   );
