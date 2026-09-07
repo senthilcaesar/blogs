@@ -55,9 +55,14 @@ export function EngineBehindAutonomousAiArticle() {
         <h3 style={{ marginTop: '1.5rem' }}>What Is AI Harness Engineering?</h3>
         <p style={{ marginTop: '1rem' }}>
           A useful formula has emerged across the AI engineering community in
-          the past few months:
+          the past few months (<a href='https://docs.langchain.com/oss/python/langchain/agents' target='_blank' rel='noreferrer'>I found this explanation better</a>):
         </p>
         <blockquote>Agent = Model + Harness</blockquote>
+        <p style={{ marginTop: '1rem' }}>
+          Model&apos;s raw capability needs to be harnessed to make it work
+          effectively. The harness coordinates the full operating environment
+          around the model. Harness turns intelligence into dependable work.
+        </p>
         <p style={{ marginTop: '1rem' }}>
           The model provides raw intelligence. The harness is everything else:
           the infrastructure that channels that intelligence into reliable,
