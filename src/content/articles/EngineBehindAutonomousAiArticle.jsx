@@ -325,6 +325,15 @@ export function EngineBehindAutonomousAiArticle() {
               https://www.databricks.com/blog/ai-harness
             </a>
           </li>
+          <li>
+            <a
+              href='https://academy.langchain.com/courses/foundation-introduction-to-deepagents'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://academy.langchain.com/courses/foundation-introduction-to-deepagents
+            </a>
+          </li>
         </ul>
       </section>
     </>

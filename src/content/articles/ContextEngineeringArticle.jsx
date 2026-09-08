@@ -169,6 +169,30 @@ export function ContextEngineeringArticle() {
           style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
         />
       </div>
+
+      <section className="article-panel">
+        <h2>References</h2>
+        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+          <li>
+            <a
+              href="https://blog.n8n.io/ai-agent-memory/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              AI Agent Memory: How It Works & How to Build It (n8n Blog)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://blog.bytebytego.com/p/graphrag-how-ai-answers-questions"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GraphRAG: How AI Answers Complex Questions on Connected Data (ByteByteGo)
+            </a>
+          </li>
+        </ul>
+      </section>
     </>
   );
 }
