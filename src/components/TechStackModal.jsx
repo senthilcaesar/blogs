@@ -1,6 +1,8 @@
 import {
+  Check,
   Cloud,
   Code2,
+  Copy,
   Database,
   Layers,
   Palette,
@@ -10,7 +12,13 @@ import {
   X,
   Zap,
 } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  TECH_STACK_INTRO,
+  TECH_STACK_SUMMARY,
+  TECH_STACK_TITLE,
+  formatTechStackForCopy,
+} from '../lib/techStack';
 
 const iconMap = {
   react: Code2,
@@ -27,6 +35,8 @@ const iconMap = {
 const iconSizeFor = { feature: 26, wide: 20, small: 18 };
 
 export function TechStackModal({ isOpen, onClose, stack }) {
+  const [copied, setCopied] = useState(false);
+
   useEffect(() => {
     if (!isOpen) return undefined;
 
@@ -43,7 +53,44 @@ export function TechStackModal({ isOpen, onClose, stack }) {
     };
   }, [isOpen, onClose]);
 
+  // Drop the "Copied" state when the dialog is dismissed, so reopening it
+  // always starts from the idle label.
+  useEffect(() => {
+    if (isOpen) return undefined;
+
+    setCopied(false);
+    return undefined;
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!copied) return undefined;
+
+    const timerId = window.setTimeout(() => setCopied(false), 2000);
+    return () => window.clearTimeout(timerId);
+  }, [copied]);
+
   if (!isOpen) return null;
+
+  async function handleCopy() {
+    let success = false;
+
+    try {
+      await navigator.clipboard.writeText(formatTechStackForCopy(stack));
+      success = true;
+      setCopied(true);
+    } catch (err) {
+      console.error('Failed to copy tech stack:', err);
+    }
+
+    window.dispatchEvent(
+      new CustomEvent('app-toast', {
+        detail: {
+          message: success ? 'Tech stack copied' : 'Copy failed',
+          type: success ? 'success' : 'error',
+        },
+      }),
+    );
+  }
 
   return (
     <div
@@ -65,20 +112,30 @@ export function TechStackModal({ isOpen, onClose, stack }) {
               <Layers size={13} />
               <span>{stack.length} Core Technologies</span>
             </div>
-            <h2 id="tech-stack-title">Architecture &amp; Tech Stack</h2>
-            <p className="modal-intro">
-              The modern tools, cloud storage, and libraries powering this blog.
-            </p>
+            <h2 id="tech-stack-title">{TECH_STACK_TITLE}</h2>
+            <p className="modal-intro">{TECH_STACK_INTRO}</p>
           </div>
 
-          <button
-            className="modal-close"
-            type="button"
-            aria-label="Close tech stack dialog"
-            onClick={onClose}
-          >
-            <X size={18} />
-          </button>
+          <div className="modal-header__actions">
+            <button
+              className={`modal-copy ${copied ? 'modal-copy--done' : ''}`}
+              type="button"
+              aria-label="Copy tech stack details to clipboard"
+              onClick={handleCopy}
+            >
+              {copied ? <Check size={14} /> : <Copy size={14} />}
+              <span>{copied ? 'Copied' : 'Copy'}</span>
+            </button>
+
+            <button
+              className="modal-close"
+              type="button"
+              aria-label="Close tech stack dialog"
+              onClick={onClose}
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
         <div className="tech-bento">
@@ -103,9 +160,7 @@ export function TechStackModal({ isOpen, onClose, stack }) {
         </div>
 
         <div className="modal-footer">
-          <span className="modal-footer__text">
-            Client-side React 19 App with Firebase Cloud Firestore Realtime Backend
-          </span>
+          <span className="modal-footer__text">{TECH_STACK_SUMMARY}</span>
         </div>
       </div>
     </div>

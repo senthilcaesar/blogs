@@ -1511,6 +1511,43 @@ blockquote p:last-child {
   transform: rotate(90deg);
 }
 
+.modal-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.modal-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.modal-copy:hover {
+  color: var(--text);
+  background: var(--accent-glow);
+  border-color: var(--accent);
+}
+
+.modal-copy--done,
+.modal-copy--done:hover {
+  color: var(--accent);
+  background: var(--accent-glow);
+  border-color: var(--accent);
+}
+
 /* ─────────────────────────────────────────────
    Tech Stack Bento Grid
    Six columns; each tile declares its own span, so a missing

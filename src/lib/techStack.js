@@ -108,3 +108,33 @@ export function getProjectTechStack() {
 
   return stack;
 }
+
+export const TECH_STACK_TITLE = 'Architecture & Tech Stack';
+export const TECH_STACK_INTRO =
+  'The modern tools, cloud storage, and libraries powering this blog.';
+export const TECH_STACK_SUMMARY =
+  'Client-side React 19 App with Firebase Cloud Firestore Realtime Backend';
+
+/**
+ * Flattens the tech stack into plain text for the modal's copy button.
+ * @param {Array} stack - Entries from getProjectTechStack()
+ * @returns {string} Newline-delimited summary of every entry
+ */
+export function formatTechStackForCopy(stack = []) {
+  const lines = [
+    TECH_STACK_TITLE,
+    TECH_STACK_INTRO,
+    `${stack.length} core technologies`,
+    '',
+  ];
+
+  stack.forEach((item, index) => {
+    lines.push(`${index + 1}. ${item.name}`);
+    lines.push(`   ${item.description}`);
+    lines.push('');
+  });
+
+  lines.push(TECH_STACK_SUMMARY);
+
+  return lines.join('\n');
+}
