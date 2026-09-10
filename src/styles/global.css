@@ -850,19 +850,56 @@ body[data-theme='light'] .filter-pill.is-active {
   padding: 0;
   margin-bottom: 20px;
   text-decoration: none;
+  position: relative;
   transition: color 180ms ease;
 }
 
-.back-link svg {
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+/* Hairline underline: wipes in from the left on enter, exits to the right on
+   leave, so the link reads as travelling back the way the chevron points. */
+.back-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.back-link:hover {
+.back-link svg {
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-link:hover,
+.back-link:focus-visible {
   color: var(--accent);
 }
 
-.back-link:hover svg {
-  transform: translateX(-3px);
+.back-link:hover::after,
+.back-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.back-link:hover svg,
+.back-link:focus-visible svg {
+  transform: translateX(-5px);
+}
+
+/* Springs back toward centre while held, so the click registers physically. */
+.back-link:active svg {
+  transform: translateX(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-link,
+  .back-link::after,
+  .back-link svg {
+    transition-duration: 1ms;
+  }
 }
 
 /* ── Article masthead: rust serif title, hairline meta ── */
