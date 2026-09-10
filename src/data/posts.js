@@ -9,7 +9,7 @@ export const posts = [
     tags: ['ai', 'agents', 'accessibility', 'html', 'webdev', 'aria'],
     excerpt:
       'Websites are typically built for human users, but AI agents increasingly interact with the same interfaces. Semantic HTML and accessibility attributes provide the context agents need to understand and act reliably.',
-    image: imageUrl('arira1.jpeg'),
+    image: imageUrl('arira1.webp'),
     date: 'Sep 2026',
     priority: 'High',
     type: 'local',
@@ -32,7 +32,7 @@ export const posts = [
     tags: ['api', 'webdev', 'backend', 'http', 'endpoints'],
     excerpt:
       'An API endpoint is a specific digital location - usually a URL—where two software programs connect to share information or trigger an action. If an API is the entire menu of services a system offers, the endpoint is the specific address you use to order one of those services.',
-    image: imageUrl('api-card.png'),
+    image: imageUrl('api-card.webp'),
     date: 'Sep 2026',
     priority: 'High',
     type: 'local',
@@ -55,7 +55,7 @@ export const posts = [
     tags: ['ai', 'agents', 'loops', 'autonomous', 'workflows'],
     excerpt:
       'Instead of prompting an agent to build a feature or fix a specific problem and then supervising each step of the work, they hand the Al an ambitious goal.',
-    image: imageUrl('loop1.png'),
+    image: imageUrl('loop1.webp'),
     date: 'Sep 2026',
     priority: 'High',
     type: 'local',
@@ -78,7 +78,7 @@ export const posts = [
     tags: ['ai', 'context-engineering', 'prompt-engineering', 'llm'],
     excerpt:
       'Most people have heard of prompt engineering. It usually comes down to one question: How do I phrase my instructions to get exactly what I want from an AI? But there is a bigger picture. It is called context engineering.',
-    image: imageUrl('ce.png'),
+    image: imageUrl('ce.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -107,7 +107,7 @@ export const posts = [
     ],
     excerpt:
       'There is a big shift happening in tech. Instead of just renting generic AI models from big companies, businesses are starting to build their own. This is about taking control. It is about owning the intelligence that powers your products.',
-    image: imageUrl('intellect.jpeg'),
+    image: imageUrl('intellect.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -138,7 +138,7 @@ export const posts = [
     ],
     excerpt:
       "You can't tell whether an agent works by running it once. The vocabulary, the three things worth measuring, how to grade open-ended output, and the mistakes that cost the most time.",
-    image: imageUrl('agent-evaluations.jpeg'),
+    image: imageUrl('agent-evaluations.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -168,7 +168,7 @@ export const posts = [
     ],
     excerpt:
       'A hands-on walkthrough: build a working /greet skill from an empty folder, then split the detail into references/ and control who is allowed to fire it.',
-    image: imageUrl('skill.jpeg'),
+    image: imageUrl('skill.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -199,7 +199,7 @@ export const posts = [
     ],
     excerpt:
       'Explore 5 production-proven structured formats—from YAML frontmatter and XML schemas to ReAct loops and function signatures—for building reliable AI agent skills.',
-    image: imageUrl('ai-skills-framework.png'),
+    image: imageUrl('ai-skills-framework.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -229,7 +229,7 @@ export const posts = [
     ],
     excerpt:
       "If you've built anything with AI agents, you've probably hit two walls pretty quickly: visual understanding and codebase navigation.",
-    image: imageUrl('complex.png'),
+    image: imageUrl('complex.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -253,7 +253,7 @@ export const posts = [
     tags: ['ai', 'agents', 'harness', 'autoresearch', 'autonomous'],
     excerpt:
       "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
-    image: imageUrl('harness.jpeg'),
+    image: imageUrl('harness.webp'),
     date: 'Aug 2026',
     priority: 'High',
     type: 'local',
@@ -276,7 +276,7 @@ export const posts = [
     tags: ['career', 'success', 'knowledge', 'practice', 'talent'],
     excerpt:
       'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
-    image: imageUrl('kpt.jpeg'),
+    image: imageUrl('kpt.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -299,7 +299,7 @@ export const posts = [
     tags: ['mongodb', 'react', 'atlas', 'json', 'vector-search', 'ai'],
     excerpt:
       'Rethinking app state and database infrastructure: How a single data platform replaces ORMs, external search, and separate vector DBs.',
-    image: imageUrl('mongodb-atlas-react.png'),
+    image: imageUrl('mongodb-atlas-react.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -322,7 +322,7 @@ export const posts = [
     tags: ['react', 'ui', 'css', 'tailwind', 'frontend'],
     excerpt:
       'Building a React UI package is tricky. Learn how to prevent CSS leakage using prefixes and scoped root containers.',
-    image: imageUrl('react-ui-packages.png'),
+    image: imageUrl('react-ui-packages.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -346,7 +346,7 @@ export const posts = [
     tags: ['nextjs', 'opentelemetry', 'cicd', 'performance', 'webpack'],
     excerpt:
       'If your team is suffering from sluggish Next.js builds, here is the step-by-step breakdown of how to stop guessing and start measuring.',
-    image: imageUrl('trace.png'),
+    image: imageUrl('trace.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -369,7 +369,7 @@ export const posts = [
     tags: ['react', 'rsc', 'nextjs', 'architecture', 'bff'],
     excerpt:
       'React Server Components solve SPA and SSR challenges by shifting component rendering and data aggregation back to the server.',
-    image: imageUrl('rsc-aggregation.png'),
+    image: imageUrl('rsc-aggregation.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -392,7 +392,7 @@ export const posts = [
     tags: ['ai', 'chatbots', 'prompts', 'privacy'],
     excerpt:
       'Four prompts you can ask AI chatbots to discover what they have inferred about your background, personality, and blind spots.',
-    image: imageUrl('prompts.jpeg'),
+    image: imageUrl('prompts.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -415,7 +415,7 @@ export const posts = [
     tags: ['python', 'orm', 'sqlalchemy', 'database'],
     excerpt:
       'To understand SQLAlchemy, it helps to first understand the problem it solves.',
-    image: imageUrl('sqlalchemy-cover.png'),
+    image: imageUrl('sqlalchemy-cover.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -438,7 +438,7 @@ export const posts = [
     tags: ['ai', 'agents', 'microservices'],
     excerpt:
       'Thinking of AI agents as "smart microservices" gets you most of the way there, and it\'s a great mental model to use.',
-    image: imageUrl('ai-microservices.png'),
+    image: imageUrl('ai-microservices.webp'),
     date: 'Jul 2026',
     priority: 'High',
     type: 'local',
@@ -484,7 +484,7 @@ export const posts = [
     tags: ['career', 'strategy', 'advice'],
     excerpt:
       'Andy Kofoid, President of Databricks, shares why you should look at the market and company before focusing on your title or scope.',
-    image: imageUrl('andy.png'),
+    image: imageUrl('andy.webp'),
     date: 'Apr 2026',
     priority: 'High',
     type: 'local',
@@ -507,7 +507,7 @@ export const posts = [
     tags: ['ai', 'agents', 'strategy'],
     excerpt:
       'A practical synthesis of Jack Clark’s advice on specification writing, agent workflows, and building better judgment around AI tools.',
-    image: imageUrl('jack.jpg'),
+    image: imageUrl('jack.webp'),
     date: 'Mar 2026',
     priority: 'High',
     type: 'local',
@@ -530,7 +530,7 @@ export const posts = [
     tags: ['career', 'interview', 'advice'],
     excerpt:
       'Interview advice from Stephen A. Schwarzman on preparation, authenticity, candor, and curiosity.',
-    image: imageUrl('blackstone.jpg'),
+    image: imageUrl('blackstone.webp'),
     date: 'Mar 2026',
     priority: 'High',
     type: 'local',
@@ -553,7 +553,7 @@ export const posts = [
     tags: ['career', 'planning', 'articles'],
     excerpt:
       'A curated reading list for career reflection, decision-making, and finding work that fits.',
-    image: imageUrl('next.png'),
+    image: imageUrl('next.webp'),
     date: 'Feb 2026',
     priority: 'Medium',
     type: 'local',
@@ -576,7 +576,7 @@ export const posts = [
     tags: ['ai', 'agency', 'leadership'],
     excerpt:
       'Why initiative, resourcefulness, and ownership compound faster than technical skill alone in the AI era.',
-    image: imageUrl('agency.jpeg'),
+    image: imageUrl('agency.webp'),
     date: 'Feb 2026',
     priority: 'High',
     type: 'external',
@@ -594,7 +594,7 @@ export const posts = [
     tags: ['ai', 'agents', 'productivity'],
     excerpt:
       'A beginner-friendly guide to moving from single prompts to coordinated teams of AI helpers.',
-    image: imageUrl('agent.jpeg'),
+    image: imageUrl('agent.webp'),
     date: 'Feb 2026',
     priority: 'High',
     type: 'external',
@@ -612,7 +612,7 @@ export const posts = [
     tags: ['sql', 'python', 'practice'],
     excerpt:
       'A practice set for sharpening data manipulation and programming fundamentals.',
-    image: imageUrl('questions.png'),
+    image: imageUrl('questions.webp'),
     date: 'Feb 2026',
     priority: 'Medium',
     type: 'external',
@@ -630,7 +630,7 @@ export const posts = [
     tags: ['statistics', 'data', 'analysis'],
     excerpt:
       'A breakdown of what confidence intervals do and do not say in statistical analysis.',
-    image: imageUrl('interval.png'),
+    image: imageUrl('interval.webp'),
     date: 'Feb 2026',
     priority: 'Medium',
     type: 'external',
@@ -648,7 +648,7 @@ export const posts = [
     tags: ['data', 'ai', 'analysis'],
     excerpt:
       'Notes on using Claude Sonnet for regional performance analysis, trends, and profit insights.',
-    image: imageUrl('sql.jpeg'),
+    image: imageUrl('sql.webp'),
     date: 'Feb 2026',
     priority: 'High',
     type: 'external',
@@ -666,7 +666,7 @@ export const posts = [
     tags: ['health', 'medicine', 'wellness'],
     excerpt:
       'A compact guide to serum cholesterol, reference ranges, and why lipid profiles matter.',
-    image: imageUrl('serum.jpeg'),
+    image: imageUrl('serum.webp'),
     date: 'Feb 2026',
     priority: 'Low',
     type: 'local',
@@ -689,7 +689,7 @@ export const posts = [
     tags: ['leadership', 'hr', 'culture'],
     excerpt:
       'A short interview on culture, recognition, and what AI gets wrong in HR.',
-    image: imageUrl('eric.png'),
+    image: imageUrl('eric.webp'),
     date: 'Feb 2026',
     priority: 'Medium',
     type: 'local',
@@ -748,7 +748,7 @@ export const posts = [
     tags: ['export', 'business', 'global'],
     excerpt:
       'Ten platforms that help exporters increase visibility, credibility, and direct buyer access.',
-    image: imageUrl('export.jpeg'),
+    image: imageUrl('export.webp'),
     date: 'Feb 2026',
     priority: 'Medium',
     type: 'local',

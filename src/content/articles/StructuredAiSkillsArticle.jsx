@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
 const skillsImg = new URL(
-  "../../../images/ai-skills-framework.png",
+  "../../../images/ai-skills-framework.webp",
   import.meta.url,
 ).href;
 

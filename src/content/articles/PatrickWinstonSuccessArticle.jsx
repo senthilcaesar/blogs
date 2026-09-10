@@ -1,6 +1,6 @@
 import { ExternalLink, Youtube } from 'lucide-react';
 
-const kptImg = new URL('../../../images/kpt.jpeg', import.meta.url).href;
+const kptImg = new URL('../../../images/kpt.webp', import.meta.url).href;
 
 export function PatrickWinstonSuccessArticle() {
   return (

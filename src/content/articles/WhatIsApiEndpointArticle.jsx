@@ -1,7 +1,7 @@
-const api1Img = new URL('../../../images/api1.png', import.meta.url).href;
-const crudImg = new URL('../../../images/crud.png', import.meta.url).href;
-const getPostImg = new URL('../../../images/get-post.png', import.meta.url).href;
-const postPutImg = new URL('../../../images/post-put.png', import.meta.url).href;
+const api1Img = new URL('../../../images/api1.webp', import.meta.url).href;
+const crudImg = new URL('../../../images/crud.webp', import.meta.url).href;
+const getPostImg = new URL('../../../images/get-post.webp', import.meta.url).href;
+const postPutImg = new URL('../../../images/post-put.webp', import.meta.url).href;
 
 export function WhatIsApiEndpointArticle() {
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
-const ariraImg = new URL('../../../images/arira.png', import.meta.url).href;
+const ariraImg = new URL('../../../images/arira.webp', import.meta.url).href;
 
 const snippet1 = `<div className="btn-primary" onClick={handleBook}>
   Book

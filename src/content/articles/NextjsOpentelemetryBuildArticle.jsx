@@ -1,4 +1,4 @@
-const traceImg = new URL('../../../images/trace.png', import.meta.url).href;
+const traceImg = new URL('../../../images/trace.webp', import.meta.url).href;
 
 export function NextjsOpentelemetryBuildArticle() {
   return (

@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
-const step1Img = new URL("../../../images/skill-step-1.png", import.meta.url).href;
-const step2Img = new URL("../../../images/skill-step-2.png", import.meta.url).href;
-const step3Img = new URL("../../../images/skill-step-3.png", import.meta.url).href;
-const step4Img = new URL("../../../images/skill-step-4.png", import.meta.url).href;
-const step5Img = new URL("../../../images/skill-step-5.png", import.meta.url).href;
-const step6Img = new URL("../../../images/skill-step-6.png", import.meta.url).href;
-const step7Img = new URL("../../../images/skill-step-7.png", import.meta.url).href;
-const step8Img = new URL("../../../images/skill-step-8.png", import.meta.url).href;
-const step9Img = new URL("../../../images/skill-step-9.png", import.meta.url).href;
-const step10Img = new URL("../../../images/skill-step-10.png", import.meta.url).href;
-const skill1Img = new URL("../../../images/skill1.png", import.meta.url).href;
+const step1Img = new URL("../../../images/skill-step-1.webp", import.meta.url).href;
+const step2Img = new URL("../../../images/skill-step-2.webp", import.meta.url).href;
+const step3Img = new URL("../../../images/skill-step-3.webp", import.meta.url).href;
+const step4Img = new URL("../../../images/skill-step-4.webp", import.meta.url).href;
+const step5Img = new URL("../../../images/skill-step-5.webp", import.meta.url).href;
+const step6Img = new URL("../../../images/skill-step-6.webp", import.meta.url).href;
+const step7Img = new URL("../../../images/skill-step-7.webp", import.meta.url).href;
+const step8Img = new URL("../../../images/skill-step-8.webp", import.meta.url).href;
+const step9Img = new URL("../../../images/skill-step-9.webp", import.meta.url).href;
+const step10Img = new URL("../../../images/skill-step-10.webp", import.meta.url).href;
+const skill1Img = new URL("../../../images/skill1.webp", import.meta.url).href;
 
 const mkdirSnippet = `mkdir learn-skills
 cd learn-skills

@@ -1,6 +1,6 @@
-const harnessImg = new URL('../../../images/harness.jpeg', import.meta.url)
+const harnessImg = new URL('../../../images/harness.webp', import.meta.url)
   .href;
-const aiAgentImg = new URL('../../../images/ai-agent.png', import.meta.url)
+const aiAgentImg = new URL('../../../images/ai-agent.webp', import.meta.url)
   .href;
 
 export function EngineBehindAutonomousAiArticle() {

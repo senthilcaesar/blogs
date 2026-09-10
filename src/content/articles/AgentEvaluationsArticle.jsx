@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 
-const evalImg1 = new URL("../../../images/agent-evaluations-1.png", import.meta.url).href;
-const evalImg2 = new URL("../../../images/agent-evaluations-2.png", import.meta.url).href;
-const evalImg3 = new URL("../../../images/agent-evaluations-3.png", import.meta.url).href;
+const evalImg1 = new URL("../../../images/agent-evaluations-1.webp", import.meta.url).href;
+const evalImg2 = new URL("../../../images/agent-evaluations-2.webp", import.meta.url).href;
+const evalImg3 = new URL("../../../images/agent-evaluations-3.webp", import.meta.url).href;
 
 const caseSnippet = `{
   "id": "refund-002",

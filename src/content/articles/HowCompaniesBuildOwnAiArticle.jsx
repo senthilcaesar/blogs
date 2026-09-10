@@ -1,7 +1,7 @@
-const img1 = new URL('../../../images/intellect-1.png', import.meta.url).href;
-const img2 = new URL('../../../images/intellect-2.png', import.meta.url).href;
-const img3 = new URL('../../../images/intellect-3.png', import.meta.url).href;
-const img4 = new URL('../../../images/intellect-4.png', import.meta.url).href;
+const img1 = new URL('../../../images/intellect-1.webp', import.meta.url).href;
+const img2 = new URL('../../../images/intellect-2.webp', import.meta.url).href;
+const img3 = new URL('../../../images/intellect-3.webp', import.meta.url).href;
+const img4 = new URL('../../../images/intellect-4.webp', import.meta.url).href;
 
 export function HowCompaniesBuildOwnAiArticle() {
   return (

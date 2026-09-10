@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
-const complexImg = new URL('../../../images/complex.png', import.meta.url).href;
-const contextFailureImg = new URL('../../../images/context-failure.png', import.meta.url).href;
+const complexImg = new URL('../../../images/complex.webp', import.meta.url).href;
+const contextFailureImg = new URL('../../../images/context-failure.webp', import.meta.url).href;
 
 const xmlPromptSnippet = `<context>
 You are an expert copyeditor who writes in a concise and clear style.

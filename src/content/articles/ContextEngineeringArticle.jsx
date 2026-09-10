@@ -1,6 +1,6 @@
-const img1 = new URL('../../../images/ce-1.png', import.meta.url).href;
-const img2 = new URL('../../../images/ce-2.png', import.meta.url).href;
-const memoryStackImg = new URL('../../../images/memory_stack.png', import.meta.url).href;
+const img1 = new URL('../../../images/ce-1.webp', import.meta.url).href;
+const img2 = new URL('../../../images/ce-2.webp', import.meta.url).href;
+const memoryStackImg = new URL('../../../images/memory_stack.webp', import.meta.url).href;
 
 export function ContextEngineeringArticle() {
   return (
