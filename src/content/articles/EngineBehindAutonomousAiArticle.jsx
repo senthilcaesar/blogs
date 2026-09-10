@@ -334,6 +334,24 @@ export function EngineBehindAutonomousAiArticle() {
               https://academy.langchain.com/courses/foundation-introduction-to-deepagents
             </a>
           </li>
+          <li>
+            <a
+              href='https://hugobowne.substack.com/p/how-evals-are-central-to-harness'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://hugobowne.substack.com/p/how-evals-are-central-to-harness
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://www.vtrivedy.com/posts/the-anatomy-of-an-agent-harness'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://www.vtrivedy.com/posts/the-anatomy-of-an-agent-harness
+            </a>
+          </li>
         </ul>
       </section>
     </>

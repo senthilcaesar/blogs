@@ -1,4 +1,4 @@
-import { ArrowLeft, CalendarRange, Check, Copy, UserRound } from 'lucide-react';
+import { CalendarRange, Check, ChevronLeft, Copy } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CommentsSection } from './CommentsSection';
@@ -65,33 +65,33 @@ export function ArticleLayout({ post, children }) {
       />
       <article className='article-page'>
         <Link className='back-link' to='/'>
-          <ArrowLeft size={16} />
-          Back to library
+          <ChevronLeft size={16} />
+          Go back
         </Link>
 
         <header className='article-hero'>
+          <div className='article-hero__header'>
+            <div className='article-hero__eyebrow-row'>
+              <span className='article-hero__eyebrow'>
+                {post.hero?.eyebrow ?? post.category}
+              </span>
+            </div>
+
+            <h1 className='article-hero__title'>{post.title}</h1>
+          </div>
+
           <div className='article-byline'>
             <div className='article-byline__left'>
-              <div className='article-byline__avatar'>
-                {post.author.initials}
-              </div>
               <div className='article-byline__author-info'>
-                <div className='article-byline__primary'>
-                  <span className='article-byline__name'>{post.author.name}</span>
-                  {post.author.role && (
-                    <span className='article-byline__role'>
-                      <span className='article-byline__dot'>·</span>
-                      {post.author.role}
-                    </span>
-                  )}
-                </div>
                 <div className='article-byline__secondary'>
                   <span className='article-byline__date'>
-                    <CalendarRange size={12} />
+                    <CalendarRange size={14} />
                     {post.date}
                   </span>
                   <span className='article-byline__dot'>·</span>
                   <span className='article-byline__category'>{post.category}</span>
+                  <span className='article-byline__dot'>·</span>
+                  <span className='article-byline__name'>{post.author.name}</span>
                   {post.tags && post.tags.length > 0 && (
                     <>
                       <span className='article-byline__dot'>·</span>
@@ -128,20 +128,6 @@ export function ArticleLayout({ post, children }) {
                 )}
               </button>
             </div>
-          </div>
-
-          <div className='article-hero__header'>
-            <div className='article-hero__eyebrow-row'>
-              <span className='article-hero__eyebrow'>
-                {post.hero?.eyebrow ?? post.category}
-              </span>
-            </div>
-
-            <h1 className='article-hero__title'>{post.title}</h1>
-
-            <p className='article-hero__summary'>
-              {post.hero?.summary ?? post.excerpt}
-            </p>
           </div>
         </header>
 

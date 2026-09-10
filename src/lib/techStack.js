@@ -18,6 +18,7 @@ export function getProjectTechStack() {
       name: `React ${major(dependencies.react)}`,
       description: 'Fast, modern, component-driven UI framework powering the app shell, pages, and interactive features.',
       tone: 'sky',
+      size: 'feature',
     });
   }
 
@@ -28,6 +29,7 @@ export function getProjectTechStack() {
       name: `Vite ${major(devDependencies.vite)}`,
       description: 'Next-gen build tool and dev server for ultra-fast HMR and production bundling.',
       tone: 'amber',
+      size: 'wide',
     });
   }
 
@@ -38,6 +40,7 @@ export function getProjectTechStack() {
       name: `Firebase Cloud Firestore ${major(dependencies.firebase)}`,
       description: 'Real-time cloud NoSQL database powering global live comment threads across all site visitors.',
       tone: 'orange',
+      size: 'wide',
     });
   }
 
@@ -48,6 +51,7 @@ export function getProjectTechStack() {
       name: 'React Router',
       description: 'Handles hash-based client navigation for the home page and article routes on GitHub Pages.',
       tone: 'violet',
+      size: 'small',
     });
   }
 
@@ -58,6 +62,7 @@ export function getProjectTechStack() {
       name: 'Lucide React',
       description: 'Provides the clean vector icon system used across navigation, cards, comments, and modals.',
       tone: 'rose',
+      size: 'small',
     });
   }
 
@@ -67,6 +72,7 @@ export function getProjectTechStack() {
     name: 'Vanilla CSS',
     description: 'Custom CSS tokens and component classes define the design system without external UI framework overhead.',
     tone: 'emerald',
+    size: 'small',
   });
 
   stack.push({
@@ -75,6 +81,7 @@ export function getProjectTechStack() {
     name: 'Native CSS Motion',
     description: 'Smooth hover micro-interactions, modal dialog physics, and progress indicators built with pure CSS.',
     tone: 'cyan',
+    size: 'small',
   });
 
   if (homepage.includes('github.io')) {
@@ -84,6 +91,7 @@ export function getProjectTechStack() {
       name: 'GitHub Pages',
       description: 'Automated CI/CD static hosting directly from the repository source.',
       tone: 'slate',
+      size: 'small',
     });
   }
 
@@ -94,6 +102,7 @@ export function getProjectTechStack() {
       name: 'Vitest',
       description: 'Blazing-fast test runner validating routing, search filtering, comment hierarchy, and theme persistence.',
       tone: 'lime',
+      size: 'small',
     });
   }
 

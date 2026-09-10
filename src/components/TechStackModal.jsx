@@ -24,6 +24,8 @@ const iconMap = {
   database: Database,
 };
 
+const iconSizeFor = { feature: 26, wide: 20, small: 18 };
+
 export function TechStackModal({ isOpen, onClose, stack }) {
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -63,7 +65,7 @@ export function TechStackModal({ isOpen, onClose, stack }) {
               <Layers size={13} />
               <span>{stack.length} Core Technologies</span>
             </div>
-            <h2 id="tech-stack-title">Architecture & Tech Stack</h2>
+            <h2 id="tech-stack-title">Architecture &amp; Tech Stack</h2>
             <p className="modal-intro">
               The modern tools, cloud storage, and libraries powering this blog.
             </p>
@@ -79,13 +81,17 @@ export function TechStackModal({ isOpen, onClose, stack }) {
           </button>
         </div>
 
-        <div className="tech-stack-grid">
+        <div className="tech-bento">
           {stack.map((item) => {
             const Icon = iconMap[item.icon] ?? Code2;
+            const size = item.size ?? 'small';
             return (
-              <article className={`tech-card tech-card--${item.tone}`} key={item.key}>
-                <div className={`tech-card__icon tech-card__icon--${item.tone}`}>
-                  <Icon size={20} />
+              <article
+                className={`tech-card tech-card--${size} tech-card--${item.tone}`}
+                key={item.key}
+              >
+                <div className="tech-card__icon">
+                  <Icon size={iconSizeFor[size] ?? 18} />
                 </div>
                 <div className="tech-card__content">
                   <h3 className="tech-card__name">{item.name}</h3>
