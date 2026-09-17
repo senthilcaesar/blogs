@@ -2,6 +2,10 @@ const harnessImg = new URL('../../../images/harness.webp', import.meta.url)
   .href;
 const aiAgentImg = new URL('../../../images/ai-agent.webp', import.meta.url)
   .href;
+const agenticCodingImg = new URL(
+  '../../../images/agentic-coding.png',
+  import.meta.url
+).href;
 
 export function EngineBehindAutonomousAiArticle() {
   return (
@@ -15,8 +19,24 @@ export function EngineBehindAutonomousAiArticle() {
         <h2>1. The AI Agent</h2>
         <p>
           Think of a standard language model as a very smart encyclopedia. You
-          ask a question, and it gives you an answer. An AI agent is different.
-          It’s an AI that takes action.
+          ask a question, and it gives you an answer.
+        </p>
+
+        <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+          <img
+            src={agenticCodingImg}
+            alt='Agentic Coding'
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '16px',
+              border: '1px solid var(--border)',
+            }}
+          />
+        </div>
+
+        <p>
+          An AI agent is different. It takes action.
         </p>
         <p style={{ marginTop: '1rem' }}>
           Agents can plan steps, use tools, and make decisions to reach a goal.
