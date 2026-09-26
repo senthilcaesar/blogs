@@ -24,8 +24,7 @@ async function copyPostLink(post) {
 }
 
 export function PostCard({ post, view = 'list' }) {
-  const cardStatus =
-    post.type === 'comingSoon' ? 'Coming soon' : 'Read now';
+  const cardStatus = post.type === 'comingSoon' ? 'Coming soon' : 'Read now';
 
   async function handleCopy() {
     const success = await copyPostLink(post);
@@ -45,43 +44,52 @@ export function PostCard({ post, view = 'list' }) {
     <article className={`post-card post-card--${view}`}>
       {/* Thumbnail / Media */}
       <div
-        className="post-card__thumb"
-        style={{ backgroundImage: `url(${post.image})` }}
-        aria-hidden="true"
+        className='post-card__thumb'
+        style={{
+          backgroundImage: `url(${post.image})`,
+          ...(post.imageFit
+            ? {
+                backgroundSize: post.imageFit,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+              }
+            : {}),
+        }}
+        aria-hidden='true'
       />
 
       {/* Body */}
-      <div className="post-card__body">
+      <div className='post-card__body'>
         {/* Top row: category */}
-        <div className="post-card__topline">
-          <span className="post-chip">{post.category}</span>
+        <div className='post-card__topline'>
+          <span className='post-chip'>{post.category}</span>
         </div>
 
         {/* Title */}
-        <h2 className="post-card__title">{post.title}</h2>
+        <h2 className='post-card__title'>{post.title}</h2>
 
         {/* Excerpt — always show in grid, hide in list when space is tight */}
-        <p className="post-card__excerpt">{post.excerpt}</p>
+        <p className='post-card__excerpt'>{post.excerpt}</p>
 
         {/* Footer: date + actions */}
-        <div className="post-card__footer">
-          <span className="post-meta">
+        <div className='post-card__footer'>
+          <span className='post-meta'>
             <Clock3 size={13} />
             {post.date}
           </span>
 
-          <div className="post-card__actions">
+          <div className='post-card__actions'>
             <button
-              className="icon-button"
-              type="button"
-              title="Copy share link"
+              className='icon-button'
+              type='button'
+              title='Copy share link'
               onClick={handleCopy}
             >
               <Copy size={14} />
             </button>
 
             {post.type === 'local' && (
-              <Link className="cta-link" to={post.route}>
+              <Link className='cta-link' to={post.route}>
                 {cardStatus}
                 <ArrowRight size={14} />
               </Link>
@@ -89,10 +97,10 @@ export function PostCard({ post, view = 'list' }) {
 
             {post.type === 'external' && (
               <a
-                className="cta-link"
+                className='cta-link'
                 href={post.url}
-                target="_blank"
-                rel="noreferrer"
+                target='_blank'
+                rel='noreferrer'
               >
                 {cardStatus}
                 <ExternalLink size={14} />
@@ -100,7 +108,7 @@ export function PostCard({ post, view = 'list' }) {
             )}
 
             {post.type === 'comingSoon' && (
-              <span className="cta-link cta-link--muted">
+              <span className='cta-link cta-link--muted'>
                 {cardStatus}
                 <ArrowRight size={14} />
               </span>

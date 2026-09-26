@@ -628,6 +628,7 @@ body[data-theme='light'] .filter-pill.is-active {
 .post-card__thumb {
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--surface-soft);
 }
 

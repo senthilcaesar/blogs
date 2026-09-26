@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Neo4j Intro Workshop',
+    slug: 'neo4j-intro-workshop',
+    category: 'Data',
+    tags: ['neo4j', 'graph', 'cypher', 'database', 'auradb'],
+    excerpt:
+      'A hands-on walkthrough to getting started with Neo4j AuraDB: provisioning a free instance, importing graph datasets with AI, querying with Cypher, visualizing with Bloom, and building Dashboards.',
+    image: imageUrl('workshop.jpg'),
+    imageFit: 'contain',
+    date: 'Sep 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/neo4j-intro-workshop',
+    author: {
+      name: 'Tech Notes',
+      role: 'Graph Database & Data Architecture Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Graph Databases & Data Architecture',
+      summary:
+        'A hands-on walkthrough to getting started with Neo4j AuraDB: provisioning a free instance, importing graph datasets with AI, querying with Cypher, visualizing with Bloom, and building Dashboards.',
+    },
+  },
+  {
     title: 'Is Your Website Built for AI Agents?',
     slug: 'is-your-website-built-for-ai-agents',
     category: 'AI',

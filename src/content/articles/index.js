@@ -24,8 +24,10 @@ import { FirstSkillMdArticle } from './FirstSkillMdArticle';
 import { AgentEvaluationsArticle } from './AgentEvaluationsArticle';
 import { HowCompaniesBuildOwnAiArticle } from './HowCompaniesBuildOwnAiArticle';
 import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiAgentsArticle';
+import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 
 export const articleRegistry = {
+  'neo4j-intro-workshop': Neo4jIntroWorkshopArticle,
   'is-your-website-built-for-ai-agents': IsYourWebsiteBuiltForAiAgentsArticle,
   'what-is-api-endpoint': WhatIsApiEndpointArticle,
   'writing-loops': WritingLoopsArticle,

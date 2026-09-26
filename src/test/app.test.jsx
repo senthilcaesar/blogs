@@ -265,6 +265,66 @@ describe('blog app', () => {
     );
   });
 
+  it('renders the Neo4j Intro Workshop article correctly', () => {
+    renderRoutes(['/posts/neo4j-intro-workshop']);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /Neo4j Intro Workshop/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: /Neo4j Introduction/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: /Hands-On Workshop Walkthrough/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 0: Download the Sample dataset/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 1: Data Import & Model Generation/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 2: Run Import into AuraDB/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Step 3: Query/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 4: Sample queries to try/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Step 5: Writing to Neo4j/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Senthil Palanivelu/i).length).toBeGreaterThan(
+      0,
+    );
+    expect(
+      screen.getByText(/Bloom \(Graphical representation\)/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Dashboard \(Analyze logs, chart\)/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Document Intelligence \(Unstructured Data\)/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 9: Neo4j Instance Inspect MCP URL/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', {
+        name: 'https://graphacademy.neo4j.com/courses/neo4j-fundamentals',
+      }),
+    ).toHaveAttribute(
+      'href',
+      'https://graphacademy.neo4j.com/courses/neo4j-fundamentals',
+    );
+  });
+
   it('persists theme values in localStorage', async () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     const user = userEvent.setup();
