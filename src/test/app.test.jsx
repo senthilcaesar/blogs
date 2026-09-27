@@ -295,6 +295,9 @@ describe('blog app', () => {
     expect(
       screen.getByText(/Step 2: Run Import into AuraDB/i),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: /Neo4j Import tool/i }),
+    ).toHaveAttribute('href', 'https://neo4j.com/docs/data-importer/current/');
     expect(screen.getByText(/Step 3: Query/i)).toBeInTheDocument();
     expect(
       screen.getByText(

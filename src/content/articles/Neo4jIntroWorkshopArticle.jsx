@@ -588,8 +588,17 @@ export function Neo4jIntroWorkshopArticle() {
         <h3 className='sub-heading'>Step 2: Run Import into AuraDB</h3>
         <p>
           Click <strong>&quot;Run import&quot;</strong> on the top right corner,
-          select the instance and run import. This will load the dataset into
-          Aura db
+          select the instance and run import. The{' '}
+          <a
+            href='https://neo4j.com/docs/data-importer/current/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Neo4j Import tool
+          </a>{' '}
+          is a &quot;no-code&quot; tool that facilitates data importing into
+          Neo4j. Its graphical user interface allows for simple data conversion
+          into nodes and relationships.
         </p>
 
         <div style={{ margin: '1.5rem 0' }}>
@@ -606,23 +615,22 @@ export function Neo4jIntroWorkshopArticle() {
         </div>
 
         <p>You can close the window once the import finishes.</p>
+      </section>
 
+      <section className='article-panel'>
+        <h3 className='sub-heading'>Step 3: Query</h3>
+        The Query tool allows you to write and execute Cypher queries
         <p style={{ marginTop: '1rem' }}>
           Click <strong>Query</strong> in the sidebar menu. Copy and paste the
-          query from Step 3 into the stream window. When you click run, it will
+          following query into the stream window. When you click run, it will
           ask you to connect to the instance - simply select your free instance
           to connect.
         </p>
-
         <p style={{ marginTop: '1rem' }}>
           Remember: Cypher is the query language Neo4j uses. It is a declarative
           language that allows you to identify patterns in your data using an
           intuitive ASCII-art syntax consisting of brackets, dashes, and arrows.
         </p>
-      </section>
-
-      <section className='article-panel'>
-        <h3 className='sub-heading'>Step 3: Query</h3>
         <p>
           Run the following Cypher statement to find the people who acted in the
           movie &apos;Toy Story&apos;.
@@ -656,7 +664,6 @@ export function Neo4jIntroWorkshopArticle() {
           <span className='syn-var'>r</span>.role{' '}
           <span className='syn-keyword'>AS</span> role
         </CodeCard>
-
         <div style={{ margin: '1rem 0' }}>
           <img
             src={queryImg}
@@ -739,11 +746,11 @@ export function Neo4jIntroWorkshopArticle() {
           <span className='syn-label'>:Movie</span>){'\n'}
           <span className='syn-keyword'>WHERE</span>{' '}
           <span className='syn-var'>u</span>.name ={' '}
-          <span className='syn-string'>&quot;Mr. Jason Love&quot;</span>{'\n'}
+          <span className='syn-string'>&quot;Mr. Jason Love&quot;</span>
+          {'\n'}
           <span className='syn-keyword'>RETURN</span>{' '}
-          <span className='syn-var'>u</span>,{' '}
-          <span className='syn-var'>r</span>,{' '}
-          <span className='syn-var'>m</span>
+          <span className='syn-var'>u</span>, <span className='syn-var'>r</span>
+          , <span className='syn-var'>m</span>
         </CodeCard>
 
         <div style={{ margin: '1rem 0 1.5rem 0' }}>
@@ -892,16 +899,15 @@ export function Neo4jIntroWorkshopArticle() {
       <section className='article-panel'>
         <h3 className='sub-heading'>Step 7: Dashboard (Analyze logs, chart)</h3>
         <p>
-          <strong>Neo4j Dashboards</strong> provide real-time reporting and
-          analytics powered by Cypher queries. They let you assemble interactive
-          charts, KPI counters, and tables to monitor graph trends and track
-          system data in a single unified view.
+          <strong>Neo4j Dashboards</strong> is a tool for visualizing and
+          exploring your graph data. Dashboards are built from cards - each card
+          is a chart, number, graph, or other visualization tied to a Cypher
+          query.
         </p>
         <p style={{ marginTop: '1rem' }}>
           Click <strong>dashboard</strong> &rarr;{' '}
           <strong>Create from scratch</strong>
         </p>
-
         <div style={{ margin: '1rem 0' }}>
           <img
             src={board1Img}
@@ -914,7 +920,6 @@ export function Neo4jIntroWorkshopArticle() {
             }}
           />
         </div>
-
         <div style={{ margin: '1rem 0' }}>
           <img
             src={board2Img}
@@ -927,6 +932,12 @@ export function Neo4jIntroWorkshopArticle() {
             }}
           />
         </div>
+        <p style={{ marginTop: '1rem' }}>You can use Dashboards to:</p>
+        <ul className='bullet-list' style={{ marginTop: '0.5rem' }}>
+          <li>Visualize patterns and relationships in your data.</li>
+          <li>Monitor trends and compare categories or entities.</li>
+          <li>Share insights with stakeholders.</li>
+        </ul>
       </section>
 
       <section className='article-panel'>
