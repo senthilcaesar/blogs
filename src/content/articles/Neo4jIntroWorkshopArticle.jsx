@@ -617,6 +617,15 @@ export function Neo4jIntroWorkshopArticle() {
 
       <section className='article-panel'>
         <h3 className='sub-heading'>Step 3: Query</h3>
+        <p>
+          Run the following Cypher statement to find the people who acted in the
+          movie &apos;Toy Story&apos;.
+        </p>
+        <p style={{ marginTop: '0.75rem', marginBottom: '1rem' }}>
+          The query searches for any Person connected to the Movie titled
+          &quot;Toy Story&quot; via an <code>ACTED_IN</code> relationship and
+          returns their names along with their roles.
+        </p>
         <CodeCard code={step3Query}>
           <span className='syn-comment'>// Find a pattern in the database</span>
           {'\n'}

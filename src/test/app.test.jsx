@@ -297,6 +297,11 @@ describe('blog app', () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/Step 3: Query/i)).toBeInTheDocument();
     expect(
+      screen.getByText(
+        /Run the following Cypher statement to find the people who acted in the movie 'Toy Story'/i,
+      ),
+    ).toBeInTheDocument();
+    expect(
       screen.getByText(/Step 4: Sample queries to try/i),
     ).toBeInTheDocument();
     expect(screen.getByText(/Step 5: Writing to Neo4j/i)).toBeInTheDocument();
