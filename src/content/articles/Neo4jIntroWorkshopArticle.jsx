@@ -31,6 +31,8 @@ const instanceMcpUrlImg = new URL(
   '../../../images/neo4j-instance-mcp-url.png',
   import.meta.url,
 ).href;
+const ratedImg = new URL('../../../images/neo4j-rated.png', import.meta.url)
+  .href;
 
 const grammarRuleCode = `(:Person)-[:PLACED]->(:Order)-[:CONTAINS]->(:Product)`;
 
@@ -54,6 +56,10 @@ const sampleQuery3 = `// Use the DIRECTED relationship to find who directed the 
 MATCH (p:Person)-[:DIRECTED]->(m:Movie)
 WHERE m.title = 'Jumanji'
 RETURN p.name AS Director`;
+
+const userRatedQuery = `MATCH (u:User)-[r:RATED]->(m:Movie)
+WHERE u.name = "Mr. Jason Love"
+RETURN u, r, m`;
 
 const sampleQuery4 = `// The movie with the most rating
 MATCH (m:Movie)<-[r:RATED]-()
@@ -718,6 +724,41 @@ export function Neo4jIntroWorkshopArticle() {
           <span className='syn-keyword'>AS</span> Director
         </CodeCard>
 
+        <p style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}>
+          The query returns all the movies that have been rated by the user
+          &quot;Mr. Jason Love&quot;.
+        </p>
+
+        <CodeCard code={userRatedQuery}>
+          <span className='syn-keyword'>MATCH</span> (
+          <span className='syn-var'>u</span>
+          <span className='syn-label'>:User</span>)-[
+          <span className='syn-var'>r</span>
+          <span className='syn-label'>:RATED</span>]-&gt;(
+          <span className='syn-var'>m</span>
+          <span className='syn-label'>:Movie</span>){'\n'}
+          <span className='syn-keyword'>WHERE</span>{' '}
+          <span className='syn-var'>u</span>.name ={' '}
+          <span className='syn-string'>&quot;Mr. Jason Love&quot;</span>{'\n'}
+          <span className='syn-keyword'>RETURN</span>{' '}
+          <span className='syn-var'>u</span>,{' '}
+          <span className='syn-var'>r</span>,{' '}
+          <span className='syn-var'>m</span>
+        </CodeCard>
+
+        <div style={{ margin: '1rem 0 1.5rem 0' }}>
+          <img
+            src={ratedImg}
+            alt='Movies rated by user Mr. Jason Love in Neo4j'
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '12px',
+              border: '1px solid var(--border)',
+            }}
+          />
+        </div>
+
         <CodeCard code={sampleQuery4}>
           <span className='syn-comment'>// The movie with the most rating</span>
           {'\n'}
@@ -997,6 +1038,15 @@ export function Neo4jIntroWorkshopArticle() {
               rel='noreferrer'
             >
               https://graphacademy.neo4j.com/courses/neo4j-fundamentals
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://neo4j.com/blog/genai/what-is-graphrag/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://neo4j.com/blog/genai/what-is-graphrag/
             </a>
           </li>
           <li>

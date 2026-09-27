@@ -304,6 +304,11 @@ describe('blog app', () => {
     expect(
       screen.getByText(/Step 4: Sample queries to try/i),
     ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /The query returns all the movies that have been rated by the user "Mr. Jason Love"/i,
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Step 5: Writing to Neo4j/i)).toBeInTheDocument();
     expect(screen.getAllByText(/Senthil Palanivelu/i).length).toBeGreaterThan(
       0,
@@ -328,6 +333,11 @@ describe('blog app', () => {
       'href',
       'https://graphacademy.neo4j.com/courses/neo4j-fundamentals',
     );
+    expect(
+      screen.getByRole('link', {
+        name: 'https://neo4j.com/blog/genai/what-is-graphrag/',
+      }),
+    ).toHaveAttribute('href', 'https://neo4j.com/blog/genai/what-is-graphrag/');
   });
 
   it('persists theme values in localStorage', async () => {
