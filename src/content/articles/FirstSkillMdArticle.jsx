@@ -241,6 +241,9 @@ export function FirstSkillMdArticle() {
   return (
     <>
       <p className="article-lead">
+        A Skill is a set of instructions packaged as a simple folder that teaches Claude how to handle specific tasks or workflows. The folder can include scripts, assets, and other resources that agents can discover and use to apply the right knowledge and procedures for a specific task.
+      </p>
+      <p style={{ marginTop: "1rem", marginBottom: "1.5rem", color: "var(--text-soft)" }}>
         Learn how to create your own custom AI agent skills step by step using <code>SKILL.md</code>. This easy guide shows you how to set up skill folders in VS Code, format the AI&apos;s replies, organize extra instructions into reference files, and control when the AI triggers your skills.
       </p>
 
