@@ -1,6 +1,7 @@
 const img1 = new URL('../../../images/ce-1.webp', import.meta.url).href;
 const img2 = new URL('../../../images/ce-2.webp', import.meta.url).href;
 const memoryStackImg = new URL('../../../images/memory_stack.webp', import.meta.url).href;
+const context1Img = new URL('../../../images/context1.png', import.meta.url).href;
 
 export function ContextEngineeringArticle() {
   return (
@@ -46,6 +47,15 @@ export function ContextEngineeringArticle() {
             <strong>Tool outputs</strong> &ndash; results from any actions the AI has taken (like a calculation, a file read, or an API call)
           </li>
         </ul>
+
+        <div style={{ margin: '1.75rem 0' }}>
+          <img
+            src={context1Img}
+            alt="Context Components Diagram"
+            style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+          />
+        </div>
+
         <p style={{ marginTop: '1rem' }}>
           For a simple chatbot, context is mostly just the conversation so far. But for an AI agent &mdash; a system that takes a series of actions to complete a task &mdash; context is broader: it&apos;s all the information the agent uses to decide what to do next and how to respond, at every step along the way, not just at the start.
         </p>
