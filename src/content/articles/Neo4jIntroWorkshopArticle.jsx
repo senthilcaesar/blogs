@@ -172,6 +172,33 @@ export function Neo4jIntroWorkshopArticle() {
         </h2>
 
         <h3 className='sub-heading' style={{ marginTop: '1.5rem' }}>
+          What is a Knowledge Graph?
+        </h3>
+        <p style={{ marginTop: '0.75rem' }}>
+          A <strong>knowledge graph</strong> is an organized representation of
+          real-world entities, their attributes, and the relationships between
+          them, giving you an interconnected understanding of your information.
+        </p>
+        <p style={{ marginTop: '0.75rem' }}>
+          It breaks down information from diverse sources and integrates it, so
+          you can see how the data is related. This holistic view supports
+          complex queries, analytics, and insights, and the graph can adapt and
+          evolve as it grows, taking on new information and structural changes.
+        </p>
+        <p style={{ marginTop: '0.75rem' }}>
+          That structured, connected data is what makes knowledge graphs useful
+          for Generative AI applications: it enhances context and reasoning in
+          generated responses. <strong>GraphRAG</strong> uses a knowledge graph
+          as context, forming the foundation for applications built on
+          proprietary or domain-specific data. Grounding responses in the graph
+          delivers more accurate answers and greater explainability.
+        </p>
+        <p style={{ marginTop: '0.75rem' }}>
+          Neo4j is well-suited for building and querying knowledge graphs. The
+          sections below show how it models data.
+        </p>
+
+        <h3 className='sub-heading' style={{ marginTop: '1.5rem' }}>
           1. The Building Blocks: Nodes, Labels, and Properties
         </h3>
         <p style={{ marginTop: '0.75rem' }}>
