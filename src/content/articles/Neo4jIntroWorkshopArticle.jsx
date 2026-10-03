@@ -1105,6 +1105,24 @@ export function Neo4jIntroWorkshopArticle() {
               https://neo4j.com/startup-program/
             </a>
           </li>
+          <li>
+            <a
+              href='https://github.com/neo4j-graph-examples/recommendations'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://github.com/neo4j-graph-examples/recommendations
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/
+            </a>
+          </li>
         </ul>
       </section>
 
