@@ -433,6 +433,29 @@ export const posts = [
     },
   },
   {
+    title: 'CI/CD',
+    slug: 'ci-cd',
+    category: 'Code',
+    tags: ['cicd', 'devops', 'github-actions', 'automation', 'pipelines'],
+    excerpt:
+      'CI/CD stands for Continuous Integration and Continuous Delivery. It is a way of working where every code change is automatically built, tested and prepared for release, so teams can ship small updates quickly and safely.',
+    image: imageUrl('cicd-card.svg'),
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/ci-cd',
+    author: {
+      name: 'Tech Notes',
+      role: 'DevOps & Software Delivery Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'DevOps Fundamentals',
+      summary:
+        'A beginner-friendly introduction to Continuous Integration and Continuous Delivery: what they mean, how a pipeline works, and why teams rely on them.',
+    },
+  },
+  {
     title: 'Python ORM, SQLAlchemy',
     slug: 'python-orm-sqlalchemy',
     category: 'Code',
