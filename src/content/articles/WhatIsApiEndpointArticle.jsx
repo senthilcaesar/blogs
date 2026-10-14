@@ -3,6 +3,15 @@ const crudImg = new URL('../../../images/crud.webp', import.meta.url).href;
 const getPostImg = new URL('../../../images/get-post.webp', import.meta.url).href;
 const postPutImg = new URL('../../../images/post-put.webp', import.meta.url).href;
 
+function YoutubeIcon() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <rect width="20" height="14" rx="4" fill="#ff0000" />
+      <path d="M8 4l5 3-5 3z" fill="#ffffff" />
+    </svg>
+  );
+}
+
 export function WhatIsApiEndpointArticle() {
   return (
     <>
@@ -125,7 +134,7 @@ export function WhatIsApiEndpointArticle() {
 
       <section className="article-panel">
         <h2>Resources</h2>
-        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+        <ul className="bullet-list" style={{ marginTop: '1rem', listStyle: 'none', paddingLeft: 0 }}>
           <li>
             <a
               href="https://car-fleet-management.herokuapp.com/swagger-ui.html"
@@ -160,6 +169,61 @@ export function WhatIsApiEndpointArticle() {
               rel="noreferrer"
             >
               SerpApi: Search Engine Results API
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://youtu.be/WXsD0ZgxjRw"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              APIs for Beginners - How to use an API (freeCodeCamp)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://youtu.be/XvFmUE-36Kc"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              API Design and Architecture - Backend Engineering Intro (Caleb Curry)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://youtu.be/_gQaygjm_hg"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              Good APIs Vs Bad APIs: 7 Tips for API Design (ByteByteGo)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://youtu.be/-MTSQjw5DrM"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              RESTful APIs in 100 Seconds (Fireship)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://youtu.be/7iHl71nt49o"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              How to Design APIs Like a Senior Engineer (Hayk Simonyan)
             </a>
           </li>
         </ul>
