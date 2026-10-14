@@ -2,6 +2,7 @@ const img1 = new URL('../../../images/ce-1.webp', import.meta.url).href;
 const img2 = new URL('../../../images/ce-2.webp', import.meta.url).href;
 const memoryStackImg = new URL('../../../images/memory_stack.webp', import.meta.url).href;
 const context1Img = new URL('../../../images/context1.png', import.meta.url).href;
+const context18Img = new URL('../../../images/context18.png', import.meta.url).href;
 
 export function ContextEngineeringArticle() {
   return (
@@ -62,6 +63,14 @@ export function ContextEngineeringArticle() {
         <p style={{ marginTop: '1rem' }}>
           The key thing to understand is that this context isn&apos;t infinite &mdash; it&apos;s a fixed-size window the model works within. So what gets included, how it&apos;s organized, and when it&apos;s introduced all directly shape how well the model performs, which is exactly why &quot;context engineering&quot; exists as its own discipline.
         </p>
+
+        <div style={{ margin: '1.75rem 0 0' }}>
+          <img
+            src={context18Img}
+            alt="Context Engineering Overview"
+            style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+          />
+        </div>
       </section>
 
       <section className="article-panel">
