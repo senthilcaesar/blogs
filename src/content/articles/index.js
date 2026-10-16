@@ -1,3 +1,4 @@
+import { RlhfArticle } from './RlhfArticle';
 import { CiCdArticle } from './CiCdArticle';
 import { WhatIsApiEndpointArticle } from './WhatIsApiEndpointArticle';
 import { WritingLoopsArticle } from './WritingLoopsArticle';
@@ -28,6 +29,7 @@ import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiA
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 
 export const articleRegistry = {
+  rlhf: RlhfArticle,
   'ci-cd': CiCdArticle,
   'neo4j-intro-workshop': Neo4jIntroWorkshopArticle,
   'is-your-website-built-for-ai-agents': IsYourWebsiteBuiltForAiAgentsArticle,

@@ -3,6 +3,29 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'RLHF: Teaching Models What We Prefer',
+    slug: 'rlhf',
+    category: 'AI',
+    tags: ['ai', 'llm', 'rlhf', 'alignment', 'reinforcement-learning'],
+    excerpt:
+      'Reinforcement Learning from Human Feedback turns human judgment into a training signal: people rank model answers, a reward model learns those preferences, and the model is tuned to match them.',
+    image: imageUrl('rlhf-card.webp'),
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/rlhf',
+    author: {
+      name: 'Tech Notes',
+      role: 'AI & Machine Learning Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'AI Alignment',
+      summary:
+        'A short introduction to RLHF: why helpfulness cannot be written as a rule, the three-step recipe behind InstructGPT, and where the method falls short.',
+    },
+  },
+  {
     title: 'Neo4j Intro Workshop',
     slug: 'neo4j-intro-workshop',
     category: 'Data',
