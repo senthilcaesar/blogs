@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
 const img1 = new URL('../../../images/neo4j-1.jpg', import.meta.url).href;
@@ -133,6 +133,47 @@ function CodeCard({ code, lang = 'cypher', children }) {
   );
 }
 
+const labelDefinition =
+  'A label is a tag on a node that groups it with other nodes of the same kind. A node can carry more than one.';
+
+function LabelTerm({ children }) {
+  const tooltipId = useId();
+
+  return (
+    <span className='term-tip' tabIndex={0} aria-describedby={tooltipId}>
+      {children}
+      <span id={tooltipId} role='tooltip' className='term-tip__bubble'>
+        {labelDefinition}
+      </span>
+    </span>
+  );
+}
+
+const hackathonUrl = 'https://graphacademy.neo4j.com/courses/workshop-hackathon';
+
+const hackathonSummary =
+  'The hackathon gives you practical, hands-on knowledge of Neo4j MCP servers and Neo4j skills, GraphRAG, Cypher, and building a GraphRAG application.';
+
+function HackathonLink() {
+  const tooltipId = useId();
+
+  return (
+    <span className='term-tip term-tip--link term-tip--start'>
+      <a
+        href={hackathonUrl}
+        target='_blank'
+        rel='noreferrer'
+        aria-describedby={tooltipId}
+      >
+        {hackathonUrl}
+      </a>
+      <span id={tooltipId} role='tooltip' className='term-tip__bubble'>
+        {hackathonSummary}
+      </span>
+    </span>
+  );
+}
+
 export function Neo4jIntroWorkshopArticle() {
   return (
     <>
@@ -199,7 +240,8 @@ export function Neo4jIntroWorkshopArticle() {
         </p>
 
         <h3 className='sub-heading' style={{ marginTop: '1.5rem' }}>
-          1. The Building Blocks: Nodes, Labels, and Properties
+          1. The Building Blocks: Nodes, <LabelTerm>Labels</LabelTerm>, and
+          Properties
         </h3>
         <p style={{ marginTop: '0.75rem' }}>
           Neo4j is a graph database that stores and connects data in the form of
@@ -219,8 +261,14 @@ export function Neo4jIntroWorkshopArticle() {
             product, or in this case, the movie <em>Toy Story</em>.
           </li>
           <li>
-            <strong>The Tags on Top (Labels):</strong> Those little tags sitting
-            above the circle are called <strong>labels</strong>. Think of them
+            <strong>
+              The Tags on Top (<LabelTerm>Labels</LabelTerm>):
+            </strong>{' '}
+            Those little tags sitting above the circle are called{' '}
+            <strong>
+              <LabelTerm>labels</LabelTerm>
+            </strong>
+            . Think of them
             just like tags or categories on a blog post. They tell the database
             what kind of thing this node is. A node can have more than one tag -
             here, <em>Toy Story</em> is tagged as both a <code>Movie</code> and{' '}
@@ -272,7 +320,9 @@ export function Neo4jIntroWorkshopArticle() {
             circle for the movie <strong>Toy Story</strong>.
           </li>
           <li>
-            <strong>Their Labels (Tags):</strong> Each node has a tag telling us
+            <strong>
+              Their <LabelTerm>Labels</LabelTerm> (Tags):
+            </strong> Each node has a tag telling us
             what it is - Tom Hanks is tagged as an <code>Actor</code>, and Toy
             Story is tagged as a <code>Movie</code>.
           </li>
@@ -343,7 +393,8 @@ export function Neo4jIntroWorkshopArticle() {
             <code>(p:Person)</code> and <code>(m:Movie)</code>. The letter
             before the colon (<code>p</code>, <code>m</code>) is just a short
             nickname so you can refer to it in your query, while{' '}
-            <code>Person</code> and <code>Movie</code> are the labels.
+            <code>Person</code> and <code>Movie</code> are the{' '}
+            <LabelTerm>labels</LabelTerm>.
           </li>
           <li>
             <strong>Arrows become Code Arrows:</strong> In code, an arrow is
@@ -1027,7 +1078,7 @@ export function Neo4jIntroWorkshopArticle() {
         </p>
         <ul className='bullet-list' style={{ marginTop: '0.5rem' }}>
           <li>
-            Discover node labels (e.g., <code>Person</code>,{' '}
+            Discover node <LabelTerm>labels</LabelTerm> (e.g., <code>Person</code>,{' '}
             <code>Company</code>, <code>Document</code>)
           </li>
           <li>
@@ -1126,6 +1177,25 @@ export function Neo4jIntroWorkshopArticle() {
         </ul>
       </section>
 
+      <section className='article-panel'>
+        <h3 className='sub-heading'>Workshop</h3>
+        <ul className='bullet-list' style={{ marginTop: '0.75rem' }}>
+          <li>
+            Workshop Hackathon course: <HackathonLink />
+          </li>
+          <li>
+            GitHub repo:{' '}
+            <a
+              href='https://github.com/neo4j-graphacademy/workshop-hackathon'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://github.com/neo4j-graphacademy/workshop-hackathon
+            </a>
+          </li>
+        </ul>
+      </section>
+
       <style>{`
         .main-heading {
           background: var(--accent-glow);
@@ -1154,6 +1224,71 @@ export function Neo4jIntroWorkshopArticle() {
 
         .article-panel > .sub-heading:first-child {
           margin-top: 0.25rem;
+        }
+
+        .term-tip {
+          position: relative;
+          display: inline-block;
+          cursor: help;
+          text-decoration: underline dotted var(--accent);
+          text-underline-offset: 3px;
+        }
+
+        .term-tip:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
+          border-radius: 3px;
+        }
+
+        .term-tip__bubble {
+          position: absolute;
+          bottom: calc(100% + 8px);
+          left: 50%;
+          z-index: 20;
+          width: max-content;
+          max-width: min(280px, 80vw);
+          padding: 0.6rem 0.8rem;
+          font-family: var(--font);
+          font-size: 0.85rem;
+          font-weight: 400;
+          font-style: normal;
+          line-height: 1.5;
+          text-align: left;
+          white-space: normal;
+          color: var(--text);
+          background: var(--surface-strong);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          box-shadow: var(--shadow-sm);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transform: translate(-50%, 4px);
+          transition: opacity 150ms ease, transform 150ms ease, visibility 150ms;
+        }
+
+        .term-tip:hover .term-tip__bubble,
+        .term-tip:focus-visible .term-tip__bubble,
+        .term-tip:focus-within .term-tip__bubble {
+          opacity: 1;
+          visibility: visible;
+          transform: translate(-50%, 0);
+        }
+
+        .term-tip--link {
+          display: inline;
+          cursor: auto;
+          text-decoration: none;
+        }
+
+        .term-tip--start .term-tip__bubble {
+          left: 0;
+          transform: translateY(4px);
+        }
+
+        .term-tip--start:hover .term-tip__bubble,
+        .term-tip--start:focus-within .term-tip__bubble {
+          transform: translateY(0);
         }
 
         .code-card {
