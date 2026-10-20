@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title:
+      'What does PR (Pull Request) mean in the context of GitHub and software development?',
+    slug: 'pull-request',
+    category: 'Code',
+    tags: ['github', 'git', 'pull-request', 'code-review', 'collaboration'],
+    excerpt:
+      'A Pull Request is a request to review and merge changes you have made in one branch of a repository into another branch.',
+    image: imageUrl('pullrequest.jpg'),
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/pull-request',
+    author: {
+      name: 'Tech Notes',
+      role: 'DevOps & Software Delivery Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Git & GitHub Basics',
+      summary:
+        'What a Pull Request is, how it works step by step, and why developers use PRs for code review, collaboration, quality control and documentation.',
+    },
+  },
+  {
     title: 'RLHF: Teaching Models What We Prefer',
     slug: 'rlhf',
     category: 'AI',

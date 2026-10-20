@@ -1,3 +1,4 @@
+import { PullRequestArticle } from './PullRequestArticle';
 import { RlhfArticle } from './RlhfArticle';
 import { CiCdArticle } from './CiCdArticle';
 import { WhatIsApiEndpointArticle } from './WhatIsApiEndpointArticle';
@@ -29,6 +30,7 @@ import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiA
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 
 export const articleRegistry = {
+  'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,
   'ci-cd': CiCdArticle,
   'neo4j-intro-workshop': Neo4jIntroWorkshopArticle,
