@@ -1,3 +1,4 @@
+import { ExpressingThoughtsClearlyArticle } from './ExpressingThoughtsClearlyArticle';
 import { PullRequestArticle } from './PullRequestArticle';
 import { RlhfArticle } from './RlhfArticle';
 import { CiCdArticle } from './CiCdArticle';
@@ -30,6 +31,8 @@ import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiA
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 
 export const articleRegistry = {
+  'formulating-thoughts-to-expressing-them-clearly':
+    ExpressingThoughtsClearlyArticle,
   'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,
   'ci-cd': CiCdArticle,

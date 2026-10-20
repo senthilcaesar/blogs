@@ -364,6 +364,29 @@ export const posts = [
     },
   },
   {
+    title: 'From Formulating Thoughts to Expressing Them Clearly',
+    slug: 'formulating-thoughts-to-expressing-them-clearly',
+    category: 'Career',
+    tags: ['communication', 'speaking', 'writing', 'clarity', 'soft-skills'],
+    excerpt:
+      'The goal is not to make your language complicated or overly formal. It is to help you express what you already understand in a clear, coherent and natural way.',
+    image: imageUrl('clear-expression.jpg'),
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/formulating-thoughts-to-expressing-them-clearly',
+    author: {
+      name: 'Tech Notes',
+      role: 'Communication & Career Skills Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Communication Skills',
+      summary:
+        'Two practical techniques for turning clear thoughts into clear sentences: organize ideas as point, reason and example, and start with the main idea before refining the wording.',
+    },
+  },
+  {
     title: 'Mongo DB Atlas for React Apps',
     slug: 'mongodb-atlas-for-react-apps',
     category: 'Data',
