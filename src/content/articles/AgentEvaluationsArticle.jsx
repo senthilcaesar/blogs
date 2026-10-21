@@ -1312,6 +1312,21 @@ export function AgentEvaluationsArticle() {
         />
       </div>
 
+      <section className="article-panel">
+        <h2>References</h2>
+        <ul className="bullet-list" style={{ marginTop: "1rem" }}>
+          <li>
+            <a
+              href="https://www.langchain.com/blog/common-questions-about-agent-evals"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Common Questions About Agent Evals (LangChain Blog)
+            </a>
+          </li>
+        </ul>
+      </section>
+
       <style>{`
         .ev-card {
           border: 1px solid var(--border);
