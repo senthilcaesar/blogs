@@ -298,7 +298,12 @@ describe('blog app', () => {
     expect(
       screen.getByRole('link', { name: /Neo4j Import tool/i }),
     ).toHaveAttribute('href', 'https://neo4j.com/docs/data-importer/current/');
-    expect(screen.getByText(/Step 3: Query/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: /Step 3: Query/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByRole('button', { name: /Step 3: Query/i }).length,
+    ).toBeGreaterThan(0);
     expect(
       screen.getByText(
         /Run the following Cypher statement to find the people who acted in the movie 'Toy Story'/i,

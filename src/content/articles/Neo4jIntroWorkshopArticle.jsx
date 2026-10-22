@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
 const img1 = new URL('../../../images/neo4j-1.jpg', import.meta.url).href;
@@ -189,9 +189,179 @@ function HackathonLink() {
   );
 }
 
+const tocGroups = [
+  {
+    id: 'part-1',
+    label: 'Part 1: Concepts',
+    items: [
+      { id: 'knowledge-graph', label: 'What is a Knowledge Graph?' },
+      { id: 'building-blocks', label: 'Nodes, labels & properties' },
+      { id: 'relationships', label: 'Relationships' },
+      { id: 'cypher', label: 'Diagrams to Cypher' },
+      { id: 'golden-rule', label: 'Golden rule of modeling' },
+    ],
+  },
+  {
+    id: 'part-2',
+    label: 'Part 2: Workshop',
+    items: [
+      { id: 'setup', label: 'AuraDB free instance' },
+      { id: 'step-0', label: 'Step 0: Sample dataset' },
+      { id: 'step-1', label: 'Step 1: Import & model' },
+      { id: 'step-2', label: 'Step 2: Run import' },
+      { id: 'step-3', label: 'Step 3: Query' },
+      { id: 'step-4', label: 'Step 4: Sample queries' },
+      { id: 'step-5', label: 'Step 5: Writing data' },
+      { id: 'step-6', label: 'Step 6: Bloom' },
+      { id: 'step-7', label: 'Step 7: Dashboards' },
+      { id: 'step-8', label: 'Step 8: Document intelligence' },
+      { id: 'step-9', label: 'Step 9: Inspect MCP URL' },
+    ],
+  },
+  {
+    id: 'resources',
+    label: 'Further reading',
+    items: [
+      { id: 'workshop', label: 'Workshop' },
+      { id: 'video-resources', label: 'Video resources' },
+    ],
+  },
+];
+
+// Every target in document order: each part heading, then its sections
+const tocIds = tocGroups.flatMap((group) => [
+  group.id,
+  ...group.items.map((item) => item.id),
+]);
+
+// Distance from the viewport top at which a heading counts as "being read"
+const spyOffset = 120;
+
+function useActiveSection(ids) {
+  const [activeId, setActiveId] = useState(ids[0]);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      let current = ids[0];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= spyOffset) current = id;
+      }
+      setActiveId(current);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, [ids]);
+
+  return activeId;
+}
+
+// HashRouter owns the URL hash, so jump with scrollIntoView instead of #anchors
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const reduceMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+  el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+
+function TocLink({ id, label, activeId, onNavigate, className = '' }) {
+  const active = id === activeId;
+  return (
+    <button
+      type='button'
+      className={`toc__link ${className} ${active ? 'toc__link--active' : ''}`}
+      aria-current={active ? 'location' : undefined}
+      onClick={() => onNavigate(id)}
+    >
+      {label}
+    </button>
+  );
+}
+
+function TocList({ activeId, onNavigate }) {
+  return (
+    <ul className='toc__groups'>
+      {tocGroups.map((group) => (
+        <li key={group.id}>
+          <TocLink
+            id={group.id}
+            label={group.label}
+            activeId={activeId}
+            onNavigate={onNavigate}
+            className='toc__group'
+          />
+          <ul className='toc__items'>
+            {group.items.map((item) => (
+              <li key={item.id}>
+                <TocLink
+                  id={item.id}
+                  label={item.label}
+                  activeId={activeId}
+                  onNavigate={onNavigate}
+                />
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ArticleToc() {
+  const activeId = useActiveSection(tocIds);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  return (
+    <>
+      <aside className='toc-rail' aria-label='On this page'>
+        <nav className='toc'>
+          <p className='toc__title'>On this page</p>
+          <TocList activeId={activeId} onNavigate={scrollToSection} />
+        </nav>
+      </aside>
+
+      <details
+        className='toc-mobile'
+        open={mobileOpen}
+        onToggle={(e) => setMobileOpen(e.currentTarget.open)}
+      >
+        <summary className='toc__title'>On this page</summary>
+        <nav className='toc' aria-label='On this page'>
+          <TocList
+            activeId={activeId}
+            onNavigate={(id) => {
+              setMobileOpen(false);
+              scrollToSection(id);
+            }}
+          />
+        </nav>
+      </details>
+    </>
+  );
+}
+
 export function Neo4jIntroWorkshopArticle() {
   return (
     <>
+      <ArticleToc />
+
       {/* Roadmap & Overview Banner */}
       <div
         className='article-panel'
@@ -223,11 +393,15 @@ export function Neo4jIntroWorkshopArticle() {
           PART 1: INTRO & CONCEPTS
          ========================================================================= */}
       <section className='article-panel'>
-        <h2 className='main-heading'>
+        <h2 id='part-1' className='main-heading'>
           Part 1: Neo4j Introduction &amp; Core Concepts
         </h2>
 
-        <h3 className='sub-heading' style={{ marginTop: '1.5rem' }}>
+        <h3
+          id='knowledge-graph'
+          className='sub-heading'
+          style={{ marginTop: '1.5rem' }}
+        >
           What is a Knowledge Graph?
         </h3>
         <p style={{ marginTop: '0.75rem' }}>
@@ -254,7 +428,11 @@ export function Neo4jIntroWorkshopArticle() {
           sections below show how it models data.
         </p>
 
-        <h3 className='sub-heading' style={{ marginTop: '1.5rem' }}>
+        <h3
+          id='building-blocks'
+          className='sub-heading'
+          style={{ marginTop: '1.5rem' }}
+        >
           1. The Building Blocks: Nodes, <LabelTerm>Labels</LabelTerm>, and
           Properties
         </h3>
@@ -321,7 +499,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>2. Connecting the Dots: Relationships</h3>
+        <h3 id='relationships' className='sub-heading'>
+          2. Connecting the Dots: Relationships</h3>
         <p>
           In the real world, things don&apos;t just exist by themselves - they
           connect to each other. In Neo4j, these connections are the secret
@@ -391,7 +570,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>3. From Visual Diagrams to Cypher Code</h3>
+        <h3 id='cypher' className='sub-heading'>
+          3. From Visual Diagrams to Cypher Code</h3>
         <p>How do these visual drawings translate into database queries?</p>
         <p style={{ marginTop: '0.75rem' }}>
           Neo4j uses a query language called <strong>Cypher</strong>. Cypher is
@@ -442,7 +622,11 @@ export function Neo4jIntroWorkshopArticle() {
           />
         </div>
 
-        <h3 className='sub-heading' style={{ marginTop: '1.5rem' }}>
+        <h3
+          id='golden-rule'
+          className='sub-heading'
+          style={{ marginTop: '1.5rem' }}
+        >
           The Golden Rule of Graph Modeling
         </h3>
         <p style={{ marginTop: '0.75rem' }}>
@@ -494,6 +678,7 @@ export function Neo4jIntroWorkshopArticle() {
         }}
       >
         <h2
+          id='part-2'
           style={{
             fontSize: '1.4rem',
             margin: '0 0 0.5rem 0',
@@ -513,7 +698,8 @@ export function Neo4jIntroWorkshopArticle() {
       </div>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Workshop Setup: AuraDB Free Instance</h3>
+        <h3 id='setup' className='sub-heading'>
+          Workshop Setup: AuraDB Free Instance</h3>
         <p>
           Sign up using the link (
           <a href='https://console.neo4j.io/' target='_blank' rel='noreferrer'>
@@ -543,7 +729,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Step 0: Download the Sample dataset</h3>
+        <h3 id='step-0' className='sub-heading'>
+          Step 0: Download the Sample dataset</h3>
         <p>
           <a
             href='http://dev.neo4j.com/ga-movie-graph'
@@ -557,7 +744,7 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>
+        <h3 id='step-1' className='sub-heading'>
           Step 1: Data Import &amp; Model Generation
         </h3>
         <p>
@@ -678,7 +865,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Step 2: Run Import into AuraDB</h3>
+        <h3 id='step-2' className='sub-heading'>
+          Step 2: Run Import into AuraDB</h3>
         <p>
           Click <strong>&quot;Run import&quot;</strong> on the top right corner,
           select the instance and run import. The{' '}
@@ -711,7 +899,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Step 3: Query</h3>
+        <h3 id='step-3' className='sub-heading'>
+          Step 3: Query</h3>
         The Query tool allows you to write and execute Cypher queries
         <p style={{ marginTop: '1rem' }}>
           Click <strong>Query</strong> in the sidebar menu. Copy and paste the
@@ -775,7 +964,8 @@ export function Neo4jIntroWorkshopArticle() {
         <p style={{ margin: '0 0 0.5rem 0', color: 'var(--text-soft)' }}>
           Following are few sample queries you can try
         </p>
-        <h3 className='sub-heading'>Step 4: Sample queries to try</h3>
+        <h3 id='step-4' className='sub-heading'>
+          Step 4: Sample queries to try</h3>
 
         <CodeCard code={sampleQuery1}>
           <span className='syn-comment'>//Find a Movie you like</span>
@@ -911,7 +1101,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Step 5: Writing to Neo4j</h3>
+        <h3 id='step-5' className='sub-heading'>
+          Step 5: Writing to Neo4j</h3>
 
         <CodeCard code={step5WriteQuery1}>
           <span className='syn-comment'>
@@ -962,7 +1153,7 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>
+        <h3 id='step-6' className='sub-heading'>
           Step 6: Bloom (Graphical representation)
         </h3>
         <p>
@@ -990,7 +1181,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Step 7: Dashboard (Analyze logs, chart)</h3>
+        <h3 id='step-7' className='sub-heading'>
+          Step 7: Dashboard (Analyze logs, chart)</h3>
         <p>
           <strong>Neo4j Dashboards</strong> is a tool for visualizing and
           exploring your graph data. Dashboards are built from cards - each card
@@ -1034,7 +1226,7 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>
+        <h3 id='step-8' className='sub-heading'>
           Step 8: Document Intelligence (Unstructured Data)
         </h3>
         <p>
@@ -1075,7 +1267,8 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Step 9: Neo4j Instance Inspect MCP URL</h3>
+        <h3 id='step-9' className='sub-heading'>
+          Step 9: Neo4j Instance Inspect MCP URL</h3>
         <p>
           The Neo4j Instance Inspect MCP URL is used by AI agents and
           MCP-compatible tools to connect to a Neo4j database and inspect its
@@ -1124,7 +1317,9 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Resources</h3>
+        <h3 id='resources' className='sub-heading'>
+          Resources
+        </h3>
         <ul className='bullet-list' style={{ marginTop: '0.75rem' }}>
           <li>
             <a
@@ -1207,7 +1402,9 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Workshop</h3>
+        <h3 id='workshop' className='sub-heading'>
+          Workshop
+        </h3>
         <ul className='bullet-list' style={{ marginTop: '0.75rem' }}>
           <li>
             Workshop Hackathon course: <HackathonLink />
@@ -1226,7 +1423,9 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 className='sub-heading'>Video Resources</h3>
+        <h3 id='video-resources' className='sub-heading'>
+          Video Resources
+        </h3>
         <ul
           className='bullet-list'
           style={{ marginTop: '0.75rem', listStyle: 'none', paddingLeft: 0 }}
@@ -1250,6 +1449,122 @@ export function Neo4jIntroWorkshopArticle() {
       </section>
 
       <style>{`
+        /* Lets the rail stretch the full height of the article body */
+        .article-content:has(> .toc-rail) {
+          position: relative;
+        }
+
+        .article-content h2[id],
+        .article-content h3[id] {
+          scroll-margin-top: 96px;
+        }
+
+        /* Wide screens: a plain list in the left gutter that sticks while you read */
+        .toc-rail {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: calc(100% + 32px);
+          width: 200px;
+          display: none;
+        }
+
+        .toc-rail .toc {
+          position: sticky;
+          top: 88px;
+          max-height: calc(100vh - 112px);
+          overflow-y: auto;
+          scrollbar-width: thin;
+        }
+
+        @media (min-width: 1380px) {
+          .toc-rail {
+            display: block;
+          }
+
+          .toc-mobile {
+            display: none;
+          }
+        }
+
+        .toc__title {
+          margin: 0 0 0.6rem 0;
+          font-family: var(--font-body);
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: var(--text);
+        }
+
+        /* Prefixed to outrank the global .article-content list spacing */
+        .article-content .toc__groups,
+        .article-content .toc__items {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .article-content .toc li {
+          margin: 0;
+          padding: 0;
+          line-height: inherit;
+        }
+
+        .article-content .toc__groups > li + li {
+          margin-top: 0.75rem;
+        }
+
+        .toc__link {
+          display: block;
+          width: 100%;
+          margin: 0;
+          padding: 0.2rem 0 0.2rem 0.75rem;
+          font-family: var(--font-body);
+          font-size: 0.82rem;
+          line-height: 1.45;
+          text-align: left;
+          color: var(--text-soft);
+          background: none;
+          border: 0;
+          border-left: 2px solid var(--border);
+          cursor: pointer;
+        }
+
+        .toc__group {
+          font-weight: 600;
+          color: var(--text);
+        }
+
+        .toc__link:hover {
+          color: var(--text);
+        }
+
+        .toc__link--active,
+        .toc__link--active:hover {
+          color: var(--accent);
+          border-left-color: var(--accent);
+        }
+
+        .toc__link:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 1px;
+        }
+
+        /* Narrow screens: the same list, collapsed above the article */
+        .toc-mobile {
+          margin-bottom: 1.5rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .toc-mobile summary {
+          margin: 0;
+          cursor: pointer;
+        }
+
+        .toc-mobile[open] summary {
+          margin-bottom: 0.6rem;
+        }
+
         .main-heading {
           background: var(--accent-glow);
           padding: 0.6rem 1rem;
