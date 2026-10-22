@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { Check, Copy, Youtube } from 'lucide-react';
 
 const img1 = new URL('../../../images/neo4j-1.jpg', import.meta.url).href;
 const img2 = new URL('../../../images/neo4j-2.jpg', import.meta.url).href;
@@ -1174,6 +1174,20 @@ export function Neo4jIntroWorkshopArticle() {
               https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/
             </a>
           </li>
+          <li>
+            <a
+              href='https://neo4j.com/essential-graphrag/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://neo4j.com/essential-graphrag/
+            </a>
+            <span style={{ color: 'var(--text-soft)' }}>
+              {' '}
+              (Book: <em>Essential GraphRAG</em>, a guide to building
+              GraphRAG applications with Neo4j)
+            </span>
+          </li>
         </ul>
       </section>
 
@@ -1196,7 +1210,41 @@ export function Neo4jIntroWorkshopArticle() {
         </ul>
       </section>
 
+      <section className='article-panel'>
+        <h3 className='sub-heading'>Video Resources</h3>
+        <ul className='video-list' style={{ marginTop: '0.75rem' }}>
+          <li>
+            <a
+              href='https://youtu.be/b7YHoRFj194'
+              target='_blank'
+              rel='noreferrer'
+              className='video-link'
+            >
+              <Youtube size={20} className='video-link__icon' aria-hidden='true' />
+              <span>Neo4j: Build a hybrid RAG pipeline with multiple retrievers</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
       <style>{`
+        .video-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .video-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+        }
+
+        .video-link__icon {
+          flex-shrink: 0;
+          color: #ff0000;
+        }
+
         .main-heading {
           background: var(--accent-glow);
           padding: 0.6rem 1rem;
