@@ -7,6 +7,21 @@ const agenticCodingImg = new URL(
   import.meta.url
 ).href;
 
+function YoutubeIcon() {
+  return (
+    <svg
+      width='20'
+      height='14'
+      viewBox='0 0 20 14'
+      aria-hidden='true'
+      style={{ flexShrink: 0 }}
+    >
+      <rect width='20' height='14' rx='4' fill='#ff0000' />
+      <path d='M8 4l5 3-5 3z' fill='#ffffff' />
+    </svg>
+  );
+}
+
 export function EngineBehindAutonomousAiArticle() {
   return (
     <>
@@ -370,6 +385,21 @@ export function EngineBehindAutonomousAiArticle() {
               rel='noreferrer'
             >
               https://www.vtrivedy.com/posts/the-anatomy-of-an-agent-harness
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://youtu.be/2C_CefSQEAQ'
+              target='_blank'
+              rel='noreferrer'
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
+            >
+              <YoutubeIcon />
+              https://youtu.be/2C_CefSQEAQ
             </a>
           </li>
         </ul>
