@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { Check, Copy, Youtube } from 'lucide-react';
+import { Check, Copy } from 'lucide-react';
 
 const img1 = new URL('../../../images/neo4j-1.jpg', import.meta.url).href;
 const img2 = new URL('../../../images/neo4j-2.jpg', import.meta.url).href;
@@ -130,6 +130,21 @@ function CodeCard({ code, lang = 'cypher', children }) {
         <code>{children || code}</code>
       </pre>
     </div>
+  );
+}
+
+function YoutubeIcon() {
+  return (
+    <svg
+      width='20'
+      height='14'
+      viewBox='0 0 20 14'
+      aria-hidden='true'
+      style={{ flexShrink: 0 }}
+    >
+      <rect width='20' height='14' rx='4' fill='#ff0000' />
+      <path d='M8 4l5 3-5 3z' fill='#ffffff' />
+    </svg>
   );
 }
 
@@ -1212,39 +1227,29 @@ export function Neo4jIntroWorkshopArticle() {
 
       <section className='article-panel'>
         <h3 className='sub-heading'>Video Resources</h3>
-        <ul className='video-list' style={{ marginTop: '0.75rem' }}>
+        <ul
+          className='bullet-list'
+          style={{ marginTop: '0.75rem', listStyle: 'none', paddingLeft: 0 }}
+        >
           <li>
             <a
               href='https://youtu.be/b7YHoRFj194'
               target='_blank'
               rel='noreferrer'
-              className='video-link'
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
             >
-              <Youtube size={20} className='video-link__icon' aria-hidden='true' />
-              <span>Neo4j: Build a hybrid RAG pipeline with multiple retrievers</span>
+              <YoutubeIcon />
+              Neo4j: Build a hybrid RAG pipeline with multiple retrievers
             </a>
           </li>
         </ul>
       </section>
 
       <style>{`
-        .video-list {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .video-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.6rem;
-        }
-
-        .video-link__icon {
-          flex-shrink: 0;
-          color: #ff0000;
-        }
-
         .main-heading {
           background: var(--accent-glow);
           padding: 0.6rem 1rem;
