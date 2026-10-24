@@ -68,49 +68,51 @@
   --article-width: 880px; /* The reading column */
 }
 
+/* Dark theme — Catppuccin Frappé (https://catppuccin.com/palette/) */
 body[data-theme='dark'] {
   color-scheme: dark;
 
-  /* Warm Ink Surfaces (Dark) */
-  --bg: #1b1713; /* Roasted-brown base */
-  --bg-elevated: #221d18;
-  --surface: rgba(27, 23, 19, 0.9);
-  --surface-strong: #242019;
-  --surface-soft: #2c2620;
-  --border: #3b342b;
-  --border-strong: #524739;
+  /* Surfaces */
+  --bg: #303446; /* Base */
+  --bg-elevated: #292c3c; /* Mantle */
+  --surface: rgba(48, 52, 70, 0.9); /* Base, translucent header */
+  --surface-strong: #414559; /* Surface 0 — raised card */
+  --surface-soft: #51576d; /* Surface 1 — chips, inline code */
+  --border: #51576d; /* Surface 1 */
+  --border-strong: #626880; /* Surface 2 */
 
   /* Typography Colors */
-  --text: #ece2d2; /* Warm parchment */
-  --text-soft: #cfc2ad;
-  --text-muted: #9b8b74;
-  --card-title-color: #ece2d2;
-  --subheading-color: #ece2d2;
-  --link-color: #ece2d2;
-  --link-hover-color: #e88a52;
+  --text: #c6d0f5; /* Text */
+  --text-soft: #b5bfe2; /* Subtext 1 */
+  --text-muted: #a5adce; /* Subtext 0 */
+  --card-title-color: #c6d0f5;
+  --subheading-color: #c6d0f5;
+  --link-color: #c6d0f5;
+  --link-hover-color: #ef9f76; /* Peach */
 
   /* Accents */
-  --accent: #e07a45; /* Lifted rust for dark paper */
-  --accent-hover: #f0965f;
-  --accent-glow: rgba(224, 122, 69, 0.14);
-  --accent-purple: #c79a63;
+  --accent: #ef9f76; /* Peach */
+  --accent-hover: #f2d5cf; /* Rosewater */
+  --accent-glow: rgba(239, 159, 118, 0.14);
+  --accent-purple: #ca9ee6; /* Mauve */
 
   /* Status */
-  --success: #8fb56a;
-  --warning: #e0aa5a;
-  --danger: #e07a72;
+  --success: #a6d189; /* Green */
+  --warning: #e5c890; /* Yellow */
+  --danger: #e78284; /* Red */
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+  /* Shadows are tinted with Crust (#232634) */
+  --shadow-sm: 0 1px 2px rgba(35, 38, 52, 0.4);
+  --shadow-md: 0 4px 16px rgba(35, 38, 52, 0.5);
+  --shadow-lg: 0 12px 32px rgba(35, 38, 52, 0.6);
 
-  --card-shadow-resting: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --card-shadow-hover: 0 6px 20px -6px rgba(0, 0, 0, 0.6);
+  --card-shadow-resting: 0 1px 2px rgba(35, 38, 52, 0.35);
+  --card-shadow-hover: 0 6px 20px -6px rgba(35, 38, 52, 0.6);
 
-  --code-bg: #16130f;
-  --code-fg: #e8e0d2;
-  --code-border: #332c24;
-  --code-header-bg: #1f1a15;
+  --code-bg: #232634; /* Crust */
+  --code-fg: #c6d0f5; /* Text */
+  --code-border: #414559; /* Surface 0 */
+  --code-header-bg: #292c3c; /* Mantle */
 }
 
 /* ─────────────────────────────────────────────
@@ -1289,7 +1291,7 @@ body[data-theme='dark'] .article-byline__share-btn--copied {
 }
 
 body[data-theme='dark'] .video-panel__icon {
-  color: #ff4e4e;
+  color: #e78284;
 }
 
 .video-panel__link,
@@ -1752,31 +1754,31 @@ blockquote p:last-child {
 }
 
 body[data-theme='dark'] .tech-card--sky {
-  --tone: #6fb6c6;
+  --tone: #99d1db;
 }
 body[data-theme='dark'] .tech-card--amber {
-  --tone: #dfae5a;
+  --tone: #e5c890;
 }
 body[data-theme='dark'] .tech-card--orange {
-  --tone: #e07a45;
+  --tone: #ef9f76;
 }
 body[data-theme='dark'] .tech-card--violet {
-  --tone: #b795c9;
+  --tone: #ca9ee6;
 }
 body[data-theme='dark'] .tech-card--rose {
-  --tone: #dd8397;
+  --tone: #f4b8e4;
 }
 body[data-theme='dark'] .tech-card--emerald {
-  --tone: #97bf72;
+  --tone: #81c8be;
 }
 body[data-theme='dark'] .tech-card--cyan {
-  --tone: #79bdb7;
+  --tone: #85c1dc;
 }
 body[data-theme='dark'] .tech-card--slate {
-  --tone: #ab9f8c;
+  --tone: #949cbb;
 }
 body[data-theme='dark'] .tech-card--lime {
-  --tone: #b8c96c;
+  --tone: #a6d189;
 }
 
 /* ── Responsive: collapse to four, then two columns ── */
@@ -1906,9 +1908,9 @@ code {
 }
 
 body[data-theme='dark'] .xml-tag-context {
-  color: #ff8a3d;
-  background: rgba(255, 138, 61, 0.18);
-  border: 1px solid rgba(255, 138, 61, 0.4);
+  color: #ef9f76;
+  background: rgba(239, 159, 118, 0.18);
+  border: 1px solid rgba(239, 159, 118, 0.4);
 }
 
 .xml-tag-task {
@@ -1922,9 +1924,9 @@ body[data-theme='dark'] .xml-tag-context {
 }
 
 body[data-theme='dark'] .xml-tag-task {
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.18);
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #85c1dc;
+  background: rgba(133, 193, 220, 0.18);
+  border: 1px solid rgba(133, 193, 220, 0.4);
 }
 
 .xml-tag-constraints {
@@ -1938,9 +1940,9 @@ body[data-theme='dark'] .xml-tag-task {
 }
 
 body[data-theme='dark'] .xml-tag-constraints {
-  color: #c4b5fd;
-  background: rgba(196, 181, 253, 0.18);
-  border: 1px solid rgba(196, 181, 253, 0.4);
+  color: #babbf1;
+  background: rgba(186, 187, 241, 0.18);
+  border: 1px solid rgba(186, 187, 241, 0.4);
 }
 
 .xml-tag-input {
@@ -1954,9 +1956,9 @@ body[data-theme='dark'] .xml-tag-constraints {
 }
 
 body[data-theme='dark'] .xml-tag-input {
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.18);
-  border: 1px solid rgba(74, 222, 128, 0.4);
+  color: #a6d189;
+  background: rgba(166, 209, 137, 0.18);
+  border: 1px solid rgba(166, 209, 137, 0.4);
 }
 
 /* Text Highlight */
@@ -2445,4 +2447,32 @@ pre.code-block code {
 .article-content .code-card pre.code-block {
   background: transparent;
   border-radius: 0;
+}
+
+/* ─────────────────────────────────────────────
+   Catppuccin Frappé — dark overrides for colours
+   hardcoded in shared rules above
+───────────────────────────────────────────── */
+body[data-theme='dark'] .modal-overlay {
+  background: rgba(35, 38, 52, 0.8); /* Crust */
+}
+
+body[data-theme='dark'] .comments-section__error {
+  background: rgba(231, 130, 132, 0.1); /* Red */
+  border: 1px solid rgba(231, 130, 132, 0.3);
+  color: #e78284;
+}
+
+body[data-theme='dark'] .article-content .code-card__lang {
+  background: #414559; /* Surface 0 */
+  color: #ef9f76; /* Peach */
+}
+
+body[data-theme='dark'] .article-content .code-copy-btn {
+  color: #a5adce; /* Subtext 0 */
+}
+
+body[data-theme='dark'] .article-content .code-copy-btn:hover {
+  background: #414559; /* Surface 0 */
+  color: var(--code-fg);
 }
