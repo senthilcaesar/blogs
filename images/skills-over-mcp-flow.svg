@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520">
+  <rect width="1000" height="520" fill="#0d1117" />
+  <g font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+    <text x="500" y="45" font-size="22" font-weight="700" fill="#f0f6fc" text-anchor="middle">What crosses the wire, and when</text>
+
+    <!-- column headers -->
+    <text x="150" y="95" font-size="16" font-weight="700" fill="#8b949e" text-anchor="middle">WHEN</text>
+    <text x="440" y="95" font-size="16" font-weight="700" fill="#8b949e" text-anchor="middle">REQUEST</text>
+    <text x="780" y="95" font-size="16" font-weight="700" fill="#8b949e" text-anchor="middle">INTO THE MODEL'S CONTEXT</text>
+
+    <!-- row 1 -->
+    <rect x="40" y="115" width="920" height="100" rx="18" fill="#161b22" stroke="#7dd3fc" stroke-width="2.5" />
+    <text x="150" y="160" font-size="18" font-weight="700" fill="#7dd3fc" text-anchor="middle">1 · Discovery</text>
+    <text x="150" y="187" font-size="14" fill="#8b949e" text-anchor="middle">host builds its catalog</text>
+    <text x="440" y="172" font-family="IBM Plex Mono, Menlo, monospace" font-size="17" fill="#c9d1d9" text-anchor="middle">skills/list</text>
+    <text x="780" y="160" font-size="16" fill="#c9d1d9" text-anchor="middle">name + description only</text>
+    <text x="780" y="187" font-size="14" fill="#8b949e" text-anchor="middle">~100 tokens per skill</text>
+
+    <!-- row 2 -->
+    <rect x="40" y="235" width="920" height="100" rx="18" fill="#161b22" stroke="#ff8a3d" stroke-width="2.5" />
+    <text x="150" y="280" font-size="18" font-weight="700" fill="#ff8a3d" text-anchor="middle">2 · Activation</text>
+    <text x="150" y="307" font-size="14" fill="#8b949e" text-anchor="middle">a task matches</text>
+    <text x="440" y="270" font-family="IBM Plex Mono, Menlo, monospace" font-size="17" fill="#c9d1d9" text-anchor="middle">resources/read</text>
+    <text x="440" y="298" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#8b949e" text-anchor="middle">skill://code-review/SKILL.md</text>
+    <text x="780" y="280" font-size="16" fill="#c9d1d9" text-anchor="middle">the full instructions</text>
+    <text x="780" y="307" font-size="14" fill="#8b949e" text-anchor="middle">under 5,000 tokens recommended</text>
+
+    <!-- row 3 -->
+    <rect x="40" y="355" width="920" height="100" rx="18" fill="#161b22" stroke="#c4b5fd" stroke-width="2.5" />
+    <text x="150" y="400" font-size="18" font-weight="700" fill="#c4b5fd" text-anchor="middle">3 · On demand</text>
+    <text x="150" y="427" font-size="14" fill="#8b949e" text-anchor="middle">the skill asks for it</text>
+    <text x="440" y="390" font-family="IBM Plex Mono, Menlo, monospace" font-size="17" fill="#c9d1d9" text-anchor="middle">resources/read</text>
+    <text x="440" y="418" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" fill="#8b949e" text-anchor="middle">…/references/checklist.md</text>
+    <text x="780" y="400" font-size="16" fill="#c9d1d9" text-anchor="middle">one supporting file</text>
+    <text x="780" y="427" font-size="14" fill="#8b949e" text-anchor="middle">only if it's needed</text>
+
+    <text x="500" y="495" font-size="15" fill="#8b949e" text-anchor="middle">Before every read reaches the model, the host checks size and SHA-256 digest against the listing, and tags the server it came from.</text>
+  </g>
+</svg>

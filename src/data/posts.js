@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Skills over MCP: Shipping the Manual with the Tools',
+    slug: 'skills-over-mcp',
+    category: 'AI',
+    tags: ['ai', 'agents', 'mcp', 'skills', 'progressive-disclosure'],
+    excerpt:
+      'An MCP server tells an agent what it can do; a skill tells it how. The official Skills extension lets a server serve both, one file at a time, only when needed.',
+    image: imageUrl('skills-over-mcp-workflow.png'),
+    imageFit: 'contain',
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/skills-over-mcp',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Model Context Protocol',
+      summary:
+        'How the Skills extension (SEP-2640) serves SKILL.md files as MCP resources, why it reuses an existing primitive, and why a skill is riskier than a tool.',
+    },
+  },
+  {
     title:
       'What does PR (Pull Request) mean in the context of GitHub and software development?',
     slug: 'pull-request',

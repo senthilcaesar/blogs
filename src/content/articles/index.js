@@ -29,10 +29,12 @@ import { AgentEvaluationsArticle } from './AgentEvaluationsArticle';
 import { HowCompaniesBuildOwnAiArticle } from './HowCompaniesBuildOwnAiArticle';
 import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiAgentsArticle';
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
+import { SkillsOverMcpArticle } from './SkillsOverMcpArticle';
 
 export const articleRegistry = {
   'formulating-thoughts-to-expressing-them-clearly':
     ExpressingThoughtsClearlyArticle,
+  'skills-over-mcp': SkillsOverMcpArticle,
   'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,
   'ci-cd': CiCdArticle,
