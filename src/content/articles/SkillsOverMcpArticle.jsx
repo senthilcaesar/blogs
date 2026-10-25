@@ -161,6 +161,13 @@ export function SkillsOverMcpArticle() {
           But a set of tools isn&apos;t the same as knowing how to do the job. Tool descriptions say what each tool does, not how to orchestrate them for a task. Give a new hire access to GitHub and they still don&apos;t know your team&apos;s review checklist, which files to look at first, or what counts as a serious problem. That know-how is the second thing, and it&apos;s what an Agent Skill provides: the order of steps, domain conventions and conditional logic (do this if that happens) come from the skill. A skill is just a folder with a text file called <code>SKILL.md</code> inside. The top few lines give the skill a name and say when to use it, such as <em>code-review: review code using the team&apos;s checklist</em>. The rest is plain written instructions, the way you&apos;d brief a colleague. The folder can also hold extra files, like the full checklist, for the instructions to point to.
         </p>
         <p style={{ marginTop: '1rem' }}>
+          If you&apos;d like hands-on practice writing your first <code>SKILL.md</code> file, follow the step-by-step guide in{' '}
+          <a href="#/posts/writing-your-first-skill-md-file" target="_blank" rel="noreferrer">
+            Write your first SKILL.md
+          </a>
+          .
+        </p>
+        <p style={{ marginTop: '1rem' }}>
           Skills stay cheap because of a habit called <TermTip tip={progressiveDisclosureTip}>progressive disclosure</TermTip>: the agent reads a little first, and more only when it needs to. That matters because a model can only keep so much text in mind at once, a limit measured in tokens (roughly, chunks of words). So at the start the agent sees only each skill&apos;s name and one-line description, about 100 tokens apiece. When you ask for a code review, it opens the full code-review instructions (the spec recommends keeping these under 5,000 tokens). Only if those instructions say &quot;read the checklist&quot; does it open that file. It&apos;s a library card catalogue: you browse the cards, and fetch a book off the shelf only when you need it.
         </p>
         <p style={{ marginTop: '1rem' }}>
