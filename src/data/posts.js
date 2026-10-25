@@ -9,7 +9,7 @@ export const posts = [
     tags: ['ai', 'agents', 'mcp', 'skills', 'progressive-disclosure'],
     excerpt:
       'An MCP server tells an agent what it can do; a skill tells it how. The official Skills extension lets a server serve both, one file at a time, only when needed.',
-    image: imageUrl('skills-over-mcp-workflow.png'),
+    image: imageUrl('skills-over-mcp-cover.jpg'),
     imageFit: 'contain',
     date: 'Oct 2026',
     priority: 'High',

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Check, Copy } from "lucide-react";
 
 const step1Img = new URL("../../../images/skill-step-1.webp", import.meta.url).href;
@@ -212,6 +212,22 @@ function CodeCard({ label, lang, snippet, sectionKey, copiedSection, onCopy }) {
   );
 }
 
+const progressiveDisclosureTip =
+  "Think of it like a library. Without progressive disclosure, you would have to read every book on the shelves before picking one. Progressive disclosure gives you a catalog with a title and short summary for each book, so you only open the one you need.";
+
+function TermTip({ children, tip }) {
+  const tooltipId = useId();
+
+  return (
+    <span className="term-tip" tabIndex={0} aria-describedby={tooltipId}>
+      {children}
+      <span id={tooltipId} role="tooltip" className="term-tip__bubble">
+        {tip}
+      </span>
+    </span>
+  );
+}
+
 function Figure({ src, alt, caption, maxWidth }) {
   return (
     <figure className="sk-figure" style={maxWidth ? { maxWidth, margin: "1.75rem auto" } : undefined}>
@@ -361,7 +377,7 @@ export function FirstSkillMdArticle() {
         </p>
 
         <p style={{ marginTop: "1rem" }}>
-          To keep <code>SKILL.md</code> lightweight and modular, we place detailed instructions and templates into a <code>references</code> subfolder. This pattern is called <strong>progressive disclosure</strong> — reference files are loaded by the agent only when needed.
+          To keep <code>SKILL.md</code> lightweight and modular, we place detailed instructions and templates into a <code>references</code> subfolder. This pattern is called <TermTip tip={progressiveDisclosureTip}><strong>progressive disclosure</strong></TermTip> — reference files are loaded by the agent only when needed.
         </p>
 
         <p style={{ marginTop: "1rem" }}>
