@@ -48,6 +48,7 @@
   /* Typography Families */
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
+  --font-article: nyt-imperial, georgia, 'times new roman', times, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Geometry & Radius */
@@ -1089,7 +1090,7 @@ body[data-theme='dark'] .article-byline__share-btn--copied {
 .article-content {
   max-width: var(--article-width);
   margin: 0 auto;
-  font-family: var(--font-body);
+  font-family: var(--font-article);
   font-size: 1.1875rem;
   line-height: 1.75;
   color: var(--text);
@@ -1253,7 +1254,7 @@ body[data-theme='dark'] .article-byline__share-btn--copied {
 .article-content figcaption,
 .article-content .figure-caption {
   margin-top: 0.75rem;
-  font-family: var(--font-body);
+  font-family: var(--font-article);
   font-size: 1.05rem;
   font-style: italic;
   color: var(--text-soft);
