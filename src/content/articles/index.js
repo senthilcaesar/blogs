@@ -30,10 +30,13 @@ import { HowCompaniesBuildOwnAiArticle } from './HowCompaniesBuildOwnAiArticle';
 import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiAgentsArticle';
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 import { SkillsOverMcpArticle } from './SkillsOverMcpArticle';
+import { SemanticModelOntologyKnowledgeGraphArticle } from './SemanticModelOntologyKnowledgeGraphArticle';
 
 export const articleRegistry = {
   'formulating-thoughts-to-expressing-them-clearly':
     ExpressingThoughtsClearlyArticle,
+  'semantic-model-vs-ontology-vs-knowledge-graph':
+    SemanticModelOntologyKnowledgeGraphArticle,
   'skills-over-mcp': SkillsOverMcpArticle,
   'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,

@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Semantic Model vs Ontology vs Knowledge Graph',
+    slug: 'semantic-model-vs-ontology-vs-knowledge-graph',
+    category: 'Data',
+    tags: ['semantic-layer', 'ontology', 'knowledge-graph', 'ai', 'data'],
+    excerpt:
+      'Semantic models, ontologies and knowledge graphs all add business context to raw data, but they are complementary tools built for different jobs.',
+    image: imageUrl('semantic-model-ontology-knowledge-graph-cover.jpg'),
+    imageFit: 'contain',
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/semantic-model-vs-ontology-vs-knowledge-graph',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Data & AI',
+      summary:
+        'What each of the three does, a concrete example of each, and how they work together to give an enterprise AI agent reliable context.',
+    },
+  },
+  {
     title: 'Skills over MCP: Shipping the Manual with the Tools',
     slug: 'skills-over-mcp',
     category: 'AI',
