@@ -345,6 +345,12 @@ export function SkillsOverMcpArticle() {
           <a href="https://www.bloomberg.com/company/stories/skills-over-mcp-how-bloomberg-helped-standardize-agent-skills-at-scale/" target="_blank" rel="noreferrer">
             Skills over MCP: How Bloomberg Helped Standardize Agent Skills at Scale
           </a>
+          <a href="https://www.bloomberg.com/company/press/bloomberg-launches-enterprise-mcp-to-seamlessly-connect-bloomberg-data-with-clients-enterprise-ai-applications/" target="_blank" rel="noreferrer">
+            Bloomberg Launches Enterprise MCP to Seamlessly Connect Bloomberg Data with Clients&apos; Enterprise AI Applications
+          </a>
+          <a href="https://webreprints.djreprints.com/2708072.html" target="_blank" rel="noreferrer">
+            Dow Jones reprint
+          </a>
         </div>
         <ul className="bullet-list" style={{ marginTop: '1rem' }}>
           <li>
