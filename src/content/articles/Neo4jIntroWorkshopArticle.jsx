@@ -1398,6 +1398,19 @@ export function Neo4jIntroWorkshopArticle() {
               GraphRAG applications with Neo4j)
             </span>
           </li>
+          <li>
+            <a
+              href='https://www.amazon.com/Knowledge-Graphs-Action-Alessandro-Negro/dp/1633439895/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://www.amazon.com/Knowledge-Graphs-Action-Alessandro-Negro/dp/1633439895/
+            </a>
+            <span style={{ color: 'var(--text-soft)' }}>
+              {' '}
+              (Book: <em>Knowledge Graphs and LLMs in Action</em>)
+            </span>
+          </li>
         </ul>
       </section>
 
