@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Traces: The New Type of Data for AI Agents',
+    slug: 'traces',
+    category: 'AI',
+    tags: ['ai', 'agents', 'observability', 'traces', 'evals'],
+    excerpt:
+      'Agents fail quietly, with confident answers that are wrong. Traces record every step so you can see why, and they need to be ingested, stored and queried differently.',
+    image: imageUrl('traces-hierarchy.jpg'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/traces',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Agent Observability',
+      summary:
+        'What a trace is, how runs roll up into traces, threads and trajectories, and the simple loop teams use to turn traces into fixes.',
+    },
+  },
+  {
     title: 'Semantic Model vs Ontology vs Knowledge Graph',
     slug: 'semantic-model-vs-ontology-vs-knowledge-graph',
     category: 'Data',
