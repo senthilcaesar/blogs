@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belgrano&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600;700&display=swap');
 
 /* ─────────────────────────────────────────────
    Editorial Paper Design System
-   Warm cream + rust, Fraunces display / Source Sans text
+   Warm cream + rust, Belgrano display / Source Sans text
    Dual Theme: Paper (Light) & Ink (Dark)
 ───────────────────────────────────────────── */
 :root {
@@ -21,7 +21,9 @@
   --text: #3d2f24; /* Warm dark brown — body ink */
   --text-soft: #5b4838; /* Secondary ink */
   --text-muted: #8b7962; /* Meta / captions */
-  --card-title-color: #3d2f24;
+  --card-title-color: #4f4c49; /* Muted warm charcoal */
+  --card-title-box-bg: #eef0f2; /* Subtle aluminium grey */
+  --card-title-box-border: #dde0e4;
   --subheading-color: #3d2f24;
   --link-color: #3d2f24;
   --link-hover-color: #b0430f;
@@ -43,10 +45,10 @@
 
   /* Card Shadow System — paper is flat, shadows stay whisper-quiet */
   --card-shadow-resting: 0 1px 2px rgba(61, 47, 36, 0.04);
-  --card-shadow-hover: 0 6px 20px -6px rgba(61, 47, 36, 0.14);
+  --card-shadow-hover: 0 4px 14px -6px rgba(61, 47, 36, 0.09);
 
   /* Typography Families */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Belgrano', Georgia, 'Times New Roman', serif;
   --font-body: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
   --font-article: nyt-imperial, georgia, 'times new roman', times, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -69,6 +71,12 @@
   --article-width: 880px; /* The reading column */
 }
 
+/* Article pages in light mode sit on milky white instead of cream paper */
+body:not([data-theme='dark']):has(.article-page) {
+  --bg: #fcfbf8;
+  --surface: rgba(252, 251, 248, 0.9);
+}
+
 /* Dark theme — Catppuccin Frappé (https://catppuccin.com/palette/) */
 body[data-theme='dark'] {
   color-scheme: dark;
@@ -87,6 +95,8 @@ body[data-theme='dark'] {
   --text-soft: #b5bfe2; /* Subtext 1 */
   --text-muted: #a5adce; /* Subtext 0 */
   --card-title-color: #c6d0f5;
+  --card-title-box-bg: rgba(198, 208, 245, 0.07);
+  --card-title-box-border: rgba(198, 208, 245, 0.16);
   --subheading-color: #c6d0f5;
   --link-color: #c6d0f5;
   --link-hover-color: #ef9f76; /* Peach */
@@ -684,12 +694,12 @@ body[data-theme='light'] .filter-pill.is-active {
   line-height: 1.3;
   letter-spacing: -0.012em;
   color: var(--card-title-color);
-  margin-bottom: 8px;
-  transition: color 150ms ease;
-}
-
-.post-card:hover .post-card__title {
-  color: var(--accent);
+  margin-bottom: 12px;
+  /* Title sits in its own softly tinted box */
+  padding: 10px 12px;
+  background: var(--card-title-box-bg);
+  border: 1px solid var(--card-title-box-border);
+  border-radius: var(--radius-md);
 }
 
 .post-card__excerpt {
@@ -1364,7 +1374,7 @@ body[data-theme='dark'] .video-panel__icon {
 }
 
 .post-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   border-color: var(--border-strong);
   box-shadow: var(--card-shadow-hover);
 }
@@ -2543,3 +2553,4 @@ body[data-theme='dark'] .article-content .code-copy-btn:hover {
   background: #414559; /* Surface 0 */
   color: var(--code-fg);
 }
+
