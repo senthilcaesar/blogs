@@ -164,6 +164,26 @@ function LabelTerm({ children }) {
   );
 }
 
+const knowledgeGraphExample =
+  'Capital One Bank is now investing resources in curating its unstructured data. One key tool that has been helpful is knowledge graphs, which characterize and map the relationships between data entities such as people, concepts, and objects, to identify, for example, which customers use which banking products.';
+
+function KnowledgeGraphTerm({ children }) {
+  const tooltipId = useId();
+
+  return (
+    <span
+      className='term-tip term-tip--start'
+      tabIndex={0}
+      aria-describedby={tooltipId}
+    >
+      {children}
+      <span id={tooltipId} role='tooltip' className='term-tip__bubble'>
+        {knowledgeGraphExample}
+      </span>
+    </span>
+  );
+}
+
 const hackathonUrl = 'https://graphacademy.neo4j.com/courses/workshop-hackathon';
 
 const hackathonSummary =
@@ -405,7 +425,11 @@ export function Neo4jIntroWorkshopArticle() {
           What is a Knowledge Graph?
         </h3>
         <p style={{ marginTop: '0.75rem' }}>
-          A <strong>knowledge graph</strong> is an organized representation of
+          A{' '}
+          <strong>
+            <KnowledgeGraphTerm>knowledge graph</KnowledgeGraphTerm>
+          </strong>{' '}
+          is an organized representation of
           real-world entities, their attributes, and the relationships between
           them, giving you an interconnected understanding of your information.
         </p>
