@@ -4,103 +4,249 @@ export function TracesArticle() {
   return (
     <>
       <p className="article-lead">
-        When a web server fails, it usually tells you: a stack trace, a 500 error, a red line in the
-        logs. When an AI agent fails, it often returns a polite, well-formatted, confident answer that
-        happens to be wrong. Nothing crashed. The only way to see what went wrong is to replay what
-        the agent actually did, step by step. That record is called a trace, and it is quietly
-        becoming a new kind of data that teams have to ingest, store and query.
+        When a traditional application fails, developers can usually find clues in error messages,
+        server logs, or stack traces. For example, a web server might return a 500 error, indicating
+        that something went wrong.
       </p>
 
       <section className="article-panel">
-        <h2>What a trace is</h2>
         <p>
-          Simply put, a trace is the full record of one request through an agent: the exact inputs,
-          the exact outputs, and the order in which everything happened. Picture a flight recorder.
-          It doesn&apos;t tell you the plane crashed (you already know that); it tells you what the
-          pilot saw and did in the minutes before.
+          AI agents are different. An agent can complete every technical step successfully and still
+          produce an incorrect answer. There may be no error message, no failed request, and nothing
+          unusual in the application logs.
         </p>
         <p>
-          Take a small example we&apos;ll stay with. A customer asks a support agent, &ldquo;Can I get
-          a refund for order 1182?&rdquo; The agent looks up the order, checks the refund policy, and
-          replies, &ldquo;Yes, you&apos;ll get $40 back.&rdquo; The order was actually $60. Every
-          step returned successfully. So where did the $20 go?
+          So, how do you figure out what went wrong?
+        </p>
+        <p>
+          You need to look beyond the final answer and examine every step the agent took to produce
+          it. This is where agent tracing comes in.
         </p>
       </section>
 
       <section className="article-panel">
-        <h2>From runs to trajectories</h2>
+        <h2>What Is an Agent Trace?</h2>
         <p>
-          To answer that, it helps to know that agent data nests in four layers, each built from the
-          one below it.
+          An agent trace is a detailed record of everything an AI agent does while handling a
+          request. It captures the sequence of operations, model interactions, tool calls, inputs,
+          and outputs that lead to the final response.
         </p>
-        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+        <p>
+          Think of it as a flight recorder in an aircraft. A flight recorder captures what happened
+          during a flight, helping investigators understand how events unfolded. Similarly, an agent
+          trace records what happened during an agent&apos;s execution, helping developers understand
+          how it arrived at a particular answer.
+        </p>
+        <p>Let&apos;s take a simple example.</p>
+        <p>A customer asks a support agent:</p>
+        <blockquote>&ldquo;Can I get a refund for order 1182?&rdquo;</blockquote>
+        <p>To answer this question, the agent:</p>
+        <ul className="bullet-list" style={{ marginTop: '0.75rem' }}>
+          <li>Looks up order 1182 in the order management system.</li>
+          <li>Retrieves the order details.</li>
+          <li>Checks the refund policy.</li>
+          <li>Calculates the eligible refund amount.</li>
+          <li>Responds to the customer.</li>
+        </ul>
+        <p style={{ marginTop: '1rem' }}>
+          The agent replies: &ldquo;Yes, you&apos;ll receive a refund of $40.&rdquo;
+        </p>
+        <p>
+          However, the customer actually paid $60.
+        </p>
+        <p>
+          The interesting part is that every operation completed successfully. The order lookup
+          worked, the policy was retrieved, and the agent generated a response. Yet, the final answer
+          was incorrect.
+        </p>
+        <p>
+          Without a trace, you only see the wrong answer. With a trace, you can examine each step and
+          discover that the order contained two items, but the agent considered only one when
+          calculating the refund.
+        </p>
+        <p>
+          An agent trace helps you understand not just what the agent answered, but how it arrived
+          at that answer.
+        </p>
+      </section>
+
+      <section className="article-panel">
+        <h2>Understanding Runs, Traces, Threads, and Trajectories</h2>
+        <p>
+          To understand how an AI agent operates, it helps to look at four related concepts: runs,
+          traces, threads, and trajectories. Each provides a different perspective on the
+          agent&apos;s execution.
+        </p>
+        <p>Let&apos;s continue with our refund example.</p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>1. Run &ndash; An individual operation</h3>
+        <p>
+          A run represents one unit of work performed by the agent. It could be an LLM call, a tool
+          invocation, or another operation.
+        </p>
+        <p>
+          For example, retrieving order details from the order management system is one run.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>2. Trace &ndash; The complete execution of one request</h3>
+        <p>
+          A trace brings together all the individual runs involved in handling a request. These runs
+          are connected in a nested execution tree, showing how one operation leads to another.
+        </p>
+        <p>
+          For example, retrieving the order, checking the refund policy, calculating the amount, and
+          generating the response together form a trace.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>3. Thread &ndash; The complete conversation</h3>
+        <p>
+          A thread groups multiple traces belonging to the same conversation.
+        </p>
+        <p>
+          For example, the customer&apos;s original refund request and subsequent follow-up messages
+          belong to the same thread, with each interaction potentially generating a separate trace.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>4. Trajectory &ndash; The chronological path of agent behaviour</h3>
+        <p>
+          A trajectory presents the agent&apos;s activity across a thread in a simplified,
+          chronological format. It brings together customer messages, agent responses, tool calls,
+          and tool results, making it easier to understand how the conversation unfolded.
+        </p>
+        <p>
+          Unlike a trace, which exposes the detailed execution structure, a trajectory provides a
+          more readable view of the agent&apos;s actions and interactions across the session.
+        </p>
+
+        <div style={{ margin: '2rem 0' }}>
+          <img
+            src={hierarchyImg}
+            alt="Runs roll up into traces, traces into threads, and threads into trajectories. Traces are stored in a database for querying."
+            style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+          />
+        </div>
+
+        <p><strong>In simple terms:</strong></p>
+        <ul className="bullet-list" style={{ marginTop: '0.75rem' }}>
           <li>
-            <strong>Run:</strong> one single step, such as one call to the model or one tool call. In
-            our example, &ldquo;look up order 1182&rdquo; is a run.
+            <strong>Run:</strong> An individual operation.
           </li>
           <li>
-            <strong>Trace:</strong> all the runs for one request, in order and nested inside each
-            other. The whole refund answer, from question to reply, is one trace.
+            <strong>Trace:</strong> The complete execution of one request.
           </li>
           <li>
-            <strong>Thread:</strong> several traces strung together into one conversation. If the
-            customer replies &ldquo;That&apos;s wrong, I paid $60,&rdquo; the next trace joins the
-            same thread.
+            <strong>Thread:</strong> Multiple traces belonging to one conversation.
           </li>
           <li>
-            <strong>Trajectory:</strong> the path the agent takes across all those steps over time,
-            the shape of its behaviour rather than any single answer.
+            <strong>Trajectory:</strong> A chronological view of agent behaviour across that conversation.
           </li>
         </ul>
       </section>
 
-      <div style={{ margin: '2rem 0' }}>
-        <img
-          src={hierarchyImg}
-          alt="Runs roll up into traces, traces into threads, and threads into trajectories. Traces are stored in a database for querying."
-          style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
-        />
-      </div>
-
       <section className="article-panel">
-        <h2>Why traces are a new type of data</h2>
+        <h2>Why Are Agent Traces Important?</h2>
         <p>
-          Traditional monitoring looks for errors and slow responses. Agent failures are different:
-          they are <em>semantic</em>, meaning the answer is wrong in what it says, not in whether it
-          arrived. Our refund trace has no error code and normal latency. The mistake only shows up
-          when you read the runs and notice, say, that the order lookup returned two line items and
-          the model only added up one.
+          Traditional application monitoring focuses primarily on technical metrics such as response
+          time, server availability, failed requests, and error rates.
         </p>
         <p>
-          That changes the questions you ask of your data. Instead of &ldquo;which requests took over
-          two seconds?&rdquo; you want &ldquo;which traces quoted a refund that didn&apos;t match the
-          order total?&rdquo; or &ldquo;which threads ended with the customer correcting the
-          agent?&rdquo; In practice, that means storing traces whole, with their full inputs and
-          outputs, so they can be searched by meaning and not just by numbers.
+          AI agents introduce a different challenge: an application can work perfectly from a
+          technical perspective while producing incorrect results.
+        </p>
+        <p>Consider our refund example:</p>
+        <ul className="bullet-list" style={{ marginTop: '0.75rem' }}>
+          <li>The API call succeeded.</li>
+          <li>The refund policy was retrieved.</li>
+          <li>The AI model responded successfully.</li>
+          <li>The response was delivered within the expected time.</li>
+        </ul>
+        <p style={{ marginTop: '1rem' }}>
+          From a traditional monitoring perspective, everything looks healthy.
+        </p>
+        <p>
+          But the customer received the wrong refund amount.
+        </p>
+        <p>
+          This is a semantic failure: the system successfully produced an answer, but the meaning or
+          content of that answer was incorrect.
+        </p>
+        <p>
+          Agent traces help uncover these failures by allowing teams to investigate questions such as:
+        </p>
+        <ul className="bullet-list" style={{ marginTop: '0.75rem' }}>
+          <li>Did the agent retrieve the correct information?</li>
+          <li>Did it select the right tool?</li>
+          <li>Did it use the retrieved information correctly?</li>
+          <li>At which step did something go wrong?</li>
+          <li>Are similar mistakes happening across other requests?</li>
+        </ul>
+        <p style={{ marginTop: '1rem' }}>
+          This changes how teams approach observability. Instead of looking exclusively at metrics and
+          error logs, they need to capture, store, inspect, and analyse the actual execution history
+          of their agents.
         </p>
       </section>
 
       <section className="article-panel">
-        <h2>How teams use them</h2>
-        <p>The working loop is short, and it repeats:</p>
-        <ol className="bullet-list" style={{ marginTop: '1rem' }}>
-          <li>
-            <strong>Look at a bunch of traces.</strong> Read real ones, not just dashboards. Patterns
-            show up after a few dozen.
-          </li>
-          <li>
-            <strong>Identify issues.</strong> Name what keeps going wrong, such as &ldquo;sums only the
-            first line item.&rdquo;
-          </li>
-          <li>
-            <strong>Make changes.</strong> Fix the prompt, the tool or the data, then go back to step
-            one and check the new traces.
-          </li>
-        </ol>
+        <h2>How Teams Use Agent Traces to Improve AI Agents</h2>
         <p>
-          Back to order 1182. Nobody would have found the missing $20 by watching error rates. They
-          found it by opening the trace and reading it. With agents, reading the record isn&apos;t a
-          last resort. It&apos;s the main way to debug.
+          Collecting traces is only the first step. Their real value comes from using them to
+          understand failures and improve agent behaviour.
+        </p>
+        <p>Think of it as a continuous improvement cycle:</p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>1. Observe &ndash; Examine real agent interactions</h3>
+        <p>
+          Review traces generated from actual user requests. Examine what the agent did, which tools
+          it used, what information it retrieved, and how it arrived at its final answer. Reviewing
+          multiple traces helps uncover recurring patterns that may not be visible from a single
+          interaction.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>2. Identify &ndash; Find recurring problems</h3>
+        <p>
+          Look for patterns in the agent&apos;s behaviour. For example, you might discover that the
+          refund agent consistently considers only the first item in an order instead of calculating
+          the total for all items.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>3. Improve &ndash; Fix the underlying problem</h3>
+        <p>
+          Once you understand the cause, make targeted changes. This could involve improving the
+          system prompt, correcting the tool implementation, refining the retrieved data, or
+          changing the agent&apos;s workflow.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>4. Validate &ndash; Check whether the fix worked</h3>
+        <p>
+          Run the agent again using the same scenarios that previously exposed the problem. Compare
+          the new traces and evaluation results with the earlier ones to verify that the agent behaves
+          correctly and that the changes haven&apos;t introduced new problems.
+        </p>
+        <p>Then repeat the cycle as new traces become available.</p>
+        <p>
+          This creates a continuous feedback loop in which every interaction becomes an opportunity
+          to understand and improve agent behaviour.
+        </p>
+      </section>
+
+      <section className="article-panel">
+        <h2>The Bigger Picture</h2>
+        <p>
+          As AI agents become part of business applications and critical workflows, understanding
+          their behaviour becomes just as important as monitoring their technical performance.
+        </p>
+        <p>
+          Traditional logs tell us whether an application encountered an error. Agent traces help us
+          understand whether an agent actually did the right thing.
+        </p>
+        <p>The distinction is important:</p>
+        <blockquote style={{ fontStyle: 'normal', fontWeight: 600 }}>
+          With AI agents, successful execution does not necessarily mean successful outcomes.
+        </blockquote>
+        <p>
+          Agent traces provide the visibility needed to understand, debug, evaluate, and continuously
+          improve how AI agents behave.
         </p>
       </section>
 
