@@ -103,6 +103,17 @@ export function TracesArticle() {
           last resort. It&apos;s the main way to debug.
         </p>
       </section>
+
+      <section className="article-panel">
+        <h2>References</h2>
+        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+          <li>
+            <a href="https://www.langchain.com/resources/agent-observability" target="_blank" rel="noreferrer">
+              Agent Observability (LangChain)
+            </a>
+          </li>
+        </ul>
+      </section>
     </>
   );
 }
