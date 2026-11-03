@@ -64,10 +64,6 @@ export function TracesArticle() {
           discover that the order contained two items, but the agent considered only one when
           calculating the refund.
         </p>
-        <p>
-          An agent trace helps you understand not just what the agent answered, but how it arrived
-          at that answer.
-        </p>
       </section>
 
       <section className="article-panel">
@@ -235,10 +231,6 @@ export function TracesArticle() {
         <p>
           As AI agents become part of business applications and critical workflows, understanding
           their behaviour becomes just as important as monitoring their technical performance.
-        </p>
-        <p>
-          Traditional logs tell us whether an application encountered an error. Agent traces help us
-          understand whether an agent actually did the right thing.
         </p>
         <p>The distinction is important:</p>
         <blockquote style={{ fontStyle: 'normal', fontWeight: 600 }}>
