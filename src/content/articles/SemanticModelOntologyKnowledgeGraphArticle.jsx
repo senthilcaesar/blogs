@@ -34,6 +34,32 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The business-friendly interface to your data.
         </p>
+        <p style={{ marginTop: '1rem' }}>
+          <strong>Why it matters:</strong> Before an executive business review, your VP of Sales asks an AI
+          assistant, &ldquo;What was net revenue for our top enterprise accounts last quarter?&rdquo; In seconds,
+          the agent returns a polished chart. Unfortunately, the numbers don&rsquo;t match the finance report.
+          Why? Because the agent counted cancelled orders as revenue and pulled from an unvalidated staging
+          table.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The agent didn&rsquo;t fail because of the model, or because it couldn&rsquo;t translate a user question
+          into a query. It failed because it didn&rsquo;t understand your business. The real kicker is that this
+          understanding usually already exists in the form of a semantic model in a Looker, dbt, Snowflake,
+          Databricks, or SAP system. But because each definition stays locked inside its own tool, every agent
+          guesses at it&hellip; and often gets it wrong.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          By grounding your AI agents in those models, they get the same business definitions your analysts rely
+          on, so their answers line up with the numbers your business trusts.
+        </p>
+        <div className="article-panel article-panel--accent">
+          <p>
+            <strong>One option:</strong> bring the semantic models from all of those tools into one{' '}
+            <mark>context graph</mark>, a connected map of your metric definitions, data sources, and business
+            rules that any agent can query. Reconcile conflicting definitions along the way, so every agent draws
+            on a single, trusted version of each metric.
+          </p>
+        </div>
       </section>
 
       <section className="article-panel">
