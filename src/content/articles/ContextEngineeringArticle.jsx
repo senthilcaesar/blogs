@@ -210,6 +210,15 @@ export function ContextEngineeringArticle() {
               GraphRAG: How AI Answers Complex Questions on Connected Data (ByteByteGo)
             </a>
           </li>
+          <li>
+            <a
+              href="https://www.langchain.com/blog/context-engineering-deep-agents-remember"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Context Engineering with Deep Agents: How To Remember Without Keeping Everything In Context (LangChain Blog)
+            </a>
+          </li>
         </ul>
       </section>
     </>

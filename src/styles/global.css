@@ -75,8 +75,8 @@
 
 /* Article pages in light mode sit on milky white instead of cream paper */
 body:not([data-theme='dark']):has(.article-page) {
-  --bg: #fcfbf8;
-  --surface: rgba(252, 251, 248, 0.9);
+  --bg: #fffefd;
+  --surface: rgba(255, 254, 253, 0.9);
 }
 
 /* Dark theme — Catppuccin Frappé (https://catppuccin.com/palette/) */
