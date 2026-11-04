@@ -59,8 +59,9 @@ export function getProjectTechStack() {
   stack.push({
     key: 'fonts',
     icon: 'type',
-    name: 'Google Fonts',
-    description: 'Belgrano for headings, Source Sans 3 for body text and IBM Plex Mono for code.',
+    name: 'Typography',
+    description:
+      'Google Fonts: Libre Baskerville for the logo, Belgrano for headings, Source Sans 3 for interface text, Plus Jakarta Sans for the sidebar and IBM Plex Mono for code. Article text is set in Georgia.',
     tone: 'rose',
     size: 'wide',
   });
