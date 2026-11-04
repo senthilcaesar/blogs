@@ -5,10 +5,12 @@ import {
   Copy,
   Database,
   Layers,
+  LayoutPanelLeft,
   Palette,
   Route,
   ShieldCheck,
   Sparkles,
+  Type,
   X,
   Zap,
 } from 'lucide-react';
@@ -30,6 +32,8 @@ const iconMap = {
   cloud: Cloud,
   shield: ShieldCheck,
   database: Database,
+  layout: LayoutPanelLeft,
+  type: Type,
 };
 
 const iconSizeFor = { feature: 26, wide: 20, small: 18 };

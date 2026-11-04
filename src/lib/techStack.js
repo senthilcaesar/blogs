@@ -44,11 +44,32 @@ export function getProjectTechStack() {
     });
   }
 
+  if (dependencies['@mui/material']) {
+    stack.push({
+      key: 'mui',
+      icon: 'layout',
+      name: `Material UI ${major(dependencies['@mui/material'])}`,
+      description:
+        'Builds the topics sidebar and header search, styled with Emotion and themed from the site’s own colour tokens so both follow day and night mode.',
+      tone: 'sky',
+      size: 'wide',
+    });
+  }
+
+  stack.push({
+    key: 'fonts',
+    icon: 'type',
+    name: 'Google Fonts',
+    description: 'Belgrano for headings, Source Sans 3 for body text and IBM Plex Mono for code.',
+    tone: 'rose',
+    size: 'wide',
+  });
+
   if (dependencies['react-router-dom']) {
     stack.push({
       key: 'router',
       icon: 'route',
-      name: 'React Router',
+      name: `React Router ${major(dependencies['react-router-dom'])}`,
       description: 'Handles hash-based client navigation for the home page and article routes on GitHub Pages.',
       tone: 'violet',
       size: 'small',
@@ -70,7 +91,7 @@ export function getProjectTechStack() {
     key: 'css',
     icon: 'palette',
     name: 'Vanilla CSS',
-    description: 'Custom CSS tokens and component classes define the design system without external UI framework overhead.',
+    description: 'Hand-written CSS tokens and classes style the cards, articles and layout; Material UI reads the same tokens.',
     tone: 'emerald',
     size: 'small',
   });
@@ -78,8 +99,8 @@ export function getProjectTechStack() {
   stack.push({
     key: 'motion',
     icon: 'sparkles',
-    name: 'Native CSS Motion',
-    description: 'Smooth hover micro-interactions, modal dialog physics, and progress indicators built with pure CSS.',
+    name: 'CSS Motion',
+    description: 'Hover effects, the modal entrance and the reading progress bar use CSS transitions; Material UI adds tooltips and ripples.',
     tone: 'cyan',
     size: 'small',
   });
@@ -100,7 +121,7 @@ export function getProjectTechStack() {
       key: 'tests',
       icon: 'shield',
       name: 'Vitest',
-      description: 'Blazing-fast test runner validating routing, search filtering, comment hierarchy, and theme persistence.',
+      description: 'Runs the test suite with Testing Library, covering routing, search, category filters and comments.',
       tone: 'lime',
       size: 'small',
     });
@@ -113,7 +134,7 @@ export const TECH_STACK_TITLE = 'Architecture & Tech Stack';
 export const TECH_STACK_INTRO =
   'The modern tools, cloud storage, and libraries powering this blog.';
 export const TECH_STACK_SUMMARY =
-  'Client-side React 19 App with Firebase Cloud Firestore Realtime Backend';
+  `Client-side React ${major(packageJson.dependencies?.react)} app with Material UI and a Firebase Cloud Firestore realtime backend`;
 
 /**
  * Flattens the tech stack into plain text for the modal's copy button.

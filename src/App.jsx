@@ -1,10 +1,8 @@
-import { LayoutGrid, LayoutList } from 'lucide-react';
 import { startTransition, useDeferredValue, useEffect, useState } from 'react';
 import { HashRouter, Navigate, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import { CategoryFilters } from './components/CategoryFilters';
 import { Header } from './components/Header';
 import { PostGrid } from './components/PostGrid';
-import { SearchBar } from './components/SearchBar';
 import { TechStackModal } from './components/TechStackModal';
 import { ToastHost } from './components/ToastHost';
 import { ArticleLayout } from './components/ArticleLayout';
@@ -17,10 +15,21 @@ import { getProjectTechStack } from './lib/techStack';
 
 const techStack = getProjectTechStack();
 
-function HomePage() {
-  const [query, setQuery] = useState('');
+const categoryCounts = categories.reduce((counts, category) => {
+  counts[category] =
+    category === 'All' ? posts.length : posts.filter((post) => post.category === category).length;
+  return counts;
+}, {});
+
+function HomePage({ query, setQuery, view }) {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [view, setView] = useState('grid');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    try {
+      return window.localStorage.getItem('sidebar-collapsed') === '1';
+    } catch {
+      return false;
+    }
+  });
   const deferredQuery = useDeferredValue(query);
   const visiblePosts = filterPosts(posts, deferredQuery, activeCategory);
 
@@ -46,50 +55,39 @@ function HomePage() {
     };
   }, []);
 
+  const toggleSidebar = () => {
+    setSidebarCollapsed((collapsed) => {
+      try {
+        window.localStorage.setItem('sidebar-collapsed', collapsed ? '0' : '1');
+      } catch {
+        // Storage can be unavailable (private mode); the toggle still works for this visit.
+      }
+      return !collapsed;
+    });
+  };
+
   return (
-    <div className="page-shell">
-      <section className="control-panel" id="articles">
-        <div className="panel-header">
-          <SearchBar
-            value={query}
-            onChange={(event) =>
+    <div className={`page-shell home-layout${sidebarCollapsed ? ' is-sidebar-collapsed' : ''}`}>
+      <aside className="home-sidebar">
+        <div className="home-sidebar__inner">
+          <CategoryFilters
+            categories={categories}
+            activeCategory={activeCategory}
+            counts={categoryCounts}
+            collapsed={sidebarCollapsed}
+            onToggleCollapsed={toggleSidebar}
+            onSelect={(category) =>
               startTransition(() => {
-                setQuery(event.target.value);
+                setActiveCategory(category);
               })
             }
-            onClear={() => startTransition(() => setQuery(''))}
           />
-          <div className="view-toggle" role="group" aria-label="View mode">
-            <button
-              className={`view-toggle__btn${view === 'list' ? ' is-active' : ''}`}
-              type="button"
-              title="List view"
-              onClick={() => setView('list')}
-            >
-              <LayoutList size={18} />
-            </button>
-            <button
-              className={`view-toggle__btn${view === 'grid' ? ' is-active' : ''}`}
-              type="button"
-              title="Grid view"
-              onClick={() => setView('grid')}
-            >
-              <LayoutGrid size={18} />
-            </button>
-          </div>
         </div>
-        <CategoryFilters
-          categories={categories}
-          activeCategory={activeCategory}
-          onSelect={(category) =>
-            startTransition(() => {
-              setActiveCategory(category);
-            })
-          }
-        />
-      </section>
+      </aside>
 
-      <PostGrid posts={visiblePosts} view={view} />
+      <div className="home-main" id="articles">
+        <PostGrid posts={visiblePosts} view={view} />
+      </div>
     </div>
   );
 }
@@ -113,10 +111,10 @@ function ArticlePage() {
   );
 }
 
-export function AppRoutes() {
+export function AppRoutes({ query = '', setQuery = () => {}, view = 'grid' }) {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage query={query} setQuery={setQuery} view={view} />} />
       <Route path="/posts/:slug" element={<ArticlePage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
@@ -126,6 +124,8 @@ export function AppRoutes() {
 function AppShell() {
   const { isDark, toggleTheme } = useTheme();
   const [isTechStackOpen, setIsTechStackOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const [view, setView] = useState('grid');
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -142,9 +142,20 @@ function AppShell() {
         isDark={isDark}
         onToggleTheme={toggleTheme}
         onOpenTechStack={() => setIsTechStackOpen(true)}
+        search={
+          pathname === '/'
+            ? {
+                value: query,
+                // Update the input synchronously; HomePage defers the filtering itself.
+                onChange: (event) => setQuery(event.target.value),
+                onClear: () => setQuery(''),
+              }
+            : null
+        }
+        viewToggle={pathname === '/' ? { value: view, onChange: setView } : null}
       />
       <main>
-        <AppRoutes />
+        <AppRoutes query={query} setQuery={setQuery} view={view} />
       </main>
       <TechStackModal
         isOpen={isTechStackOpen}
@@ -154,8 +165,8 @@ function AppShell() {
       <ToastHost />
       <footer className="site-footer" id="footer">
         <p>
-          Built for GitHub Pages with React 19, Vite 8, Lucide React, and
-          Vanilla CSS.
+          Built for GitHub Pages with React 19, Vite 8, Material UI, Lucide React,
+          and Firebase.
         </p>
       </footer>
     </div>

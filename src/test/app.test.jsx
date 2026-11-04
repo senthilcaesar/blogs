@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
-import App, { AppRoutes } from '../App';
+import App, { AppRoutes, AppShell } from '../App';
 
 function renderRoutes(initialEntries = ['/']) {
   return render(
@@ -19,7 +19,12 @@ describe('blog app', () => {
 
   it('renders posts from the shared data source and filters them by search query', async () => {
     const user = userEvent.setup();
-    renderRoutes();
+    // The search box lives in the header, so render the full shell rather than just the routes.
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <AppShell />
+      </MemoryRouter>,
+    );
 
     expect(
       screen.getByRole('heading', {
