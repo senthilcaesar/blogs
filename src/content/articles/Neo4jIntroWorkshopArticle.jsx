@@ -242,6 +242,7 @@ const tocGroups = [
     id: 'resources',
     label: 'Further reading',
     items: [
+      { id: 'books', label: 'Books' },
       { id: 'workshop', label: 'Workshop' },
       { id: 'video-resources', label: 'Video resources' },
     ],
@@ -1408,6 +1409,14 @@ export function Neo4jIntroWorkshopArticle() {
               https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/
             </a>
           </li>
+        </ul>
+      </section>
+
+      <section className='article-panel'>
+        <h3 id='books' className='sub-heading'>
+          Books
+        </h3>
+        <ul className='bullet-list' style={{ marginTop: '0.75rem' }}>
           <li>
             <a
               href='https://neo4j.com/essential-graphrag/'
@@ -1433,6 +1442,19 @@ export function Neo4jIntroWorkshopArticle() {
             <span style={{ color: 'var(--text-soft)' }}>
               {' '}
               (Book: <em>Knowledge Graphs and LLMs in Action</em>)
+            </span>
+          </li>
+          <li>
+            <a
+              href='https://neo4j.com/books/developers-guide-how-to-build-knowledge-graph/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://neo4j.com/books/developers-guide-how-to-build-knowledge-graph/
+            </a>
+            <span style={{ color: 'var(--text-soft)' }}>
+              {' '}
+              (Book: <em>Developer&apos;s Guide: How to Build a Knowledge Graph</em>)
             </span>
           </li>
         </ul>
