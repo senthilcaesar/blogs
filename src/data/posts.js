@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Benchmarking RAG Systems: A Hands-On Introduction',
+    slug: 'benchmarking-rag-systems',
+    category: 'AI',
+    tags: ['ai', 'rag', 'graphrag', 'evals', 'neo4j', 'python', 'benchmarking'],
+    excerpt:
+      'A wrong answer and a right one sound exactly alike. Learn how to score a RAG system on correctness, faithfulness and refusal, then benchmark vector RAG against GraphRAG on Neo4j in Python.',
+    image: imageUrl('rag-benchmark-pipeline.webp'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/benchmarking-rag-systems',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'RAG Evaluation',
+      summary:
+        'What to ask, how to score it, and how to tell a retrieval problem from a generation problem, with a step-by-step Python and Neo4j workshop comparing vector RAG and GraphRAG.',
+    },
+  },
+  {
     title: 'Traces: The New Type of Data for AI Agents',
     slug: 'traces',
     category: 'AI',

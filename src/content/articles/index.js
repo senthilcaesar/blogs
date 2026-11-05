@@ -31,12 +31,14 @@ import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiA
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 import { SkillsOverMcpArticle } from './SkillsOverMcpArticle';
 import { TracesArticle } from './TracesArticle';
+import { RagBenchmarkingArticle } from './RagBenchmarkingArticle';
 import { SemanticModelOntologyKnowledgeGraphArticle } from './SemanticModelOntologyKnowledgeGraphArticle';
 
 export const articleRegistry = {
   'formulating-thoughts-to-expressing-them-clearly':
     ExpressingThoughtsClearlyArticle,
   traces: TracesArticle,
+  'benchmarking-rag-systems': RagBenchmarkingArticle,
   'semantic-model-vs-ontology-vs-knowledge-graph':
     SemanticModelOntologyKnowledgeGraphArticle,
   'skills-over-mcp': SkillsOverMcpArticle,

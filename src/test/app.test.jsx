@@ -270,6 +270,32 @@ describe('blog app', () => {
     );
   });
 
+  it('renders the RAG benchmarking article with its workshop steps', () => {
+    renderRoutes(['/posts/benchmarking-rag-systems']);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /Benchmarking RAG Systems/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 2, name: /Hands-On Workshop/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: /Step 1: Start Neo4j/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: /Step 10: Run the benchmarks/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByRole('button', { name: /Copy retrievers.py/i }).length,
+    ).toBe(1);
+  });
+
   it('renders the Neo4j Intro Workshop article correctly', () => {
     renderRoutes(['/posts/neo4j-intro-workshop']);
 
