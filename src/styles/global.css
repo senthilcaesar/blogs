@@ -636,7 +636,7 @@ body:has(.home-layout) .site-header__inner {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: transparent;
+  background-color: var(--surface-soft);
 }
 
 .post-card--grid .post-card__thumb {
@@ -689,6 +689,11 @@ body:has(.home-layout) .site-header__inner {
   letter-spacing: -0.012em;
   color: var(--card-title-color);
   margin-bottom: 12px;
+  /* Title sits in its own softly tinted box */
+  padding: 10px 12px;
+  background: var(--card-title-box-bg);
+  border: 1px solid var(--card-title-box-border);
+  border-radius: var(--radius-md);
 }
 
 .post-card__excerpt {
@@ -724,7 +729,7 @@ body:has(.home-layout) .site-header__inner {
   margin-right: -16px;
   margin-bottom: -16px;
   padding: 10px 16px;
-  background: transparent;
+  background: var(--sidebar-bg); /* Same soft stone as the header and sidebar */
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -737,6 +742,7 @@ body:has(.home-layout) .site-header__inner {
 }
 
 .post-card:hover .post-card__footer {
+  background: color-mix(in srgb, var(--sidebar-bg) 94%, var(--text));
   border-top-color: var(--border-strong);
 }
 
@@ -2540,5 +2546,292 @@ body[data-theme='dark'] .article-content .code-copy-btn {
 body[data-theme='dark'] .article-content .code-copy-btn:hover {
   background: #414559; /* Surface 0 */
   color: var(--code-fg);
+}
+
+/* ─────────────────────────────────────────────
+   Mobile and tablet
+   Kept last so these win over the rules above. Selectors inside articles carry
+   .article-content because articles ship inline <style> blocks after this sheet.
+───────────────────────────────────────────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.header-secondary-button {
+  white-space: nowrap;
+}
+
+/* Too narrow for a centred search: the outer columns would squeeze the action
+   buttons and slide the view toggle behind the search box */
+@media (min-width: 821px) and (max-width: 1400px) {
+  .site-header__inner:has(.header-search) {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+}
+
+/* Tooltips open as a sheet along the bottom edge, so they can't run off the
+   screen or make the page scroll sideways */
+@media (max-width: 1100px) {
+  .article-content .term-tip__bubble,
+  .article-content .term-tip--start .term-tip__bubble {
+    position: fixed;
+    top: auto;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    z-index: 60;
+    width: auto;
+    max-width: none;
+    transform: translateY(4px);
+  }
+
+  .article-content .term-tip:hover .term-tip__bubble,
+  .article-content .term-tip:focus-visible .term-tip__bubble,
+  .article-content .term-tip:focus-within .term-tip__bubble {
+    transform: none;
+  }
+}
+
+/* Long posts: "On this page" stays reachable while reading. The wide-screen
+   sidebar takes over at 1380px, where each article hides this bar. */
+@media (max-width: 1379px) {
+  .article-content .toc-mobile {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    margin-inline: -16px;
+    padding: 0 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-content .toc-mobile summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    margin: 0;
+  }
+
+  .article-content .toc-mobile summary::before {
+    content: '▸';
+    font-size: 0.9rem;
+    transition: transform 150ms ease;
+  }
+
+  .article-content .toc-mobile[open] summary::before {
+    transform: rotate(90deg);
+  }
+
+  .article-content .toc-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .article-content .toc-mobile > nav {
+    max-height: 65vh;
+    padding-bottom: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .article-page .article-content h2[id],
+  .article-page .article-content h3[id] {
+    scroll-margin-top: 60px;
+  }
+}
+
+/* Touch screens: controls large enough to tap comfortably */
+@media (max-width: 1024px), (pointer: coarse) {
+  .icon-button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .cta-link,
+  .back-link,
+  .article-byline__share-btn,
+  .header-secondary-button {
+    min-height: 40px;
+  }
+
+  .back-link {
+    margin-bottom: 12px;
+  }
+
+  .view-toggle__btn,
+  .header-actions .view-toggle__btn {
+    min-width: 40px;
+  }
+
+  .theme-toggle__option {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+  }
+
+  .modal-close {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* 16px text stops iOS Safari zooming the page when a field gets focus */
+  .header-search .MuiInputBase-root {
+    height: 44px;
+    font-size: 1rem;
+  }
+
+  .comment-form input,
+  .comment-form textarea {
+    font-size: 1rem;
+  }
+
+  .home-sidebar .MuiChip-root {
+    height: 40px;
+  }
+
+  .home-sidebar .MuiIconButton-root {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand {
+    min-height: 40px;
+  }
+
+  .article-content .code-copy-btn {
+    min-height: 36px;
+  }
+
+  .article-content .toc-mobile .toc__link {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  /* Row one: brand, Tech Stack, theme. Row two: search and the view toggle. */
+  .site-header__inner:has(.header-search) {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: 8px;
+    row-gap: 10px;
+  }
+
+  .site-header__inner:has(.header-search) .header-actions {
+    display: contents;
+  }
+
+  .site-header__inner .brand {
+    grid-area: 1 / 1;
+  }
+
+  .site-header__inner .header-secondary-button {
+    grid-area: 1 / 2;
+  }
+
+  .site-header__inner .theme-toggle {
+    grid-area: 1 / 3;
+    justify-self: end;
+  }
+
+  .site-header__inner .header-search {
+    grid-area: 2 / 1 / 3 / 3;
+    order: 0;
+  }
+
+  .site-header__inner .view-toggle {
+    grid-area: 2 / 3;
+    justify-self: end;
+    height: 44px;
+  }
+
+  /* List view: a small square thumbnail leaves room for the text. Cards set
+     their fit inline, so !important is needed to fill the square. */
+  .post-card--list .post-card__thumb {
+    width: 88px;
+    height: 88px;
+    margin: 12px 0 0 12px;
+    align-self: flex-start;
+    border-radius: var(--radius-sm);
+    background-size: cover !important;
+  }
+
+  .header-search input,
+  .header-search input::placeholder {
+    text-overflow: ellipsis;
+  }
+
+  /* Tech Stack dialog: the buttons float in the corner so the title gets the full width */
+  .modal-header {
+    position: relative;
+    display: block;
+  }
+
+  .modal-header__actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .modal-header__badge {
+    white-space: nowrap;
+  }
+
+  .modal-header__title-group {
+    padding-top: 48px;
+  }
+
+  .post-card--list .post-card__body {
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .post-card--list .post-card__footer {
+    margin-left: -12px;
+    margin-right: -12px;
+    margin-bottom: -12px;
+    padding: 6px 12px;
+  }
+
+  /* Long file names and commands in running text wrap instead of overflowing */
+  .article-content p code,
+  .article-content li code {
+    overflow-wrap: anywhere;
+  }
+
+  /* Wide tables swipe sideways instead of squeezing text into thin columns */
+  .table-wrap table {
+    min-width: 540px;
+  }
+
+  .article-content .code-card .code-block {
+    padding: 14px 16px;
+  }
+
+  .article-content .code-card .code-block code {
+    font-size: 0.84rem;
+  }
+
+  .article-content .am-banner,
+  .article-content .am-part,
+  .article-content .rb-banner,
+  .article-content .rb-part {
+    padding: 1rem;
+  }
+}
+
+/* The pinned header would cover too much of a small or landscape phone screen */
+@media (max-width: 640px), (max-height: 500px) {
+  body:has(.home-layout) .site-header {
+    position: static;
+  }
+}
+
+@media (max-width: 360px) {
+  .theme-toggle__option {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 

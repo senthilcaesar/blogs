@@ -1,9 +1,15 @@
 // Code samples for AgentMemoryTutorialArticle.jsx. Python, YAML and repo Cypher are
 // condensed excerpts from github.com/johnymontana/road-to-agent-memory; "# ..." marks a gap.
 
-export const cloneLocal = String.raw`git clone https://github.com/johnymontana/road-to-agent-memory.git
-cd road-to-agent-memory
-cp .env.example .env
+export const checkTools = String.raw`git --version
+uv --version
+node --version
+make --version`;
+
+export const cloneRepo = String.raw`git clone https://github.com/johnymontana/road-to-agent-memory.git
+cd road-to-agent-memory`;
+
+export const makeSetup = String.raw`cp .env.example .env
 make setup`;
 
 export const envFile = String.raw`NEO4J_URI=<URI from your Aura credentials file>

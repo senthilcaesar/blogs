@@ -177,6 +177,22 @@ export function PythonOrmsSqlalchemyArticle() {
           display: flex;
           flex-direction: column;
           gap: 6px;
+          min-width: 0;
+        }
+
+        .mapping-col code {
+          overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 640px) {
+          .mapping-row {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 8px;
+          }
+
+          .mapping-arrow {
+            transform: rotate(90deg);
+          }
         }
 
         .mapping-arrow {

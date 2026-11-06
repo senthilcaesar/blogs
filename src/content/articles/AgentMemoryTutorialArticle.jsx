@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, Copy } from 'lucide-react';
 import {
-  cloneLocal,
+  checkTools,
+  cloneRepo,
   devModule1,
   devModule2,
   devModule3,
@@ -42,6 +43,7 @@ import {
   m5Hosted,
   m5Skill,
   makeCheck,
+  makeSetup,
   mondayPy,
   takeHome,
 } from './agentMemoryTutorialCode';
@@ -255,7 +257,7 @@ const tocGroups = [
     label: 'Part 2: Set up',
     items: [
       { id: 'need', label: 'What you need' },
-      { id: 'codespace', label: 'Step 1: Open the code' },
+      { id: 'clone', label: 'Step 1: Get the code' },
       { id: 'aura', label: 'Step 2: Create the database' },
       { id: 'openai', label: 'Step 3: Get an OpenAI key' },
       { id: 'env', label: 'Step 4: Fill in .env' },
@@ -431,7 +433,9 @@ function ArticleToc() {
   // The list is taller than most screens, so keep the current section in view.
   // This scrolls only the rail: scrollIntoView would also move the page.
   useEffect(() => {
-    const rail = document.querySelector('.toc-rail .toc');
+    const rail = document.querySelector(
+      mobileOpen ? '.toc-mobile > nav' : '.toc-rail .toc',
+    );
     const link = rail?.querySelector('.toc__link--active');
     if (!link) return;
     const offset =
@@ -439,7 +443,7 @@ function ArticleToc() {
     if (offset < 0 || offset > rail.clientHeight - link.offsetHeight) {
       rail.scrollTop += offset - rail.clientHeight / 2;
     }
-  }, [activeId]);
+  }, [activeId, mobileOpen]);
 
   return (
     <>
@@ -572,8 +576,8 @@ export function AgentMemoryTutorialArticle() {
             kinds of memory, with no setup needed.
           </li>
           <li>
-            <strong>Part 2: Set up</strong>: a free database, a cloud coding
-            environment and the app running in your browser.
+            <strong>Part 2: Set up</strong>: the tools, a copy of the code
+            on your computer, a free database and the app running in your browser.
           </li>
           <li>
             <strong>Modules 1 to 5</strong>: for each stage, what it adds, how
@@ -596,7 +600,8 @@ export function AgentMemoryTutorialArticle() {
           repository. The diagrams are slides from the workshop deck, and the
           code is condensed from the repository, where <code># ...</code> marks
           a gap. The steps follow the repository, which differs from the
-          recording in a few places. Expected results come from the repository's
+          recording in a few places. For example, the recording uses GitHub
+          Codespaces, and here you'll run everything on your own computer. Expected results come from the repository's
           November 2026 rehearsal notes, and yours may vary because model
           replies do.
         </p>
@@ -838,9 +843,9 @@ export function AgentMemoryTutorialArticle() {
           PART 2: SET UP
          ===================================================================== */}
       <PartBanner id='part-2' title='Part 2: Set Up'>
-        We'll get three things ready: the code, a database for the memory and an
-        AI model to talk to. This takes about 20 minutes, and most of it is
-        waiting.
+        We'll get three things ready: the code on your computer, a database for
+        the memory and an AI model to talk to. Allow about 30 minutes, or longer
+        if you need to install the tools first.
       </PartBanner>
 
       <section className='article-panel'>
@@ -849,8 +854,19 @@ export function AgentMemoryTutorialArticle() {
         </h3>
         <ul className='bullet-list'>
           <li>
-            <strong>A GitHub account</strong>, to run the code in your browser.
-            GitHub Codespaces has a monthly free allowance on personal accounts.
+            <strong>A Mac, Linux or Windows computer.</strong> On Windows, use{' '}
+            <ExternalLink href='https://learn.microsoft.com/windows/wsl/install'>
+              WSL
+            </ExternalLink>{' '}
+            (Windows Subsystem for Linux), because the project's commands expect a
+            Linux-style terminal.
+          </li>
+          <li>
+            <strong>A code editor</strong>, also called an IDE.{' '}
+            <ExternalLink href='https://code.visualstudio.com/'>
+              VS Code
+            </ExternalLink>{' '}
+            is free and is what this tutorial describes, but any editor works.
           </li>
           <li>
             <strong>A free Neo4j Aura account</strong>, for the database.
@@ -881,45 +897,79 @@ export function AgentMemoryTutorialArticle() {
       </section>
 
       <section className='article-panel'>
-        <h3 id='codespace' className='sub-heading'>
-          Step 1: Open the code
+        <h3 id='clone' className='sub-heading'>
+          Step 1: Get the code
         </h3>
         <p>
-          A <strong>Codespace</strong> is a ready-made computer in the cloud
-          that you use through your browser. It's the recommended route because
-          it installs every dependency for you.
+          <strong>Cloning</strong> means downloading your own copy of a repository.
+          Before we do that, your computer needs four small tools:
         </p>
+        <ul className='bullet-list'>
+          <li>
+            <ExternalLink href='https://git-scm.com/downloads'>Git</ExternalLink>
+            , which downloads the code.
+          </li>
+          <li>
+            <ExternalLink href='https://docs.astral.sh/uv/getting-started/installation/'>
+              uv
+            </ExternalLink>
+            , which installs the Python packages. The project needs Python 3.11
+            or later, and uv can fetch a suitable version for you.
+          </li>
+          <li>
+            <ExternalLink href='https://nodejs.org/'>Node.js</ExternalLink> (the
+            LTS version), which runs the web app.
+          </li>
+          <li>
+            <code>make</code>, which runs the project's commands. On a Mac,{' '}
+            <code>xcode-select --install</code> provides it along with Git. On
+            Linux and WSL, install it with your package manager.
+          </li>
+        </ul>
+        <p>
+          Open a terminal (<strong>Terminal</strong> on a Mac, your distribution's
+          terminal on Linux, or your Linux terminal in WSL) and check them. Each
+          line should print a version number. If one says "command not found",
+          install that tool, then open a new terminal and try again.
+        </p>
+        <CodeCard code={checkTools} lang='bash' file='Terminal' />
+        <p>
+          Now download the code and move into its folder. This creates a folder
+          called <code>road-to-agent-memory</code> inside whichever folder your
+          terminal is in.
+        </p>
+        <CodeCard code={cloneRepo} lang='bash' file='Terminal' />
+        <p>Next, open that folder in your editor:</p>
         <Steps>
           <li>
-            Open the{' '}
-            <ExternalLink href='https://github.com/johnymontana/road-to-agent-memory'>
-              road-to-agent-memory repository
-            </ExternalLink>
-            .
+            In VS Code, choose <strong>File &rarr; Open Folder</strong> and select{' '}
+            <code>road-to-agent-memory</code>. In another editor, use its
+            equivalent. Open that top folder itself, not a folder inside it.
           </li>
           <li>
-            Click the <strong>Open in GitHub Codespaces</strong> badge, then
-            create the Codespace.
+            If your editor asks whether you trust the folder, say yes. If it
+            offers to reopen in a container, say no.
           </li>
           <li>
-            Wait for the editor to load. If it asks whether you trust the code,
-            say yes. A setup script creates your <code>.env</code> file.
+            Open the editor's built-in terminal. In VS Code, that's{' '}
+            <strong>Terminal &rarr; New Terminal</strong>. From now on, use this
+            terminal. In an editor without one, keep using your own terminal in
+            the same folder.
           </li>
         </Steps>
-        <Note title='While you are in GitHub settings'>
+        <p>
+          Finally, create your private settings file and install the project. The
+          first run downloads a lot of packages, so it can take a few minutes.
+        </p>
+        <CodeCard code={makeSetup} lang='bash' file='Terminal 1' />
+        <Note title='What you should see'>
           <p>
-            A Codespace stops after 30 idle minutes by default. Setting{' '}
-            <strong>Default idle timeout</strong> to 90 minutes in your GitHub
-            Codespaces settings avoids surprises during long steps.
+            The output ends with a line starting <em>Seeded</em>, followed by row
+            counts such as <em>customers: 3 rows</em>. That means the sample
+            business data is ready. A message from npm about an audit is normal
+            and you can ignore it.
           </p>
         </Note>
-        <p>
-          Prefer your own machine? You'll need Python 3.11 or later,{' '}
-          <ExternalLink href='https://docs.astral.sh/uv/'>uv</ExternalLink>{' '}
-          (a Python package manager), Node.js and <code>make</code>. Expect more
-          environment issues than in a Codespace.
-        </p>
-        <CodeCard code={cloneLocal} lang='bash' file='Local setup only' />
       </section>
 
       <section className='article-panel'>
@@ -986,7 +1036,7 @@ export function AgentMemoryTutorialArticle() {
         <p>
           <code>.env</code> is a private settings file that Git is set up to
           ignore, so your secrets stay on your machine. Open it from the file
-          list on the left and fill in the values from your credentials file and
+          list in your editor and fill in the values from your credentials file and
           OpenAI. Your file has a few extra comment lines, which you can leave
           alone. Just change these lines:
         </p>
@@ -1015,16 +1065,16 @@ export function AgentMemoryTutorialArticle() {
           Step 5: Check and start
         </h3>
         <p>
-          Open a terminal (<strong>Terminal &rarr; New Terminal</strong> in the
-          Codespace menu) and check that everything can connect. This takes
-          under a minute.
+          In your terminal, check that everything can connect. This takes under a
+          minute.
         </p>
         <CodeCard code={makeCheck} lang='bash' file='Terminal 1' />
         <Note title='What you should see'>
           <p>
             Green ✅ marks and <em>All required checks passed</em>. A warning
-            that NAMS is optional is normal for now. If a line shows ❌, note its
-            name and see <strong>Troubleshooting</strong> at the end.
+            that NAMS is optional is normal for now. (One check mentions a "Codespaces
+            secret", which you can ignore, since your key is in{' '}
+            <code>.env</code>.) If a line shows ❌, note its name and see <strong>Troubleshooting</strong> at the end.
           </p>
         </Note>
         <p>Now start the first version of the agent:</p>
@@ -1032,11 +1082,8 @@ export function AgentMemoryTutorialArticle() {
         <p>
           This starts two programs: the agent's backend (the part that does the
           work behind the web page) on port 8000 and the web app on port 5173. A <strong>port</strong> is a numbered door on a
-          computer. When you see <em>Ready: http://localhost:5173 (module 1)</em>
-          , open the <strong>Ports</strong> tab next to your terminal and open
-          port 5173, labelled{' '}
-          <strong>SupportBot UI (chat / graph / trace)</strong>. If you're
-          working locally, go to <code>http://localhost:5173</code> instead, where{' '}
+          computer. When you see <em>Ready: http://localhost:5173 (module 1)</em>, open{' '}
+          <code>http://localhost:5173</code> in your browser. Here,{' '}
           <code>localhost</code> means your own computer.
         </p>
       </section>
@@ -1116,7 +1163,7 @@ export function AgentMemoryTutorialArticle() {
           </li>
           <li>
             <strong>Try it.</strong> Chat in the browser. Open a second terminal
-            (the <strong>+</strong> in the terminal panel) for the module's
+            (in VS Code, the <strong>+</strong> in the terminal panel) for the module's
             commands, and leave Terminal 1 running.
           </li>
           <li>
@@ -1144,17 +1191,13 @@ export function AgentMemoryTutorialArticle() {
         <p>
           The whole tutorial runs about 2.5 hours, and you don't have to do it in
           one sitting. Your memory graph lives in Aura, so it's still there when
-          you come back. To pause, press <strong>Ctrl+C</strong> in Terminal 1 and
-          stop your Codespace at{' '}
-          <ExternalLink href='https://github.com/codespaces'>
-            github.com/codespaces
-          </ExternalLink>
-          . To come back:
+          you come back, and your code and <code>.env</code> stay on your computer.
+          To pause, press <strong>Ctrl+C</strong> in Terminal 1. To come back:
         </p>
         <Steps>
           <li>
-            Open your Codespace again from that same page. Your files and{' '}
-            <code>.env</code> will still be there.
+            Open the <code>road-to-agent-memory</code> folder in your editor and
+            open a terminal.
           </li>
           <li>
             In the{' '}
@@ -1162,8 +1205,8 @@ export function AgentMemoryTutorialArticle() {
             , resume your instance if it has paused.
           </li>
           <li>
-            Run <code>make dev MODULE=N</code> with the module you're on, and
-            reopen port 5173 from the <strong>Ports</strong> tab.
+            Run <code>make dev MODULE=N</code> with the module you're on, and open{' '}
+            <code>http://localhost:5173</code>.
           </li>
         </Steps>
         <Note title='Two habits that save confusion'>
@@ -1556,8 +1599,7 @@ export function AgentMemoryTutorialArticle() {
             pipeline: spaCy, a fast statistical language library, goes first,
             then GLiNER, a small model that needs no special hardware and accepts
             your ontology, with the LLM kept for hard cases. The workshop skips
-            those because they use more memory and processing power than a
-            Codespace comfortably offers.
+            those because they use more memory and processing power.
           </p>
         </Note>
         <Figure
@@ -2289,7 +2331,7 @@ export function AgentMemoryTutorialArticle() {
               <tr>
                 <td>Chat turns take 20 seconds or more</td>
                 <td>
-                  Your database may be far from your Codespace. Run{' '}
+                  Your database may be far from you. Run{' '}
                   <code>make check</code>, which prints the time per query, and
                   consider an instance in a closer region.
                 </td>
@@ -2371,10 +2413,28 @@ export function AgentMemoryTutorialArticle() {
                 </td>
               </tr>
               <tr>
-                <td>A key saved as a Codespaces secret (in your GitHub settings) isn't visible</td>
+                <td>"command not found" for git, uv, node or make</td>
                 <td>
-                  Secrets added after a Codespace starts need a reload. Accept
-                  GitHub's offer to reload it.
+                  Install that tool using the links in Step 1, then open a new
+                  terminal, which picks up the newly installed command.
+                </td>
+              </tr>
+              <tr>
+                <td>"No such file" or "No rule to make target"</td>
+                <td>
+                  You're in the wrong folder. Run <code>cd road-to-agent-memory</code>{' '}
+                  from where you cloned it, or open a terminal from that folder in
+                  your editor.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <code>make dev</code> says port 5173 or 8000 is already in use
+                </td>
+                <td>
+                  Another program is using it, possibly an earlier run. Press{' '}
+                  <strong>Ctrl+C</strong> in any terminal still running the app,
+                  or close the other program, then try again.
                 </td>
               </tr>
             </tbody>
@@ -2480,17 +2540,14 @@ export function AgentMemoryTutorialArticle() {
           Clean up
         </h3>
         <p>
-          Save anything you want to keep first, since deleting a Codespace
-          removes its uncommitted files.
+          Save anything you want to keep first, such as a distilled skill in{' '}
+          <code>artifacts/distilled/</code>.
         </p>
         <Steps>
           <li>
-            <strong>Codespace:</strong> at{' '}
-            <ExternalLink href='https://github.com/codespaces'>
-              github.com/codespaces
-            </ExternalLink>
-            , open the <strong>···</strong> menu and choose{' '}
-            <strong>Delete</strong>. Stopping it doesn't free its storage.
+            <strong>The code:</strong> delete the{' '}
+            <code>road-to-agent-memory</code> folder. This also removes your{' '}
+            <code>.env</code> file and the local sample data.
           </li>
           <li>
             <strong>AuraDB:</strong> delete or pause your instance at{' '}
