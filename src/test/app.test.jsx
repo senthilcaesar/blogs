@@ -296,6 +296,20 @@ describe('blog app', () => {
     ).toBe(1);
   });
 
+  it('renders the Agent Memory tutorial with its sidebar sections', () => {
+    renderRoutes(['/posts/agent-memory-tutorial']);
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: /Give Your AI Agent a Memory/i }),
+    ).toBeInTheDocument();
+    for (const name of [/Part 2: Set Up/i, /Module 3: Long-Term Memory/i, /Module 5: Skill Distillation/i]) {
+      expect(screen.getByRole('heading', { level: 2, name })).toBeInTheDocument();
+    }
+    expect(
+      screen.getAllByRole('button', { name: /Module 1: Stateless/i }).length,
+    ).toBeGreaterThan(0);
+  });
+
   it('renders the Neo4j Intro Workshop article correctly', () => {
     renderRoutes(['/posts/neo4j-intro-workshop']);
 

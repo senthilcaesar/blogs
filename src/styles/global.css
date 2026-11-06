@@ -636,7 +636,7 @@ body:has(.home-layout) .site-header__inner {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: var(--surface-soft);
+  background-color: transparent;
 }
 
 .post-card--grid .post-card__thumb {
@@ -689,11 +689,6 @@ body:has(.home-layout) .site-header__inner {
   letter-spacing: -0.012em;
   color: var(--card-title-color);
   margin-bottom: 12px;
-  /* Title sits in its own softly tinted box */
-  padding: 10px 12px;
-  background: var(--card-title-box-bg);
-  border: 1px solid var(--card-title-box-border);
-  border-radius: var(--radius-md);
 }
 
 .post-card__excerpt {
@@ -729,7 +724,7 @@ body:has(.home-layout) .site-header__inner {
   margin-right: -16px;
   margin-bottom: -16px;
   padding: 10px 16px;
-  background: var(--sidebar-bg); /* Same soft stone as the header and sidebar */
+  background: transparent;
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -742,7 +737,6 @@ body:has(.home-layout) .site-header__inner {
 }
 
 .post-card:hover .post-card__footer {
-  background: color-mix(in srgb, var(--sidebar-bg) 94%, var(--text));
   border-top-color: var(--border-strong);
 }
 

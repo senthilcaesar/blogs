@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Give Your AI Agent a Memory: A Beginner\'s Step-by-Step Tutorial',
+    slug: 'agent-memory-tutorial',
+    category: 'AI',
+    tags: ['ai', 'agents', 'agent-memory', 'context-graph', 'neo4j', 'tutorial'],
+    excerpt:
+      'A support agent asks for your email twice because it keeps nothing between messages. Starting from zero, run one agent through five stages, from stateless to short-term, long-term and reasoning memory in Neo4j, and finally to a reusable skill.',
+    image: imageUrl('mem.jpg'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/agent-memory-tutorial',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Agent Memory & Context Graphs',
+      summary:
+        'No graph or agent background needed. Set up a free database, run a working support agent and watch it gain memory one module at a time, checking the results and reading the code at each stage.',
+    },
+  },
+  {
     title: 'Benchmarking RAG Systems: A Hands-On Introduction',
     slug: 'benchmarking-rag-systems',
     category: 'AI',
