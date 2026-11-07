@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'The Skills You Still Need When Agents Write the Code',
+    slug: 'skills-you-still-need-ai-agents',
+    category: 'AI',
+    tags: ['ai', 'agents', 'software-engineering', 'sdlc'],
+    excerpt:
+      'Building software is a loop of ten steps. Follow one search bar through all of them to see which need human skills, which you can delegate to AI and which are shared.',
+    image: imageUrl('skills-you-still-need.webp'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/skills-you-still-need-ai-agents',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'AI & Software Engineering',
+      summary:
+        'Five steps need human skills, two can be delegated to AI agents and three are shared. Here is what happens at each one.',
+    },
+  },
+  {
     title: 'Give Your AI Agent a Memory: A Beginner\'s Step-by-Step Tutorial',
     slug: 'agent-memory-tutorial',
     category: 'AI',

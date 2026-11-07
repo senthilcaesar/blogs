@@ -29,6 +29,7 @@ import { AgentEvaluationsArticle } from './AgentEvaluationsArticle';
 import { HowCompaniesBuildOwnAiArticle } from './HowCompaniesBuildOwnAiArticle';
 import { IsYourWebsiteBuiltForAiAgentsArticle } from './IsYourWebsiteBuiltForAiAgentsArticle';
 import { AgentMemoryTutorialArticle } from './AgentMemoryTutorialArticle';
+import { SkillsYouStillNeedArticle } from './SkillsYouStillNeedArticle';
 import { Neo4jIntroWorkshopArticle } from './Neo4jIntroWorkshopArticle';
 import { SkillsOverMcpArticle } from './SkillsOverMcpArticle';
 import { TracesArticle } from './TracesArticle';
@@ -40,6 +41,7 @@ export const articleRegistry = {
     ExpressingThoughtsClearlyArticle,
   traces: TracesArticle,
   'agent-memory-tutorial': AgentMemoryTutorialArticle,
+  'skills-you-still-need-ai-agents': SkillsYouStillNeedArticle,
   'benchmarking-rag-systems': RagBenchmarkingArticle,
   'semantic-model-vs-ontology-vs-knowledge-graph':
     SemanticModelOntologyKnowledgeGraphArticle,

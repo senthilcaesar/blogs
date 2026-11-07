@@ -1874,6 +1874,112 @@ body[data-theme='dark'] .tech-card--lime {
   background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
 
+/* Step map — three labelled columns; the top rule echoes who leads */
+.step-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.75rem 0;
+  overflow: hidden;
+  background: var(--surface-strong);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow-resting);
+}
+
+.step-map__column {
+  position: relative;
+  min-width: 0;
+  padding: 22px 20px 16px;
+}
+
+.step-map__column + .step-map__column {
+  border-left: 1px solid var(--border);
+}
+
+.step-map__column::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+}
+
+.step-map__column--human::before {
+  background: var(--accent);
+}
+
+.step-map__column--ai::before {
+  background: repeating-linear-gradient(90deg, var(--border-strong) 0 8px, transparent 8px 14px);
+}
+
+.step-map__column--shared::before {
+  background: linear-gradient(90deg, var(--accent) 50%, var(--border-strong) 50%);
+}
+
+.step-map__header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.step-map__name {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.step-map__count {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.article-panel .step-map__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article-panel .step-map__step {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+  margin: 0;
+  padding: 10px 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.article-panel .step-map__step + .step-map__step {
+  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.article-panel .step-map__step::before {
+  content: none;
+}
+
+.step-map__number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 680px) {
+  .step-map {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .step-map__column + .step-map__column {
+    border-top: 1px solid var(--border);
+    border-left: none;
+  }
+}
+
 /* Footer */
 .site-footer {
   margin-top: auto;
