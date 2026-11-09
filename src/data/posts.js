@@ -3,6 +3,153 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Neo4j Intro Workshop',
+    slug: 'neo4j-intro-workshop',
+    category: 'Data',
+    tags: ['neo4j', 'graph', 'cypher', 'database', 'auradb'],
+    excerpt:
+      'A hands-on walkthrough to getting started with Neo4j AuraDB: provisioning a free instance, importing graph datasets with AI, querying with Cypher, visualizing with Bloom, and building Dashboards.',
+    image: imageUrl('workshop.jpg'),
+    imageFit: 'contain',
+    date: 'Sep 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/neo4j-intro-workshop',
+    author: {
+      name: 'Tech Notes',
+      role: 'Graph Database & Data Architecture Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Graph Databases & Data Architecture',
+      summary:
+        'A hands-on walkthrough to getting started with Neo4j AuraDB: provisioning a free instance, importing graph datasets with AI, querying with Cypher, visualizing with Bloom, and building Dashboards.',
+    },
+  },
+  {
+    title: 'Write your first SKILL.md',
+    slug: 'writing-your-first-skill-md-file',
+    category: 'AI',
+    tags: [
+      'ai',
+      'agents',
+      'skills',
+      'agents-folder',
+      'progressive-disclosure',
+      'tutorial',
+    ],
+    excerpt:
+      'A hands-on walkthrough: build a working /greet skill from an empty folder, then split the detail into references/ and control who is allowed to fire it.',
+    image: imageUrl('skill.webp'),
+    date: 'Aug 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/writing-your-first-skill-md-file',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Agent Skills Tutorial',
+      summary:
+        'A skill is a set of instructions - packaged as a simple folder - that teaches an Agent how to handle specific tasks or workflows.',
+    },
+  },
+  {
+    title: 'Formula for Success: Quality = f(K,p,t)',
+    slug: 'formula-for-success-patrick-winston',
+    category: 'Career',
+    tags: ['career', 'success', 'knowledge', 'practice', 'talent'],
+    excerpt:
+      'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
+    image: imageUrl('kpt.webp'),
+    date: 'Jul 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/formula-for-success-patrick-winston',
+    author: {
+      name: 'Patrick Winston',
+      role: 'Professor & Author',
+      initials: 'PW',
+    },
+    hero: {
+      eyebrow: 'Career & Growth',
+      summary:
+        'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
+    },
+  },
+  {
+    title:
+      'The Engine Behind Autonomous AI: Agents, Harnesses, and Autoresearch',
+    slug: 'engine-behind-autonomous-ai-agents-harnesses-autoresearch',
+    category: 'AI',
+    tags: ['ai', 'agents', 'harness', 'autoresearch', 'autonomous'],
+    excerpt:
+      "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
+    image: imageUrl('harness.webp'),
+    date: 'Aug 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/engine-behind-autonomous-ai-agents-harnesses-autoresearch',
+    author: {
+      name: 'Tech Notes',
+      role: 'Autonomous AI Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Autonomous AI',
+      summary:
+        "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
+    },
+  },
+  {
+    title: 'Context Engineering',
+    slug: 'context-engineering',
+    category: 'AI',
+    tags: ['ai', 'context-engineering', 'prompt-engineering', 'llm'],
+    excerpt:
+      'Most people have heard of prompt engineering. It usually comes down to one question: How do I phrase my instructions to get exactly what I want from an AI? But there is a bigger picture. It is called context engineering.',
+    image: imageUrl('ce.webp'),
+    date: 'Aug 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/context-engineering',
+    author: {
+      name: 'Tech Notes',
+      role: 'AI Architecture Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'AI Engineering',
+      summary: 'Beyond the Prompt: A Beginner’s Guide to Context Engineering.',
+    },
+  },
+  {
+    title: 'Skills over MCP: Shipping the Manual with the Tools',
+    slug: 'skills-over-mcp',
+    category: 'AI',
+    tags: ['ai', 'agents', 'mcp', 'skills', 'progressive-disclosure'],
+    excerpt:
+      'An MCP server tells an agent what it can do; a skill tells it how. The official Skills extension lets a server serve both, one file at a time, only when needed.',
+    image: imageUrl('skills-over-mcp-cover.jpg'),
+    imageFit: 'contain',
+    date: 'Oct 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/skills-over-mcp',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Model Context Protocol',
+      summary:
+        'How the Skills extension (SEP-2640) serves SKILL.md files as MCP resources, why it reuses an existing primitive, and why a skill is riskier than a tool.',
+    },
+  },
+  {
     title: 'The Skills You Still Need When Agents Write the Code',
     slug: 'skills-you-still-need-ai-agents',
     category: 'AI',
@@ -123,30 +270,6 @@ export const posts = [
     },
   },
   {
-    title: 'Skills over MCP: Shipping the Manual with the Tools',
-    slug: 'skills-over-mcp',
-    category: 'AI',
-    tags: ['ai', 'agents', 'mcp', 'skills', 'progressive-disclosure'],
-    excerpt:
-      'An MCP server tells an agent what it can do; a skill tells it how. The official Skills extension lets a server serve both, one file at a time, only when needed.',
-    image: imageUrl('skills-over-mcp-cover.jpg'),
-    imageFit: 'contain',
-    date: 'Oct 2026',
-    priority: 'High',
-    type: 'local',
-    route: '/posts/skills-over-mcp',
-    author: {
-      name: 'Senthil Palanivelu',
-      role: 'AI Architecture Explainer',
-      initials: 'SP',
-    },
-    hero: {
-      eyebrow: 'Model Context Protocol',
-      summary:
-        'How the Skills extension (SEP-2640) serves SKILL.md files as MCP resources, why it reuses an existing primitive, and why a skill is riskier than a tool.',
-    },
-  },
-  {
     title:
       'What does PR (Pull Request) mean in the context of GitHub and software development?',
     slug: 'pull-request',
@@ -191,30 +314,6 @@ export const posts = [
       eyebrow: 'AI Alignment',
       summary:
         'A short introduction to RLHF: why helpfulness cannot be written as a rule, the three-step recipe behind InstructGPT, and where the method falls short.',
-    },
-  },
-  {
-    title: 'Neo4j Intro Workshop',
-    slug: 'neo4j-intro-workshop',
-    category: 'Data',
-    tags: ['neo4j', 'graph', 'cypher', 'database', 'auradb'],
-    excerpt:
-      'A hands-on walkthrough to getting started with Neo4j AuraDB: provisioning a free instance, importing graph datasets with AI, querying with Cypher, visualizing with Bloom, and building Dashboards.',
-    image: imageUrl('workshop.jpg'),
-    imageFit: 'contain',
-    date: 'Sep 2026',
-    priority: 'High',
-    type: 'local',
-    route: '/posts/neo4j-intro-workshop',
-    author: {
-      name: 'Tech Notes',
-      role: 'Graph Database & Data Architecture Explainer',
-      initials: 'TN',
-    },
-    hero: {
-      eyebrow: 'Graph Databases & Data Architecture',
-      summary:
-        'A hands-on walkthrough to getting started with Neo4j AuraDB: provisioning a free instance, importing graph datasets with AI, querying with Cypher, visualizing with Bloom, and building Dashboards.',
     },
   },
   {
@@ -287,28 +386,6 @@ export const posts = [
     },
   },
   {
-    title: 'Context Engineering',
-    slug: 'context-engineering',
-    category: 'AI',
-    tags: ['ai', 'context-engineering', 'prompt-engineering', 'llm'],
-    excerpt:
-      'Most people have heard of prompt engineering. It usually comes down to one question: How do I phrase my instructions to get exactly what I want from an AI? But there is a bigger picture. It is called context engineering.',
-    image: imageUrl('ce.webp'),
-    date: 'Aug 2026',
-    priority: 'High',
-    type: 'local',
-    route: '/posts/context-engineering',
-    author: {
-      name: 'Tech Notes',
-      role: 'AI Architecture Explainer',
-      initials: 'TN',
-    },
-    hero: {
-      eyebrow: 'AI Engineering',
-      summary: 'Beyond the Prompt: A Beginner’s Guide to Context Engineering.',
-    },
-  },
-  {
     title: 'How Companies Are Building Their Own AI',
     slug: 'how-companies-are-building-their-own-ai',
     category: 'AI',
@@ -370,36 +447,6 @@ export const posts = [
     },
   },
   {
-    title: 'Write your first SKILL.md',
-    slug: 'writing-your-first-skill-md-file',
-    category: 'AI',
-    tags: [
-      'ai',
-      'agents',
-      'skills',
-      'agents-folder',
-      'progressive-disclosure',
-      'tutorial',
-    ],
-    excerpt:
-      'A hands-on walkthrough: build a working /greet skill from an empty folder, then split the detail into references/ and control who is allowed to fire it.',
-    image: imageUrl('skill.webp'),
-    date: 'Aug 2026',
-    priority: 'High',
-    type: 'local',
-    route: '/posts/writing-your-first-skill-md-file',
-    author: {
-      name: 'Senthil Palanivelu',
-      role: 'AI Architecture Explainer',
-      initials: 'SP',
-    },
-    hero: {
-      eyebrow: 'Agent Skills Tutorial',
-      summary:
-        'A skill is a set of instructions - packaged as a simple folder - that teaches an Agent how to handle specific tasks or workflows.',
-    },
-  },
-  {
     title: 'Structured Formats for Writing Effective AI Agent Skills',
     slug: 'structured-formats-for-effective-ai-agent-skills',
     category: 'AI',
@@ -458,53 +505,6 @@ export const posts = [
       eyebrow: 'AI Architecture',
       summary:
         "If you've built anything with AI agents, you've probably hit two walls pretty quickly: visual understanding and codebase navigation.",
-    },
-  },
-  {
-    title:
-      'The Engine Behind Autonomous AI: Agents, Harnesses, and Autoresearch',
-    slug: 'engine-behind-autonomous-ai-agents-harnesses-autoresearch',
-    category: 'AI',
-    tags: ['ai', 'agents', 'harness', 'autoresearch', 'autonomous'],
-    excerpt:
-      "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
-    image: imageUrl('harness.webp'),
-    date: 'Aug 2026',
-    priority: 'High',
-    type: 'local',
-    route: '/posts/engine-behind-autonomous-ai-agents-harnesses-autoresearch',
-    author: {
-      name: 'Tech Notes',
-      role: 'Autonomous AI Explainer',
-      initials: 'TN',
-    },
-    hero: {
-      eyebrow: 'Autonomous AI',
-      summary:
-        "You’ve probably heard a lot about AI lately. But there's a big shift happening right now. We are moving from AI that just chats to AI that actually does things.",
-    },
-  },
-  {
-    title: 'Formula for Success: Quality = f(K,p,t)',
-    slug: 'formula-for-success-patrick-winston',
-    category: 'Career',
-    tags: ['career', 'success', 'knowledge', 'practice', 'talent'],
-    excerpt:
-      'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
-    image: imageUrl('kpt.webp'),
-    date: 'Jul 2026',
-    priority: 'High',
-    type: 'local',
-    route: '/posts/formula-for-success-patrick-winston',
-    author: {
-      name: 'Patrick Winston',
-      role: 'Professor & Author',
-      initials: 'PW',
-    },
-    hero: {
-      eyebrow: 'Career & Growth',
-      summary:
-        'Your success in life will be determined largely by your ability to speak, your abaility to write, and the quality of your ideas, in that order.',
     },
   },
   {

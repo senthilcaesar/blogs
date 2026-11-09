@@ -75,10 +75,16 @@
   --article-width: 880px; /* The reading column */
 }
 
-/* Article pages in light mode sit on milky white instead of cream paper */
+/* Article pages in light mode sit on milky aluminium instead of cream paper */
 body:not([data-theme='dark']):has(.article-page) {
-  --bg: #fffefd;
-  --surface: rgba(255, 254, 253, 0.9);
+  --bg: #fbfbfc;
+  --surface: rgba(251, 251, 252, 0.9);
+  /* Paper tones pulled back towards neutral so articles don't read sandal */
+  --bg-elevated: #f4f3f1;
+  --surface-strong: #fefefd;
+  --surface-soft: #f1f1ef;
+  --border: #e4e3df;
+  --border-strong: #d2d0cb;
 }
 
 /* Dark theme — Catppuccin Frappé (https://catppuccin.com/palette/) */
@@ -1174,6 +1180,14 @@ body[data-theme='dark'] .article-byline__share-btn--copied {
   font-weight: 600;
   color: var(--text);
   margin: 1.5rem 0 0.5rem 0;
+}
+
+/* Section subheadings sit on the same soft bar in every post, matching the
+   .sub-heading style. Direct children only, so titles inside cards stay plain. */
+:is(.article-content, .article-content .article-panel, .article-content .section-header) > :is(h2, h3):not(.main-heading, .sub-heading, .am-part__title, .rb-part__title) {
+  background: var(--surface-soft);
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
 }
 
 /* Panels used to be cards. On paper they are just sections that breathe. */
