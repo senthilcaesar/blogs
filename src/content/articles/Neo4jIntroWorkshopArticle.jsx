@@ -242,6 +242,7 @@ const tocGroups = [
     id: 'resources',
     label: 'Further reading',
     items: [
+      { id: 'certifications', label: 'Certifications' },
       { id: 'books', label: 'Books' },
       { id: 'workshop', label: 'Workshop' },
       { id: 'video-resources', label: 'Video resources' },
@@ -1407,6 +1408,32 @@ export function Neo4jIntroWorkshopArticle() {
               rel='noreferrer'
             >
               https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/vector-indexes/
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section className='article-panel'>
+        <h3 id='certifications' className='sub-heading'>
+          Certifications
+        </h3>
+        <ul className='bullet-list' style={{ marginTop: '0.75rem' }}>
+          <li>
+            <a
+              href='https://graphacademy.neo4j.com/certifications/neo4j-certification'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://graphacademy.neo4j.com/certifications/neo4j-certification
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://graphacademy.neo4j.com/certifications/genai-certification'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://graphacademy.neo4j.com/certifications/genai-certification
             </a>
           </li>
         </ul>
