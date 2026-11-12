@@ -1457,6 +1457,19 @@ export function Neo4jIntroWorkshopArticle() {
               (Book: <em>Developer&apos;s Guide: How to Build a Knowledge Graph</em>)
             </span>
           </li>
+          <li>
+            <a
+              href='https://neo4j.com/books/oreilly-graphrag-definitive-guide/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://neo4j.com/books/oreilly-graphrag-definitive-guide/
+            </a>
+            <span style={{ color: 'var(--text-soft)' }}>
+              {' '}
+              (Book: <em>GraphRAG: The Definitive Guide</em>, O&apos;Reilly)
+            </span>
+          </li>
         </ul>
       </section>
 
