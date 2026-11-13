@@ -10,6 +10,178 @@ function YoutubeIcon() {
   );
 }
 
+const svgText = { fill: 'var(--text)', fontFamily: 'inherit' };
+const svgMuted = { fill: 'var(--text-muted)', fontFamily: 'inherit' };
+const figureStyle = {
+  margin: '1.25rem 0 0',
+  padding: '1rem',
+  border: '1px solid var(--border)',
+  borderRadius: '16px',
+};
+
+function ArrowMarker({ id }) {
+  return (
+    <marker id={id} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" style={{ fill: 'var(--text-muted)' }} />
+    </marker>
+  );
+}
+
+const edgeStyle = { stroke: 'var(--text-muted)', strokeWidth: 2, fill: 'none' };
+
+function OntologyDiagram() {
+  const box = {
+    fill: 'color-mix(in srgb, var(--accent-purple) 12%, transparent)',
+    stroke: 'var(--accent-purple)',
+    strokeWidth: 2,
+  };
+  const classes = [
+    { x: 20, title: 'Customer', props: 'id · name · region' },
+    { x: 285, title: 'Order', props: 'id · date · status' },
+    { x: 550, title: 'Product', props: 'id · name · price' },
+  ];
+  return (
+    <figure style={figureStyle}>
+      <svg
+        viewBox="0 0 720 200"
+        role="img"
+        aria-label="Ontology diagram. Three concept boxes: Customer, Order and Product. Customer places Order. Order belongs to Customer. Order contains Product."
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      >
+        <defs>
+          <ArrowMarker id="onto-arrow" />
+        </defs>
+        <text x="20" y="28" style={{ ...svgMuted, fontSize: 13, letterSpacing: '0.08em' }}>
+          CONCEPTS &amp; ALLOWED RELATIONSHIPS
+        </text>
+        {classes.map((c) => (
+          <g key={c.title}>
+            <rect x={c.x} y="60" width="150" height="80" rx="12" style={box} />
+            <text x={c.x + 75} y="94" textAnchor="middle" style={{ ...svgText, fontSize: 19, fontWeight: 700 }}>
+              {c.title}
+            </text>
+            <text x={c.x + 75} y="120" textAnchor="middle" style={{ ...svgMuted, fontSize: 12 }}>
+              {c.props}
+            </text>
+          </g>
+        ))}
+        <line x1="172" y1="86" x2="281" y2="86" style={edgeStyle} markerEnd="url(#onto-arrow)" />
+        <text x="227" y="76" textAnchor="middle" style={{ ...svgText, fontSize: 14, fontStyle: 'italic' }}>
+          places
+        </text>
+        <line x1="283" y1="116" x2="174" y2="116" style={edgeStyle} markerEnd="url(#onto-arrow)" />
+        <text x="227" y="138" textAnchor="middle" style={{ ...svgText, fontSize: 14, fontStyle: 'italic' }}>
+          belongs to
+        </text>
+        <line x1="437" y1="100" x2="546" y2="100" style={edgeStyle} markerEnd="url(#onto-arrow)" />
+        <text x="492" y="90" textAnchor="middle" style={{ ...svgText, fontSize: 14, fontStyle: 'italic' }}>
+          contains
+        </text>
+        <text x="360" y="186" textAnchor="middle" style={{ ...svgMuted, fontSize: 13 }}>
+          A blueprint: it defines what a Customer, Order and Product are, not which ones exist.
+        </text>
+      </svg>
+      <figcaption>Ontology: the types of things and the relationships allowed between them.</figcaption>
+    </figure>
+  );
+}
+
+function KnowledgeGraphDiagram() {
+  const node = {
+    fill: 'color-mix(in srgb, var(--accent) 14%, transparent)',
+    stroke: 'var(--accent)',
+    strokeWidth: 2,
+  };
+  const nodes = [
+    { cx: 95, type: 'Customer', id: 'C102', prop: 'region: EU' },
+    { cx: 360, type: 'Order', id: 'O501', prop: 'status: shipped' },
+    { cx: 625, type: 'Product', id: 'P20', prop: 'name: Laptop Pro' },
+  ];
+  return (
+    <figure style={figureStyle}>
+      <svg
+        viewBox="0 0 720 210"
+        role="img"
+        aria-label="Knowledge graph diagram. Node Customer C102 has a PLACED relationship to node Order O501, which has a CONTAINS relationship to node Product P20."
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      >
+        <defs>
+          <ArrowMarker id="kg-arrow" />
+        </defs>
+        <text x="20" y="28" style={{ ...svgMuted, fontSize: 13, letterSpacing: '0.08em' }}>
+          ACTUAL ENTITIES &amp; FACTS
+        </text>
+        {nodes.map((n) => (
+          <g key={n.id}>
+            <text x={n.cx} y="62" textAnchor="middle" style={{ ...svgMuted, fontSize: 13, letterSpacing: '0.06em' }}>
+              {n.type.toUpperCase()}
+            </text>
+            <circle cx={n.cx} cy="115" r="42" style={node} />
+            <text x={n.cx} y="122" textAnchor="middle" style={{ ...svgText, fontSize: 20, fontWeight: 700 }}>
+              {n.id}
+            </text>
+            <text x={n.cx} y="182" textAnchor="middle" style={{ ...svgMuted, fontSize: 13 }}>
+              {n.prop}
+            </text>
+          </g>
+        ))}
+        <line x1="139" y1="115" x2="314" y2="115" style={edgeStyle} markerEnd="url(#kg-arrow)" />
+        <text x="227" y="105" textAnchor="middle" style={{ ...svgText, fontSize: 13, fontWeight: 600, letterSpacing: '0.05em' }}>
+          PLACED
+        </text>
+        <line x1="404" y1="115" x2="579" y2="115" style={edgeStyle} markerEnd="url(#kg-arrow)" />
+        <text x="492" y="105" textAnchor="middle" style={{ ...svgText, fontSize: 13, fontWeight: 600, letterSpacing: '0.05em' }}>
+          CONTAINS
+        </text>
+      </svg>
+      <figcaption>Knowledge graph: real records connected by the relationships the ontology allows.</figcaption>
+    </figure>
+  );
+}
+
+const ontologyVsGraph = [
+  {
+    aspect: 'Question it answers',
+    ontology: 'What kinds of things exist, and how are they allowed to relate?',
+    graph: 'Which actual things exist, and how are they connected right now?',
+  },
+  {
+    aspect: 'What it contains',
+    ontology: 'Concepts and rules: Customer, Order, Product, “an Order belongs to one Customer”',
+    graph: 'Real records and links: C102 placed O501, O501 contains P20',
+  },
+  {
+    aspect: 'Everyday analogy',
+    ontology: 'A blank form template',
+    graph: 'The stack of filled-in forms',
+  },
+  {
+    aspect: 'Size and change',
+    ontology: 'Small; changes only when the business itself changes',
+    graph: 'Large; grows every day as new data arrives',
+  },
+  {
+    aspect: 'Who builds it',
+    ontology: 'Domain experts and data architects agree on it',
+    graph: 'Data pipelines load it from CRM, ERP and other systems',
+  },
+  {
+    aspect: 'What it achieves',
+    ontology: 'Shared meaning: everyone (and every AI agent) uses the same definitions',
+    graph: 'Connected facts: you can look up and trace real relationships',
+  },
+  {
+    aspect: 'Example question',
+    ontology: '“Can an order exist without a customer?” → No',
+    graph: '“Which products did customer C102 buy?” → P20',
+  },
+  {
+    aspect: 'Without it',
+    ontology: 'Data is linked, but each team means something different by “customer”',
+    graph: 'Definitions exist, but there are no real records to reason over',
+  },
+];
+
 export function SemanticModelOntologyKnowledgeGraphArticle() {
   return (
     <>
@@ -32,7 +204,7 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
       </figure>
 
       <section className="article-panel">
-        <h2>Semantic Model — Make data meaningful</h2>
+        <h2>Semantic Model - Make data meaningful</h2>
         <p>
           A semantic model translates technical data structures into business-friendly concepts, relationships,
           and calculations. It helps people and software interpret data consistently.
@@ -75,16 +247,23 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Ontology — Define what things mean</h2>
+        <h2>Ontology - Define what things mean</h2>
         <p>
           An ontology formally defines the concepts in a domain, their properties, how they relate, and sometimes
           the rules governing those relationships. It establishes a shared vocabulary that machines can
           interpret.
         </p>
+        <div className="article-panel article-panel--accent">
+          <p>
+            <strong>A business-facing ontology</strong> is a simple description of the real-world concepts of your
+            business and how they relate, articulated in a way that makes sense to human users.
+          </p>
+        </div>
         <p style={{ marginTop: '1rem' }}>
           <strong>Example:</strong> A Customer can place an Order; an Order contains Products; and each order
           belongs to a customer.
         </p>
+        <OntologyDiagram />
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The blueprint and rulebook for business knowledge.
         </p>
@@ -93,7 +272,6 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           style={{
             margin: '2rem 0 0',
             paddingLeft: '1.25rem',
-            borderLeft: '3px solid color-mix(in srgb, var(--accent-tertiary) 70%, transparent)',
           }}
         >
         <h3 style={{ marginTop: 0 }}>From Tables to Business Context</h3>
@@ -123,7 +301,7 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Knowledge Graph — Connect actual facts</h2>
+        <h2>Knowledge Graph - Connect actual facts</h2>
         <p>
           A knowledge graph represents specific entities and the relationships between them. It connects
           information from different systems, making it possible to explore how people, products, transactions,
@@ -132,8 +310,51 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         <p style={{ marginTop: '1rem' }}>
           <strong>Example:</strong> Customer C102 placed Order O501, which contains Product P20.
         </p>
+        <KnowledgeGraphDiagram />
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The populated network of connected business facts.
+        </p>
+      </section>
+
+      <section className="article-panel">
+        <h2>Ontology vs Knowledge Graph - What&rsquo;s the Difference?</h2>
+        <p>
+          They look alike because both talk about customers, orders and products. The difference is simple: the
+          ontology describes the <em>kinds</em> of things, while the knowledge graph holds the <em>actual</em>{' '}
+          things.
+        </p>
+        <div className="article-panel article-panel--accent">
+          <p>
+            <strong>The ontology says what <em>can</em> be true. The knowledge graph records what <em>is</em>{' '}
+            true.</strong>
+          </p>
+        </div>
+        <div className="table-wrap" style={{ marginTop: '1.5rem' }}>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Ontology</th>
+                <th>Knowledge Graph</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ontologyVsGraph.map((row) => (
+                <tr key={row.aspect}>
+                  <td>
+                    <strong>{row.aspect}</strong>
+                  </td>
+                  <td>{row.ontology}</td>
+                  <td>{row.graph}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ marginTop: '1rem' }}>
+          In practice, the ontology acts as the schema for the knowledge graph: every node and link in the graph
+          should fit a concept and relationship the ontology defines. You need both. One gives the meaning, the
+          other gives the facts.
         </p>
       </section>
 
