@@ -389,6 +389,15 @@ export function EngineBehindAutonomousAiArticle() {
           </li>
           <li>
             <a
+              href='https://docs.langchain.com/oss/python/concepts/products'
+              target='_blank'
+              rel='noreferrer'
+            >
+              https://docs.langchain.com/oss/python/concepts/products
+            </a>
+          </li>
+          <li>
+            <a
               href='https://youtu.be/2C_CefSQEAQ'
               target='_blank'
               rel='noreferrer'
