@@ -383,7 +383,7 @@ export function SkillsOverMcpArticle() {
               Four Companies Serve Skills Over MCP The Way The Spec Says (API Evangelist)
             </a>
           </li>
-          <li>
+          <li style={{ listStyle: 'none', marginLeft: '-1.65rem' }}>
             <a
               href="https://youtu.be/3oHLjC3wZNE"
               target="_blank"

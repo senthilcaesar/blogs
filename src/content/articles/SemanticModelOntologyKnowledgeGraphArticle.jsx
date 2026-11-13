@@ -1,4 +1,14 @@
 const comparisonImg = new URL('../../../images/semantic-model-ontology-knowledge-graph.jpg', import.meta.url).href;
+const ontologyFlowImg = new URL('../../../images/semantic-model-to-ontology.png', import.meta.url).href;
+
+function YoutubeIcon() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <rect width="20" height="14" rx="4" fill="#ff0000" />
+      <path d="M8 4l5 3-5 3z" fill="#ffffff" />
+    </svg>
+  );
+}
 
 export function SemanticModelOntologyKnowledgeGraphArticle() {
   return (
@@ -28,8 +38,10 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           and calculations. It helps people and software interpret data consistently.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          <strong>Example:</strong> Instead of asking for <code>SUM(invoice_amount)</code>, a business user asks,
-          &ldquo;What is our total revenue this quarter?&rdquo;
+          <strong>Example:</strong> Instead of every analyst or agent writing{' '}
+          <code>SUM(invoice_amount) WHERE status &lt;&gt; 'cancelled' AND is_test = false</code>, the semantic
+          model defines <strong>Net Revenue</strong> once, and anyone can simply ask, &ldquo;What was net revenue
+          this quarter?&rdquo;
         </p>
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The business-friendly interface to your data.
@@ -42,10 +54,10 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           table.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          The agent didn&rsquo;t fail because of the model, or because it couldn&rsquo;t translate a user question
+          The agent didn&rsquo;t fail because of the LLM, or because it couldn&rsquo;t translate a user question
           into a query. It failed because it didn&rsquo;t understand your business. The real kicker is that this
-          understanding usually already exists in the form of a semantic model in a Looker, dbt, Snowflake,
-          Databricks, or SAP system. But because each definition stays locked inside its own tool, every agent
+          understanding often already exists in the form of a semantic model in a Power BI / Microsoft Fabric,
+          Looker, dbt, Snowflake, Databricks, or SAP system. But because each definition stays locked inside its own tool, every agent
           guesses at it&hellip; and often gets it wrong.
         </p>
         <p style={{ marginTop: '1rem' }}>
@@ -76,6 +88,38 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The blueprint and rulebook for business knowledge.
         </p>
+
+        <div
+          style={{
+            margin: '2rem 0 0',
+            paddingLeft: '1.25rem',
+            borderLeft: '3px solid color-mix(in srgb, var(--accent-tertiary) 70%, transparent)',
+          }}
+        >
+        <h3 style={{ marginTop: 0 }}>From Tables to Business Context</h3>
+        <ul>
+          <li>
+            <strong>Tables</strong> tell you where and how the data is stored.
+          </li>
+          <li>
+            <strong>Semantic models</strong> tell you how that data is structured to analyze and answer specific
+            business questions.
+          </li>
+          <li>
+            <strong>Ontologies</strong> tell you what that business means. In platforms like Microsoft Fabric, the
+            ontology becomes the business context layer on top of the semantic model, and it lets AI agents reason
+            across <em>many</em> semantic models.
+          </li>
+        </ul>
+        <figure style={{ margin: '1.5rem 0 0' }}>
+          <img
+            src={ontologyFlowImg}
+            alt="Flow diagram: a Semantic model feeds an analytical engine (Power BI icon), producing Analytical Engine output. That flows down into an Ontology, which feeds an AI assistant (Copilot icon), producing Business Context."
+            style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+          />
+          <figcaption>The semantic model powers analytics; the ontology turns it into business context for AI.</figcaption>
+        </figure>
+        </div>
       </section>
 
       <section className="article-panel">
@@ -125,6 +169,35 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           linking real-world records like customers, products, and accounts. Using all three together gives both
           people and AI the complete, reliable context needed to make sense of your business.
         </p>
+      </section>
+
+      <section className="article-panel">
+        <h2>References</h2>
+        <ul className="bullet-list" style={{ marginTop: '1rem', paddingLeft: 0 }}>
+          <li style={{ listStyle: 'none' }}>
+            <a
+              href="https://youtu.be/y1iw0tf4lzY"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              Is Ontology REPLACING the Semantic Model? (Guy in a Cube, YouTube)
+            </a>
+          </li>
+          <li style={{ listStyle: 'none' }}>
+            <a
+              href="https://youtu.be/VGN22pPpb-8"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <YoutubeIcon />
+              Thinner Agents on a Smarter Substrate: The Ontology-based Semantic Layer &mdash; Emil Eifrem, Neo4j
+              (AI Engineer, YouTube)
+            </a>
+          </li>
+        </ul>
       </section>
     </>
   );

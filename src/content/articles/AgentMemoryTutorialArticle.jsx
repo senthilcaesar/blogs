@@ -239,6 +239,29 @@ function ExternalLink({ href, children }) {
   );
 }
 
+function YoutubeIcon() {
+  return (
+    <svg width='20' height='14' viewBox='0 0 20 14' aria-hidden='true' style={{ flexShrink: 0 }}>
+      <rect width='20' height='14' rx='4' fill='#ff0000' />
+      <path d='M8 4l5 3-5 3z' fill='#ffffff' />
+    </svg>
+  );
+}
+
+function YoutubeLink({ href, children }) {
+  return (
+    <a
+      href={href}
+      target='_blank'
+      rel='noreferrer'
+      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', verticalAlign: 'bottom' }}
+    >
+      <YoutubeIcon />
+      {children}
+    </a>
+  );
+}
+
 const tocGroups = [
   {
     id: 'part-1',
@@ -590,9 +613,9 @@ export function AgentMemoryTutorialArticle() {
         </ul>
         <p className='am-credit'>
           Based on Will Lyon's{' '}
-          <ExternalLink href='https://youtu.be/ybekhrF4HUY'>
+          <YoutubeLink href='https://youtu.be/ybekhrF4HUY'>
             Road to NODES workshop
-          </ExternalLink>{' '}
+          </YoutubeLink>{' '}
           at Neo4j and its{' '}
           <ExternalLink href='https://github.com/johnymontana/road-to-agent-memory'>
             road-to-agent-memory
@@ -2585,10 +2608,10 @@ export function AgentMemoryTutorialArticle() {
             , including question-and-answer guides in{' '}
             <code>docs/modules/</code> and a <code>docs/glossary.md</code>
           </li>
-          <li>
-            <ExternalLink href='https://youtu.be/ybekhrF4HUY'>
+          <li style={{ listStyle: 'none', marginLeft: '-1.65rem' }}>
+            <YoutubeLink href='https://youtu.be/ybekhrF4HUY'>
               The recorded workshop
-            </ExternalLink>{' '}
+            </YoutubeLink>{' '}
             with Will Lyon
           </li>
           <li>

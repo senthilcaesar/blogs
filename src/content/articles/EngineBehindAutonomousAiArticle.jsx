@@ -396,7 +396,7 @@ export function EngineBehindAutonomousAiArticle() {
               https://docs.langchain.com/oss/python/concepts/products
             </a>
           </li>
-          <li>
+          <li style={{ listStyle: 'none', marginLeft: '-1.65rem' }}>
             <a
               href='https://youtu.be/2C_CefSQEAQ'
               target='_blank'

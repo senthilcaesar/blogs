@@ -1268,24 +1268,28 @@ export function Neo4jIntroWorkshopArticle() {
           and analyzed.
         </p>
 
-        <ul className='bullet-list' style={{ marginTop: '0.75rem' }}>
-          <li>
+        <ul className='bullet-list' style={{ marginTop: '0.75rem', paddingLeft: 0 }}>
+          <li style={{ listStyle: 'none' }}>
             Tutorial video 1:{' '}
             <a
               href='https://youtu.be/7MoHbvJjzEQ'
               target='_blank'
               rel='noreferrer'
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
             >
+              <YoutubeIcon />
               https://youtu.be/7MoHbvJjzEQ
             </a>
           </li>
-          <li>
+          <li style={{ listStyle: 'none' }}>
             Tutorial video 2:{' '}
             <a
               href='https://youtu.be/NgeDak5uW7Y'
               target='_blank'
               rel='noreferrer'
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
             >
+              <YoutubeIcon />
               https://youtu.be/NgeDak5uW7Y
             </a>
           </li>
