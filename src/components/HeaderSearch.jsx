@@ -9,8 +9,6 @@ const muiTheme = createTheme({
   typography: { fontFamily: 'var(--font-body)' },
 });
 
-const accentTint = (percent) => `color-mix(in srgb, var(--accent) ${percent}%, transparent)`;
-
 export function HeaderSearch({ value, onChange, onClear }) {
   const inputRef = useRef(null);
 
@@ -57,19 +55,13 @@ export function HeaderSearch({ value, onChange, onClear }) {
           </InputAdornment>
         }
         sx={{
-          height: 42,
+          height: 44,
+          pl: 0.5,
           fontSize: '0.95rem',
           color: 'var(--text)',
-          bgcolor: 'var(--surface-strong)',
-          borderRadius: '12px',
-          transition: 'box-shadow 180ms ease',
-          '& .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--border)' },
-          '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'var(--border-strong)' },
-          '&.Mui-focused': { boxShadow: `0 0 0 4px ${accentTint(14)}` },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'var(--accent)',
-            borderWidth: 1,
-          },
+          bgcolor: 'transparent',
+          // The surrounding .header-search bar draws the border, shadow and focus ring.
+          '& .MuiOutlinedInput-notchedOutline': { display: 'none' },
           '& input::placeholder': { color: 'var(--text-muted)', opacity: 1 },
           '& input::-webkit-search-cancel-button': { display: 'none' },
           '& .MuiIconButton-root': { color: 'var(--text-soft)' },

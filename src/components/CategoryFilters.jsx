@@ -1,29 +1,22 @@
 import {
   Box,
-  Chip,
-  IconButton,
-  List,
-  ListItemButton,
-  ListItemIcon,
   ListItemText,
-  Stack,
+  ListSubheader,
+  MenuItem,
+  Select,
   ThemeProvider,
-  Tooltip,
-  Typography,
   createTheme,
-  useMediaQuery,
 } from '@mui/material';
 import {
   BarChart3,
   Brain,
   BriefcaseBusiness,
+  ChevronDown,
   Code2,
   Database,
   Globe,
   HeartPulse,
   LayoutGrid,
-  PanelLeftClose,
-  PanelLeftOpen,
   Ship,
   Users,
 } from 'lucide-react';
@@ -41,198 +34,150 @@ const iconByCategory = {
   Export: Ship,
 };
 
-// Colours come from the site's CSS variables so the sidebar follows the day/night toggle.
+// Colours come from the site's CSS variables so the dropdown follows the day/night toggle.
 const muiTheme = createTheme({
   palette: { primary: { main: '#ff8a3d' } },
   shape: { borderRadius: 12 },
-  typography: { fontFamily: "'Plus Jakarta Sans', var(--font-body)" },
+  typography: { fontFamily: 'var(--font-body)' },
 });
 
 const accentTint = (percent) => `color-mix(in srgb, var(--accent) ${percent}%, transparent)`;
 const accentText = 'color-mix(in srgb, var(--accent) 72%, var(--text))';
 
-const MOBILE = '@media (max-width: 820px)';
-
-const iconButtonSx = {
-  width: 32,
-  height: 32,
-  borderRadius: '8px',
-  color: 'var(--text-soft)',
-  '&:hover': { bgcolor: 'color-mix(in srgb, var(--text) 5%, transparent)', color: 'var(--text)' },
-  '&.Mui-focusVisible': { outline: '2px solid var(--accent)', outlineOffset: -2 },
-};
-
-function CountBadge({ count, selected }) {
+function IconBadge({ icon: Icon, active = false, size = 22 }) {
   return (
     <Box
       component="span"
       sx={{
-        minWidth: 22,
-        height: 20,
-        px: 0.625,
+        width: size,
+        height: size,
+        flexShrink: 0,
         display: 'inline-grid',
         placeItems: 'center',
-        borderRadius: '6px',
-        fontSize: '0.72rem',
-        fontWeight: selected ? 700 : 500,
-        fontVariantNumeric: 'tabular-nums',
-        color: selected ? 'var(--text-soft)' : 'var(--text-muted)',
-        bgcolor: 'var(--sidebar-badge-bg)',
+        borderRadius: '7px',
+        color: active ? 'var(--accent)' : 'var(--text-soft)',
+        bgcolor: active ? accentTint(14) : 'color-mix(in srgb, var(--text) 6%, transparent)',
+        transition: 'background-color 160ms ease, color 160ms ease',
       }}
     >
-      {count}
+      <Icon size={13} strokeWidth={2} />
     </Box>
   );
 }
 
-export function CategoryFilters({
-  categories,
-  activeCategory,
-  onSelect,
-  counts = {},
-  collapsed: collapsedPreference = false,
-  onToggleCollapsed,
-}) {
-  // Phones always get the full panel; minimising is a desktop affordance.
-  const isMobile = useMediaQuery('(max-width: 820px)');
-  const collapsed = collapsedPreference && !isMobile;
+function SelectChevron(props) {
+  return <ChevronDown size={16} strokeWidth={2} {...props} />;
+}
 
-  const toggleLabel = collapsed ? 'Expand sidebar' : 'Minimise sidebar';
-
+export function CategoryFilters({ categories, activeCategory, onSelect, counts = {} }) {
   return (
     <ThemeProvider theme={muiTheme}>
-      <Stack component="nav" aria-label="Post categories" spacing={1}>
-        {!isMobile && onToggleCollapsed && (
-          <Stack
-            direction="row"
-            alignItems="center"
-            sx={{ justifyContent: collapsed ? 'center' : 'space-between', pl: collapsed ? 0 : 1.5 }}
-          >
-            {!collapsed && (
-              <Typography
-                component="span"
-                sx={{
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-muted)',
-                }}
-              >
-                Categories
-              </Typography>
-            )}
-            <Tooltip title={toggleLabel} placement={collapsed ? 'right' : 'bottom'}>
-              <IconButton aria-label={toggleLabel} onClick={onToggleCollapsed} sx={iconButtonSx}>
-                {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
-              </IconButton>
-            </Tooltip>
-          </Stack>
+      <Select
+        size="small"
+        value={activeCategory}
+        onChange={(event) => onSelect(event.target.value)}
+        IconComponent={SelectChevron}
+        inputProps={{ 'aria-label': 'Filter by category' }}
+        renderValue={(value) => (
+          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, minWidth: 0 }}>
+            <IconBadge icon={iconByCategory[value] ?? LayoutGrid} active />
+            <Box component="span" sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {value === 'All' ? 'All categories' : value}
+            </Box>
+          </Box>
         )}
-
-        {/* Desktop: vertical list */}
-        <List
-          disablePadding
-          sx={{ display: 'flex', flexDirection: 'column', gap: 0.25, [MOBILE]: { display: 'none' } }}
-        >
-          {categories.map((category) => {
-            const Icon = iconByCategory[category] ?? LayoutGrid;
-            const selected = activeCategory === category;
-            const item = (
-              <ListItemButton
-                key={category}
-                selected={selected}
-                aria-label={collapsed ? category : undefined}
-                aria-pressed={selected}
-                onClick={() => onSelect(category)}
-                sx={{
-                  px: collapsed ? 0 : 1.25,
-                  py: 0.75,
-                  justifyContent: collapsed ? 'center' : 'flex-start',
-                  borderRadius: '10px',
-                  border: '1px solid transparent',
-                  color: 'var(--text-soft)',
-                  transition: 'background-color 160ms ease, color 160ms ease, border-color 160ms ease',
-                  '&:hover': { bgcolor: 'color-mix(in srgb, var(--text) 4%, transparent)', color: 'var(--text)' },
-                  '&.Mui-selected, &.Mui-selected:hover': {
-                    bgcolor: accentTint(12),
-                    borderColor: accentTint(35),
-                    color: accentText,
-                  },
-                  '&.Mui-focusVisible': { outline: '2px solid var(--accent)', outlineOffset: -2 },
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: collapsed ? 0 : 1.25,
-                    color: selected ? 'var(--accent)' : 'var(--text-soft)',
-                  }}
-                >
-                  <Icon size={16} strokeWidth={1.75} />
-                </ListItemIcon>
-                {!collapsed && (
-                  <>
-                    <ListItemText
-                      primary={category}
-                      slotProps={{
-                        primary: { sx: { fontSize: '0.88rem', fontWeight: selected ? 600 : 500 } },
-                      }}
-                    />
-                    {counts[category] != null && (
-                      <CountBadge count={counts[category]} selected={selected} />
-                    )}
-                  </>
-                )}
-              </ListItemButton>
-            );
-            if (!collapsed) return item;
-            const tip = counts[category] != null ? `${category} · ${counts[category]}` : category;
-            return (
-              <Tooltip key={category} title={tip} placement="right">
-                {item}
-              </Tooltip>
-            );
-          })}
-        </List>
-
-        {/* Mobile: one row of chips that scrolls sideways */}
-        <Box
+        MenuProps={{
+          anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+          transformOrigin: { vertical: 'top', horizontal: 'right' },
+          slotProps: {
+            paper: {
+              sx: {
+                mt: 1.25,
+                minWidth: 240,
+                borderRadius: '16px',
+                bgcolor: 'color-mix(in srgb, var(--surface-strong) 92%, transparent)',
+                backdropFilter: 'blur(16px) saturate(1.4)',
+                color: 'var(--text)',
+                border: '1px solid var(--border)',
+                boxShadow:
+                  '0 1px 2px rgba(15, 15, 15, 0.06), 0 24px 48px -16px rgba(15, 15, 15, 0.28)',
+              },
+            },
+            list: { sx: { p: 0.75 } },
+          },
+        }}
+        sx={{
+          height: 38,
+          minWidth: 176,
+          fontSize: '0.92rem',
+          fontWeight: 550,
+          color: 'var(--text)',
+          bgcolor: 'transparent',
+          borderRadius: '10px',
+          // The surrounding .header-search bar draws the border, shadow and focus ring.
+          '& .MuiOutlinedInput-notchedOutline': { display: 'none' },
+          '& .MuiSelect-select': { display: 'flex', alignItems: 'center', pl: 1, pr: '34px !important' },
+          '& .MuiSelect-icon': {
+            right: 10,
+            top: 'calc(50% - 8px)',
+            color: 'var(--text-muted)',
+            transition: 'transform 200ms cubic-bezier(0.16, 1, 0.3, 1)',
+          },
+        }}
+      >
+        <ListSubheader
           sx={{
-            display: 'none',
-            gap: 1,
-            overflowX: 'auto',
-            pb: 0.5,
-            scrollbarWidth: 'none',
-            '&::-webkit-scrollbar': { display: 'none' },
-            [MOBILE]: { display: 'flex' },
+            px: 1.25,
+            lineHeight: '30px',
+            fontSize: '0.68rem',
+            fontWeight: 600,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--text-muted)',
+            bgcolor: 'transparent',
           }}
         >
-          {categories.map((category) => {
-            const Icon = iconByCategory[category] ?? LayoutGrid;
-            const selected = activeCategory === category;
-            return (
-              <Chip
-                key={category}
-                icon={<Icon size={14} />}
-                label={category}
-                clickable
-                onClick={() => onSelect(category)}
-                variant={selected ? 'filled' : 'outlined'}
-                sx={{
-                  flexShrink: 0,
-                  fontWeight: selected ? 600 : 500,
-                  color: selected ? accentText : 'var(--text-soft)',
-                  bgcolor: selected ? accentTint(12) : 'transparent',
-                  borderColor: 'var(--border)',
-                  '& .MuiChip-icon': { color: selected ? 'var(--accent)' : 'var(--text-muted)' },
-                }}
+          Browse by category
+        </ListSubheader>
+        {categories.map((category) => {
+          const selected = activeCategory === category;
+          return (
+            <MenuItem
+              key={category}
+              value={category}
+              sx={{
+                gap: 1.25,
+                px: 1.25,
+                py: 0.875,
+                borderRadius: '10px',
+                fontSize: '0.9rem',
+                transition: 'background-color 120ms ease',
+                '&:hover': { bgcolor: 'color-mix(in srgb, var(--text) 5%, transparent)' },
+                '&.Mui-selected, &.Mui-selected:hover': { bgcolor: accentTint(10), color: accentText },
+                '&.Mui-focusVisible': { bgcolor: 'color-mix(in srgb, var(--text) 7%, transparent)' },
+              }}
+            >
+              <ListItemText
+                primary={category === 'All' ? 'All categories' : category}
+                slotProps={{ primary: { sx: { fontSize: '0.9rem', fontWeight: selected ? 600 : 500 } } }}
               />
-            );
-          })}
-        </Box>
-
-      </Stack>
+              {counts[category] != null && (
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '0.75rem',
+                    fontWeight: selected ? 600 : 500,
+                    fontVariantNumeric: 'tabular-nums',
+                    color: selected ? 'var(--accent)' : 'var(--text-muted)',
+                  }}
+                >
+                  {counts[category]}
+                </Box>
+              )}
+            </MenuItem>
+          );
+        })}
+      </Select>
     </ThemeProvider>
   );
 }

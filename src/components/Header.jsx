@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import { BookOpenText, Code2, LayoutGrid, LayoutList } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { CategoryFilters } from './CategoryFilters';
 import { HeaderSearch } from './HeaderSearch';
 import { ThemeToggle } from './ThemeToggle';
 
-export function Header({ isDark, onToggleTheme, onOpenTechStack, search = null, viewToggle = null }) {
+export function Header({
+  isDark,
+  onToggleTheme,
+  onOpenTechStack,
+  search = null,
+  categoryFilter = null,
+  viewToggle = null,
+}) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(true);
@@ -69,7 +77,19 @@ export function Header({ isDark, onToggleTheme, onOpenTechStack, search = null, 
         </Link>
         {search && (
           <div className="header-search">
-            <HeaderSearch value={search.value} onChange={search.onChange} onClear={search.onClear} />
+            <div className="header-search__field">
+              <HeaderSearch value={search.value} onChange={search.onChange} onClear={search.onClear} />
+            </div>
+            {categoryFilter && (
+              <div className="header-search__category">
+                <CategoryFilters
+                  categories={categoryFilter.categories}
+                  counts={categoryFilter.counts}
+                  activeCategory={categoryFilter.value}
+                  onSelect={categoryFilter.onChange}
+                />
+              </div>
+            )}
           </div>
         )}
         <div className="header-actions">

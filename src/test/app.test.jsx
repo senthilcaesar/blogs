@@ -47,11 +47,17 @@ describe('blog app', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('filters posts by category', async () => {
+  it('filters posts by category from the header dropdown', async () => {
     const user = userEvent.setup();
-    renderRoutes();
+    // The category dropdown lives in the header, so render the full shell.
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <AppShell />
+      </MemoryRouter>,
+    );
 
-    await user.click(screen.getByRole('button', { name: /health/i }));
+    await user.click(screen.getByRole('combobox', { name: /filter by category/i }));
+    await user.click(await screen.findByRole('option', { name: /health/i }));
 
     expect(
       screen.getByRole('heading', { name: /what is serum cholesterol/i }),
