@@ -191,6 +191,16 @@ export function ContextEngineeringArticle() {
 
       <section className="article-panel">
         <h2>References</h2>
+        <div className="ce-recommended">
+          <span className="ce-recommended__label">Recommended reading</span>
+          <a
+            href="https://www.langchain.com/blog/context-engineering-starts-with-retrieval"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Context Engineering Starts with Retrieval (LangChain Blog)
+          </a>
+        </div>
         <ul className="bullet-list" style={{ marginTop: '1rem' }}>
           <li>
             <a
@@ -221,6 +231,26 @@ export function ContextEngineeringArticle() {
           </li>
         </ul>
       </section>
+
+      <style>{`
+        .ce-recommended {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          margin-top: 1rem;
+          padding: 0.9rem 1.1rem;
+          background: color-mix(in srgb, var(--success) 12%, transparent);
+          border-radius: 10px;
+        }
+        .ce-recommended__label {
+          font-family: var(--font-body);
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--success);
+        }
+      `}</style>
     </>
   );
 }
