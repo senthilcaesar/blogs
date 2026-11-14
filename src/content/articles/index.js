@@ -35,6 +35,7 @@ import { SkillsOverMcpArticle } from './SkillsOverMcpArticle';
 import { TracesArticle } from './TracesArticle';
 import { RagBenchmarkingArticle } from './RagBenchmarkingArticle';
 import { SemanticModelOntologyKnowledgeGraphArticle } from './SemanticModelOntologyKnowledgeGraphArticle';
+import { AutoOntologyArticle } from './AutoOntologyArticle';
 
 export const articleRegistry = {
   'formulating-thoughts-to-expressing-them-clearly':
@@ -45,6 +46,7 @@ export const articleRegistry = {
   'benchmarking-rag-systems': RagBenchmarkingArticle,
   'semantic-model-vs-ontology-vs-knowledge-graph':
     SemanticModelOntologyKnowledgeGraphArticle,
+  'auto-ontology': AutoOntologyArticle,
   'skills-over-mcp': SkillsOverMcpArticle,
   'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,

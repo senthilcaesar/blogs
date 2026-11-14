@@ -246,6 +246,29 @@ export const posts = [
     },
   },
   {
+    title: 'Auto Ontology',
+    slug: 'auto-ontology',
+    category: 'Data',
+    tags: ['ontology', 'nvidia', 'text-to-sql', 'ai-agents', 'semantic-layer'],
+    excerpt:
+      'A beginner-friendly introduction to NVIDIA Auto Ontology: how it drafts a map of what your database means, how people certify it, and why that helps an AI agent write the right SQL.',
+    image: imageUrl('auto-ontology-cover.png'),
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/auto-ontology',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Data & AI',
+      summary:
+        'Why AI agents get database questions wrong, and how NVIDIA Auto Ontology drafts a shared map of business meaning that people check and agents use.',
+    },
+  },
+  {
     title: 'Semantic Model vs Ontology vs Knowledge Graph',
     slug: 'semantic-model-vs-ontology-vs-knowledge-graph',
     category: 'Data',
