@@ -1,4 +1,4 @@
-import { CalendarRange, Check, ChevronLeft, Copy } from 'lucide-react';
+import { ArrowUp, CalendarRange, Check, ChevronLeft, Copy } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CommentsSection } from './CommentsSection';
@@ -6,10 +6,12 @@ import { CommentsSection } from './CommentsSection';
 export function ArticleLayout({ post, children }) {
   const [readingProgress, setReadingProgress] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
     const updateScrollProgress = () => {
       const currentScroll = window.scrollY;
+      setShowTop(currentScroll > 600);
       const scrollHeight =
         document.documentElement.scrollHeight - window.innerHeight;
       if (scrollHeight > 0) {
@@ -23,6 +25,12 @@ export function ArticleLayout({ post, children }) {
     updateScrollProgress();
     return () => window.removeEventListener('scroll', updateScrollProgress);
   }, []);
+
+  // HashRouter owns the URL hash, so scroll with JS rather than a #top anchor
+  const scrollToTop = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
 
   const handleCopyLink = async () => {
     const baseUrl = window.location.origin + window.location.pathname;
@@ -135,6 +143,17 @@ export function ArticleLayout({ post, children }) {
 
         <CommentsSection postSlug={post.slug} />
       </article>
+
+      <button
+        type='button'
+        className={`scroll-top-btn ${showTop ? 'scroll-top-btn--visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label='Back to top'
+        title='Back to top'
+        tabIndex={showTop ? 0 : -1}
+      >
+        <ArrowUp size={20} />
+      </button>
     </>
   );
 }
