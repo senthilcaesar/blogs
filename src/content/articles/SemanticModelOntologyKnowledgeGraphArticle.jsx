@@ -427,16 +427,16 @@ function KnowledgeGraphDiagram() {
     strokeWidth: 2,
   };
   const nodes = [
-    { cx: 95, type: 'Customer', id: 'C102', prop: 'region: EU' },
-    { cx: 360, type: 'Order', id: 'O501', prop: 'status: shipped' },
-    { cx: 625, type: 'Product', id: 'P20', prop: 'name: Laptop Pro' },
+    { cx: 95, type: 'Customer', id: 'C215', prop: 'region: EU' },
+    { cx: 360, type: 'Order', id: 'O733', prop: 'status: shipped' },
+    { cx: 625, type: 'Product', id: 'P31', prop: 'name: Logo T-shirt' },
   ];
   return (
     <figure style={figureStyle}>
       <svg
         viewBox="0 0 720 210"
         role="img"
-        aria-label="Knowledge graph diagram. Node Customer C102 has a PLACED relationship to node Order O501, which has a CONTAINS relationship to node Product P20."
+        aria-label="Knowledge graph diagram. Node Customer C215 has a PLACED relationship to node Order O733, which has a LISTS relationship to node Product P31, a logo t-shirt."
         style={{ width: '100%', height: 'auto', display: 'block' }}
       >
         <defs>
@@ -465,7 +465,7 @@ function KnowledgeGraphDiagram() {
         </text>
         <line x1="404" y1="115" x2="579" y2="115" style={edgeStyle} markerEnd="url(#kg-arrow)" />
         <text x="492" y="105" textAnchor="middle" style={{ ...svgText, fontSize: 13, fontWeight: 600, letterSpacing: '0.05em' }}>
-          CONTAINS
+          LISTS
         </text>
       </svg>
       <figcaption>Knowledge graph: real records connected by the relationships the ontology allows.</figcaption>
@@ -742,7 +742,7 @@ const ontologyVsGraph = [
   {
     aspect: 'What it contains',
     ontology: 'Concepts and rules: Customer, Order, Product, “an Order belongs to one Customer”',
-    graph: 'Real records and links: C102 placed O501, O501 contains P20',
+    graph: 'Real records and links: C215 placed O733, O733 lists P31',
   },
   {
     aspect: 'Everyday analogy',
@@ -767,7 +767,7 @@ const ontologyVsGraph = [
   {
     aspect: 'Example question',
     ontology: '“Can an order exist without a customer?” → No',
-    graph: '“Which products did customer C102 buy?” → P20',
+    graph: '“Which products did customer C215 buy?” → P31, a t-shirt',
   },
   {
     aspect: 'Without it',
@@ -782,11 +782,11 @@ const tocGroups = [
     id: 'ontology',
     label: 'Ontology',
     items: [
+      { id: 'one-word-one-meaning', label: 'One word, one meaning' },
       { id: 'taxonomy', label: 'First, a taxonomy' },
       { id: 'what-an-ontology-adds', label: 'What an ontology adds' },
       { id: 'one-map-two-readers', label: 'One map, two readers' },
       { id: 'semantic-model-vs-ontology', label: 'Semantic model vs ontology' },
-      { id: 'tables-to-business-context', label: 'From tables to business context' },
     ],
   },
   { id: 'knowledge-graph', label: 'Knowledge Graph' },
@@ -842,10 +842,20 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
       <section className="article-panel">
         <h2 id="semantic-model">Semantic Model - Make data meaningful</h2>
         <p>
-          A company&rsquo;s data sits in database tables built for computers, not people. A column is called{' '}
-          <code>invoice_amount</code>, a row marked <code>is_test</code> is fake data, and some invoices were
-          cancelled but are still in the table. Anyone who wants a simple number, like how much the company earned,
-          first has to know all of those quirks.
+          Before an executive business review, your VP of Sales asks an AI assistant, &ldquo;What was net revenue
+          for our top enterprise accounts last quarter?&rdquo; In seconds, the agent returns a polished chart.
+          Unfortunately, the numbers don&rsquo;t match the finance report. Why? Because the agent counted
+          cancelled orders as revenue, and it read its numbers from a staging table instead of the finished one.
+          A staging table is where new data lands first, before anyone has cleaned or checked it, so it can still
+          hold duplicates and half-loaded rows.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The agent didn&rsquo;t fail because of the large language model (LLM) behind it, or because it
+          couldn&rsquo;t translate a user question into a query. It failed because it didn&rsquo;t understand your
+          business. A company&rsquo;s data sits in database tables built for computers, not people. A column is
+          called <code>invoice_amount</code>, a row marked <code>is_test</code> is fake data, some invoices were
+          cancelled but are still in the table, and a staging table of not-yet-checked data can sit right next to the finished one.
+          Anyone who wants a simple number, whether a person or an agent, first has to know all of those quirks.
         </p>
         <p style={{ marginTop: '1rem' }}>
           A semantic model is a layer that sits on top of those tables and gives them plain business names. We
@@ -857,22 +867,19 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         <p style={{ marginTop: '1rem' }}>
           <strong>Example:</strong> Here&rsquo;s the recipe behind that menu item, written in SQL, the language
           databases understand: <code>SELECT SUM(invoice_amount) FROM invoices WHERE status &lt;&gt; 'cancelled' AND is_test = false</code>.
-          Without a semantic model, every analyst or agent has to write that out themselves and remember every
-          part of it. With one, the semantic model defines <strong>Net Revenue</strong> once, and anyone can simply
-          ask, &ldquo;What was net revenue this quarter?&rdquo;
+          It reads from <code>invoices</code>, the finished table, never the staging one, and it leaves out the
+          cancelled and test rows. Without a semantic model, every analyst or agent has to write that out
+          themselves and remember every part of it. With one, the semantic model defines{' '}
+          <strong>Net Revenue</strong> once, and anyone can simply ask, &ldquo;What was net revenue this
+          quarter?&rdquo;
         </p>
-        <ul>
-          <li>
-            <strong>Tables</strong> tell you where and how the data is stored.
-          </li>
-          <li>
-            <strong>Semantic models</strong> tell you how that data is structured to analyze and answer specific
-            business questions.
-          </li>
-        </ul>
         <p style={{ marginTop: '1rem' }}>
           In practice, this means everyone who asks for net revenue, whether an analyst, a dashboard or an AI
-          agent, gets the same number, because they all use the same recipe.
+          agent, gets the same number, because they all use the same recipe. The real kicker is that this recipe
+          often already exists, in the semantic models behind the company&rsquo;s own reports and dashboards. But
+          because each one stays locked inside its own tool, an agent that can&rsquo;t reach it has to guess, as
+          the VP&rsquo;s agent did. Connect your AI agents to those same semantic models, and their answers line
+          up with the numbers your business trusts.
         </p>
         <p style={{ marginTop: '1rem' }}>
           <strong>Who builds it:</strong> Usually the data team, but the business decides what goes in it. The
@@ -880,26 +887,7 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           in tools like Power BI or Looker, or analytics engineers, who write it as code in tools like dbt. They
           don&rsquo;t get to decide what net revenue means, though. That&rsquo;s usually finance&rsquo;s call:
           whether refunds come out, whether tax is included, what counts as cancelled. The data team then turns
-          that agreement into the recipe. Skip that step and you get a semantic model that&rsquo;s technically
-          correct and still disagrees with the finance report.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          <strong>Why it matters:</strong> Before an executive business review, your VP of Sales asks an AI
-          assistant, &ldquo;What was net revenue for our top enterprise accounts last quarter?&rdquo; In seconds,
-          the agent returns a polished chart. Unfortunately, the numbers don&rsquo;t match the finance report.
-          Why? Because the agent counted cancelled orders as revenue and pulled from a staging table, a rough
-          working copy of the data that nobody had checked yet.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          The agent didn&rsquo;t fail because of the large language model (LLM) behind it, or because it couldn&rsquo;t translate a user question
-          into a query. It failed because it didn&rsquo;t understand your business. The real kicker is that this
-          understanding often already exists, in the semantic models behind the company&rsquo;s own reports
-          and dashboards. But because each definition stays locked inside its own tool, every agent
-          guesses at it&hellip; and often gets it wrong.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          Connect your AI agents to those same semantic models, and they get the same business definitions your analysts rely
-          on, so their answers line up with the numbers your business trusts.
+          that agreement into the recipe.
         </p>
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The business-friendly interface to your data.
@@ -909,8 +897,10 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
       <section className="article-panel">
         <h2 id="ontology">Ontology - Define what things mean</h2>
         <p>
-          A semantic model gets the math right, but only once everyone agrees on what&rsquo;s being counted.
-          That&rsquo;s harder than it sounds. Ask your sales, marketing and finance teams the same question, &ldquo;What&rsquo;s an active
+          A semantic model makes sure a number is always calculated the same way. What it can&rsquo;t do is decide
+          what belongs in the count. Say you want the number of active customers. The semantic model can count
+          them, but someone first has to say who counts as &ldquo;active&rdquo;, and that&rsquo;s harder than it
+          sounds. Ask your sales, marketing and finance teams the same question, &ldquo;What&rsquo;s an active
           customer?&rdquo;, and you&rsquo;ll probably get three answers. Sales means anyone who bought something in
           the last year. Marketing means anyone who opened an email this month. Finance means anyone with a paid
           invoice this quarter. Now ask an AI agent how many active customers you have. Which definition does it
@@ -918,17 +908,39 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         </p>
         <p style={{ marginTop: '1rem' }}>
           An ontology is the fix for that guess. Simply put, it&rsquo;s a shared map of the things your business
-          cares about and how they connect, written so that people and machines read it the same way.
+          cares about, written so that people and machines read it the same way. The map holds four things: what
+          each term means, what&rsquo;s a kind of what, how things relate, and the rules they must follow.
+          We&rsquo;ll start with the first one, because it settles the active customer question.
         </p>
-        <div className="article-panel article-panel--accent">
-          <p>
-            <strong>A business-facing ontology</strong> is a simple description of the real-world concepts of your
-            business and how they relate, articulated in a way that makes sense to human users.
-          </p>
-        </div>
+
+        <h3 id="one-word-one-meaning">One word, one meaning</h3>
+        <p>
+          The business picks one meaning for &ldquo;active customer&rdquo;, writes it down once in the ontology,
+          and every reader, person or agent, uses that meaning instead of guessing:
+        </p>
+        <SharedDefinitionDiagram />
         <p style={{ marginTop: '1rem' }}>
-          To see what goes into that map, it helps to start with something simpler that people often confuse it
-          with.
+          Writing a definition down doesn&rsquo;t just tidy things up. It changes the answers an agent gives.{' '}
+          <a href="https://www.linkedin.com/in/syedmuhammadhumair/" target="_blank" rel="noreferrer">
+            Syed Humair
+          </a>{' '}
+          saw this when he tested NVIDIA&rsquo;s open-source Auto Ontology tool on video (linked in the
+          references). He asked its agent the same question many times: how much revenue one product earned in
+          Pennsylvania. About one time in three, the answer changed, because the agent switched to a different
+          meaning of &ldquo;revenue&rdquo;. Instead of adding up the price of each item sold, it added up whole
+          payments with tax included (and picked the wrong city to decide the state). It&rsquo;s the active
+          customer problem again, with a different word: nobody had written down what &ldquo;revenue&rdquo; meant,
+          so the agent guessed. Humair then added one human-written example, a saved query with a plain note
+          saying that revenue means the price of each item sold. After that, the agent was right every time he
+          asked. Nobody changed the AI model; the meaning was simply written down. To be sure, that&rsquo;s one
+          question asked many times, so it&rsquo;s a quick check rather than a benchmark. Still, Humair&rsquo;s
+          conclusion is hard to argue with: context mattered more than the model.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Look closely at that definition, though: &ldquo;a customer who placed a paid order&rdquo;. It only
+          makes sense if the agent already knows what a customer and an order are, and how one connects to the
+          other. That&rsquo;s what the other three parts of the map are for. To see them, it helps to start with
+          something simpler that people often confuse with an ontology.
         </p>
 
         <h3 id="taxonomy">First, a taxonomy</h3>
@@ -946,9 +958,10 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
 
         <h3 id="what-an-ontology-adds">What an ontology adds</h3>
         <p>
-          An ontology keeps those types and adds two things on top: how things relate, and the rules they must
-          follow. Our running example is a shop with three concepts, Customer, Order and Product. In plain words:
-          a customer places an order, an order lists products, and every order must have a customer.
+          An ontology keeps those types and adds the last two parts of the map: how things relate, and the rules
+          they must follow. Our running example is a shop with three concepts, Customer, Order and Product. In
+          plain words: a customer places an order, an order lists products, and every order must have a
+          customer.
         </p>
         <OntologyDiagram />
         <p style={{ marginTop: '1rem' }}>
@@ -958,11 +971,20 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           revenue.
         </p>
 
+        <h3 id="one-map-two-readers">One map, two readers</h3>
+        <p>
+          We now have the whole map: the definitions, the types, the relationships and the rules. It has two
+          kinds of reader. People read it as boxes and arrows, like the diagrams above. AI agents read the very
+          same map, written as text instead of a picture. Because everyone reads one map, nobody has to translate
+          it, and there&rsquo;s no second copy to fall out of date. When the business changes a rule, people and
+          agents see the change at the same time.
+        </p>
+
         <details className="article-details">
-          <summary>Under the hood (optional): how an ontology is written down</summary>
+          <summary>Under the hood (optional): the text agents read</summary>
           <p>
             You don&rsquo;t need this part to follow the rest of the post, but you&rsquo;ll see these names in
-            most ontology tools. There are open standards for writing each layer down:
+            most ontology tools. There&rsquo;s an open standard for writing down each part of the map:
           </p>
           <ul>
             <li>
@@ -999,31 +1021,12 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
             what <code>sh:inversePath</code> means) and demands at least one customer at the other end:
           </p>
           <CodeCard code={orderShape} lang="turtle" file="SHACL shape" />
-          <p style={{ marginTop: '1rem' }}>And the definition of an active customer, which we&rsquo;ll meet next:</p>
+          <p style={{ marginTop: '1rem' }}>
+            And finally, the definition of an active customer that we started with:
+          </p>
           <CodeCard code={definitionTurtle} lang="turtle" />
         </details>
 
-        <h3 id="one-map-two-readers">One map, two readers</h3>
-        <p>
-          The ontology we just drew has two kinds of reader. People read it as the boxes and arrows in the
-          diagram. AI agents read the very same map, written as text instead of a picture (the optional box above
-          shows what that text looks like). Because everyone reads one map, nobody has to translate it, and
-          there&rsquo;s no second copy to fall out of date. When the business changes a rule, people and agents
-          see the change at the same time.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          That brings us back to the active customer. An ontology also writes down what each term means, in plain
-          words. The business picks one meaning, writes it down once, and every reader uses it:
-        </p>
-        <SharedDefinitionDiagram />
-        <p style={{ marginTop: '1rem' }}>
-          This matters more than it might seem. In one hands-on test of NVIDIA&rsquo;s open-source Auto Ontology
-          tool (linked in the references), the same revenue question came back wrong about one time in three,
-          partly because the agent sometimes counted tax as revenue. Adding a single human-written note that said
-          what &ldquo;revenue&rdquo; meant made it right on every later run. That was one question asked many
-          times, so it&rsquo;s a quick check rather than a benchmark. Still, the presenter&rsquo;s conclusion is
-          hard to argue with: context mattered more than the model.
-        </p>
         <div className="article-panel article-panel--accent">
           <p>
             <strong>Want to see one in action?</strong>{' '}
@@ -1032,9 +1035,6 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
             revenue question.
           </p>
         </div>
-        <p style={{ marginTop: '1rem' }}>
-          <strong>Think of it as:</strong> The blueprint and rulebook for business knowledge.
-        </p>
 
         <h3 id="semantic-model-vs-ontology">Semantic model vs ontology</h3>
         <p>
@@ -1045,19 +1045,14 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           customer&rdquo; means, and that definition stays the same whichever database the data is stored in.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          In practice, you need both: the ontology settles what &ldquo;active
-          customer&rdquo; means, and the semantic model does the sum. A semantic model on its own will happily
-          total revenue for &ldquo;active customers&rdquo; using whatever definition someone typed into that one
-          dashboard, and that&rsquo;s how sales and finance end up with different numbers.
+          In practice, you need both: the ontology settles what &ldquo;active customer&rdquo; means, and the
+          semantic model does the sum. A semantic model on its own will happily total revenue for &ldquo;active
+          customers&rdquo; using whatever definition someone typed into that one dashboard, and that&rsquo;s how
+          sales and finance end up with different numbers.
         </p>
-
-        <div
-          style={{
-            margin: '2rem 0 0',
-            paddingLeft: '1.25rem',
-          }}
-        >
-        <h3 id="tables-to-business-context" style={{ marginTop: 0 }}>From Tables to Business Context</h3>
+        <p style={{ marginTop: '1rem' }}>
+          The two also stack, one on top of the other:
+        </p>
         <ul>
           <li>
             <strong>Tables</strong> tell you where and how the data is stored.
@@ -1067,11 +1062,14 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
             business questions.
           </li>
           <li>
-            <strong>Ontologies</strong> tell you what that business means. In platforms like Microsoft Fabric, the
-            ontology becomes the business context layer on top of the semantic model, and it lets AI agents reason
-            across <em>many</em> semantic models.
+            <strong>Ontologies</strong> tell you what that business means.
           </li>
         </ul>
+        <p style={{ marginTop: '1rem' }}>
+          Platforms like Microsoft Fabric build it this way. The ontology sits on top of the semantic models as the
+          business context layer, and because it isn&rsquo;t tied to any one of them, it lets AI agents reason
+          across <em>many</em> semantic models at once.
+        </p>
         <figure style={{ margin: '1.5rem 0 0' }}>
           <img
             src={ontologyFlowImg}
@@ -1080,7 +1078,9 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           />
           <figcaption>The semantic model powers analytics; the ontology turns it into business context for AI.</figcaption>
         </figure>
-        </div>
+        <p style={{ marginTop: '1rem' }}>
+          <strong>Think of it as:</strong> The blueprint and rulebook for business knowledge.
+        </p>
       </section>
 
       <section className="article-panel">
@@ -1091,19 +1091,44 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           for the order number, and every box is empty. So where do the filled-in forms live?
         </p>
         <p style={{ marginTop: '1rem' }}>
-          That&rsquo;s the knowledge graph. Simply put, it&rsquo;s the shop&rsquo;s real records, drawn as dots
-          and lines. Each dot, called a <em>node</em>, is one actual thing: a particular customer, a particular
-          order, a particular product. Each line, called a <em>relationship</em>, is a real fact connecting two of
-          them. The records often come from different systems, such as the sales system and the warehouse system,
-          and the graph links them into one picture.
+          That&rsquo;s the knowledge graph. Simply put, it&rsquo;s the shop&rsquo;s real records, stored as a
+          network of connected points. Each point, called a <em>node</em>, is one actual thing: a particular
+          customer, a particular order, a particular product. Each link, called a <em>relationship</em>, is a real
+          fact connecting two of them, and it uses the relationship names the ontology defined, like{' '}
+          <em>places</em> and <em>lists</em>. We can picture each node as a dot and each relationship as a line
+          between two dots.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          <strong>Example:</strong> Customer C102 placed Order O501, which contains Product P20, a laptop.
+          <strong>Example:</strong> Customer C215 placed Order O733, which lists Product P31, a t-shirt.
         </p>
         <KnowledgeGraphDiagram />
         <p style={{ marginTop: '1rem' }}>
-          In practice, an agent can start at customer C102 and follow the lines to find every order they placed
-          and every product in those orders, without anyone writing a complicated query.
+          But the shop&rsquo;s database already has its customers and orders. Why copy them into a graph? There
+          are two reasons. First, the records live in different systems. The customer&rsquo;s details are in the
+          sales system and the shipment is in the warehouse system, often under a different ID, so nothing
+          connects the two until someone matches them up. The knowledge graph does that matching once, when the
+          records are copied in, and keeps the result. Second, in tables, every hop from a customer to an order
+          to a product is a <em>join</em>, an instruction that matches rows in one table to rows in another, and
+          someone has to write each one correctly. In a graph, those links are already stored, so the agent just
+          follows them.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Semantic models struggle with questions that follow a chain of connections. A semantic model is built
+          around a fixed set of tables, joined in ways the data team chose in advance, and it&rsquo;s best at
+          adding things up across them. Now take a question like this one from our shop:{' '}
+          <mark className="highlight">&ldquo;What else did customers who bought the logo t-shirt also buy?&rdquo;</mark> To answer it, you go from the t-shirt to its
+          orders, then to the customers who placed them, then to their other orders, then to the products on those
+          orders. In tables, that&rsquo;s four joins, and it loops back through the same tables twice. Nobody would
+          define a metric for that ahead of time, and you can&rsquo;t predefine one for every chain a user might
+          ask about. A knowledge graph stores those links already, so the agent just follows them, however many
+          steps the question needs. The question <mark className="highlight highlight-green">&ldquo;who is connected to whom, and how far away&rdquo;</mark> is what
+          graphs are built for.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          In practice, the ontology and the knowledge graph split the work. The ontology tells the agent that a
+          path from a customer to a product exists, and that it runs through an order. The knowledge graph holds
+          the actual customers and orders on that path, so the agent can start at customer C215 and follow the
+          links to every order they placed and every product in those orders.
         </p>
         <p style={{ marginTop: '1rem' }}>
           <strong>Think of it as:</strong> The populated network of connected business facts.
