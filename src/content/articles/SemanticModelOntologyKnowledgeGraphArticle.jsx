@@ -398,6 +398,106 @@ function SharedDefinitionDiagram() {
   );
 }
 
+function TwoQuestionsDiagram() {
+  const card = {
+    fill: 'color-mix(in srgb, var(--accent-purple) 10%, transparent)',
+    stroke: 'var(--accent-purple)',
+    strokeWidth: 2,
+  };
+  const iconBox = {
+    fill: 'color-mix(in srgb, var(--accent-purple) 16%, transparent)',
+    stroke: 'var(--accent-purple)',
+    strokeWidth: 1.5,
+  };
+  const purpleFill = { fill: 'var(--accent-purple)' };
+  const purpleStroke = { stroke: 'var(--accent-purple)', strokeWidth: 2.5, fill: 'none', strokeLinejoin: 'round' };
+  const question = { ...svgText, fontSize: 21, fontStyle: 'italic' };
+  return (
+    <figure style={figureStyle}>
+      <svg
+        viewBox="0 0 720 220"
+        role="img"
+        aria-label="Two questions. The semantic model answers: how is the data related? The ontology answers: what do these relations mean?"
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      >
+        {/* Semantic model card */}
+        <rect x="20" y="20" width="300" height="76" rx="14" style={card} />
+        <rect x="40" y="38" width="40" height="40" rx="8" style={iconBox} />
+        {[[51, 53], [60, 53], [69, 53], [51, 63], [60, 63]].map(([cx, cy]) => (
+          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="2.6" style={purpleFill} />
+        ))}
+        <text x="96" y="66" style={{ ...svgText, fontSize: 22, fontWeight: 700 }}>
+          Semantic model
+        </text>
+        <text x="350" y="66" style={question}>
+          How is the data related?
+        </text>
+
+        {/* Ontology card */}
+        <rect x="80" y="122" width="240" height="76" rx="14" style={card} />
+        <rect x="100" y="140" width="40" height="40" rx="8" style={iconBox} />
+        <path d="M120 148 L132 154 L120 160 L108 154 Z" style={purpleFill} />
+        <path d="M108 159 L120 165 L132 159" style={purpleStroke} />
+        <path d="M108 165 L120 171 L132 165" style={purpleStroke} />
+        <text x="156" y="168" style={{ ...svgText, fontSize: 22, fontWeight: 700 }}>
+          Ontology
+        </text>
+        <text x="350" y="168" style={question}>
+          What do these relations mean?
+        </text>
+      </svg>
+      <figcaption>The semantic model connects the data; the ontology says what those connections mean.</figcaption>
+    </figure>
+  );
+}
+
+function StackRowDiagram() {
+  const pill = {
+    fill: 'color-mix(in srgb, var(--accent) 16%, transparent)',
+    stroke: 'var(--accent)',
+    strokeWidth: 2,
+  };
+  const layers = [
+    { x: 10, label: 'TABLES', caption: 'Data storage' },
+    { x: 255, label: 'SEMANTIC MODEL', caption: 'Data structure' },
+    { x: 500, label: 'ONTOLOGY', caption: 'Relationship context' },
+  ];
+  return (
+    <figure style={figureStyle}>
+      <svg
+        viewBox="0 0 720 120"
+        role="img"
+        aria-label="Three layers from left to right. Tables: data storage. Semantic model: data structure. Ontology: relationship context."
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      >
+        <defs>
+          <ArrowMarker id="stack-arrow" />
+        </defs>
+        {layers.map((l, i) => (
+          <g key={l.label}>
+            <rect x={l.x} y="18" width="210" height="48" rx="10" style={pill} />
+            <text
+              x={l.x + 105}
+              y="49"
+              textAnchor="middle"
+              style={{ ...svgText, fontSize: 17, fontWeight: 700, letterSpacing: '0.06em' }}
+            >
+              {l.label}
+            </text>
+            <text x={l.x + 105} y="98" textAnchor="middle" style={{ ...svgMuted, fontSize: 16, fontStyle: 'italic' }}>
+              {l.caption}
+            </text>
+            {i < layers.length - 1 && (
+              <line x1={l.x + 214} y1="42" x2={l.x + 241} y2="42" style={edgeStyle} markerEnd="url(#stack-arrow)" />
+            )}
+          </g>
+        ))}
+      </svg>
+      <figcaption>Each layer builds on the one before it.</figcaption>
+    </figure>
+  );
+}
+
 const taxonomyTurtle = `:TShirt   rdfs:subClassOf :Clothing .
 :Clothing rdfs:subClassOf :Product .`;
 
@@ -970,6 +1070,21 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           rule, an order loaded without a customer gets flagged as broken data before an agent ever counts it as
           revenue.
         </p>
+        <p style={{ marginTop: '1rem' }}>
+          <strong style={{ textDecoration: 'underline' }}>Another example, beyond the shop:</strong> Suppose you ask an AI agent:
+          <br />
+          <mark className="highlight">
+            &ldquo;Which high-value customers are at risk because they have unresolved incidents and repeated SLA
+            breaches?&rdquo;
+          </mark>
+          <br />
+          You can&rsquo;t answer the question with just one table or a
+          few tables. To answer it, you need to connect multiple pieces of business context together. An ontology
+          provides that context. It defines what each business term means, such as what makes a customer
+          high-value or when an incident counts as unresolved, and the rules for how customers, incidents and SLAs
+          relate to each other. That&rsquo;s exactly the context an AI agent needs before it can start looking for
+          the answer.
+        </p>
 
         <h3 id="one-map-two-readers">One map, two readers</h3>
         <p>
@@ -1044,6 +1159,7 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           Revenue. The ontology is about <strong>meaning</strong>: it says what a term like &ldquo;active
           customer&rdquo; means, and that definition stays the same whichever database the data is stored in.
         </p>
+        <TwoQuestionsDiagram />
         <p style={{ marginTop: '1rem' }}>
           In practice, you need both: the ontology settles what &ldquo;active customer&rdquo; means, and the
           semantic model does the sum. A semantic model on its own will happily total revenue for &ldquo;active
@@ -1065,6 +1181,7 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
             <strong>Ontologies</strong> tell you what that business means.
           </li>
         </ul>
+        <StackRowDiagram />
         <p style={{ marginTop: '1rem' }}>
           Platforms like Microsoft Fabric build it this way. The ontology sits on top of the semantic models as the
           business context layer, and because it isn&rsquo;t tied to any one of them, it lets AI agents reason
