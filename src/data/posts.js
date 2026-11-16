@@ -156,7 +156,7 @@ export const posts = [
     tags: ['semantic-layer', 'ontology', 'knowledge-graph', 'ai', 'data'],
     excerpt:
       'Semantic models, ontologies and knowledge graphs all add business context to raw data, but they are complementary tools built for different jobs.',
-    image: imageUrl('semantic-model-ontology-knowledge-graph-cover.jpg'),
+    image: imageUrl('semantic-model-ontology-knowledge-graph-cover-whiteboard.png'),
     imageFit: 'contain',
     date: 'Oct 2026',
     priority: 'High',

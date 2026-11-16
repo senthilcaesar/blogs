@@ -4,6 +4,7 @@ import { ArticleToc } from '../../components/ArticleToc';
 
 const comparisonImg = new URL('../../../images/semantic-model-ontology-knowledge-graph.jpg', import.meta.url).href;
 const ontologyFlowImg = new URL('../../../images/semantic-model-to-ontology.png', import.meta.url).href;
+const whiteboardImg = new URL('../../../images/semantic-model-ontology-knowledge-graph-whiteboard.png', import.meta.url).href;
 
 function YoutubeIcon() {
   return (
@@ -1350,6 +1351,14 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         </p>
         <p style={{ marginTop: '1rem' }}>Here&rsquo;s the whole picture in one place, from question to answer:</p>
         <InActionDiagram />
+        <figure style={{ margin: '1.5rem 0 0' }}>
+          <img
+            src={whiteboardImg}
+            alt="Whiteboard with three panels. 1. Semantic model, the math: customers, orders and products tables joined on id, customer_id and product_id, feeding a measure, Net Revenue = SUM(amount), leaving out cancelled and test rows. 2. Ontology, the meaning: Customer places Order, Order lists Product, T-shirt is a Clothing is a Product, with the definition active = paid order in last 12 months and the rule every Order needs a Customer. 3. Knowledge graph, the facts: C215 placed O733, which lists P31 T-shirt; C102 placed O501, which lists P31 T-shirt and P20 Hoodie."
+            style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+          />
+          <figcaption>The three layers on one board: the math, the meaning and the facts.</figcaption>
+        </figure>
       </section>
 
       <section className="article-panel">
