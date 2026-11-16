@@ -361,7 +361,7 @@ const ontologyTerms = [
     std: '—',
   },
   {
-    db: 'A person marking a term as certified',
+    db: 'A person marking a term as certified (more on this in Stage 2)',
     onto: 'A curator signing off',
     std: '—',
   },
@@ -529,8 +529,10 @@ export function AutoOntologyArticle() {
         <p style={{ marginTop: '1rem' }}>
           It&rsquo;s easiest to understand next to its simpler cousin, the taxonomy. A taxonomy only sorts things
           into types, from broad to narrow: a t-shirt is a kind of clothing, and clothing is a kind of product. An
-          ontology keeps those types and adds two things: how things relate (a customer <em>places</em> an order)
-          and the rules (every order must have a customer).
+          ontology keeps those types and adds three more things: what each term means (a written definition), how
+          things relate (a customer <em>places</em> an order) and the rules things must follow (every order must have
+          a customer). That makes four parts in all, and we&rsquo;ll check Auto Ontology&rsquo;s map against them
+          shortly.
         </p>
         <p style={{ marginTop: '1rem' }}>
           Why does that matter for our question? Ask sales, marketing and finance what an &ldquo;active
@@ -564,7 +566,9 @@ export function AutoOntologyArticle() {
         <p>
           If you already know the vocabulary of ontologies, each piece has a familiar counterpart. If you
           don&rsquo;t, the left column is all you need; the right-hand columns are the formal names you&rsquo;ll
-          meet elsewhere. (OWL is the Web Ontology Language, the main standard for writing ontologies.)
+          meet elsewhere. (OWL is the Web Ontology Language, the main standard for writing ontologies.) They&rsquo;re
+          equivalents, not what the tool writes: as the next section shows, Auto Ontology stores its map without any
+          of these standards.
         </p>
         <div className="table-wrap" style={{ marginTop: '1.25rem' }}>
           <table>
@@ -591,7 +595,9 @@ export function AutoOntologyArticle() {
           </table>
         </div>
         <p style={{ marginTop: '1rem' }}>
-          Two things you might expect are missing. The terms aren&rsquo;t arranged into types from broad to narrow,
+          Of the four parts of an ontology, the map clearly has two: definitions, in each term&rsquo;s description
+          and synonyms, and relationships. It also adds something ontologies usually don&rsquo;t hold: saved
+          formulas. But two things you might expect are missing. The terms aren&rsquo;t arranged into types from broad to narrow,
           so there&rsquo;s no &ldquo;a t-shirt is a kind of clothing&rdquo;. And there&rsquo;s no reasoner, a program
           that works out new facts from the rules you&rsquo;ve given it. In the words of Syed Humair, who tested the
           tool on video, it&rsquo;s &ldquo;an ontology in spirit, built for one job&rdquo;: helping an AI agent write
@@ -663,7 +669,7 @@ export function AutoOntologyArticle() {
           database. Plain code then checks those suggested links against the real data.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          Going table by table takes time, and the model you choose matters a lot. On the sample database,
+          Going table by table takes time, and the model you choose matters a lot for speed. On the sample database,
           Humair&rsquo;s build took about two and a half minutes with Anthropic&rsquo;s Claude Haiku, and more than
           20 minutes with NVIDIA&rsquo;s free hosted model. That works out to roughly three seconds per table with
           Haiku. At that rate, a company with 5,000 tables would wait about four hours for a first draft.
@@ -725,28 +731,23 @@ export function AutoOntologyArticle() {
         <p style={{ marginTop: '1rem' }}>
           The second test was a trick question: the return on ad spend for the same product. Wide World Importers
           has no advertising data at all, so the only honest answer is &ldquo;I can&rsquo;t&rdquo;. That&rsquo;s
-          what came back:
+          what came back. Humair asked this one through the project&rsquo;s MCP server, a plug-in point that lets
+          an AI assistant call Auto Ontology&rsquo;s tools, such as <code>check_answerable</code>, directly (more on it
+          in Trying it yourself):
         </p>
         <CodeCard code={adSpendExchange} lang="chat" file="MCP session" />
         <p style={{ marginTop: '1rem' }}>
           It then offered sales revenue instead, which is helpful. But in Humair&rsquo;s run it calculated that
-          revenue from orders rather than invoices, yet another meaning of the word. The agent knew what data was
-          missing; it still needed the meaning written down.
+          revenue from orders rather than invoices, yet another meaning of the word. Knowing which data is missing,
+          it turns out, isn&rsquo;t the same as knowing what a word means.
         </p>
       </section>
 
       <section className="article-panel">
         <h2 id="does-the-model-matter">Does the AI model matter?</h2>
         <p>
-          Auto Ontology uses two kinds of model. A <em>chat model</em> reads tables and writes SQL, and you can swap
-          it: NVIDIA&rsquo;s hosted models are the default, but Humair also ran it with GPT, Claude and Gemini models
-          and with local models through Ollama. An <em>embedding model</em> powers the search, and that one has to
-          stay on NVIDIA for now, because the database expects vectors of one exact size and other embedding models
-          don&rsquo;t match it.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          He then asked the Pennsylvania question to 11 chat models, three times each, with and without the example
-          query. Without it, almost every model got it wrong. With it, almost every model got it right. Only one,
+          Humair asked the Pennsylvania question to 11 <em>chat models</em>, the AI models that read tables and write
+          SQL, three times each, with and without that saved query. Without it, almost every model got it wrong. With it, almost every model got it right. Only one,
           Claude Sonnet, was right every time with no help, and even that depended on the map: on a map built by
           Haiku instead, Sonnet was right two times out of three. Speed varied just as much, from about 30 seconds
           per answer with Sonnet to four and a half minutes with NVIDIA&rsquo;s free default model.
@@ -783,11 +784,17 @@ export function AutoOntologyArticle() {
         <p>The quickstart, shortened from the README, comes down to four steps:</p>
         <CodeCard code={quickstart} lang="bash" />
         <p style={{ marginTop: '1rem' }}>
+          Auto Ontology uses two kinds of model. The <em>chat model</em> can be swapped: NVIDIA&rsquo;s hosted models
+          are the default, but Humair also ran it with GPT, Claude and Gemini models and with local models through
+          Ollama. An <em>embedding model</em> powers the search, and that one has to stay on NVIDIA for now, because
+          the database expects vectors of one exact size and other embedding models don&rsquo;t match it.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
           Expect some rough edges. Humair needed three fixes before his first map would build: two because
           NVIDIA&rsquo;s cloud API had changed underneath the tool, and one real bug that missed every link crossing
           from one part of the database to another (in the sample, 59 of the 98 links). Some of this may already be
           fixed; the current README, for instance, now uses the embedding model he switched to as its default. He
-          also told the map to skip the archive tables and to ignore the &ldquo;last edited by&rdquo; column that
+          also told the map to skip the archive tables mentioned earlier, and to ignore the &ldquo;last edited by&rdquo; column that
           almost every table points to, so it wouldn&rsquo;t treat that as a meaningful join.
         </p>
         <p style={{ marginTop: '1rem' }}>
