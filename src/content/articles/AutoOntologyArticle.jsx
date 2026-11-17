@@ -447,8 +447,8 @@ export function AutoOntologyArticle() {
       <ArticleToc groups={tocGroups} />
 
       <p className="article-lead">
-        Ask an AI agent a simple question about your company&rsquo;s data, &ldquo;How much did we sell last
-        June?&rdquo;, and it&rsquo;ll write a database query, run it and hand you a number. It sounds sure of
+        Ask an AI agent a simple question about your company&rsquo;s data,{' '}
+        <mark>&ldquo;How much did we sell last June?&rdquo;</mark>, and it&rsquo;ll write a database query, run it and hand you a number. It sounds sure of
         itself. But is the number right?
       </p>
       <p className="article-lead">
@@ -469,7 +469,15 @@ export function AutoOntologyArticle() {
         </p>
         <p style={{ marginTop: '1rem' }}>
           Let&rsquo;s make that concrete with the example we&rsquo;ll follow through this whole post. Auto
-          Ontology&rsquo;s own quickstart uses Wide World Importers, a sample sales database from Microsoft with 51
+          Ontology&rsquo;s own quickstart uses{' '}
+          <a
+            href="https://learn.microsoft.com/en-us/sql/samples/wide-world-importers-what-is"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Wide World Importers
+          </a>
+          , a sample sales database from Microsoft with 51
           tables, close to 600 columns and around 2 million rows. One of its test questions is:
         </p>
         <div className="article-panel article-panel--accent">
@@ -833,6 +841,15 @@ export function AutoOntologyArticle() {
           <li style={{ listStyle: 'none' }}>
             <a href="https://github.com/NVIDIA/auto-ontology-eval" target="_blank" rel="noreferrer">
               Auto Ontology sample data and evaluation (GitHub)
+            </a>
+          </li>
+          <li style={{ listStyle: 'none' }}>
+            <a
+              href="https://learn.microsoft.com/en-us/sql/samples/wide-world-importers-what-is"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Wide World Importers sample databases (Microsoft Learn)
             </a>
           </li>
           <li style={{ listStyle: 'none' }}>
