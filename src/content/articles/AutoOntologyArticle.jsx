@@ -603,11 +603,14 @@ export function AutoOntologyArticle() {
           </table>
         </div>
         <p style={{ marginTop: '1rem' }}>
-          Of the four parts of an ontology, the map clearly has two: definitions, in each term&rsquo;s description
-          and synonyms, and relationships. It also adds something ontologies usually don&rsquo;t hold: saved
-          formulas. But two things you might expect are missing. The terms aren&rsquo;t arranged into types from broad to narrow,
-          so there&rsquo;s no &ldquo;a t-shirt is a kind of clothing&rdquo;. And there&rsquo;s no reasoner, a program
-          that works out new facts from the rules you&rsquo;ve given it. In the words of Syed Humair, who tested the
+          Measured against the four parts of an ontology, the map has two and lacks two. It has{' '}
+          <strong>definitions</strong>, in each term&rsquo;s description and synonyms, and it has{' '}
+          <strong>relationships</strong>, in the links between tables. What it lacks are <strong>types</strong> and{' '}
+          <strong>rules</strong>. Its terms aren&rsquo;t arranged from broad to narrow, so there&rsquo;s no &ldquo;a
+          t-shirt is a kind of clothing&rdquo;. And there&rsquo;s no reasoner, the program that would apply a rule
+          like &ldquo;every order must have a customer&rdquo; and work out new facts from it. What the map adds instead
+          is something ontologies usually don&rsquo;t hold: saved formulas, such as how to calculate revenue. In the
+          words of Syed Humair, who tested the
           tool on video, it&rsquo;s &ldquo;an ontology in spirit, built for one job&rdquo;: helping an AI agent write
           the correct SQL.
         </p>
