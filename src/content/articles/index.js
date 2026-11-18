@@ -36,6 +36,7 @@ import { TracesArticle } from './TracesArticle';
 import { RagBenchmarkingArticle } from './RagBenchmarkingArticle';
 import { SemanticModelOntologyKnowledgeGraphArticle } from './SemanticModelOntologyKnowledgeGraphArticle';
 import { AutoOntologyArticle } from './AutoOntologyArticle';
+import { QTableArticle } from './QTableArticle';
 
 export const articleRegistry = {
   'formulating-thoughts-to-expressing-them-clearly':
@@ -50,6 +51,7 @@ export const articleRegistry = {
   'skills-over-mcp': SkillsOverMcpArticle,
   'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,
+  'q-table-reinforcement-learning': QTableArticle,
   'ci-cd': CiCdArticle,
   'neo4j-intro-workshop': Neo4jIntroWorkshopArticle,
   'is-your-website-built-for-ai-agents': IsYourWebsiteBuiltForAiAgentsArticle,

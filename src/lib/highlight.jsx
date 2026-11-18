@@ -17,7 +17,23 @@ const sqlWord = (word, code, end) => {
   return null;
 };
 
+const PY_KEYWORDS = new Set(
+  'and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield True False None'.split(
+    ' ',
+  ),
+);
+
+const pyWord = (word, code, end) => {
+  if (PY_KEYWORDS.has(word)) return 'tok-keyword';
+  if (/^\(/.test(code.slice(end))) return 'tok-func';
+  return null;
+};
+
 const LANGS = {
+  python: {
+    re: /(#[^\n]*)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|(\b\d+(?:\.\d+)?\b)|(\b[A-Za-z_]\w*\b)|([=<>+\-*/]+)/g,
+    groups: ['tok-comment', 'tok-string', 'tok-number', pyWord, 'tok-punct'],
+  },
   turtle: {
     re: /(#[^\n]*)|("(?:[^"\\\n]|\\.)*")|(\b[a-z]+:[A-Za-z_]\w*)|(:[A-Za-z_]\w*)|(\ba\b)|(\b\d+\b)|([;.[\]])/g,
     groups: ['tok-comment', 'tok-string', 'tok-prop', 'tok-type', 'tok-keyword', 'tok-number', 'tok-punct'],

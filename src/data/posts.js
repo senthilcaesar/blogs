@@ -340,6 +340,29 @@ export const posts = [
     },
   },
   {
+    title: 'What Is a Q-Table in Reinforcement Learning?',
+    slug: 'q-table-reinforcement-learning',
+    category: 'AI',
+    tags: ['ai', 'reinforcement-learning', 'q-learning', 'dqn', 'machine-learning'],
+    excerpt:
+      'A Q-table is a lookup table that holds an agent’s estimate of how good each action is in each situation: the core data structure of Q-learning.',
+    image: imageUrl('q-table-cover.svg'),
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/q-table-reinforcement-learning',
+    author: {
+      name: 'Tech Notes',
+      role: 'AI & Machine Learning Explainer',
+      initials: 'TN',
+    },
+    hero: {
+      eyebrow: 'Reinforcement Learning',
+      summary:
+        'What a Q-table holds, how the Bellman update fills it in, why the agent explores, and where the table breaks down.',
+    },
+  },
+  {
     title: 'Is Your Website Built for AI Agents?',
     slug: 'is-your-website-built-for-ai-agents',
     category: 'AI',
