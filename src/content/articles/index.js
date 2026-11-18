@@ -37,6 +37,7 @@ import { RagBenchmarkingArticle } from './RagBenchmarkingArticle';
 import { SemanticModelOntologyKnowledgeGraphArticle } from './SemanticModelOntologyKnowledgeGraphArticle';
 import { AutoOntologyArticle } from './AutoOntologyArticle';
 import { QTableArticle } from './QTableArticle';
+import { VsCodeMcpServersArticle } from './VsCodeMcpServersArticle';
 
 export const articleRegistry = {
   'formulating-thoughts-to-expressing-them-clearly':
@@ -49,6 +50,7 @@ export const articleRegistry = {
     SemanticModelOntologyKnowledgeGraphArticle,
   'auto-ontology': AutoOntologyArticle,
   'skills-over-mcp': SkillsOverMcpArticle,
+  'install-mcp-servers-in-vs-code': VsCodeMcpServersArticle,
   'pull-request': PullRequestArticle,
   rlhf: RlhfArticle,
   'q-table-reinforcement-learning': QTableArticle,

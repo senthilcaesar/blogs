@@ -363,6 +363,30 @@ export const posts = [
     },
   },
   {
+    title: 'Install MCP Servers in VS Code',
+    slug: 'install-mcp-servers-in-vs-code',
+    category: 'AI',
+    tags: ['ai', 'mcp', 'vs-code', 'tools', 'tutorial'],
+    excerpt:
+      'A five-minute walkthrough for adding the GitHub, Context7, Playwright and Microsoft Learn MCP servers from VS Code’s built-in gallery, plus the fix when the gallery is empty.',
+    image: imageUrl('vscode-mcp-4.png'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/install-mcp-servers-in-vs-code',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Model Context Protocol',
+      summary:
+        'Give the AI in your editor tools it can call: current docs, GitHub, a real browser and Microsoft Learn, installed in a few clicks without a config file.',
+    },
+  },
+  {
     title: 'Is Your Website Built for AI Agents?',
     slug: 'is-your-website-built-for-ai-agents',
     category: 'AI',
