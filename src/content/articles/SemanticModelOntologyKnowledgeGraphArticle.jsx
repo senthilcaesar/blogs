@@ -530,14 +530,14 @@ function KnowledgeGraphDiagram() {
   const nodes = [
     { cx: 95, type: 'Customer', id: 'C215', prop: 'region: EU' },
     { cx: 360, type: 'Order', id: 'O733', prop: 'status: shipped' },
-    { cx: 625, type: 'Product', id: 'P31', prop: 'name: Logo T-shirt' },
+    { cx: 625, type: 'Product', id: 'P31', prop: 'category: T-shirt' },
   ];
   return (
     <figure style={figureStyle}>
       <svg
         viewBox="0 0 720 210"
         role="img"
-        aria-label="Knowledge graph diagram. Node Customer C215 has a PLACED relationship to node Order O733, which has a LISTS relationship to node Product P31, a logo t-shirt."
+        aria-label="Knowledge graph diagram. Node Customer C215 has a PLACED relationship to node Order O733, which has a LISTS relationship to node Product P31, whose category is T-shirt."
         style={{ width: '100%', height: 'auto', display: 'block' }}
       >
         <defs>
@@ -1009,7 +1009,10 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
         </p>
         <p style={{ marginTop: '1rem' }}>
           An ontology is the fix for that guess. Simply put, it&rsquo;s a shared map of the things your business
-          cares about, written so that people and machines read it the same way. The map holds four things: what
+          cares about, written so that people and machines read it the same way. <mark className="highlight">The Neo4j team describes it as a
+          shared description of a domain that <em>formalizes</em> what the business knows.</mark> Formal here means the
+          knowledge is written in a fixed structure rather than in loose prose, so a machine can read it without
+          guessing. In other words, it helps every team, and every agent, speak the same language. The map holds four things: what
           each term means, what&rsquo;s a kind of what, how things relate, and the rules they must follow.
           We&rsquo;ll start with the first one, because it settles the active customer question.
         </p>
@@ -1094,6 +1097,39 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           same map, written as text instead of a picture. Because everyone reads one map, nobody has to translate
           it, and there&rsquo;s no second copy to fall out of date. When the business changes a rule, people and
           agents see the change at the same time.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The same goes for systems, not just readers. The sales system might call a buyer a <code>client</code>{' '}
+          and the warehouse system a <code>consignee</code>, but if both are mapped to the ontology&rsquo;s
+          Customer, they finally mean the same thing. This is called <em>interoperability</em>: different tools and
+          systems can exchange data and still agree on what it means. In practice, a new dashboard or a new agent
+          plugs into the map once, instead of learning each system&rsquo;s private vocabulary.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          And because the map records how everything connects, it can answer a question that&rsquo;s otherwise
+          painful: <em>if we change this, what breaks?</em> The trick is that dependencies come in chains. A depends
+          on B, B depends on C, and a change to C ripples all the way back to A, even though A never mentions C. In
+          our shop, the chain might run like this:
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          <code>Active customer</code> (definition) &rarr; <code>Active customer revenue</code> (metric) &rarr;{' '}
+          <code>Quarterly sales dashboard</code> (report) &rarr; <code>Sales forecast agent</code> (reads the
+          dashboard)
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Now suppose finance decides an active customer needs a paid order in the last <strong>six</strong> months,
+          not twelve. <mark className="highlight">Impact analysis</mark> starts at the thing being changed and follows every <em>used by</em> link
+          downstream, one hop at a time. The first hop reaches the metric. From the metric, the next hop reaches
+          the dashboard, and from the dashboard, the agent. At each step it collects whatever it lands on, and it
+          keeps going until there are no more links to follow. What comes back is the full list of everything the
+          change will touch, including the agent three hops away that nobody thought to ask about.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          This is a graph traversal, the same &ldquo;follow the links&rdquo; move we&rsquo;ll meet again in the
+          knowledge graph. Run it in the other direction, <em>upstream</em>, and it answers the reverse question: a
+          number on the dashboard looks wrong, so what does it depend on? In practice, both directions turn a
+          hunt through dashboards into a single query, run before the change goes live rather than after the
+          numbers have already gone out.
         </p>
 
         <details className="article-details">
@@ -1231,6 +1267,14 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           follows them.
         </p>
         <p style={{ marginTop: '1rem' }}>
+          Turning a table into a graph is fairly mechanical. Each row in the <code>customers</code> table becomes a
+          customer node, each row in <code>orders</code> becomes an order node, and each <code>customer_id</code>{' '}
+          column pointing from an order to its customer becomes a line between them. On its own, though, that line
+          only says &ldquo;these two rows are connected&rdquo;. The ontology is what gives it context: the node is
+          a <em>Customer</em>, the line is <em>places</em>, and every order must have one. Same data, but now it
+          describes the business rather than the database.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
           Semantic models struggle with questions that follow a chain of connections. A semantic model is built
           around a fixed set of tables, joined in ways the data team chose in advance, and it&rsquo;s best at
           adding things up across them. Now take a question like this one from our shop:{' '}
@@ -1292,6 +1336,15 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           In practice, the ontology acts as the schema for the knowledge graph, the set of shapes the data has to
           fit: every node and link in the graph should match a concept and relationship the ontology defines. You need both. One gives the meaning, the
           other gives the facts.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Put the two together and you get something neither has alone: facts nobody stored. The knowledge graph
+          says P31 is a product, with its category set to T-shirt. The ontology says a t-shirt is a kind of
+          clothing, and clothing is a kind of product. A reasoner, a program (or, increasingly, an AI model) that
+          reads the ontology, matches that category value to the ontology&rsquo;s T-shirt concept, then walks the
+          links one step at a time and concludes that P31 is clothing. Crucially, no one wrote that fact down; it
+          was worked out by following the graph. This is called <em>inference</em>, and it&rsquo;s how a question
+          about &ldquo;clothing&rdquo; finds a t-shirt that was only ever filed as a t-shirt.
         </p>
       </section>
 
