@@ -16,7 +16,7 @@ describe("FirstSkillMdArticle", () => {
 
     const { container } = render(<FirstSkillMdArticle />);
     const buttons = screen.getAllByTitle("Copy snippet");
-    const blocks = [...container.querySelectorAll(".sk-card pre.sk-block")];
+    const blocks = [...container.querySelectorAll(".code-window pre.code-block")];
 
     expect(buttons.length).toBeGreaterThan(0);
     expect(blocks).toHaveLength(buttons.length);

@@ -3274,3 +3274,430 @@ html {
   }
 }
 
+
+/* ─────────────────────────────────────────────
+   Code Window — every code block in an article
+   A small app window: traffic-light dots, a file tab that opens into the
+   body, and a yellow copy button. Selectors carry .article-content (and the
+   token rules one more class) so they win over the inline <style> blocks
+   articles ship after this sheet.
+───────────────────────────────────────────── */
+:root {
+  --cw-bg: #fffdf9;
+  --cw-ink: #2b2118;
+  --cw-text: #2b2620;
+  --cw-muted: #8f877b;
+  --cw-tab-idle: #9a948b;
+  --cw-copy-bg: #f2d15c;
+  --cw-dot-1: #ee6a5f;
+  --cw-dot-2: #f3c64f;
+  --cw-dot-3: #d9a6f2;
+  /* Token colours: GitHub Light */
+  --cw-keyword: #cf222e;
+  --cw-string: #0a3069;
+  --cw-comment: #6e7781;
+  --cw-func: #8250df;
+  --cw-constant: #0550ae;
+  --cw-variable: #953800;
+  --cw-tag: #116329;
+  --cw-punct: #1f2328;
+  --cw-inserted-fg: #116329;
+  --cw-inserted-bg: #dafbe1;
+  --cw-deleted-fg: #82071e;
+  --cw-deleted-bg: #ffebe9;
+}
+
+body[data-theme='dark'] {
+  --cw-bg: #232634; /* Crust */
+  --cw-ink: #737994; /* Overlay 1 */
+  --cw-text: #c6d0f5; /* Text */
+  --cw-muted: #949cbb; /* Overlay 2 */
+  --cw-tab-idle: #838ba7;
+  --cw-copy-bg: #e5c890; /* Yellow */
+  --cw-dot-1: #e78284;
+  --cw-dot-2: #e5c890;
+  --cw-dot-3: #ca9ee6;
+  /* Token colours: GitHub Dark */
+  --cw-keyword: #ff7b72;
+  --cw-string: #a5d6ff;
+  --cw-comment: #8b949e;
+  --cw-func: #d2a8ff;
+  --cw-constant: #79c0ff;
+  --cw-variable: #ffa657;
+  --cw-tag: #7ee787;
+  --cw-punct: #c9d1d9;
+  --cw-inserted-fg: #aff5b4;
+  --cw-inserted-bg: rgba(46, 160, 67, 0.15);
+  --cw-deleted-fg: #ffdcd7;
+  --cw-deleted-bg: rgba(248, 81, 73, 0.15);
+}
+
+.code-window,
+.article-content .code-window {
+  margin: 1.25rem 0 1.5rem;
+  background: var(--cw-bg);
+  border: 2px solid var(--cw-ink);
+  border-radius: 16px;
+  overflow: hidden;
+  color: var(--cw-text);
+}
+
+.code-window__bar {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  min-height: 52px;
+  padding: 0 12px 0 18px;
+}
+
+/* The bar's bottom rule; the active tab covers it to open into the body */
+.code-window__bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid var(--cw-ink);
+}
+
+.code-window__dots {
+  display: flex;
+  gap: 7px;
+  align-self: center;
+}
+
+.code-window__dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cw-ink);
+  background: var(--cw-dot-1);
+}
+
+.code-window__dots span:nth-child(2) {
+  background: var(--cw-dot-2);
+}
+
+.code-window__dots span:nth-child(3) {
+  background: var(--cw-dot-3);
+}
+
+.code-window__tab {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -2px;
+  padding: 10px 22px 11px;
+  border: 2px solid var(--cw-ink);
+  border-bottom-color: var(--cw-bg);
+  border-radius: 12px 12px 0 0;
+  background: var(--cw-bg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--cw-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+}
+
+.code-window__copy {
+  align-self: center;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 2px solid var(--cw-ink);
+  border-radius: 9px;
+  background: var(--cw-copy-bg);
+  color: #2b2118;
+  box-shadow: 2px 2px 0 var(--cw-ink);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.code-window__copy:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--cw-ink);
+}
+
+.code-window__copy:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--cw-ink);
+}
+
+.code-window__copy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.code-window__copy--copied {
+  background: #a6d189;
+}
+
+.article-content .code-window pre,
+.article-content .code-window pre.code-block,
+.code-window pre.code-block {
+  margin: 0;
+  padding: 22px 26px 26px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--cw-text);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.85;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.article-content .code-window pre.code-block--tall {
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.article-content .code-window pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre;
+}
+
+/* One palette for every highlighter the articles use.
+   Standard GitHub colours: keywords red, strings navy, functions purple,
+   constants/properties blue, variables/types orange, tags green, comments grey. */
+.article-content .code-window pre .tok-keyword,
+.article-content .code-window pre .syn-keyword,
+.article-content .code-window pre .ev-keyword,
+.article-content .code-window pre .ev-bool,
+.article-content .code-window pre .code-keyword,
+.article-content .code-window pre .tok-string,
+.article-content .code-window pre .syn-string,
+.article-content .code-window pre .ev-string,
+.article-content .code-window pre .som-string,
+.article-content .code-window pre .sk-inline,
+.article-content .code-window pre .som-inline,
+.article-content .code-window pre .tok-comment,
+.article-content .code-window pre .syn-comment,
+.article-content .code-window pre .ev-muted,
+.article-content .code-window pre .sk-muted,
+.article-content .code-window pre .som-comment,
+.article-content .code-window pre .tok-func,
+.article-content .code-window pre .syn-fn,
+.article-content .code-window pre .syn-func,
+.article-content .code-window pre .ev-fn,
+.article-content .code-window pre .tok-number,
+.article-content .code-window pre .tok-prop,
+.article-content .code-window pre .tok-key,
+.article-content .code-window pre .tok-value,
+.article-content .code-window pre .syn-number,
+.article-content .code-window pre .syn-val,
+.article-content .code-window pre .syn-prop,
+.article-content .code-window pre .syn-attr,
+.article-content .code-window pre .ev-num,
+.article-content .code-window pre .ev-key,
+.article-content .code-window pre .sk-key,
+.article-content .code-window pre .som-key,
+.article-content .code-window pre .som-number,
+.article-content .code-window pre .code-number,
+.article-content .code-window pre .tok-var,
+.article-content .code-window pre .tok-type,
+.article-content .code-window pre .syn-var,
+.article-content .code-window pre .syn-label,
+.article-content .code-window pre .syn-tag,
+.article-content .code-window pre .xml-tag-context,
+.article-content .code-window pre .xml-tag-task,
+.article-content .code-window pre .xml-tag-constraints,
+.article-content .code-window pre .xml-tag-input,
+.article-content .code-window pre .tok-punct,
+.article-content .code-window pre .syn-punct,
+.article-content .code-window pre .syn-bracket,
+.article-content .code-window pre .syn-text,
+.article-content .code-window pre .som-punct,
+.article-content .code-window pre .xml-code-content,
+.article-content .code-window pre .tok-heading,
+.article-content .code-window pre .sk-head,
+.article-content .code-window pre .som-head,
+.article-content .code-window pre .ev-head,
+.article-content .code-window pre .tok-meta,
+.article-content .code-window pre .sk-fence,
+.article-content .code-window pre .som-fence,
+.article-content .code-window pre .tok-strong,
+.article-content .code-window pre .syn-badge-thought,
+.article-content .code-window pre .syn-badge-action,
+.article-content .code-window pre .syn-badge-obs,
+.article-content .code-window pre .syn-badge-verify {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.article-content .code-window .tok-keyword,
+.article-content .code-window .syn-keyword,
+.article-content .code-window .ev-keyword,
+.article-content .code-window .ev-bool,
+.article-content .code-window .code-keyword {
+  color: var(--cw-keyword);
+}
+
+.article-content .code-window .tok-string,
+.article-content .code-window .syn-string,
+.article-content .code-window .ev-string,
+.article-content .code-window .som-string,
+.article-content .code-window .sk-inline,
+.article-content .code-window .som-inline {
+  color: var(--cw-string);
+}
+
+.article-content .code-window .tok-comment,
+.article-content .code-window .syn-comment,
+.article-content .code-window .ev-muted,
+.article-content .code-window .sk-muted,
+.article-content .code-window .som-comment {
+  color: var(--cw-comment);
+}
+
+.article-content .code-window .tok-func,
+.article-content .code-window .syn-fn,
+.article-content .code-window .syn-func,
+.article-content .code-window .ev-fn {
+  color: var(--cw-func);
+}
+
+.article-content .code-window .tok-number,
+.article-content .code-window .tok-prop,
+.article-content .code-window .tok-key,
+.article-content .code-window .tok-value,
+.article-content .code-window .syn-number,
+.article-content .code-window .syn-val,
+.article-content .code-window .syn-prop,
+.article-content .code-window .syn-attr,
+.article-content .code-window .ev-num,
+.article-content .code-window .ev-key,
+.article-content .code-window .sk-key,
+.article-content .code-window .som-key,
+.article-content .code-window .som-number,
+.article-content .code-window .code-number {
+  color: var(--cw-constant);
+}
+
+.article-content .code-window .tok-var,
+.article-content .code-window .tok-type,
+.article-content .code-window .syn-var,
+.article-content .code-window .syn-label {
+  color: var(--cw-variable);
+}
+
+.article-content .code-window .syn-tag,
+.article-content .code-window .xml-tag-context,
+.article-content .code-window .xml-tag-task,
+.article-content .code-window .xml-tag-constraints,
+.article-content .code-window .xml-tag-input {
+  color: var(--cw-tag);
+}
+
+.article-content .code-window .tok-punct,
+.article-content .code-window .syn-punct,
+.article-content .code-window .syn-bracket,
+.article-content .code-window .syn-text,
+.article-content .code-window .som-punct,
+.article-content .code-window .xml-code-content {
+  color: var(--cw-punct);
+}
+
+.article-content .code-window .tok-heading,
+.article-content .code-window .sk-head,
+.article-content .code-window .som-head,
+.article-content .code-window .ev-head {
+  color: var(--cw-constant);
+  font-weight: 600;
+}
+
+.article-content .code-window .tok-meta,
+.article-content .code-window .sk-fence,
+.article-content .code-window .som-fence {
+  color: var(--cw-comment);
+}
+
+.article-content .code-window .tok-strong,
+.article-content .code-window .syn-badge-thought,
+.article-content .code-window .syn-badge-action,
+.article-content .code-window .syn-badge-obs,
+.article-content .code-window .syn-badge-verify {
+  color: var(--cw-punct);
+  font-weight: 600;
+}
+
+.article-content .code-window .tok-inserted {
+  display: inline-block;
+  min-width: 100%;
+  color: var(--cw-inserted-fg);
+  background: var(--cw-inserted-bg);
+}
+
+.article-content .code-window .tok-deleted {
+  display: inline-block;
+  min-width: 100%;
+  color: var(--cw-deleted-fg);
+  background: var(--cw-deleted-bg);
+}
+
+@media (max-width: 640px) {
+  .code-window__bar {
+    min-height: 46px;
+    gap: 12px;
+    padding: 0 10px 0 14px;
+  }
+
+  .code-window__dots span {
+    width: 10px;
+    height: 10px;
+  }
+
+  .code-window__tab {
+    padding: 8px 14px 9px;
+    font-size: 0.78rem;
+  }
+
+  .article-content .code-window pre,
+  .article-content .code-window pre.code-block {
+    padding: 16px 16px 20px;
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+}
+
+.code-window__tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+button.code-window__tab {
+  cursor: pointer;
+  max-width: none;
+}
+
+.code-window__tab--idle {
+  border-color: transparent;
+  background: transparent;
+  color: var(--cw-tab-idle);
+}
+
+.code-window__tab--idle:hover {
+  color: var(--cw-text);
+}

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { CodeCard as CodeWindow } from '../../components/CodeCard';
 
 const evalImg1 = new URL("../../../images/agent-evaluations-1.webp", import.meta.url).href;
 const evalImg2 = new URL("../../../images/agent-evaluations-2.webp", import.meta.url).href;
@@ -216,58 +215,16 @@ function highlight(source, lang) {
   return nodes;
 }
 
-function CodeCard({ label, lang, snippet, sectionKey, copiedSection, onCopy }) {
-  const isCopied = copiedSection === sectionKey;
-
+function CodeCard({ label, lang, snippet }) {
   return (
-    <div className="ev-card">
-      <div className="ev-card__header">
-        <span>{label}</span>
-        <div className="ev-card__actions">
-          <span className="ev-card__lang">{lang}</span>
-          <button
-            type="button"
-            className={`ev-copy ${isCopied ? "ev-copy--done" : ""}`}
-            onClick={() => onCopy(snippet, sectionKey)}
-            title="Copy snippet"
-          >
-            {isCopied ? (
-              <>
-                <Check size={14} />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy size={14} />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-      <pre className="ev-block">
-        <code>{highlight(snippet, lang)}</code>
-      </pre>
-    </div>
+    <CodeWindow code={snippet} lang={lang} title={label}>
+      {highlight(snippet, lang)}
+    </CodeWindow>
   );
 }
 
 export function AgentEvaluationsArticle() {
-  const [copiedSection, setCopiedSection] = useState(null);
-
-  const handleCopy = async (text, sectionKey) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedSection(sectionKey);
-      setTimeout(() => setCopiedSection(null), 2000);
-    } catch (err) {
-      console.error("Failed to copy text:", err);
-    }
-  };
-
-  const card = (props) => (
-    <CodeCard {...props} copiedSection={copiedSection} onCopy={handleCopy} />
-  );
+  const card = (props) => <CodeCard {...props} />;
 
   return (
     <>

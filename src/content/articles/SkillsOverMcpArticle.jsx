@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { CodeCard } from '../../components/CodeCard';
 
 const architectureImg = new URL('../../../images/skills-over-mcp-architecture.jpg', import.meta.url).href;
 const flowImg = new URL('../../../images/skills-over-mcp-flow.svg', import.meta.url).href;
@@ -249,9 +250,9 @@ export function SkillsOverMcpArticle() {
         <p>
           When the host first connects, it asks the server what it supports, a bit like asking a shop which payment cards it takes. A server that offers skills includes this in its answer:
         </p>
-        <pre className="code-block" style={{ marginTop: '1rem' }}>
-          <code>{highlightJson(capabilitySnippet)}</code>
-        </pre>
+        <CodeCard code={capabilitySnippet} lang="json" title="initialize response">
+          {highlightJson(capabilitySnippet)}
+        </CodeCard>
         <p style={{ marginTop: '1rem' }}>
           The important part is <code>io.modelcontextprotocol/skills</code>. It tells the host that this server follows the Skills over MCP extension, so it&apos;s worth asking for skills. A server without that line simply doesn&apos;t offer any.
         </p>
@@ -260,9 +261,9 @@ export function SkillsOverMcpArticle() {
         <p>
           Next, the host sends <code>skills/list</code>, which asks &quot;what skills do you have?&quot; The server replies with one entry per skill. Here&apos;s the entry for code-review, trimmed for length:
         </p>
-        <pre className="code-block" style={{ marginTop: '1rem' }}>
-          <code>{highlightJson(listSnippet)}</code>
-        </pre>
+        <CodeCard code={listSnippet} lang="json" title="skills/list response">
+          {highlightJson(listSnippet)}
+        </CodeCard>
         <p style={{ marginTop: '1rem' }}>
           Each entry has two parts. The first is the frontmatter, the short name-and-description block from the top of <code>SKILL.md</code>, copied over unchanged. The second is a manifest, a packing list of every file in the skill. For each file it gives the file&apos;s address (its URI), its size in bytes, and its digest.
         </p>
@@ -279,9 +280,9 @@ export function SkillsOverMcpArticle() {
         <p>
           When a user asks for a code review, the host fetches <code>skill://code-review/SKILL.md</code> using <code>resources/read</code>, MCP&apos;s ordinary request for reading a file. Before using it, the host checks the file against the manifest, comparing fingerprints to make sure it&apos;s the exact file the server listed. Then it hands the instructions to the model, labelled with the server they came from, so the model knows where they originated. Here&apos;s the whole file:
         </p>
-        <pre className="code-block" style={{ marginTop: '1rem' }}>
-          <code>{highlightMarkdown(skillSnippet)}</code>
-        </pre>
+        <CodeCard code={skillSnippet} lang="markdown" title="SKILL.md">
+          {highlightMarkdown(skillSnippet)}
+        </CodeCard>
 
         <h3>Step 5: The checklist is read only if the instructions call for it</h3>
         <p>

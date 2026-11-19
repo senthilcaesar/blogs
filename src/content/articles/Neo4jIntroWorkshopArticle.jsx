@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { CodeCard as CodeWindow } from '../../components/CodeCard';
 
 const img1 = new URL('../../../images/neo4j-1.jpg', import.meta.url).href;
 const img2 = new URL('../../../images/neo4j-2.jpg', import.meta.url).href;
@@ -85,51 +85,10 @@ MATCH (p:Person {name: "Senthil Palanivelu"})-[r:ACTED_IN]->(m:Movie {title: "Ju
 RETURN r.roles AS role`;
 
 function CodeCard({ code, lang = 'cypher', children }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy snippet:', err);
-    }
-  };
-
   return (
-    <div
-      className='code-card'
-      style={{ marginTop: '1rem', marginBottom: '1.25rem' }}
-    >
-      <div className='code-card__header'>
-        <span className='code-card__lang'>{lang}</span>
-        <div className='code-card__actions'>
-          <button
-            type='button'
-            className={`code-copy-btn ${copied ? 'code-copy-btn--copied' : ''}`}
-            onClick={handleCopy}
-            title='Copy code snippet to clipboard'
-            aria-label='Copy code snippet to clipboard'
-          >
-            {copied ? (
-              <>
-                <Check size={14} />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy size={14} />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-      <pre className='code-block'>
-        <code>{children || code}</code>
-      </pre>
-    </div>
+    <CodeWindow code={code} lang={lang}>
+      {children || code}
+    </CodeWindow>
   );
 }
 

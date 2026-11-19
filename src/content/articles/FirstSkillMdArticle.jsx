@@ -1,5 +1,6 @@
-import { useId, useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { useId } from "react";
+import { CodeCard as CodeWindow } from '../../components/CodeCard';
+import { highlight as sharedHighlight } from '../../lib/highlight';
 
 const step1Img = new URL("../../../images/skill-step-1.webp", import.meta.url).href;
 const step2Img = new URL("../../../images/skill-step-2.webp", import.meta.url).href;
@@ -137,6 +138,7 @@ function withInlineCode(text, keyPrefix) {
 }
 
 function highlight(source, lang) {
+  if (lang === "bash") return sharedHighlight(source, lang);
   const lines = source.split("\n");
   let fences = 0;
   const nodes = [];
@@ -176,39 +178,11 @@ function highlight(source, lang) {
   return nodes;
 }
 
-function CodeCard({ label, lang, snippet, sectionKey, copiedSection, onCopy }) {
-  const isCopied = copiedSection === sectionKey;
-
+function CodeCard({ label, lang, snippet }) {
   return (
-    <div className="sk-card">
-      <div className="sk-card__header">
-        <span>{label}</span>
-        <div className="sk-card__actions">
-          <span className="sk-card__lang">{lang}</span>
-          <button
-            type="button"
-            className={`sk-copy ${isCopied ? "sk-copy--done" : ""}`}
-            onClick={() => onCopy(snippet, sectionKey)}
-            title="Copy snippet"
-          >
-            {isCopied ? (
-              <>
-                <Check size={14} />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy size={14} />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-      <pre className="sk-block">
-        <code>{highlight(snippet, lang)}</code>
-      </pre>
-    </div>
+    <CodeWindow code={snippet} lang={lang} title={label}>
+      {highlight(snippet, lang)}
+    </CodeWindow>
   );
 }
 
@@ -238,21 +212,7 @@ function Figure({ src, alt, caption, maxWidth }) {
 }
 
 export function FirstSkillMdArticle() {
-  const [copiedSection, setCopiedSection] = useState(null);
-
-  const handleCopy = async (text, sectionKey) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedSection(sectionKey);
-      setTimeout(() => setCopiedSection(null), 2000);
-    } catch (err) {
-      console.error("Failed to copy text:", err);
-    }
-  };
-
-  const card = (props) => (
-    <CodeCard {...props} copiedSection={copiedSection} onCopy={handleCopy} />
-  );
+  const card = (props) => <CodeCard {...props} />;
 
   return (
     <>

@@ -50,14 +50,28 @@ const LANGS = {
     re: /((?:^|(?<=\s))#[^\n]*)|("(?:[^"\\\n]|\\.)*"|'[^'\n]*')|((?<=^|\s)--?[A-Za-z][\w-]*)|(\b[A-Z_][A-Z0-9_]*(?==))|((?<=^\s*|&&\s*|\(\s*|\|\s*)[a-z][\w.-]*)|(&&|\\$)/gm,
     groups: ['tok-comment', 'tok-string', 'tok-prop', 'tok-var', 'tok-func', 'tok-punct'],
   },
+  json: {
+    re: /("(?:[^"\\\n]|\\.)*"(?=\s*:))|("(?:[^"\\\n]|\\.)*")|(-?\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b)|(\b(?:true|false|null)\b)|([{}[\],:])/g,
+    groups: ['tok-prop', 'tok-string', 'tok-number', 'tok-keyword', 'tok-punct'],
+  },
+  markdown: {
+    re: /(^---$)|(^#{1,6} [^\n]*)|((?<=^\s*)[a-z_][\w-]*(?=:\s))|(`[^`\n]+`)|(\*\*[^*\n]+\*\*)|(^\s*(?:[-*]|\d+\.)(?=\s))|(<!--[\s\S]*?-->)/gm,
+    groups: ['tok-punct', 'tok-heading', 'tok-key', 'tok-string', 'tok-strong', 'tok-punct', 'tok-comment'],
+  },
+  diff: {
+    re: /(^(?:diff|---|\+\+\+|index|Only in) [^\n]*|^@@[^\n]*)|(^\+[^\n]*)|(^-[^\n]*)/gm,
+    groups: ['tok-meta', 'tok-inserted', 'tok-deleted'],
+  },
   chat: {
     re: /(^(?:You|Agent):)|(\b[a-z]+_[a-z_]+\b|->)|("[^"\n]*")|(\b\d+(?:\.\d+)?\b)/gm,
     groups: ['tok-keyword', 'tok-func', 'tok-string', 'tok-number'],
   },
 };
 
+const ALIASES = { sh: 'bash', shell: 'bash', zsh: 'bash', env: 'bash', py: 'python', md: 'markdown', yml: 'yaml' };
+
 export function highlight(code, lang) {
-  const spec = LANGS[lang];
+  const spec = LANGS[ALIASES[lang] || lang];
   if (!spec) return code;
 
   const parts = [];

@@ -1,3 +1,5 @@
+import { CodeCard } from '../../components/CodeCard';
+
 function YoutubeIcon() {
   return (
     <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -144,9 +146,7 @@ export function CiCdArticle() {
         <p>
           GitHub Actions lets you define a pipeline as a YAML file inside your repository at <code>.github/workflows/ci.yml</code>. This workflow runs on every push to <code>main</code> and on every pull request:
         </p>
-        <pre className="code-block" style={{ marginTop: '1rem' }}>
-          <code>{workflowSnippet}</code>
-        </pre>
+        <CodeCard code={workflowSnippet} lang="yaml" file=".github/workflows/ci.yml" />
         <p style={{ marginTop: '1rem' }}>
           Each <code>run</code> step is a command you would normally type in your terminal. If any of them fails, the pipeline stops and the pull request shows a red cross.
         </p>

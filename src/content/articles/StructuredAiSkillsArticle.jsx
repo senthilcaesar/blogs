@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { CodeCard } from "../../components/CodeCard";
 
 const skillsImg = new URL(
   "../../../images/ai-skills-framework.webp",
@@ -117,61 +116,10 @@ Assert ALL of the following after the final step:
 
 If any postcondition fails: run the down-migration, then report the failed assertion.`;
 
-// Header for a code card. `snippet` must be byte-identical to the markup rendered
-// inside the sibling <pre>; src/test/snippet-parity.test.jsx enforces it.
-// Declared at module scope so a copy click re-renders the button rather than
-// remounting every code block below it.
-function CodeCardHeader({
-  label,
-  lang,
-  snippet,
-  sectionKey,
-  copiedSection,
-  onCopy,
-}) {
-  const isCopied = copiedSection === sectionKey;
-
-  return (
-    <div className="code-card__header">
-      <span>{label}</span>
-      <div className="code-card__actions">
-        <span className="code-card__lang">{lang}</span>
-        <button
-          type="button"
-          className={`code-copy-btn ${isCopied ? "code-copy-btn--copied" : ""}`}
-          onClick={() => onCopy(snippet, sectionKey)}
-          title="Copy snippet"
-        >
-          {isCopied ? (
-            <>
-              <Check size={14} />
-              <span>Copied!</span>
-            </>
-          ) : (
-            <>
-              <Copy size={14} />
-              <span>Copy</span>
-            </>
-          )}
-        </button>
-      </div>
-    </div>
-  );
-}
+// Each snippet constant must be byte-identical to the markup rendered inside
+// its CodeCard; src/test/snippet-parity.test.jsx enforces it.
 
 export function StructuredAiSkillsArticle() {
-  const [copiedSection, setCopiedSection] = useState(null);
-
-  const handleCopy = async (text, sectionKey) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedSection(sectionKey);
-      setTimeout(() => setCopiedSection(null), 2000);
-    } catch (err) {
-      console.error("Failed to copy text:", err);
-    }
-  };
-
   return (
     <>
       <p className="article-lead">
@@ -233,100 +181,85 @@ export function StructuredAiSkillsArticle() {
           below follow Claude Code&apos;s naming.
         </p>
 
-        <div
-          className="code-card"
-          style={{ marginTop: "1.25rem", marginBottom: "1.5rem" }}
-        >
-          <CodeCardHeader
-            label="SKILL.md Specification Example"
-            lang="markdown"
-            snippet={yamlSkillSnippet}
-            sectionKey="yaml"
-          copiedSection={copiedSection}
-          onCopy={handleCopy}
-          />
-          <pre className="code-block">
-            <code>
-              <span className="syn-comment">{"---"}</span>
-              {"\n"}
-              <span className="syn-prop">{"name"}</span>
-              {": "}
-              <span className="syn-string">{"Database Migration Auditor"}</span>
-              {"\n"}
-              <span className="syn-prop">{"description"}</span>
-              {": "}
-              <span className="syn-string">
-                {
-                  "Audits SQL migration files for destructive operations, locking changes, and missing rollbacks."
-                }
-              </span>
-              {"\n"}
-              <span className="syn-prop">{"allowed-tools"}</span>
-              {": "}
-              <span className="syn-func">{"Read"}</span>
-              {", "}
-              <span className="syn-func">{"Grep"}</span>
-              {", "}
-              <span className="syn-func">{"Bash"}</span>
-              {"\n"}
-              <span className="syn-prop">{"metadata"}</span>
-              {":\n  "}
-              <span className="syn-prop">{"version"}</span>
-              {": "}
-              <span className="syn-number">{"1.2.0"}</span>
-              {"\n"}
-              <span className="syn-comment">{"---"}</span>
-              {"\n\n"}
-              <span className="syn-keyword">{"# Objective"}</span>
-              {"\n"}
-              <span className="syn-text">
-                {
-                  "Analyze target SQL migration files for schema safety and concurrency hazards."
-                }
-              </span>
-              {"\n\n"}
-              <span className="syn-keyword">{"## Input Parameters"}</span>
-              {"\n- "}
-              <span className="syn-prop">{"`migration_path`"}</span>
-              {": "}
-              <span className="syn-string">
-                {"Absolute path to target .sql file"}
-              </span>
-              {"\n- "}
-              <span className="syn-prop">{"`db_dialect`"}</span>
-              {": "}
-              <span className="syn-string">
-                {"Target database (`postgres` | `mysql` | `sqlite`)"}
-              </span>
-              {"\n\n"}
-              <span className="syn-keyword">{"## Execution Steps"}</span>
-              {"\n1. "}
-              <span className="syn-tag">{"**Syntax & Style Validation**"}</span>
-              {": Parse file to confirm structural validity.\n2. "}
-              <span className="syn-tag">
-                {"**Destructive Operations Audit**"}
-              </span>
-              {
-                ": Scan for `DROP TABLE`, `DROP COLUMN`, or unindexed `ALTER TABLE`.\n3. "
-              }
-              <span className="syn-tag">{"**Rollback Generation**"}</span>
-              {": Generate automated inverse migration statements.\n\n"}
-              <span className="syn-keyword">{"## Output Requirements"}</span>
-              {"\n"}
-              <span className="syn-text">
-                {"Return findings grouped strictly under:"}
-              </span>
-              {"\n- "}
-              <span className="syn-attr">{"## Risk Rating"}</span>
-              {"\n- "}
-              <span className="syn-attr">{"## Found Hazards"}</span>
-              {"\n- "}
-              <span className="syn-attr">
-                {"## Recommended Rollback Script"}
-              </span>
-            </code>
-          </pre>
-        </div>
+        <CodeCard code={yamlSkillSnippet} lang="markdown" title="SKILL.md Specification Example">
+          <span className="syn-comment">{"---"}</span>
+          {"\n"}
+          <span className="syn-prop">{"name"}</span>
+          {": "}
+          <span className="syn-string">{"Database Migration Auditor"}</span>
+          {"\n"}
+          <span className="syn-prop">{"description"}</span>
+          {": "}
+          <span className="syn-string">
+            {
+              "Audits SQL migration files for destructive operations, locking changes, and missing rollbacks."
+            }
+          </span>
+          {"\n"}
+          <span className="syn-prop">{"allowed-tools"}</span>
+          {": "}
+          <span className="syn-func">{"Read"}</span>
+          {", "}
+          <span className="syn-func">{"Grep"}</span>
+          {", "}
+          <span className="syn-func">{"Bash"}</span>
+          {"\n"}
+          <span className="syn-prop">{"metadata"}</span>
+          {":\n  "}
+          <span className="syn-prop">{"version"}</span>
+          {": "}
+          <span className="syn-number">{"1.2.0"}</span>
+          {"\n"}
+          <span className="syn-comment">{"---"}</span>
+          {"\n\n"}
+          <span className="syn-keyword">{"# Objective"}</span>
+          {"\n"}
+          <span className="syn-text">
+            {
+              "Analyze target SQL migration files for schema safety and concurrency hazards."
+            }
+          </span>
+          {"\n\n"}
+          <span className="syn-keyword">{"## Input Parameters"}</span>
+          {"\n- "}
+          <span className="syn-prop">{"`migration_path`"}</span>
+          {": "}
+          <span className="syn-string">
+            {"Absolute path to target .sql file"}
+          </span>
+          {"\n- "}
+          <span className="syn-prop">{"`db_dialect`"}</span>
+          {": "}
+          <span className="syn-string">
+            {"Target database (`postgres` | `mysql` | `sqlite`)"}
+          </span>
+          {"\n\n"}
+          <span className="syn-keyword">{"## Execution Steps"}</span>
+          {"\n1. "}
+          <span className="syn-tag">{"**Syntax & Style Validation**"}</span>
+          {": Parse file to confirm structural validity.\n2. "}
+          <span className="syn-tag">
+            {"**Destructive Operations Audit**"}
+          </span>
+          {
+            ": Scan for `DROP TABLE`, `DROP COLUMN`, or unindexed `ALTER TABLE`.\n3. "
+          }
+          <span className="syn-tag">{"**Rollback Generation**"}</span>
+          {": Generate automated inverse migration statements.\n\n"}
+          <span className="syn-keyword">{"## Output Requirements"}</span>
+          {"\n"}
+          <span className="syn-text">
+            {"Return findings grouped strictly under:"}
+          </span>
+          {"\n- "}
+          <span className="syn-attr">{"## Risk Rating"}</span>
+          {"\n- "}
+          <span className="syn-attr">{"## Found Hazards"}</span>
+          {"\n- "}
+          <span className="syn-attr">
+            {"## Recommended Rollback Script"}
+          </span>
+        </CodeCard>
       </section>
 
       <section className="article-panel">
@@ -346,130 +279,115 @@ export function StructuredAiSkillsArticle() {
           and what a rejection should look like.
         </p>
 
-        <div
-          className="code-card"
-          style={{ marginTop: "1.25rem", marginBottom: "1.5rem" }}
-        >
-          <CodeCardHeader
-            label="XML Tagged Skill with Few-Shot Examples"
-            lang="xml"
-            snippet={xmlSkillSnippet}
-            sectionKey="xml"
-          copiedSection={copiedSection}
-          onCopy={handleCopy}
-          />
-          <pre className="code-block">
-            <code>
-              <span className="xml-tag-context">{"<skill_definition>"}</span>
-              {"\n  "}
-              <span className="syn-tag">{"<meta>"}</span>
-              {"\n    "}
-              <span className="syn-tag">{"<name>"}</span>
-              <span className="syn-string">{"API Contract Validator"}</span>
-              <span className="syn-tag">{"</name>"}</span>
-              {"\n    "}
-              <span className="syn-tag">{"<purpose>"}</span>
-              <span className="syn-text">
-                {
-                  "Ensure response payloads conform to standard JSON schema guidelines."
-                }
-              </span>
-              <span className="syn-tag">{"</purpose>"}</span>
-              {"\n  "}
-              <span className="syn-tag">{"</meta>"}</span>
-              {"\n\n  "}
-              <span className="xml-tag-constraints">{"<constraints>"}</span>
-              {"\n"}
-              <span className="xml-code-content">
-                {
-                  "    - Never permit extra top-level keys not defined in the contract."
-                }
-              </span>
-              {"\n"}
-              <span className="xml-code-content">
-                {
-                  "    - All timestamp strings must strictly follow ISO-8601 UTC format."
-                }
-              </span>
-              {"\n"}
-              <span className="xml-code-content">
-                {
-                  "    - Return explicit failure locations using JSONPath expression syntax."
-                }
-              </span>
-              {"\n  "}
-              <span className="xml-tag-constraints">{"</constraints>"}</span>
-              {"\n\n  "}
-              <span className="xml-tag-input">{"<examples>"}</span>
-              {"\n    "}
-              <span className="syn-tag">{"<example>"}</span>
-              {"\n"}
-              <span className="xml-code-content">
-                {"      <input>"}
-                <span className="syn-string">
-                  {'{"status": "active", "createdAt": "2026-08-10T11:30:00Z"}'}
-                </span>
-                {"</input>"}
-              </span>
-              {"\n"}
-              <span className="xml-code-content">
-                {"      <thought>"}
-                <span className="syn-comment">
-                  {"Keys match schema. Timestamps are valid ISO-8601 UTC."}
-                </span>
-                {"</thought>"}
-              </span>
-              {"\n"}
-              <span className="xml-code-content">
-                {"      <output>"}
-                <span className="syn-keyword">{"PASS"}</span>
-                {"</output>"}
-              </span>
-              {"\n    "}
-              <span className="syn-tag">{"</example>"}</span>
-              {"\n    "}
-              <span className="syn-tag">{"<example>"}</span>
-              {"\n"}
-              <span className="xml-code-content">
-                {"      <input>"}
-                <span className="syn-string">{'{"status": 200}'}</span>
-                {"</input>"}
-              </span>
-              {"\n"}
-              <span className="xml-code-content">
-                {"      <thought>"}
-                <span className="syn-comment">
-                  {"'status' field expected string enum, received integer 200."}
-                </span>
-                {"</thought>"}
-              </span>
-              {"\n"}
-              <span className="xml-code-content">
-                {"      <output>"}
-                <span className="syn-keyword">
-                  {"FAIL: Type mismatch at $.status"}
-                </span>
-                {"</output>"}
-              </span>
-              {"\n    "}
-              <span className="syn-tag">{"</example>"}</span>
-              {"\n  "}
-              <span className="xml-tag-input">{"</examples>"}</span>
-              {"\n\n  "}
-              <span className="xml-tag-task">{"<task>"}</span>
-              {"\n"}
-              <span className="xml-code-content">
-                {
-                  "    Validate the provided JSON payload against the active API contract."
-                }
-              </span>
-              {"\n  "}
-              <span className="xml-tag-task">{"</task>"}</span>
-              {"\n"}
-              <span className="xml-tag-context">{"</skill_definition>"}</span>
-            </code>
-          </pre>
-        </div>
+        <CodeCard code={xmlSkillSnippet} lang="xml" title="XML Tagged Skill with Few-Shot Examples">
+          <span className="xml-tag-context">{"<skill_definition>"}</span>
+          {"\n  "}
+          <span className="syn-tag">{"<meta>"}</span>
+          {"\n    "}
+          <span className="syn-tag">{"<name>"}</span>
+          <span className="syn-string">{"API Contract Validator"}</span>
+          <span className="syn-tag">{"</name>"}</span>
+          {"\n    "}
+          <span className="syn-tag">{"<purpose>"}</span>
+          <span className="syn-text">
+            {
+              "Ensure response payloads conform to standard JSON schema guidelines."
+            }
+          </span>
+          <span className="syn-tag">{"</purpose>"}</span>
+          {"\n  "}
+          <span className="syn-tag">{"</meta>"}</span>
+          {"\n\n  "}
+          <span className="xml-tag-constraints">{"<constraints>"}</span>
+          {"\n"}
+          <span className="xml-code-content">
+            {
+              "    - Never permit extra top-level keys not defined in the contract."
+            }
+          </span>
+          {"\n"}
+          <span className="xml-code-content">
+            {
+              "    - All timestamp strings must strictly follow ISO-8601 UTC format."
+            }
+          </span>
+          {"\n"}
+          <span className="xml-code-content">
+            {
+              "    - Return explicit failure locations using JSONPath expression syntax."
+            }
+          </span>
+          {"\n  "}
+          <span className="xml-tag-constraints">{"</constraints>"}</span>
+          {"\n\n  "}
+          <span className="xml-tag-input">{"<examples>"}</span>
+          {"\n    "}
+          <span className="syn-tag">{"<example>"}</span>
+          {"\n"}
+          <span className="xml-code-content">
+            {"      <input>"}
+            <span className="syn-string">
+              {'{"status": "active", "createdAt": "2026-08-10T11:30:00Z"}'}
+            </span>
+            {"</input>"}
+          </span>
+          {"\n"}
+          <span className="xml-code-content">
+            {"      <thought>"}
+            <span className="syn-comment">
+              {"Keys match schema. Timestamps are valid ISO-8601 UTC."}
+            </span>
+            {"</thought>"}
+          </span>
+          {"\n"}
+          <span className="xml-code-content">
+            {"      <output>"}
+            <span className="syn-keyword">{"PASS"}</span>
+            {"</output>"}
+          </span>
+          {"\n    "}
+          <span className="syn-tag">{"</example>"}</span>
+          {"\n    "}
+          <span className="syn-tag">{"<example>"}</span>
+          {"\n"}
+          <span className="xml-code-content">
+            {"      <input>"}
+            <span className="syn-string">{'{"status": 200}'}</span>
+            {"</input>"}
+          </span>
+          {"\n"}
+          <span className="xml-code-content">
+            {"      <thought>"}
+            <span className="syn-comment">
+              {"'status' field expected string enum, received integer 200."}
+            </span>
+            {"</thought>"}
+          </span>
+          {"\n"}
+          <span className="xml-code-content">
+            {"      <output>"}
+            <span className="syn-keyword">
+              {"FAIL: Type mismatch at $.status"}
+            </span>
+            {"</output>"}
+          </span>
+          {"\n    "}
+          <span className="syn-tag">{"</example>"}</span>
+          {"\n  "}
+          <span className="xml-tag-input">{"</examples>"}</span>
+          {"\n\n  "}
+          <span className="xml-tag-task">{"<task>"}</span>
+          {"\n"}
+          <span className="xml-code-content">
+            {
+              "    Validate the provided JSON payload against the active API contract."
+            }
+          </span>
+          {"\n  "}
+          <span className="xml-tag-task">{"</task>"}</span>
+          {"\n"}
+          <span className="xml-tag-context">{"</skill_definition>"}</span>
+        </CodeCard>
       </section>
 
       <section className="article-panel">
@@ -490,61 +408,46 @@ export function StructuredAiSkillsArticle() {
           confidently walking off a cliff.
         </p>
 
-        <div
-          className="code-card"
-          style={{ marginTop: "1.25rem", marginBottom: "1.5rem" }}
-        >
-          <CodeCardHeader
-            label="ReAct Loop Skill Specification"
-            lang="markdown"
-            snippet={reactLoopSnippet}
-            sectionKey="react"
-          copiedSection={copiedSection}
-          onCopy={handleCopy}
-          />
-          <pre className="code-block">
-            <code>
-              <span className="syn-keyword">
-                {"# Skill: Automated Refactoring Engine"}
-              </span>
-              {"\n\n"}
-              <span className="syn-keyword">{"## Loop State Machine"}</span>
-              {"\n"}
-              <span className="syn-text">
-                {
-                  "For each refactoring iteration, you MUST follow this strict cycle:"
-                }
-              </span>
-              {"\n\n1. "}
-              <span className="syn-badge-thought">{"**THOUGHT**"}</span>
-              {
-                ": Analyze the codebase state and state what single change is required.\n2. "
-              }
-              <span className="syn-badge-action">{"**ACTION**"}</span>
-              {": Invoke a single tool command ("}
-              <span className="syn-func">{"`Grep`"}</span>
-              {", "}
-              <span className="syn-func">{"`Edit`"}</span>
-              {").\n3. "}
-              <span className="syn-badge-obs">{"**OBSERVATION**"}</span>
-              {": Inspect tool response, compiler logs, or lint results.\n4. "}
-              <span className="syn-badge-verify">{"**VERIFICATION**"}</span>
-              {": Run local unit tests to ensure zero regression.\n\n"}
-              <span className="syn-keyword">
-                {"## Guardrails & Exit Conditions"}
-              </span>
-              {"\n- "}
-              <span className="syn-attr">{"Stop loop immediately"}</span>
-              {" if 3 consecutive test runs fail.\n- "}
-              <span className="syn-attr">{"Do NOT edit files"}</span>
-              {" outside the designated target workspace directory.\n- "}
-              <span className="syn-attr">
-                {"Roll back all uncommitted changes"}
-              </span>
-              {" if build step throws an unhandled exception."}
-            </code>
-          </pre>
-        </div>
+        <CodeCard code={reactLoopSnippet} lang="markdown" title="ReAct Loop Skill Specification">
+          <span className="syn-keyword">
+            {"# Skill: Automated Refactoring Engine"}
+          </span>
+          {"\n\n"}
+          <span className="syn-keyword">{"## Loop State Machine"}</span>
+          {"\n"}
+          <span className="syn-text">
+            {
+              "For each refactoring iteration, you MUST follow this strict cycle:"
+            }
+          </span>
+          {"\n\n1. "}
+          <span className="syn-badge-thought">{"**THOUGHT**"}</span>
+          {
+            ": Analyze the codebase state and state what single change is required.\n2. "
+          }
+          <span className="syn-badge-action">{"**ACTION**"}</span>
+          {": Invoke a single tool command ("}
+          <span className="syn-func">{"`Grep`"}</span>
+          {", "}
+          <span className="syn-func">{"`Edit`"}</span>
+          {").\n3. "}
+          <span className="syn-badge-obs">{"**OBSERVATION**"}</span>
+          {": Inspect tool response, compiler logs, or lint results.\n4. "}
+          <span className="syn-badge-verify">{"**VERIFICATION**"}</span>
+          {": Run local unit tests to ensure zero regression.\n\n"}
+          <span className="syn-keyword">
+            {"## Guardrails & Exit Conditions"}
+          </span>
+          {"\n- "}
+          <span className="syn-attr">{"Stop loop immediately"}</span>
+          {" if 3 consecutive test runs fail.\n- "}
+          <span className="syn-attr">{"Do NOT edit files"}</span>
+          {" outside the designated target workspace directory.\n- "}
+          <span className="syn-attr">
+            {"Roll back all uncommitted changes"}
+          </span>
+          {" if build step throws an unhandled exception."}
+        </CodeCard>
       </section>
 
       <section className="article-panel">
@@ -574,94 +477,79 @@ export function StructuredAiSkillsArticle() {
           sense.
         </p>
 
-        <div
-          className="code-card"
-          style={{ marginTop: "1.25rem", marginBottom: "1.5rem" }}
-        >
-          <CodeCardHeader
-            label="Strict Function Calling Definition (OpenAI shape)"
-            lang="json"
-            snippet={jsonSchemaSnippet}
-            sectionKey="json"
-          copiedSection={copiedSection}
-          onCopy={handleCopy}
-          />
-          <pre className="code-block">
-            <code>
-              {"{\n  "}
-              <span className="syn-prop">{'"name"'}</span>
-              {": "}
-              <span className="syn-string">{'"run_security_audit"'}</span>
-              {",\n  "}
-              <span className="syn-prop">{'"description"'}</span>
-              {": "}
-              <span className="syn-string">
-                {
-                  '"Performs static security analysis on target repository dependencies."'
-                }
-              </span>
-              {",\n  "}
-              <span className="syn-prop">{'"strict"'}</span>
-              {": "}
-              <span className="syn-keyword">{"true"}</span>
-              {",\n  "}
-              <span className="syn-prop">{'"parameters"'}</span>
-              {": {\n    "}
-              <span className="syn-prop">{'"type"'}</span>
-              {": "}
-              <span className="syn-keyword">{'"object"'}</span>
-              {",\n    "}
-              <span className="syn-prop">{'"properties"'}</span>
-              {": {\n      "}
-              <span className="syn-prop">{'"severity_threshold"'}</span>
-              {": {\n        "}
-              <span className="syn-prop">{'"type"'}</span>
-              {": "}
-              <span className="syn-keyword">{'"string"'}</span>
-              {",\n        "}
-              <span className="syn-prop">{'"enum"'}</span>
-              {": ["}
-              <span className="syn-string">{'"low"'}</span>
-              {", "}
-              <span className="syn-string">{'"medium"'}</span>
-              {", "}
-              <span className="syn-string">{'"high"'}</span>
-              {", "}
-              <span className="syn-string">{'"critical"'}</span>
-              {"],\n        "}
-              <span className="syn-prop">{'"description"'}</span>
-              {": "}
-              <span className="syn-string">
-                {'"Minimum vulnerability severity to trigger alert."'}
-              </span>
-              {"\n      },\n      "}
-              <span className="syn-prop">{'"include_dev_deps"'}</span>
-              {": {\n        "}
-              <span className="syn-prop">{'"type"'}</span>
-              {": ["}
-              <span className="syn-keyword">{'"boolean"'}</span>
-              {", "}
-              <span className="syn-keyword">{'"null"'}</span>
-              {"],\n        "}
-              <span className="syn-prop">{'"description"'}</span>
-              {": "}
-              <span className="syn-string">
-                {'"Include devDependencies in the scan. Null means false."'}
-              </span>
-              {"\n      }\n    },\n    "}
-              <span className="syn-prop">{'"required"'}</span>
-              {": ["}
-              <span className="syn-string">{'"severity_threshold"'}</span>
-              {", "}
-              <span className="syn-string">{'"include_dev_deps"'}</span>
-              {"],\n    "}
-              <span className="syn-prop">{'"additionalProperties"'}</span>
-              {": "}
-              <span className="syn-keyword">{"false"}</span>
-              {"\n  }\n}"}
-            </code>
-          </pre>
-        </div>
+        <CodeCard code={jsonSchemaSnippet} lang="json" title="Strict Function Calling Definition (OpenAI shape)">
+          {"{\n  "}
+          <span className="syn-prop">{'"name"'}</span>
+          {": "}
+          <span className="syn-string">{'"run_security_audit"'}</span>
+          {",\n  "}
+          <span className="syn-prop">{'"description"'}</span>
+          {": "}
+          <span className="syn-string">
+            {
+              '"Performs static security analysis on target repository dependencies."'
+            }
+          </span>
+          {",\n  "}
+          <span className="syn-prop">{'"strict"'}</span>
+          {": "}
+          <span className="syn-keyword">{"true"}</span>
+          {",\n  "}
+          <span className="syn-prop">{'"parameters"'}</span>
+          {": {\n    "}
+          <span className="syn-prop">{'"type"'}</span>
+          {": "}
+          <span className="syn-keyword">{'"object"'}</span>
+          {",\n    "}
+          <span className="syn-prop">{'"properties"'}</span>
+          {": {\n      "}
+          <span className="syn-prop">{'"severity_threshold"'}</span>
+          {": {\n        "}
+          <span className="syn-prop">{'"type"'}</span>
+          {": "}
+          <span className="syn-keyword">{'"string"'}</span>
+          {",\n        "}
+          <span className="syn-prop">{'"enum"'}</span>
+          {": ["}
+          <span className="syn-string">{'"low"'}</span>
+          {", "}
+          <span className="syn-string">{'"medium"'}</span>
+          {", "}
+          <span className="syn-string">{'"high"'}</span>
+          {", "}
+          <span className="syn-string">{'"critical"'}</span>
+          {"],\n        "}
+          <span className="syn-prop">{'"description"'}</span>
+          {": "}
+          <span className="syn-string">
+            {'"Minimum vulnerability severity to trigger alert."'}
+          </span>
+          {"\n      },\n      "}
+          <span className="syn-prop">{'"include_dev_deps"'}</span>
+          {": {\n        "}
+          <span className="syn-prop">{'"type"'}</span>
+          {": ["}
+          <span className="syn-keyword">{'"boolean"'}</span>
+          {", "}
+          <span className="syn-keyword">{'"null"'}</span>
+          {"],\n        "}
+          <span className="syn-prop">{'"description"'}</span>
+          {": "}
+          <span className="syn-string">
+            {'"Include devDependencies in the scan. Null means false."'}
+          </span>
+          {"\n      }\n    },\n    "}
+          <span className="syn-prop">{'"required"'}</span>
+          {": ["}
+          <span className="syn-string">{'"severity_threshold"'}</span>
+          {", "}
+          <span className="syn-string">{'"include_dev_deps"'}</span>
+          {"],\n    "}
+          <span className="syn-prop">{'"additionalProperties"'}</span>
+          {": "}
+          <span className="syn-keyword">{"false"}</span>
+          {"\n  }\n}"}
+        </CodeCard>
 
         <p style={{ marginTop: "-0.25rem" }}>
           The wrapper differs by vendor even though the schema body does not.
@@ -697,66 +585,51 @@ export function StructuredAiSkillsArticle() {
           improvise.
         </p>
 
-        <div
-          className="code-card"
-          style={{ marginTop: "1.25rem", marginBottom: "0.5rem" }}
-        >
-          <CodeCardHeader
-            label="Contract-Checked Skill Specification"
-            lang="markdown"
-            snippet={contractSnippet}
-            sectionKey="contract"
-          copiedSection={copiedSection}
-          onCopy={handleCopy}
-          />
-          <pre className="code-block">
-            <code>
-              <span className="syn-keyword">
-                {"# Skill: Production Database Migration"}
-              </span>
-              {"\n\n"}
-              <span className="syn-keyword">{"## Preconditions"}</span>
-              {"\n"}
-              <span className="syn-text">
-                {"Assert ALL of the following before executing any step:"}
-              </span>
-              {"\n- "}
-              <span className="syn-func">{"`git status --porcelain`"}</span>
-              {" returns empty output (clean working tree).\n- "}
-              <span className="syn-prop">{"`DATABASE_URL`"}</span>
-              {" is set and does NOT resolve to the production cluster.\n"}
-              {
-                "- A verified backup exists with a timestamp less than 60 minutes old.\n\n"
-              }
-              <span className="syn-attr">
-                {
-                  "If any precondition fails: STOP, report which assertion failed, take no further action."
-                }
-              </span>
-              {"\n\n"}
-              <span className="syn-keyword">{"## Postconditions"}</span>
-              {"\n"}
-              <span className="syn-text">
-                {"Assert ALL of the following after the final step:"}
-              </span>
-              {"\n"}
-              {
-                "- The migrations table records exactly one newly applied revision.\n"
-              }
-              {"- The application boots and "}
-              <span className="syn-func">{"`/healthz`"}</span>
-              {" returns HTTP 200.\n"}
-              {
-                "- The generated down-migration replays cleanly against the staging replica.\n\n"
-              }
-              <span className="syn-attr">
-                {
-                  "If any postcondition fails: run the down-migration, then report the failed assertion."
-                }
-              </span>
-            </code>
-          </pre>
-        </div>
+        <CodeCard code={contractSnippet} lang="markdown" title="Contract-Checked Skill Specification" style={{ marginBottom: "0.5rem" }}>
+          <span className="syn-keyword">
+            {"# Skill: Production Database Migration"}
+          </span>
+          {"\n\n"}
+          <span className="syn-keyword">{"## Preconditions"}</span>
+          {"\n"}
+          <span className="syn-text">
+            {"Assert ALL of the following before executing any step:"}
+          </span>
+          {"\n- "}
+          <span className="syn-func">{"`git status --porcelain`"}</span>
+          {" returns empty output (clean working tree).\n- "}
+          <span className="syn-prop">{"`DATABASE_URL`"}</span>
+          {" is set and does NOT resolve to the production cluster.\n"}
+          {
+            "- A verified backup exists with a timestamp less than 60 minutes old.\n\n"
+          }
+          <span className="syn-attr">
+            {
+              "If any precondition fails: STOP, report which assertion failed, take no further action."
+            }
+          </span>
+          {"\n\n"}
+          <span className="syn-keyword">{"## Postconditions"}</span>
+          {"\n"}
+          <span className="syn-text">
+            {"Assert ALL of the following after the final step:"}
+          </span>
+          {"\n"}
+          {
+            "- The migrations table records exactly one newly applied revision.\n"
+          }
+          {"- The application boots and "}
+          <span className="syn-func">{"`/healthz`"}</span>
+          {" returns HTTP 200.\n"}
+          {
+            "- The generated down-migration replays cleanly against the staging replica.\n\n"
+          }
+          <span className="syn-attr">
+            {
+              "If any postcondition fails: run the down-migration, then report the failed assertion."
+            }
+          </span>
+        </CodeCard>
       </section>
 
       <section className="article-panel">

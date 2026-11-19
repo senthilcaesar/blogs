@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, Copy } from 'lucide-react';
 import {
   checkTools,
   cloneRepo,
@@ -47,6 +46,8 @@ import {
   mondayPy,
   takeHome,
 } from './agentMemoryTutorialCode';
+import { CodeCard as CodeWindow } from '../../components/CodeCard';
+import { highlight as sharedHighlight } from '../../lib/highlight';
 
 const image = (name) =>
   new URL(`../../../images/agent-memory-${name}.webp`, import.meta.url).href;
@@ -118,8 +119,9 @@ function classify(lang, match, code) {
 }
 
 function highlight(code, lang) {
-  const pattern = PATTERNS[lang];
-  if (!pattern) return code;
+  // Shell, chat transcripts, diffs and Markdown use the shared highlighter
+  const pattern = lang === 'bash' ? null : PATTERNS[lang];
+  if (!pattern) return sharedHighlight(code, lang);
 
   const parts = [];
   let last = 0;
@@ -139,49 +141,10 @@ function highlight(code, lang) {
 }
 
 function CodeCard({ code, lang = 'python', file }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy snippet:', err);
-    }
-  };
-
   return (
-    <div className='code-card'>
-      <div className='code-card__header'>
-        <div className='code-card__meta'>
-          <span className='code-card__lang'>{lang}</span>
-          {file && <span className='code-card__file'>{file}</span>}
-        </div>
-        <button
-          type='button'
-          className={`code-copy-btn ${copied ? 'code-copy-btn--copied' : ''}`}
-          onClick={handleCopy}
-          title='Copy code snippet to clipboard'
-          aria-label={`Copy ${file || 'code snippet'} to clipboard`}
-        >
-          {copied ? (
-            <>
-              <Check size={14} />
-              <span>Copied!</span>
-            </>
-          ) : (
-            <>
-              <Copy size={14} />
-              <span>Copy</span>
-            </>
-          )}
-        </button>
-      </div>
-      <pre className='code-block'>
-        <code>{highlight(code, lang)}</code>
-      </pre>
-    </div>
+    <CodeWindow code={code} lang={lang} file={file}>
+      {highlight(code, lang)}
+    </CodeWindow>
   );
 }
 

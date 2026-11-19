@@ -1,3 +1,5 @@
+import { CodeCard } from '../../components/CodeCard';
+
 export function ReactUiPackagesArticle() {
   return (
     <>
@@ -26,12 +28,7 @@ export function ReactUiPackagesArticle() {
           Here is what a bad setup looks like.
         </p>
 
-        <div className="code-card">
-          <div className="code-card__header code-card__header--bad">
-            BAD: Unprotected Component
-          </div>
-          <pre className="code-block">
-            <code>
+        <CodeCard title="BAD: Unprotected Component">
               <span className="syn-comment">// BAD: This component has no protection.</span>{'\n'}
               <span className="syn-comment">// It relies on global styles and generic class names.</span>{'\n'}
               <span className="syn-keyword">import</span> <span className="syn-string">&apos;./global.css&apos;</span>; <span className="syn-comment">// This will ruin the host app</span>{'\n'}
@@ -43,9 +40,7 @@ export function ReactUiPackagesArticle() {
               {'    '}&lt;/<span className="syn-tag">button</span>&gt;{'\n'}
               {'  '});{'\n'}
               {'}'}
-            </code>
-          </pre>
-        </div>
+        </CodeCard>
 
         <p style={{ marginTop: '1rem' }}>
           If the host app also uses a generic class like <code>bg-blue-500</code> but defines it as a different shade of blue, your button will look wrong.
@@ -67,12 +62,7 @@ export function ReactUiPackagesArticle() {
           Here is how you build a protected component.
         </p>
 
-        <div className="code-card" style={{ marginBottom: '1.5rem' }}>
-          <div className="code-card__header">
-            tailwind.config.js
-          </div>
-          <pre className="code-block">
-            <code>
+        <CodeCard title="tailwind.config.js">
               <span className="syn-comment">// tailwind.config.js</span>{'\n'}
               <span className="syn-comment">// Configure your unique prefix here</span>{'\n'}
               <span className="syn-keyword">module</span>.<span className="syn-keyword">exports</span> = {'{'}{'\n'}
@@ -80,16 +70,9 @@ export function ReactUiPackagesArticle() {
               {'  '}<span className="syn-prop">content</span>: [<span className="syn-string">{`'./src/**/*.{js,jsx}'`}</span>],{'\n'}
               {'  '}<span className="syn-comment">// ... rest of config</span>{'\n'}
               {'}'};
-            </code>
-          </pre>
-        </div>
+        </CodeCard>
 
-        <div className="code-card">
-          <div className="code-card__header code-card__header--good">
-            GOOD: Protected Component
-          </div>
-          <pre className="code-block">
-            <code>
+        <CodeCard title="GOOD: Protected Component">
               <span className="syn-comment">// GOOD: Uses a scoped wrapper and prefixed classes.</span>{'\n'}
               <span className="syn-keyword">import</span> <span className="syn-string">&apos;./scoped-reset.css&apos;</span>; <span className="syn-comment">// Only affects things inside .my-lib-root</span>{'\n'}
               {'\n'}
@@ -102,9 +85,7 @@ export function ReactUiPackagesArticle() {
               {'    '}&lt;/<span className="syn-tag">div</span>&gt;{'\n'}
               {'  '});{'\n'}
               {'}'}
-            </code>
-          </pre>
-        </div>
+        </CodeCard>
       </section>
 
       <section className="article-panel">

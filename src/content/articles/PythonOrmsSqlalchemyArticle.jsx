@@ -1,3 +1,5 @@
+import { CodeCard } from '../../components/CodeCard';
+
 export function PythonOrmsSqlalchemyArticle() {
   return (
     <>
@@ -94,25 +96,12 @@ export function PythonOrmsSqlalchemyArticle() {
           Code Comparison
         </h3>
         
-        <div className="comparison-grid">
-          <div className="comparison-card">
-            <div className="card-header-label sql-label">Raw SQL Approach</div>
-            <pre>
-              <code>
-                <span className="code-keyword">SELECT</span> * <span className="code-keyword">FROM</span> users <span className="code-keyword">WHERE</span> id = <span className="code-number">1</span>;
-              </code>
-            </pre>
-          </div>
-
-          <div className="comparison-card">
-            <div className="card-header-label sqlalchemy-label">SQLAlchemy ORM Approach</div>
-            <pre>
-              <code>
-                user = session.query(User).get(<span className="code-number">1</span>)
-              </code>
-            </pre>
-          </div>
-        </div>
+        <CodeCard
+          tabs={[
+            { label: 'Raw SQL', lang: 'sql', code: 'SELECT * FROM users WHERE id = 1;' },
+            { label: 'SQLAlchemy ORM', lang: 'python', code: 'user = session.query(User).get(1)' },
+          ]}
+        />
       </section>
 
       <section className="article-panel">

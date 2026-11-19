@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { CodeCard as CodeWindow } from '../../components/CodeCard';
 
 const ariraImg = new URL('../../../images/arira.webp', import.meta.url).href;
 
@@ -16,51 +15,10 @@ const snippet2 = `<button
 </button>`;
 
 function CodeCard({ code, children }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy snippet:', err);
-    }
-  };
-
   return (
-    <div
-      className='code-card'
-      style={{ marginTop: '1rem', marginBottom: '1.25rem' }}
-    >
-      <div className='code-card__header'>
-        <span className='code-card__lang'>html</span>
-        <div className='code-card__actions'>
-          <button
-            type='button'
-            className={`code-copy-btn ${copied ? 'code-copy-btn--copied' : ''}`}
-            onClick={handleCopy}
-            title='Copy code snippet to clipboard'
-            aria-label='Copy code snippet to clipboard'
-          >
-            {copied ? (
-              <>
-                <Check size={14} />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy size={14} />
-                <span>Copy</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-      <pre className='code-block'>
-        <code>{children}</code>
-      </pre>
-    </div>
+    <CodeWindow code={code} lang='html'>
+      {children || code}
+    </CodeWindow>
   );
 }
 

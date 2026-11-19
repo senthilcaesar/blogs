@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { CodeCard } from '../../components/CodeCard';
 
 const complexImg = new URL('../../../images/complex.webp', import.meta.url).href;
 const contextFailureImg = new URL('../../../images/context-failure.webp', import.meta.url).href;
@@ -22,18 +21,6 @@ Rewrite the input text to be active and concise.
 </task>`;
 
 export function AgentsForComplexWorkflowsArticle() {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(xmlPromptSnippet);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
-
   return (
     <>
       <p className="article-lead">
@@ -109,50 +96,21 @@ export function AgentsForComplexWorkflowsArticle() {
           Rather than writing prompts as unstructured prose, wrapping different parts of a prompt in XML-style tags (like <code className="xml-tag-context">&lt;context&gt;</code>, <code className="xml-tag-task">&lt;task&gt;</code>, <code className="xml-tag-constraints">&lt;constraints&gt;</code>) gives the model a clear structural map of the prompt. This isn&apos;t cosmetic &mdash; it measurably helps the model distinguish &quot;this is background info&quot; from &quot;this is the actual instruction&quot; from &quot;this is a hard rule to follow.&quot;
         </p>
 
-        <div className="code-card" style={{ marginTop: '1.25rem', marginBottom: '1.5rem' }}>
-          <div className="code-card__header">
-            <span>Example of an XML-Structured Prompt</span>
-            <div className="code-card__actions">
-              <span className="code-card__lang">xml</span>
-              <button
-                type="button"
-                className={`code-copy-btn ${copied ? 'code-copy-btn--copied' : ''}`}
-                onClick={handleCopy}
-                title="Copy code snippet to clipboard"
-                aria-label="Copy code snippet to clipboard"
-              >
-                {copied ? (
-                  <>
-                    <Check size={14} />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={14} />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-          <pre className="code-block">
-            <code>
-              <span className="xml-tag-context">&lt;context&gt;</span>{'\n'}
-              <span className="xml-code-content">You are an expert copyeditor who writes in a concise and clear style.</span>{'\n'}
-              <span className="xml-tag-context">&lt;/context&gt;</span>{'\n\n'}
-              <span className="xml-tag-constraints">&lt;constraints&gt;</span>{'\n'}
-              <span className="xml-code-content">- Do not use exclamation marks.</span>{'\n'}
-              <span className="xml-code-content">- Keep the rewrite under 50 words.</span>{'\n'}
-              <span className="xml-tag-constraints">&lt;/constraints&gt;</span>{'\n\n'}
-              <span className="xml-tag-input">&lt;input&gt;</span>{'\n'}
-              <span className="xml-code-content">The project management team went ahead and scheduled the kickoff meeting for next Monday.</span>{'\n'}
-              <span className="xml-tag-input">&lt;/input&gt;</span>{'\n\n'}
-              <span className="xml-tag-task">&lt;task&gt;</span>{'\n'}
-              <span className="xml-code-content">Rewrite the input text to be active and concise.</span>{'\n'}
-              <span className="xml-tag-task">&lt;/task&gt;</span>
-            </code>
-          </pre>
-        </div>
+        <CodeCard code={xmlPromptSnippet} lang="xml" title="XML-structured prompt">
+            <span className="xml-tag-context">&lt;context&gt;</span>{'\n'}
+            <span className="xml-code-content">You are an expert copyeditor who writes in a concise and clear style.</span>{'\n'}
+            <span className="xml-tag-context">&lt;/context&gt;</span>{'\n\n'}
+            <span className="xml-tag-constraints">&lt;constraints&gt;</span>{'\n'}
+            <span className="xml-code-content">- Do not use exclamation marks.</span>{'\n'}
+            <span className="xml-code-content">- Keep the rewrite under 50 words.</span>{'\n'}
+            <span className="xml-tag-constraints">&lt;/constraints&gt;</span>{'\n\n'}
+            <span className="xml-tag-input">&lt;input&gt;</span>{'\n'}
+            <span className="xml-code-content">The project management team went ahead and scheduled the kickoff meeting for next Monday.</span>{'\n'}
+            <span className="xml-tag-input">&lt;/input&gt;</span>{'\n\n'}
+            <span className="xml-tag-task">&lt;task&gt;</span>{'\n'}
+            <span className="xml-code-content">Rewrite the input text to be active and concise.</span>{'\n'}
+            <span className="xml-tag-task">&lt;/task&gt;</span>
+        </CodeCard>
 
         <h3 style={{ marginTop: '1.5rem' }}>2. Subagents &mdash; Divide and Conquer Across Context Windows</h3>
         <p style={{ marginTop: '0.5rem' }}>
