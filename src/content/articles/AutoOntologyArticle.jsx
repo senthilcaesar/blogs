@@ -861,6 +861,11 @@ export function AutoOntologyArticle() {
             </a>
           </li>
           <li style={{ listStyle: 'none' }}>
+            <a href="https://neo4j.com/docs/ontology-graph-spec/" target="_blank" rel="noreferrer">
+              Ontology Graph Spec &mdash; Neo4j Docs
+            </a>
+          </li>
+          <li style={{ listStyle: 'none' }}>
             <a href="https://youtu.be/Zksf5xKOo-s" target="_blank" rel="noreferrer" style={linkStyle}>
               <YoutubeIcon />
               NVIDIA Auto Ontology: Give Your AI a Map of Your Database &mdash; Syed Humair (CodeUCraftAI, YouTube)
