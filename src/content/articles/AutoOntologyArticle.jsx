@@ -228,7 +228,7 @@ function OssieLayersDiagram() {
       <svg
         viewBox="0 0 720 230"
         role="img"
-        aria-label="Two-layer diagram. On top, ontology.yaml, the new part: business concepts and how they relate. Underneath, semantic_model.yaml, the data layer: tables, columns and metrics, close to a dbt semantic model. Both export to and import from other tools."
+        aria-label="Two-layer diagram. On top, ontology.yaml, the vocabulary: business concepts and how they relate. Underneath, semantic_model.yaml, the where and how: tables, columns and metrics, close to a dbt semantic model. Both export to and import from other tools."
         style={svgStyle}
       >
         <defs>
@@ -239,7 +239,7 @@ function OssieLayersDiagram() {
         </text>
         <rect x="20" y="44" width="500" height="78" rx="14" style={purpleBox} />
         <text x="40" y="74" style={{ ...svgText, fontSize: 17, fontWeight: 700 }}>
-          The new part
+          The vocabulary
         </text>
         <text x="500" y="74" textAnchor="end" style={{ ...svgText, fontSize: 13, fontFamily: monoFont }}>
           ontology.yaml
@@ -249,7 +249,7 @@ function OssieLayersDiagram() {
         </text>
         <rect x="20" y="134" width="500" height="78" rx="14" style={neutralBox} />
         <text x="40" y="164" style={{ ...svgText, fontSize: 17, fontWeight: 700 }}>
-          The data layer
+          The where and how
         </text>
         <text x="500" y="164" textAnchor="end" style={{ ...svgText, fontSize: 13, fontFamily: monoFont }}>
           semantic_model.yaml
@@ -339,6 +339,274 @@ function PipelineDiagram() {
   );
 }
 
+function SavedQueryTablesDiagram() {
+  const header = { fill: 'var(--accent-purple)', stroke: 'var(--accent-purple)' };
+  const headText = { fontFamily: monoFont, fontSize: 13, fontWeight: 700, fill: 'var(--bg)' };
+  const key = { ...svgMuted, fontFamily: monoFont, fontSize: 12 };
+  const val = { ...svgText, fontSize: 12 };
+  const mono = { ...svgText, fontFamily: monoFont, fontSize: 11.5 };
+  const rule = { stroke: 'var(--accent-purple)', strokeWidth: 1, opacity: 0.4 };
+  return (
+    <figure style={figureStyle}>
+      <svg
+        viewBox="0 0 720 290"
+        role="img"
+        aria-label="Storage diagram for the saved query. The custom_analysis table holds id a1, the name revenue by state and month, and the description: revenue means invoice line prices, and the state is the customer's delivery city. The sql_query table holds id q7 and the full SQL, and its other rows are queries from your query history. A small link table, custom_analysis__sql, holds analysis_id a1 and sql_query_id q7, recording which name goes with which SQL."
+        style={svgStyle}
+      >
+        <defs>
+          <ArrowMarker id="ao-tables-arrow" />
+        </defs>
+        <text x="10" y="32" style={headingLabel}>
+          HOW THE SAVED QUERY IS STORED
+        </text>
+
+        {/* custom_analysis */}
+        <rect x="10" y="56" width="270" height="184" rx="10" style={purpleBox} />
+        <rect x="10" y="56" width="270" height="30" rx="10" style={header} />
+        <text x="22" y="76" style={headText}>
+          custom_analysis
+        </text>
+        <text x="22" y="106" style={key}>id</text>
+        <text x="118" y="106" style={mono}>a1</text>
+        <line x1="10" y1="116" x2="280" y2="116" style={rule} />
+        <text x="22" y="136" style={key}>name</text>
+        <text x="118" y="136" style={val}>revenue by state</text>
+        <text x="118" y="152" style={val}>and month</text>
+        <line x1="10" y1="162" x2="280" y2="162" style={rule} />
+        <text x="22" y="182" style={key}>description</text>
+        {['Revenue means invoice', 'line prices; the state is', "the customer's delivery", 'city'].map((l, i) => (
+          <text key={l} x="118" y={182 + i * 16} style={val}>
+            {l}
+          </text>
+        ))}
+
+        {/* link table */}
+        <rect x="305" y="56" width="145" height="90" rx="10" style={neutralBox} />
+        <rect
+          x="305"
+          y="56"
+          width="145"
+          height="30"
+          rx="10"
+          style={{ fill: 'var(--text-muted)', stroke: 'var(--text-muted)' }}
+        />
+        <text x="377" y="76" textAnchor="middle" style={{ ...headText, fontSize: 11 }}>
+          custom_analysis__sql
+        </text>
+        <text x="315" y="106" style={key}>analysis_id</text>
+        <text x="425" y="106" style={mono}>a1</text>
+        <line x1="305" y1="116" x2="450" y2="116" style={{ ...rule, stroke: 'var(--text-muted)' }} />
+        <text x="315" y="136" style={key}>sql_query_id</text>
+        <text x="425" y="136" style={mono}>q7</text>
+
+        {/* sql_query */}
+        <rect x="495" y="56" width="215" height="184" rx="10" style={purpleBox} />
+        <rect x="495" y="56" width="215" height="30" rx="10" style={header} />
+        <text x="507" y="76" style={headText}>
+          sql_query
+        </text>
+        <text x="507" y="106" style={key}>id</text>
+        <text x="603" y="106" style={mono}>q7</text>
+        <line x1="495" y1="116" x2="710" y2="116" style={rule} />
+        <text x="507" y="136" style={key}>sql_full_query</text>
+        {['SELECT SUM(il.extendedprice)', 'FROM sales.invoicelines il', 'JOIN … (six tables)'].map((l, i) => (
+          <text key={l} x="507" y={156 + i * 16} style={mono}>
+            {l}
+          </text>
+        ))}
+        <line x1="495" y1="200" x2="710" y2="200" style={rule} />
+        <text x="507" y="218" style={{ ...svgMuted, fontSize: 11.5, fontStyle: 'italic' }}>
+          other rows: queries collected
+        </text>
+        <text x="507" y="233" style={{ ...svgMuted, fontSize: 11.5, fontStyle: 'italic' }}>
+          from your query history
+        </text>
+
+        {/* links */}
+        <line x1="303" y1="101" x2="284" y2="101" style={edgeStyle} markerEnd="url(#ao-tables-arrow)" />
+        <path d="M452 131 H468 V101 H491" style={{ ...edgeStyle, strokeLinejoin: 'round' }} markerEnd="url(#ao-tables-arrow)" />
+
+        <text x="360" y="272" textAnchor="middle" style={{ ...svgMuted, fontSize: 13 }}>
+          The middle table only records which name goes with which SQL.
+        </text>
+      </svg>
+      <figcaption>
+        Where the saved query lives in the map&rsquo;s database. The ids are shortened here; the real ones are long
+        random strings.
+      </figcaption>
+    </figure>
+  );
+}
+
+function AgentRetrievalDiagram() {
+  const tools = [
+    {
+      x: 10,
+      name: 'retrieve',
+      style: accentBox,
+      lines: ['searches the map by meaning', 'and by name'],
+    },
+    {
+      x: 250,
+      name: 'run_sql',
+      style: neutralBox,
+      lines: ['checks table and column', 'names against the catalog,', 'then tests a draft', 'and returns rows'],
+    },
+    {
+      x: 490,
+      name: 'submit',
+      style: neutralBox,
+      lines: ['same checks, then runs', 'the final query; an error', 'goes back to the model', 'to fix'],
+    },
+  ];
+  return (
+    <figure style={figureStyle}>
+      <svg
+        viewBox="0 0 720 470"
+        role="img"
+        aria-label="Answer loop diagram. Your question goes to a reasoning model, which calls one tool at a time and reads each result. The retrieve tool searches the map by meaning and by name, and finds the custom analysis revenue by state and month with its description of what revenue means. The run_sql tool checks table and column names against the catalog, tests a draft and returns rows. The submit tool applies the same checks and runs the final query; an error goes back to the model to fix. The answer is $588.80 from 3 invoice lines, returned with the SQL it ran. If no query is accepted, the agent says it can't answer."
+        style={svgStyle}
+      >
+        <defs>
+          <ArrowMarker id="ao-agent-arrow" />
+        </defs>
+        <text x="10" y="28" style={headingLabel}>
+          HOW THE AGENT FINDS THE SAVED QUERY
+        </text>
+        <rect x="10" y="44" width="700" height="50" rx="12" style={neutralBox} />
+        <text x="28" y="74" style={{ ...svgText, fontSize: 15, fontWeight: 700 }}>
+          Your question
+        </text>
+        <text x="146" y="74" style={{ ...svgMuted, fontSize: 13 }}>
+          &ldquo;Revenue for the sushi roll flash drive in Pennsylvania in June 2015?&rdquo;
+        </text>
+        <line x1="360" y1="96" x2="360" y2="118" style={edgeStyle} markerEnd="url(#ao-agent-arrow)" />
+        <rect x="210" y="120" width="300" height="56" rx="14" style={purpleBox} />
+        <text x="360" y="144" textAnchor="middle" style={{ ...svgText, fontSize: 15, fontWeight: 700 }}>
+          Reasoning model
+        </text>
+        <text x="360" y="164" textAnchor="middle" style={{ ...svgMuted, fontSize: 12 }}>
+          reads each result, picks the next tool
+        </text>
+        {[
+          [300, 120],
+          [360, 360],
+          [420, 600],
+        ].map(([x1, x2]) => (
+          <line
+            key={x2}
+            x1={x1}
+            y1="180"
+            x2={x2}
+            y2="226"
+            style={edgeStyle}
+            markerStart="url(#ao-agent-arrow)"
+            markerEnd="url(#ao-agent-arrow)"
+          />
+        ))}
+        <text x="20" y="198" style={{ ...svgMuted, fontSize: 11.5 }}>
+          One tool at a time;
+        </text>
+        <text x="20" y="214" style={{ ...svgMuted, fontSize: 11.5 }}>
+          it reads each result.
+        </text>
+        {tools.map((t) => (
+          <g key={t.name}>
+            <rect x={t.x} y="230" width="220" height="150" rx="14" style={t.style} />
+            <text x={t.x + 16} y="258" style={{ ...svgText, fontFamily: monoFont, fontSize: 15, fontWeight: 700 }}>
+              {t.name}
+            </text>
+            {t.lines.map((l, i) => (
+              <text key={l} x={t.x + 16} y={284 + i * 18} style={{ ...svgText, fontSize: 12.5 }}>
+                {l}
+              </text>
+            ))}
+          </g>
+        ))}
+        <rect
+          x="22"
+          y="312"
+          width="196"
+          height="58"
+          rx="8"
+          style={{ fill: 'var(--bg)', stroke: 'var(--accent)', strokeWidth: 1.5 }}
+        />
+        <text x="32" y="333" style={{ ...svgText, fontFamily: monoFont, fontSize: 11.5, fontWeight: 700 }}>
+          revenue by state and month
+        </text>
+        <text x="32" y="355" style={{ ...svgMuted, fontSize: 11.5 }}>
+          + its description of revenue
+        </text>
+        <line x1="600" y1="382" x2="600" y2="398" style={edgeStyle} markerEnd="url(#ao-agent-arrow)" />
+        <rect
+          x="330"
+          y="400"
+          width="380"
+          height="56"
+          rx="14"
+          style={{
+            fill: 'color-mix(in srgb, var(--success) 16%, transparent)',
+            stroke: 'var(--success)',
+            strokeWidth: 2,
+          }}
+        />
+        <text x="520" y="424" textAnchor="middle" style={{ ...svgText, fontSize: 15, fontWeight: 700 }}>
+          $588.80, from 3 invoice lines
+        </text>
+        <text x="520" y="444" textAnchor="middle" style={{ ...svgMuted, fontSize: 12 }}>
+          returned with the SQL it ran
+        </text>
+        <text x="20" y="424" style={{ ...svgMuted, fontSize: 12 }}>
+          If no query is accepted, the agent
+        </text>
+        <text x="20" y="442" style={{ ...svgMuted, fontSize: 12 }}>
+          says it can&rsquo;t answer instead.
+        </text>
+      </svg>
+      <figcaption>
+        How the agent answers the Pennsylvania question. A reasoning model calls one tool at a time, and{' '}
+        <code>retrieve</code> is the step that finds the saved query and its description.
+      </figcaption>
+    </figure>
+  );
+}
+
+const mapQuestions = [
+  {
+    question: 'What does it mean?',
+    element: 'Concept',
+    detail: 'A term, such as Customer or Invoice Line, with a plain description and synonyms',
+  },
+  {
+    question: 'Where is it?',
+    element: 'Mapping',
+    detail: 'Column attributes, which tie each term to the tables and columns that hold its data',
+  },
+  {
+    question: 'What’s connected?',
+    element: 'Relationship',
+    detail:
+      'How tables join: the keys the database declares, plus links the AI suggests and the data confirms. This includes bridge tables, tables that exist only to link two others',
+  },
+  {
+    question: 'How do I calculate it?',
+    element: 'Metric',
+    detail:
+      'SQL attributes: saved, reviewed formulas that belong to a term, such as how to calculate revenue, so every answer works it out the same way',
+  },
+  {
+    question: 'Where does it come from?',
+    element: 'Lineage',
+    detail: 'Each term and attribute points back to the tables and columns it came from, and each answer shows the SQL it ran',
+  },
+  {
+    question: 'Should I use it?',
+    element: 'Certification',
+    detail: 'Experts sign off names, descriptions and attributes, and the app marks those parts as reviewed',
+  },
+];
+
 const ontologyTerms = [
   {
     db: 'A term, such as Customer or Order, with a description and synonyms',
@@ -367,8 +635,7 @@ const ontologyTerms = [
   },
 ];
 
-const ossieYaml = `# ontology.yaml
-ontology:
+const ossieOntologyYaml = `ontology:
 - concept: Customer
   type: EntityType
   relationships:
@@ -377,10 +644,9 @@ ontology:
     - concept: City
     multiplicity: ManyToOne
     verbalizes:
-    - '{Customer} has {City}'
+    - '{Customer} has {City}'`;
 
-# semantic_model.yaml
-metrics:
+const ossieSemanticModelYaml = `metrics:
 - name: revenue_by_state_and_month`;
 
 const answerSql = `SELECT SUM(il.extendedprice) AS revenue, COUNT(*) AS invoice_lines
@@ -424,18 +690,25 @@ const tocGroups = [
   { id: 'what-is-an-ontology', label: 'What’s an ontology?' },
   { id: 'whats-in-the-map', label: 'What’s in the map' },
   { id: 'where-the-map-lives', label: 'Where the map lives' },
-  { id: 'sharing-the-map', label: 'Sharing the map' },
   {
     id: 'how-it-builds-the-map',
-    label: 'How it builds the map',
+    label: 'How it works',
     items: [
       { id: 'stage-generate', label: 'Stage 1: Generate' },
       { id: 'stage-certify', label: 'Stage 2: Certify' },
       { id: 'stage-answer', label: 'Stage 3: Answer' },
     ],
   },
-  { id: 'back-to-pennsylvania', label: 'Back to Pennsylvania' },
-  { id: 'does-the-model-matter', label: 'Does the model matter?' },
+  {
+    id: 'back-to-pennsylvania',
+    label: 'Back to Pennsylvania',
+    items: [
+      { id: 'the-answer-and-the-drift', label: 'The answer, and the drift' },
+      { id: 'inside-the-saved-query', label: 'Inside the saved query' },
+      { id: 'a-trick-question', label: 'A trick question' },
+    ],
+  },
+  { id: 'sharing-the-map', label: 'Sharing the map' },
   { id: 'trying-it-yourself', label: 'Trying it yourself' },
   { id: 'where-it-falls-short', label: 'Where it falls short' },
   { id: 'references', label: 'References' },
@@ -556,24 +829,41 @@ export function AutoOntologyArticle() {
 
       <section className="article-panel">
         <h2 id="whats-in-the-map">What&rsquo;s in Auto Ontology&rsquo;s map?</h2>
-        <p>Auto Ontology&rsquo;s map holds three kinds of definition:</p>
-        <ul>
-          <li>
-            <strong>Terms.</strong> Business concepts such as <em>Customer</em> or <em>Invoice Line</em>, each with a
-            plain description and synonyms, mapped to the columns that hold them.
-          </li>
-          <li>
-            <strong>SQL attributes.</strong> Saved, reviewed formulas that belong to a term, such as how to calculate
-            revenue or a rolling total. The agent reuses them instead of reinventing them each time.
-          </li>
-          <li>
-            <strong>Relationships.</strong> How tables join, worked out from the database&rsquo;s keys and from the
-            data itself.
-          </li>
-        </ul>
         <p>
+          Auto Ontology sums up the map as the answers to six questions that a person, or an agent,
+          might ask about a piece of data. Each question has its own part of the map:
+        </p>
+        <div className="table-wrap" style={{ marginTop: '1.25rem' }}>
+          <table style={{ fontSize: '1.05rem' }}>
+            <thead>
+              <tr>
+                <th style={{ fontSize: '0.85rem' }}>Question</th>
+                <th style={{ fontSize: '0.85rem' }}>Part of the map</th>
+                <th style={{ fontSize: '0.85rem' }}>In Auto Ontology</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mapQuestions.map((row) => (
+                <tr key={row.element}>
+                  <td>{row.question}</td>
+                  <td>
+                    <strong>{row.element}</strong>
+                  </td>
+                  <td>{row.detail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ marginTop: '1rem' }}>
+          Alongside SQL attributes, which belong to a single term, the map can hold <em>custom analyses</em>: whole
+          saved SQL queries, each with a name and a plain description of what it calculates. People add them in the
+          app or through its API, and the agent can find and reuse them just as it finds terms. We&rsquo;ll see one
+          at work in Back to Pennsylvania.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
           If you already know the vocabulary of ontologies, each piece has a familiar counterpart. If you
-          don&rsquo;t, the left column is all you need; the right-hand columns are the formal names you&rsquo;ll
+          don&rsquo;t, the first column of the next table is all you need; the right-hand columns are the formal names you&rsquo;ll
           meet elsewhere. (OWL is the Web Ontology Language, the main standard for writing ontologies.) They&rsquo;re
           equivalents, not what the tool writes: as the next section shows, Auto Ontology stores its map without any
           of these standards.
@@ -603,16 +893,24 @@ export function AutoOntologyArticle() {
           </table>
         </div>
         <p style={{ marginTop: '1rem' }}>
-          Measured against the four parts of an ontology, the map has two and lacks two. It has{' '}
-          <strong>definitions</strong>, in each term&rsquo;s description and synonyms, and it has{' '}
-          <strong>relationships</strong>, in the links between tables. What it lacks are <strong>types</strong> and{' '}
-          <strong>rules</strong>. Its terms aren&rsquo;t arranged from broad to narrow, so there&rsquo;s no &ldquo;a
-          t-shirt is a kind of clothing&rdquo;. And there&rsquo;s no reasoner, the program that would apply a rule
-          like &ldquo;every order must have a customer&rdquo; and work out new facts from it. What the map adds instead
+          Measured against the four parts of an ontology, the map has two in full and two only partly or not at all.
+          It has <strong>definitions</strong>, in each term&rsquo;s description and synonyms, and it has{' '}
+          <strong>relationships</strong>, in the links between tables. It has <strong>types</strong> too, since each
+          term is a class, but only as a flat list: what it lacks is a <strong>type hierarchy</strong>. Its terms sit
+          side by side rather than from broad to narrow, so there&rsquo;s no &ldquo;a t-shirt is a kind of
+          clothing&rdquo;. (Since November 2026, the map can group the parts of one thing split across tables, such as{' '}
+          <code>customer</code> and <code>customer_ext</code>, into a single entity, but that grouping says &ldquo;part
+          of&rdquo;, not &ldquo;kind of&rdquo;.) And it lacks <strong>rules</strong>: there&rsquo;s no reasoner, the program that would
+          apply a rule like &ldquo;every order must have a customer&rdquo; and work out new facts from it. What the
+          map adds instead
           is something ontologies usually don&rsquo;t hold: saved formulas, such as how to calculate revenue. In the
-          words of Syed Humair, who tested the
-          tool on video, it&rsquo;s &ldquo;an ontology in spirit, built for one job&rdquo;: helping an AI agent write
-          the correct SQL.
+          words of{' '}
+          <a href="https://www.linkedin.com/in/syedmuhammadhumair/" target="_blank" rel="noreferrer">
+            Syed Humair
+          </a>
+          , who tested the
+          tool, it&rsquo;s &ldquo;an ontology in spirit, built for one job&rdquo;:{' '}
+          <mark>helping an AI agent write the correct SQL query</mark>.
         </p>
       </section>
 
@@ -642,33 +940,7 @@ export function AutoOntologyArticle() {
       </section>
 
       <section className="article-panel">
-        <h2 id="sharing-the-map">How is the map shared with other tools?</h2>
-        <p>
-          A map locked inside one tool would bring back the problem it was meant to solve. So Auto Ontology can
-          export and import its map using Apache Ossie, a new open standard for exchanging semantic models.
-          We can think of Ossie as a common file format for business meaning: terms, metrics and how they connect,
-          written in YAML (a plain-text format of indented key-value pairs). According to Humair, it was started by
-          Snowflake, dbt Labs and Salesforce and is now an Apache project, still at an early stage.
-        </p>
-        <p style={{ marginTop: '1rem' }}>Here&rsquo;s a trimmed piece of an export from the sample database:</p>
-        <CodeCard code={ossieYaml} lang="yaml" file="Apache Ossie export" />
-        <p style={{ marginTop: '1rem' }}>
-          Read it from the top. <code>concept: Customer</code> is a term. Its relationship, named after the{' '}
-          <code>deliverycityid</code> column, points to the City concept. <code>ManyToOne</code> says many customers
-          can share one city, and <code>verbalizes</code> gives the link as a plain sentence, &ldquo;Customer has
-          City&rdquo;. Below that, the semantic model file holds the metrics, like{' '}
-          <code>revenue_by_state_and_month</code>.
-        </p>
-        <OssieLayersDiagram />
-        <p style={{ marginTop: '1rem' }}>
-          If you use dbt, a popular tool for transforming data with SQL, the bottom layer will look familiar: it is
-          very close to a dbt semantic model. The new part is the ontology file on top, which describes the business
-          concepts and how they relate.
-        </p>
-      </section>
-
-      <section className="article-panel">
-        <h2 id="how-it-builds-the-map">How does it build the map?</h2>
+        <h2 id="how-it-builds-the-map">How does it work?</h2>
         <p>Auto Ontology works in three stages: it generates a draft, people certify it, and the agent answers from it.</p>
         <PipelineDiagram />
 
@@ -678,17 +950,6 @@ export function AutoOntologyArticle() {
           part is plain code, with no AI involved. Then an AI model looks at the tables one at a time, drafts a
           business term and description for each, and suggests links between tables that nobody declared in the
           database. Plain code then checks those suggested links against the real data.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          Going table by table takes time, and the model you choose matters a lot for speed. On the sample database,
-          Humair&rsquo;s build took about two and a half minutes with Anthropic&rsquo;s Claude Haiku, and more than
-          20 minutes with NVIDIA&rsquo;s free hosted model. That works out to roughly three seconds per table with
-          Haiku. At that rate, a company with 5,000 tables would wait about four hours for a first draft.
-        </p>
-        <p style={{ marginTop: '1rem' }}>
-          His build left out 17 old archive tables (copies of customers, cities and so on, which had confused the AI
-          into linking customers to outdated city data). It produced 34 business terms, one per remaining table, and
-          92 links between them, which you can explore as a graph in the web app.
         </p>
 
         <h3 id="stage-certify">Stage 2: Certify</h3>
@@ -705,42 +966,154 @@ export function AutoOntologyArticle() {
         </p>
 
         <h3 id="stage-answer">Stage 3: Answer</h3>
-        <p>When you ask a question in plain English, the agent:</p>
-        <ol>
-          <li>Works out what you&rsquo;re asking and picks out the things you named.</li>
-          <li>Searches the map for matching terms, columns and saved formulas.</li>
-          <li>Writes the SQL from what it found.</li>
-          <li>Checks the filter values and the query against the database, and repairs the SQL if a check fails.</li>
-          <li>Runs the query and returns the answer, along with the SQL and the steps it took.</li>
-        </ol>
         <p>
-          If the map has nothing that fits the question, the agent says the data can&rsquo;t answer it rather than
-          inventing something.
+          When you ask a question in plain English, it goes to the agent&rsquo;s <em>reasoning model</em>, the AI model
+          that runs the agent. The model starts out knowing nothing about your database, so it works in a loop,
+          calling one tool at a time and reading what each one returns:
+        </p>
+        <ul>
+          <li>
+            <code>retrieve</code> searches the map, by meaning and by name, for matching terms, columns, saved formulas
+            and saved queries.
+          </li>
+          <li>
+            <code>run_sql</code> checks a draft query&rsquo;s table and column names against the catalog, then runs it
+            and returns rows.
+          </li>
+          <li>
+            <code>submit</code> applies the same checks and runs the final query. An error goes back to the model to
+            fix; a clean run is the answer, returned with its SQL.
+          </li>
+        </ul>
+        <p>
+          If no query is accepted, the agent says the data can&rsquo;t answer the question rather than inventing
+          something.
         </p>
       </section>
 
       <section className="article-panel">
         <h2 id="back-to-pennsylvania">Back to Pennsylvania</h2>
+        <h3 id="the-answer-and-the-drift">The answer, and the drift</h3>
         <p>
-          So what happens to our question? According to the project&rsquo;s README, the agent matches
+          So what happens to our question,{' '}
+          <mark>
+            &ldquo;What was revenue for the USB food flash drive &ndash; sushi roll in Pennsylvania in June
+            2015?&rdquo;
+          </mark>{' '}
+          The agent matches
           &ldquo;revenue&rdquo;, the product and the state to terms in the map, follows their relationships to find
           the joins, and comes back with &ldquo;$588.80, from 3 invoice lines&rdquo;, along with this query:
         </p>
         <CodeCard code={answerSql} lang="sql" />
         <p style={{ marginTop: '1rem' }}>
-          That&rsquo;s Reading A: invoice line prices, and the customer&rsquo;s delivery city. Humair checked the
-          figure by hand against the database and got the same answer. But when he asked again and again, about one
-          time in three the agent drifted to Reading B, adding up whole payments with tax and using the
-          supplier&rsquo;s city. Same question, different meaning, the same confident tone.
+          That&rsquo;s Reading A, the correct one: invoice line prices, and the customer&rsquo;s delivery city.
+          Humair worked the figure out himself against the database and also got $588.80. But the agent didn&rsquo;t
+          land on it every time. When he asked the same question again and again, about one time in three it drifted
+          to Reading B, adding up whole payments with tax and using the supplier&rsquo;s city. Same question,
+          different meaning, the same confident tone.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          The fix was one human-written example: a saved query named &ldquo;revenue by state and month&rdquo;, with a
-          plain note saying that revenue means invoice line prices and that the state belongs to the
-          customer&rsquo;s delivery city. After that, it was right every time in his tests. Crucially, nobody changed
-          the model. It simply had the meaning written down.
+          The fix was to write the meaning down once. Humair added a saved query named <mark className="highlight-sea">&ldquo;revenue by state and
+          month&rdquo;</mark> to the map, with a plain description saying that revenue
+          means invoice line prices and that the state belongs to the customer&rsquo;s delivery city. After that, the
+          agent stopped drifting in his tests.
+          Crucially, nobody changed the model. The agent simply had the meaning written down.
+        </p>
+        <h3 id="inside-the-saved-query">Inside the saved query</h3>
+        <p>
+          This saved query is the custom analysis we met in What&rsquo;s in Auto Ontology&rsquo;s map. It holds three things, and it&rsquo;s stored in
+          two forms in the map&rsquo;s Postgres database: once as ordinary rows, and once as an embedding the agent
+          can search by meaning.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          The second test was a trick question: the return on ad spend for the same product. Wide World Importers
+          <strong>What it contains</strong>
+        </p>
+        <div className="table-wrap" style={{ marginTop: '0.75rem' }}>
+          <table style={{ fontSize: '1.05rem' }}>
+            <thead>
+              <tr>
+                <th style={{ fontSize: '0.85rem' }}>Part</th>
+                <th style={{ fontSize: '0.85rem' }}>What it is</th>
+                <th style={{ fontSize: '0.85rem' }}>In our example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <code>name</code>
+                </td>
+                <td>A short label</td>
+                <td><mark className="highlight-sea">&ldquo;revenue by state and month&rdquo;</mark></td>
+              </tr>
+              <tr>
+                <td>
+                  <code>description</code>
+                </td>
+                <td>The plain-English description</td>
+                <td>Revenue means invoice line prices, and the state is the customer&rsquo;s delivery city</td>
+              </tr>
+              <tr>
+                <td>SQL</td>
+                <td>The full query</td>
+                <td>
+                  The six-table join that adds up <code>extendedprice</code> by state and month
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ marginTop: '1rem' }}>
+          <strong>Where it lives</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>As ordinary records, which the app and its API read and edit.</strong> Our saved query is split
+            across three small tables in the map&rsquo;s database. One, <code>custom_analysis</code>, holds its name
+            and description. Another, <code>sql_query</code>, holds the SQL itself; it&rsquo;s the same table that keeps the
+            queries Auto Ontology collects from your databases&rsquo; query history. A third table simply records which
+            name goes with which SQL. Before anything is stored, Auto Ontology checks the SQL against its catalog,
+            the list of tables and columns it read from your databases. A query that can&rsquo;t be read as SQL, or
+            that names a table the catalog doesn&rsquo;t have, isn&rsquo;t saved.
+          </li>
+          <li>
+            <strong>As an embedding, for the agent.</strong> At the same moment, Auto Ontology joins the name, the
+            description and the SQL into one line of text and stores it in pgvector as an embedding, the same kind of
+            meaning-based index the terms get. Deleting the analysis deletes its embedding too.
+          </li>
+        </ul>
+        <SavedQueryTablesDiagram />
+        <p style={{ marginTop: '1rem' }}>
+          <strong>How the agent finds it</strong>
+        </p>
+        <p>
+          Now let&rsquo;s ask our question again, this time with the saved query in the map:{' '}
+          <mark className="highlight-green">
+            &ldquo;What was revenue for the USB food flash drive &ndash; sushi roll in Pennsylvania in June 2015?&rdquo;
+          </mark>{' '}
+          As Stage 3 described, the reasoning model&rsquo;s first move is to search the map with <code>retrieve</code>.
+          That tool looks in two ways at once: by meaning,
+          using the embeddings, and by name, matching the question&rsquo;s words against the names in the map.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The search by meaning is what finds the saved query. Because its description and SQL are part of what&rsquo;s
+          embedded, our question sits close to{' '}
+          <mark className="highlight-sea">&ldquo;revenue by state and month&rdquo;</mark>, even though it says
+          &ldquo;Pennsylvania&rdquo; and &ldquo;June 2015&rdquo; rather than &ldquo;state&rdquo; and &ldquo;month&rdquo;.
+          The match comes back to the model as the analysis&rsquo;s name and description, with the SQL underneath. The
+          model can then copy that SQL or adapt it, here by adding the filter for the sushi roll flash drive, before
+          checking and running it, as the diagram below shows.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          In practice, the description does as much work as the SQL. It&rsquo;s part of what gets searched, so a clear
+          description makes the analysis easier to find, and once it&rsquo;s found, the description is what tells the model
+          which meaning of &ldquo;revenue&rdquo; to use. It&rsquo;s still a search, though, not a rule: the tool keeps
+          only the closest few analyses, and the model decides whether to use what it&rsquo;s shown.
+        </p>
+        <AgentRetrievalDiagram />
+        <h3 id="a-trick-question">A trick question</h3>
+        <p>
+          The saved query fixed a question the data could answer. Humair&rsquo;s second test asked one it couldn&rsquo;t:
+          the return on ad spend for the same product. Wide World Importers
           has no advertising data at all, so the only honest answer is &ldquo;I can&rsquo;t&rdquo;. That&rsquo;s
           what came back. Humair asked this one through the project&rsquo;s MCP server, a plug-in point that lets
           an AI assistant call Auto Ontology&rsquo;s tools, such as <code>check_answerable</code>, directly (more on it
@@ -748,24 +1121,94 @@ export function AutoOntologyArticle() {
         </p>
         <CodeCard code={adSpendExchange} lang="chat" file="MCP session" />
         <p style={{ marginTop: '1rem' }}>
-          It then offered sales revenue instead, which is helpful. But in Humair&rsquo;s run it calculated that
+          The coverage score is <code>check_answerable</code>&rsquo;s quick grade, made without running the full
+          agent, of how many of the things the question names the map covers. Here it&rsquo;s half, because nothing
+          covers ad spend. The agent then offered sales revenue instead, which is helpful. But in Humair&rsquo;s run it calculated that
           revenue from orders rather than invoices, yet another meaning of the word. Knowing which data is missing,
           it turns out, isn&rsquo;t the same as knowing what a word means.
         </p>
       </section>
 
       <section className="article-panel">
-        <h2 id="does-the-model-matter">Does the AI model matter?</h2>
+        <h2 id="sharing-the-map">How is the map shared with other tools?</h2>
         <p>
-          Humair asked the Pennsylvania question to 11 <em>chat models</em>, the AI models that read tables and write
-          SQL, three times each, with and without that saved query. Without it, almost every model got it wrong. With it, almost every model got it right. Only one,
-          Claude Sonnet, was right every time with no help, and even that depended on the map: on a map built by
-          Haiku instead, Sonnet was right two times out of three. Speed varied just as much, from about 30 seconds
-          per answer with Sonnet to four and a half minutes with NVIDIA&rsquo;s free default model.
+          A map locked inside one tool would bring back the problem it was meant to solve. So Auto Ontology can
+          export and import its map using{' '}
+          <a href="https://ossie.apache.org/" target="_blank" rel="noreferrer">
+            Apache Ossie
+          </a>
+          , a new open standard for exchanging semantic models.
+          We can think of Ossie as a common file format for business meaning: terms, metrics and how they connect,
+          written in YAML (a plain-text format of indented key-value pairs). According to Humair, it was started by
+          Snowflake, dbt Labs and Salesforce and is now an Apache project, still at an early stage.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          To be sure, that&rsquo;s one question asked many times, so it&rsquo;s a quick check rather than a ranking.
-          But the pattern was clear, and Humair put it in one line: context mattered more than the model.
+          An export comes as two main files, because it answers two different questions. Picture a new employee&rsquo;s
+          first week. First they learn the business&rsquo;s vocabulary: what a customer is, what an invoice is, and
+          that every customer has a delivery city. Separately, they learn where those things are kept: which table in
+          the database holds the customers, which column holds the city, and how to add up revenue. An Ossie export
+          writes each kind of knowledge into its own file:
+        </p>
+        <ul>
+          <li>
+            <code>ontology.yaml</code> is <strong>the vocabulary</strong>. It lists the business concepts and how they
+            relate, in the words a business person would use.
+          </li>
+          <li>
+            <code>semantic_model.yaml</code> is <strong>the where and how</strong>. It lists the tables and columns
+            behind each concept, plus the metrics, saved calculations such as revenue.
+          </li>
+        </ul>
+        <p>
+          (A full export also has a small third file, <code>mapping.yaml</code>, which ties each concept in the first
+          file to its table in the second.)
+        </p>
+        <OssieLayersDiagram />
+        <p style={{ marginTop: '1rem' }}>
+          If you use dbt, a popular tool for transforming data with SQL, the second file will look familiar: it is
+          very close to a dbt semantic model. The new part is the vocabulary file on top.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Here&rsquo;s a trimmed piece of each file from the sample database, one per tab:
+        </p>
+        <CodeCard
+          tabs={[
+            { label: 'ontology.yaml', code: ossieOntologyYaml, lang: 'yaml' },
+            { label: 'semantic_model.yaml', code: ossieSemanticModelYaml, lang: 'yaml' },
+          ]}
+        />
+        <p style={{ marginTop: '1rem' }}>
+          In plain English, the <code>ontology.yaml</code> tab says one thing: <em>a customer is something the
+          business keeps records about, and each customer has one delivery city</em>. Here&rsquo;s how each line
+          contributes to that sentence:
+        </p>
+        <ul>
+          <li>
+            <code>concept: Customer</code> names the concept. It&rsquo;s the same Customer term that lives in the map.
+          </li>
+          <li>
+            <code>type: EntityType</code> says Customer is a thing the business keeps records about, not a plain value
+            such as a date or a number.
+          </li>
+          <li>
+            <code>relationships</code> lists how Customer connects to other concepts. The one shown is named{' '}
+            <code>deliverycityid</code>, after the database column that holds the link, and its <code>roles</code>{' '}
+            entry says the other end of the link is the City concept.
+          </li>
+          <li>
+            <code>multiplicity: ManyToOne</code> says many customers can share one city, but each customer has only
+            one delivery city.
+          </li>
+          <li>
+            <code>verbalizes</code> spells the link out as a sentence a person can read, &ldquo;Customer has
+            City&rdquo;. The curly braces mark which words are concepts.
+          </li>
+        </ul>
+        <p>
+          The <code>semantic_model.yaml</code> tab is trimmed to a single line: the name of one metric,{' '}
+          <code>revenue_by_state_and_month</code>. In the full file, that metric also carries the calculation
+          itself, and the rest of the file lists the tables and columns behind each concept. It&rsquo;s the saved
+          query from Back to Pennsylvania, now in a form other tools can read.
         </p>
       </section>
 
@@ -792,10 +1235,10 @@ export function AutoOntologyArticle() {
             <code>nvapi-&hellip;</code>.
           </li>
         </ul>
-        <p>The quickstart, shortened from the README, comes down to four steps:</p>
+        <p>The quickstart, shortened here, comes down to four steps:</p>
         <CodeCard code={quickstart} lang="bash" />
         <p style={{ marginTop: '1rem' }}>
-          Auto Ontology uses two kinds of model. The <em>chat model</em> can be swapped: NVIDIA&rsquo;s hosted models
+          There are two kinds of model you&rsquo;ll choose. The reasoning model, which runs the agent, can be swapped: NVIDIA&rsquo;s hosted models
           are the default, but Humair also ran it with GPT, Claude and Gemini models and with local models through
           Ollama. An <em>embedding model</em> powers the search, and that one has to stay on NVIDIA for now, because
           the database expects vectors of one exact size and other embedding models don&rsquo;t match it.
@@ -804,14 +1247,15 @@ export function AutoOntologyArticle() {
           Expect some rough edges. Humair needed three fixes before his first map would build: two because
           NVIDIA&rsquo;s cloud API had changed underneath the tool, and one real bug that missed every link crossing
           from one part of the database to another (in the sample, 59 of the 98 links). Some of this may already be
-          fixed; the current README, for instance, now uses the embedding model he switched to as its default. He
-          also told the map to skip the archive tables mentioned earlier, and to ignore the &ldquo;last edited by&rdquo; column that
+          fixed; the project, for instance, now uses the embedding model he switched to as its default. He
+          also told the map to skip 17 old archive tables (copies of customers, cities and so on, which had confused
+          the AI into linking customers to outdated city data), and to ignore the &ldquo;last edited by&rdquo; column that
           almost every table points to, so it wouldn&rsquo;t treat that as a meaningful join.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          Once it&rsquo;s running, you aren&rsquo;t limited to the built-in chat. The project also ships an MCP
-          server, a standard plug-in point that lets AI assistants such as Claude Desktop or Cursor call tools like{' '}
-          <code>check_answerable</code> and <code>ask_question</code>, as well as a REST API.
+          Once it&rsquo;s running, you aren&rsquo;t limited to the built-in chat. The MCP server from the trick-question
+          test lets AI assistants such as Claude Desktop or Cursor call tools like <code>check_answerable</code> and{' '}
+          <code>ask_question</code>, and there&rsquo;s a REST API too.
         </p>
       </section>
 
@@ -827,8 +1271,9 @@ export function AutoOntologyArticle() {
         <p style={{ marginTop: '1rem' }}>
           What persuades me, though, is the Pennsylvania result. The agent had all the data it needed from the
           start, and a capable model to read it. What it lacked was one sentence saying what &ldquo;revenue&rdquo;
-          means. Auto Ontology&rsquo;s real contribution is to write the first draft of those sentences for every
-          table, and to make it easy for a person to say &ldquo;yes, that one&rsquo;s right&rdquo;.
+          means. Auto Ontology&rsquo;s real contribution is to draft those sentences for every table, to make it easy
+          for a person to say &ldquo;yes, that one&rsquo;s right&rdquo;, and to give them a place to add the ones it
+          can&rsquo;t guess, like what &ldquo;revenue&rdquo; means.
         </p>
         <p style={{ marginTop: '1rem' }}>Smart models, it turns out, still need someone to tell them what we meant.</p>
       </section>

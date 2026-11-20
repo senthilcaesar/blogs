@@ -2312,6 +2312,23 @@ body[data-theme='dark'] .highlight-green {
   border-bottom: 0;
 }
 
+mark.highlight-sea,
+.highlight-sea {
+  background: color-mix(in srgb, #1f8fa3 13%, transparent);
+  color: inherit;
+  padding: 0.12em 0.3em;
+  border-radius: 3px;
+  border-bottom: 0;
+  font-weight: 600;
+}
+
+body[data-theme='dark'] mark.highlight-sea,
+body[data-theme='dark'] .highlight-sea {
+  background: color-mix(in srgb, #5ec8db 20%, transparent);
+  color: inherit;
+  border-bottom: 0;
+}
+
 /* ─────────────────────────────────────────────
    Comments Section & Threaded Comments
 ───────────────────────────────────────────── */
