@@ -626,12 +626,12 @@ const ontologyTerms = [
   {
     db: 'A saved formula (an SQL attribute), such as revenue',
     onto: 'A derived property',
-    std: '—',
+    std: '-',
   },
   {
     db: 'A person marking a term as certified (more on this in Stage 2)',
     onto: 'A curator signing off',
-    std: '—',
+    std: '-',
   },
 ];
 
@@ -756,7 +756,7 @@ export function AutoOntologyArticle() {
         <div className="article-panel article-panel--accent">
           <p>
             <em>
-              &ldquo;What was revenue for the USB food flash drive &ndash; sushi roll in Pennsylvania in June
+              &ldquo;What was revenue for the USB food flash drive - sushi roll in Pennsylvania in June
               2015?&rdquo;
             </em>
           </p>
@@ -997,7 +997,7 @@ export function AutoOntologyArticle() {
         <p>
           So what happens to our question,{' '}
           <mark>
-            &ldquo;What was revenue for the USB food flash drive &ndash; sushi roll in Pennsylvania in June
+            &ldquo;What was revenue for the USB food flash drive - sushi roll in Pennsylvania in June
             2015?&rdquo;
           </mark>{' '}
           The agent matches
@@ -1088,7 +1088,7 @@ export function AutoOntologyArticle() {
         <p>
           Now let&rsquo;s ask our question again, this time with the saved query in the map:{' '}
           <mark className="highlight-green">
-            &ldquo;What was revenue for the USB food flash drive &ndash; sushi roll in Pennsylvania in June 2015?&rdquo;
+            &ldquo;What was revenue for the USB food flash drive - sushi roll in Pennsylvania in June 2015?&rdquo;
           </mark>{' '}
           As Stage 3 described, the reasoning model&rsquo;s first move is to search the map with <code>retrieve</code>.
           That tool looks in two ways at once: by meaning,
@@ -1307,13 +1307,13 @@ export function AutoOntologyArticle() {
           </li>
           <li style={{ listStyle: 'none' }}>
             <a href="https://neo4j.com/docs/ontology-graph-spec/" target="_blank" rel="noreferrer">
-              Ontology Graph Spec &mdash; Neo4j Docs
+              Ontology Graph Spec - Neo4j Docs
             </a>
           </li>
           <li style={{ listStyle: 'none' }}>
             <a href="https://youtu.be/Zksf5xKOo-s" target="_blank" rel="noreferrer" style={linkStyle}>
               <YoutubeIcon />
-              NVIDIA Auto Ontology: Give Your AI a Map of Your Database &mdash; Syed Humair (CodeUCraftAI, YouTube)
+              NVIDIA Auto Ontology walkthrough - Syed Humair
             </a>
           </li>
         </ul>
