@@ -15,7 +15,21 @@ function YoutubeIcon() {
   );
 }
 
-const svgText = { fill: 'var(--text)', fontFamily: 'inherit' };
+function ReadingIcon() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style={{ flexShrink: 0 }}>
+      <path
+        d="M10 3C8 1.6 5 1.3 2 2v10c3-.7 6-.4 8 1 2-1.4 5-1.7 8-1V2c-3-.7-6-.4-8 1zM10 3v10"
+        fill="none"
+        stroke="var(--text-muted)"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const svgText ={ fill: 'var(--text)', fontFamily: 'inherit' };
 const svgMuted = { fill: 'var(--text-muted)', fontFamily: 'inherit' };
 const figureStyle = {
   margin: '1.25rem 0 0',
@@ -1453,6 +1467,17 @@ export function SemanticModelOntologyKnowledgeGraphArticle() {
           <li style={{ listStyle: 'none' }}>
             <a href="https://neo4j.com/docs/ontology-graph-spec/" target="_blank" rel="noreferrer">
               Ontology Graph Spec &mdash; Neo4j Docs
+            </a>
+          </li>
+          <li style={{ listStyle: 'none' }}>
+            <a
+              href="https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/knowledge-graphs-in-foundry-iq-improve-evidence-recall-with-fewer-tokens/4573663"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <ReadingIcon />
+              Knowledge Graphs in Foundry IQ - Microsoft Foundry Blog
             </a>
           </li>
           <li style={{ listStyle: 'none' }}>
