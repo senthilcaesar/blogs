@@ -306,6 +306,9 @@ export function FirstSkillMdArticle() {
             The <code>name</code> identifies your skill, while the <code>description</code> tells the AI Agent when to use it. When you type a message in chat, the AI Agent reads the skill descriptions to find the right skill that matches your request.
           </p>
           <p style={{ marginTop: "1rem" }}>
+            Skills don&apos;t load fully into context on startup. Only the <code>name</code> and <code>description</code> load at first. When your agent decides a Skill is relevant, it then loads the full Skill into context. That keeps your context lean even when many Skills are available.
+          </p>
+          <p style={{ marginTop: "1rem" }}>
             <strong>A good description answers two questions:</strong>
           </p>
           <ul className="bullet-list" style={{ marginTop: "0.5rem" }}>
