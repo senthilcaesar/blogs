@@ -26,7 +26,6 @@ description: Greet the user back in Spanish. Use when the user says hi, hello, h
 ---
 
 # Greet
-
 When the user greets you, reply with a Spanish greeting:
 
 - Generic -> \`¡Hola!\`
@@ -40,7 +39,6 @@ const mkdirRefSnippet = `mkdir -p .agents/skills/greet/references
 touch .agents/skills/greet/references/output_format.md`;
 
 const outputFormatSnippet = `# Output Format
-
 Two lines: the Spanish greeting, then the current date and time.
 
 \`\`\`
@@ -55,7 +53,6 @@ date "+%A, %d %B %Y — %H:%M"
 \`\`\`
 
 ## Example
-
 \`\`\`
 ¡Buenas noches!
 Today is Saturday, 08 August 2026 — 22:22
@@ -67,7 +64,6 @@ description: Greet the user back in Spanish with the current date and time. Use 
 ---
 
 # Greet
-
 When the user greets you, reply with a Spanish greeting:
 
 - Generic -> \`¡Hola!\`
@@ -78,7 +74,6 @@ When the user greets you, reply with a Spanish greeting:
 Keep it to one line. If the greeting came with a request, greet first, then do the work as normal.
 
 ## Output Format
-
 Follow the layout in [references/output_format.md](references/output_format.md).`;
 
 const disableInvocationSnippet = `---
@@ -88,7 +83,6 @@ disable-model-invocation: true
 ---
 
 # Greet
-
 When the user greets you, reply with a Spanish greeting:
 
 - Generic -> \`¡Hola!\`
@@ -99,7 +93,6 @@ When the user greets you, reply with a Spanish greeting:
 Keep it to one line. If the greeting came with a request, greet first, then do the work as normal.
 
 ## Output Format
-
 Follow the layout in [references/output_format.md](references/output_format.md).`;
 
 const enableInvocationSnippet = `---
@@ -109,7 +102,6 @@ disable-model-invocation: false
 ---
 
 # Greet
-
 When the user greets you, reply with a Spanish greeting:
 
 - Generic -> \`¡Hola!\`
@@ -120,7 +112,6 @@ When the user greets you, reply with a Spanish greeting:
 Keep it to one line. If the greeting came with a request, greet first, then do the work as normal.
 
 ## Output Format
-
 Follow the layout in [references/output_format.md](references/output_format.md).`;
 
 // ── Rendering & Highlighting Helpers ──────────────────────────────────────────
@@ -254,8 +245,8 @@ export function FirstSkillMdArticle() {
           maxWidth="380px"
         />
 
-        <div className="article-panel article-panel--accent" style={{ marginTop: "1.5rem" }}>
-          <h3>Pro Tip: Disable VS Code Compact Folders</h3>
+        <div style={{ marginTop: "1.5rem" }}>
+          <h3 className="accent-heading">Pro Tip: Disable VS Code Compact Folders</h3>
           <p>
             By default, VS Code collapses single child folders into a single compressed line (e.g. <code>.agents/skills/greet</code>).
             If you want VS Code&apos;s Explorer to display each folder individually in a proper nested tree hierarchy:
@@ -298,7 +289,7 @@ export function FirstSkillMdArticle() {
           caption="Step 3: Initial SKILL.md file with name, description frontmatter, and greeting logic."
         />
 
-        <div className="article-panel article-panel--accent" style={{ marginTop: "1.5rem" }}>
+        <div className="article-panel article-panel--sketch" style={{ marginTop: "1.5rem" }}>
           <p>
             Each skill lives in a <code>SKILL.md</code> file with a <code>name</code> and <code>description</code> in its frontmatter (the header settings at the top).
           </p>
@@ -479,7 +470,7 @@ export function FirstSkillMdArticle() {
       <section className="article-panel">
         <h2>Summary of Key Concepts</h2>
 
-        <div className="table-wrap" style={{ marginTop: "1.5rem" }}>
+        <div className="table-wrap table-wrap--shaded-head" style={{ marginTop: "1.5rem" }}>
           <table>
             <thead>
               <tr>
@@ -518,8 +509,8 @@ export function FirstSkillMdArticle() {
           </table>
         </div>
 
-        <div className="article-panel article-panel--accent" style={{ marginTop: "1.5rem" }}>
-          <h3>Key Takeaways</h3>
+        <div style={{ marginTop: "1.5rem" }}>
+          <h3 style={{ marginTop: 0 }}>Key Takeaways</h3>
           <ul className="bullet-list" style={{ marginTop: "0.75rem" }}>
             <li><strong>Folder Name = Command Name:</strong> The directory name <code>greet</code> determines the slash command <code>/greet</code>.</li>
             <li><strong>Progressive Disclosure Saves Context:</strong> By placing heavy schemas or templates in <code>references/</code>, you keep your main agent prompt lightweight.</li>

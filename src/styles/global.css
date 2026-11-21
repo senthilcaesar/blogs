@@ -1344,6 +1344,61 @@ body[data-theme='dark'] .article-byline__share-btn--copied {
   border-radius: 0;
 }
 
+/* Orange accent bar on a single heading only (not the whole block) */
+.accent-heading {
+  margin-top: 0;
+  padding: 2px 0 2px 14px;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 80%, transparent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+/* Pencil-sketch box: straight hairline graphite border with hatched pencil shading */
+.article-panel--sketch {
+  --pencil: color-mix(in srgb, var(--text-muted) 35%, transparent);
+  --pencil-shade: color-mix(in srgb, var(--text-muted) 16%, transparent);
+  --pencil-hatch: repeating-linear-gradient(
+    -45deg,
+    var(--pencil-shade) 0 1px,
+    transparent 1px 6px
+  );
+  position: relative;
+  margin: 1.75rem 10px 1.75rem 0;
+  padding: 1.1rem 1.35rem;
+  border: 1px solid var(--pencil);
+  border-radius: 0;
+  background: none;
+}
+
+/* Hatched shadow strips sitting entirely outside the box (right and bottom edges),
+   so the shading never runs behind the text */
+.article-panel--sketch::before,
+.article-panel--sketch::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: var(--pencil-hatch);
+}
+
+.article-panel--sketch::before {
+  top: 7px;
+  right: -8px;
+  bottom: -8px;
+  width: 7px;
+}
+
+.article-panel--sketch::after {
+  left: 7px;
+  right: -1px;
+  bottom: -8px;
+  height: 7px;
+}
+
+.article-panel--sketch > *:last-child {
+  margin-bottom: 0 !important;
+}
+
 .article-panel--accent > *:last-child {
   margin-bottom: 0 !important;
 }
@@ -2011,6 +2066,11 @@ body[data-theme='dark'] .tech-card--lime {
 
 .table-wrap tr:hover td {
   background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+/* Opt-in: subtle tinted background on the header row */
+.table-wrap--shaded-head th {
+  background: color-mix(in srgb, var(--text-muted) 9%, transparent);
 }
 
 /* Step map — three labelled columns; the top rule echoes who leads */
