@@ -60,7 +60,11 @@ export function ContextEngineeringArticle() {
         <p style={{ marginTop: '1rem' }}>
           For a simple chatbot, context is mostly just the conversation so far. But for an AI agent &mdash; a system that takes a series of actions to complete a task &mdash; context is broader: it&apos;s all the information the agent uses to decide what to do next and how to respond, at every step along the way, not just at the start.
         </p>
-        <p style={{ marginTop: '1rem' }}>
+      </section>
+
+      <section className="article-panel">
+        <h2>The Context Window: AI&apos;s Working Memory</h2>
+        <p>
           The key thing to understand is that this context isn&apos;t infinite &mdash; it&apos;s a fixed-size window the model works within. So what gets included, how it&apos;s organized, and when it&apos;s introduced all directly shape how well the model performs, which is exactly why &quot;context engineering&quot; exists as its own discipline.
         </p>
 
