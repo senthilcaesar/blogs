@@ -26,26 +26,26 @@ export function ContextEngineeringArticle() {
       <section className="article-panel">
         <h2>What is &quot;Context&quot;?</h2>
         <p>
-          For an AI, context is everything the model can &quot;see&quot; at the moment it generates a response &mdash; all the information present in its working window at inference time.
+          For an AI, context is everything the model can &quot;see&quot; at the moment it generates a response - all the information present in its working window at inference time.
         </p>
         <p style={{ marginTop: '1rem' }}>
           This context includes:
         </p>
         <ul className="bullet-list" style={{ marginTop: '1rem' }}>
           <li>
-            <strong>System prompt</strong> &ndash; background instructions defining its role and behavior
+            <strong>System prompt</strong> - background instructions defining its role and behavior
           </li>
           <li>
-            <strong>User query</strong> &ndash; what you actually typed or asked
+            <strong>User query</strong> - what you actually typed or asked
           </li>
           <li>
-            <strong>Conversation history</strong> &ndash; everything said earlier in the exchange
+            <strong>Conversation history</strong> - everything said earlier in the exchange
           </li>
           <li>
-            <strong>Retrieved data</strong> &ndash; documents, search results, or database records pulled in to help answer
+            <strong>Retrieved data</strong> - documents, search results, or database records pulled in to help answer
           </li>
           <li>
-            <strong>Tool outputs</strong> &ndash; results from any actions the AI has taken (like a calculation, a file read, or an API call)
+            <strong>Tool outputs</strong> - results from any actions the AI has taken (like a calculation, a file read, or an API call)
           </li>
         </ul>
 
@@ -58,14 +58,14 @@ export function ContextEngineeringArticle() {
         </div>
 
         <p style={{ marginTop: '1rem' }}>
-          For a simple chatbot, context is mostly just the conversation so far. But for an AI agent &mdash; a system that takes a series of actions to complete a task &mdash; context is broader: it&apos;s all the information the agent uses to decide what to do next and how to respond, at every step along the way, not just at the start.
+          For a simple chatbot, context is mostly just the conversation so far. But for an AI agent - a system that takes a series of actions to complete a task - context is broader: it&apos;s all the information the agent uses to decide what to do next and how to respond, at every step along the way, not just at the start.
         </p>
       </section>
 
       <section className="article-panel">
         <h2>The Context Window: AI&apos;s Working Memory</h2>
         <p>
-          The key thing to understand is that this context isn&apos;t infinite &mdash; it&apos;s a fixed-size window the model works within. So what gets included, how it&apos;s organized, and when it&apos;s introduced all directly shape how well the model performs, which is exactly why &quot;context engineering&quot; exists as its own discipline.
+          The key thing to understand is that this context isn&apos;t infinite - it&apos;s a fixed-size window the model works within. So what gets included, how it&apos;s organized, and when it&apos;s introduced all directly shape how well the model performs, which is exactly why &quot;context engineering&quot; exists as its own discipline.
         </p>
 
         <div style={{ margin: '1.75rem 0 0' }}>
@@ -107,7 +107,7 @@ export function ContextEngineeringArticle() {
               <tr>
                 <td><strong>1. Relevance</strong></td>
                 <td>
-                  Only include information that&apos;s actually useful for the task at hand. If a piece of data doesn&apos;t help the model make a better decision right now, it shouldn&apos;t be sitting on the desk &mdash; it&apos;s just noise competing for the model&apos;s attention.
+                  Only include information that&apos;s actually useful for the task at hand. If a piece of data doesn&apos;t help the model make a better decision right now, it shouldn&apos;t be sitting on the desk - it&apos;s just noise competing for the model&apos;s attention.
                 </td>
               </tr>
               <tr>
@@ -119,7 +119,7 @@ export function ContextEngineeringArticle() {
               <tr>
                 <td><strong>3. Timing</strong></td>
                 <td>
-                  Context should be introduced only when it&apos;s actually needed &mdash; not all at once, upfront. Imagine handing someone every document they might need for a multi-step project on day one, versus handing them each relevant document exactly when that step of the project begins. The second approach keeps their &quot;desk&quot; clean and focused. This is especially important for AI agents, which work through tasks step-by-step.
+                  Context should be introduced only when it&apos;s actually needed - not all at once, upfront. Imagine handing someone every document they might need for a multi-step project on day one, versus handing them each relevant document exactly when that step of the project begins. The second approach keeps their &quot;desk&quot; clean and focused. This is especially important for AI agents, which work through tasks step-by-step.
                 </td>
               </tr>
               <tr>
@@ -137,13 +137,13 @@ export function ContextEngineeringArticle() {
               <tr>
                 <td><strong>6. Prioritization</strong></td>
                 <td>
-                  Not all information is equally important. Good context management assigns a kind of &quot;priority score&quot; to different pieces of information based on how relevant or critical they are to the current task &mdash; making sure the most important information is front and center, not buried under less important details.
+                  Not all information is equally important. Good context management assigns a kind of &quot;priority score&quot; to different pieces of information based on how relevant or critical they are to the current task - making sure the most important information is front and center, not buried under less important details.
                 </td>
               </tr>
               <tr>
                 <td><strong>7. Information Lifecycle Management</strong></td>
                 <td>
-                  This is the most dynamic piece. In real-world use, information changes over time &mdash; a database gets updated, a fact becomes outdated, a decision gets reversed. Context engineering means actively updating context as new information comes in, and invalidating (removing) outdated data so the model is always working from the most current and accurate picture of the world. This matters most in fast-changing environments, where yesterday&apos;s &quot;fact&quot; might be wrong today.
+                  This is the most dynamic piece. In real-world use, information changes over time - a database gets updated, a fact becomes outdated, a decision gets reversed. Context engineering means actively updating context as new information comes in, and invalidating (removing) outdated data so the model is always working from the most current and accurate picture of the world. This matters most in fast-changing environments, where yesterday&apos;s &quot;fact&quot; might be wrong today.
                 </td>
               </tr>
             </tbody>
@@ -162,7 +162,7 @@ export function ContextEngineeringArticle() {
       <section className="article-panel">
         <h2>The Takeaway</h2>
         <p>
-          Writing a good prompt is a great start, but it is only half the battle. By managing the context&mdash;keeping it clean, organized, and highly relevant&mdash;you set the AI up for success. It clears the muddy waters and helps the model give you exactly what you need.
+          Writing a good prompt is a great start, but it is only half the battle. By managing the context - keeping it clean, organized, and highly relevant - you set the AI up for success. It clears the muddy waters and helps the model give you exactly what you need.
         </p>
         <p style={{ marginTop: '1rem' }}>
           Put simply: <mark className="highlight highlight-green">prompt engineering optimizes what you say; context engineering optimizes what the model sees</mark>.
@@ -171,7 +171,7 @@ export function ContextEngineeringArticle() {
           A model with a perfectly worded prompt but a messy, overloaded, outdated context will still underperform. A model with a simple prompt but clean, relevant, well-timed, well-prioritized context will often perform dramatically better.
         </p>
         <p style={{ marginTop: '1rem' }}>
-          As AI systems evolve from single-turn chatbots into multi-step agents that retrieve data, use tools, and make decisions over time, context engineering becomes the real skill that determines whether these systems are reliable &mdash; or whether they quietly fall apart under the weight of their own clutter.
+          As AI systems evolve from single-turn chatbots into multi-step agents that retrieve data, use tools, and make decisions over time, context engineering becomes the real skill that determines whether these systems are reliable - or whether they quietly fall apart under the weight of their own clutter.
         </p>
       </section>
 
