@@ -3,6 +3,7 @@ const img2 = new URL('../../../images/ce-2.webp', import.meta.url).href;
 const memoryStackImg = new URL('../../../images/memory_stack.webp', import.meta.url).href;
 const context1Img = new URL('../../../images/context1.png', import.meta.url).href;
 const context18Img = new URL('../../../images/context18.png', import.meta.url).href;
+const agentTurnImg = new URL('../../../images/context-agent-turn.png', import.meta.url).href;
 
 export function ContextEngineeringArticle() {
   return (
@@ -59,6 +60,33 @@ export function ContextEngineeringArticle() {
 
         <p style={{ marginTop: '1rem' }}>
           For a simple chatbot, context is mostly just the conversation so far. But for an AI agent - a system that takes a series of actions to complete a task - context is broader: it&apos;s all the information the agent uses to decide what to do next and how to respond, at every step along the way, not just at the start.
+        </p>
+
+        <h3 style={{ marginTop: '1.75rem' }}>What counts as context</h3>
+        <p>
+          Context is everything an Agent sees on a given turn:
+        </p>
+
+        <div style={{ margin: '1.75rem 0' }}>
+          <img
+            src={agentTurnImg}
+            alt="Five parts of an agent's context: system prompt, message history, tools, files and skills, and thinking blocks"
+            style={{ width: '100%', height: 'auto', borderRadius: '16px', border: '1px solid var(--border)' }}
+          />
+        </div>
+
+        <ul className="bullet-list">
+          <li>The system prompt</li>
+          <li>The message history</li>
+          <li>Tool definitions and tool results</li>
+          <li>Attached files and skills</li>
+          <li>Thinking blocks</li>
+        </ul>
+        <p style={{ marginTop: '1rem' }}>
+          It&apos;s the input to every single API call. You pay for it on the way in, and you pay for it on the way out. And once the window is full, the request fails.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          So the goal isn&apos;t to fit everything in. The goal is to fit the right things in.
         </p>
       </section>
 
