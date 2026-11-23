@@ -230,6 +230,27 @@ export function SkillsYouStillNeedArticle() {
       </section>
 
       <section className="article-panel">
+        <h2>The 4 D's</h2>
+        <p>
+          The human and shared steps lean on the same four habits, often called the 4 D's. Each one shows up somewhere in the loop: delegation in step 4, description in step 2, discernment in step 7, and diligence wherever a person signs off on the result.
+        </p>
+        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+          <li>
+            <strong>Delegation</strong> means deciding what AI handles and what stays with you.
+          </li>
+          <li>
+            <strong>Description</strong> means communicating clearly what you need and how you want AI to approach it.
+          </li>
+          <li>
+            <strong>Discernment</strong> means evaluating what AI gives back before acting on it.
+          </li>
+          <li>
+            <strong>Diligence</strong> means owning the final result fully, regardless of AI's role.
+          </li>
+        </ul>
+      </section>
+
+      <section className="article-panel">
         <h2>How does this compare with what developers do today?</h2>
         <p>
           The best match is Stack Overflow's 2026 survey (12,547 responses), which asked what people currently use AI or agents for. It doesn't use these ten steps, so each row below pairs a step with the closest survey item.
