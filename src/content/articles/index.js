@@ -39,8 +39,10 @@ import { AutoOntologyArticle } from './AutoOntologyArticle';
 import { QTableArticle } from './QTableArticle';
 import { VsCodeMcpServersArticle } from './VsCodeMcpServersArticle';
 import { ClaudeMdFileArticle } from './ClaudeMdFileArticle';
+import { HooksInClaudeArticle } from './HooksInClaudeArticle';
 
 export const articleRegistry = {
+  'hooks-in-claude': HooksInClaudeArticle,
   'your-claude-md-file': ClaudeMdFileArticle,
   'formulating-thoughts-to-expressing-them-clearly':
     ExpressingThoughtsClearlyArticle,

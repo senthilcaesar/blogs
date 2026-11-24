@@ -269,6 +269,29 @@ export const posts = [
     },
   },
   {
+    title: 'Hooks in Claude',
+    slug: 'hooks-in-claude',
+    category: 'AI',
+    tags: ['ai', 'claude-code', 'hooks', 'automation', 'settings'],
+    excerpt:
+      "Hooks let you run commands at specific points in Claude Code's lifecycle. Unlike prompts, hooks are deterministic - they always run.",
+    image: imageUrl('hooks.png'),
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/hooks-in-claude',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Claude Code',
+      summary:
+        'Deterministic control over Claude Code: auto-format with PostToolUse, block dangerous operations with PreToolUse, and share hooks with your team.',
+    },
+  },
+  {
     title: 'Traces: The New Type of Data for AI Agents',
     slug: 'traces',
     category: 'AI',
