@@ -88,6 +88,9 @@ export function ContextEngineeringArticle() {
         <p style={{ marginTop: '1rem' }}>
           So the goal isn&apos;t to fit everything in. The goal is to fit the right things in.
         </p>
+        <p style={{ marginTop: '1rem' }}>
+          To use your context window effectively: be specific with your prompts, check what&apos;s consuming your current context, and use subagents to delegate tasks where you only need the result.
+        </p>
       </section>
 
       <section className="article-panel">
