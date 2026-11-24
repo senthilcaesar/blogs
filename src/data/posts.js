@@ -174,6 +174,29 @@ export const posts = [
     },
   },
   {
+    title: 'Your CLAUDE.md file',
+    slug: 'your-claude-md-file',
+    category: 'AI',
+    tags: ['ai', 'claude-code', 'claude-md', 'memory', 'context-engineering'],
+    excerpt:
+      'One of the most useful features in Claude Code is the CLAUDE.md file. It gives Claude Code persistent memory about your project.',
+    image: imageUrl('claude-md.png'),
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/your-claude-md-file',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Claude Code',
+      summary:
+        'An onboarding script for your codebase: how CLAUDE.md gives Claude Code persistent memory about your project.',
+    },
+  },
+  {
     title: 'The Skills You Still Need When Agents Write the Code',
     slug: 'skills-you-still-need-ai-agents',
     category: 'AI',

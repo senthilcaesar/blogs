@@ -38,8 +38,10 @@ import { SemanticModelOntologyKnowledgeGraphArticle } from './SemanticModelOntol
 import { AutoOntologyArticle } from './AutoOntologyArticle';
 import { QTableArticle } from './QTableArticle';
 import { VsCodeMcpServersArticle } from './VsCodeMcpServersArticle';
+import { ClaudeMdFileArticle } from './ClaudeMdFileArticle';
 
 export const articleRegistry = {
+  'your-claude-md-file': ClaudeMdFileArticle,
   'formulating-thoughts-to-expressing-them-clearly':
     ExpressingThoughtsClearlyArticle,
   traces: TracesArticle,
