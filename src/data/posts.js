@@ -245,6 +245,30 @@ export const posts = [
     },
   },
   {
+    title: 'Neo4j Agentic GraphRAG + Memory',
+    slug: 'nams-agentic-graphrag',
+    category: 'AI',
+    tags: ['ai', 'neo4j', 'graphrag', 'agents', 'agent-memory', 'knowledge-graph'],
+    excerpt:
+      'An assistant that answers from a knowledge graph, picks the right way to query it, and remembers yesterday. Follow two questions about ACME contracts through every box and arrow of the NAMS + Agentic GraphRAG architecture.',
+    image: imageUrl('nams-agentic-graphrag.svg'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/nams-agentic-graphrag',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Neo4j · GraphRAG',
+      summary:
+        'What each component does, why it is there, and how the planner, NAMS memory, the four retrieval tools and the knowledge graph pass one question from start to finish. No Neo4j background needed.',
+    },
+  },
+  {
     title: 'Benchmarking RAG Systems: A Hands-On Introduction',
     slug: 'benchmarking-rag-systems',
     category: 'AI',

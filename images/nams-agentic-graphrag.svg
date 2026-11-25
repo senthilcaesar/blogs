@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" font-family="Inter, 'Source Sans 3', system-ui, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#5b4838"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="675" fill="#fefdfa"/>
+  <text x="600" y="78" text-anchor="middle" font-size="40" font-weight="700" fill="#3d2f24">NAMS + Agentic GraphRAG</text>
+  <text x="600" y="116" text-anchor="middle" font-size="20" fill="#8b7962">one question, from start to finish</text>
+
+  <g fill="#f5f0e4" stroke="#d6c9ae" stroke-width="2">
+    <rect x="60" y="170" width="190" height="400" rx="20"/>
+    <rect x="300" y="170" width="230" height="230" rx="20"/>
+    <rect x="300" y="440" width="230" height="130" rx="20"/>
+    <rect x="580" y="170" width="230" height="400" rx="20"/>
+    <rect x="860" y="170" width="170" height="400" rx="20"/>
+  </g>
+  <g fill="#fefdfa" stroke="#8b7962" stroke-width="1.8">
+    <rect x="80" y="200" width="150" height="64" rx="12"/>
+    <rect x="80" y="476" width="150" height="64" rx="12"/>
+    <rect x="330" y="280" width="170" height="80" rx="12"/>
+    <rect x="600" y="230" width="190" height="80" rx="12"/>
+    <rect x="600" y="330" width="190" height="80" rx="12"/>
+    <rect x="600" y="430" width="190" height="80" rx="12"/>
+    <rect x="875" y="200" width="140" height="70" rx="12"/>
+    <rect x="875" y="290" width="140" height="70" rx="12"/>
+    <rect x="875" y="380" width="140" height="70" rx="12"/>
+    <rect x="875" y="470" width="140" height="70" rx="12"/>
+    <path d="M1070 280 V380 A50 13 0 0 0 1170 380 V280"/>
+    <ellipse cx="1120" cy="280" rx="50" ry="13"/>
+  </g>
+  <g fill="#3d2f24" font-size="18" font-weight="600" text-anchor="middle">
+    <text x="155" y="239">User query</text>
+    <text x="155" y="515">Response</text>
+    <text x="415" y="215">Planner agent</text>
+    <text x="415" y="315">LLM</text>
+    <text x="415" y="515">LLM (output)</text>
+    <text x="695" y="208">NAMS memory</text>
+    <text x="695" y="276">Conversation</text>
+    <text x="695" y="376">Entity</text>
+    <text x="695" y="476">Reasoning</text>
+    <text x="945" y="241" font-size="15">Vector + graph</text>
+    <text x="945" y="331" font-size="15">Text2Cypher</text>
+    <text x="945" y="421" font-size="15">SME templates</text>
+    <text x="945" y="511" font-size="15">MCP</text>
+    <text x="1120" y="420" font-size="15">Knowledge</text>
+    <text x="1120" y="440" font-size="15">graph</text>
+  </g>
+  <text x="415" y="340" text-anchor="middle" font-size="15" fill="#8b7962">(planning)</text>
+
+  <g stroke="#5b4838" stroke-width="2.4" fill="none">
+    <line x1="230" y1="232" x2="298" y2="232" marker-end="url(#a)"/>
+    <line x1="415" y1="400" x2="415" y2="438" marker-end="url(#a)"/>
+    <line x1="300" y1="508" x2="232" y2="508" marker-end="url(#a)"/>
+    <path d="M470 170 V145 H845 V505" />
+    <line x1="845" y1="235" x2="873" y2="235" marker-end="url(#a)"/>
+    <line x1="845" y1="325" x2="873" y2="325" marker-end="url(#a)"/>
+    <line x1="845" y1="415" x2="873" y2="415" marker-end="url(#a)"/>
+    <line x1="845" y1="505" x2="873" y2="505" marker-end="url(#a)"/>
+    <line x1="1015" y1="325" x2="1066" y2="330" marker-end="url(#a)"/>
+    <line x1="1015" y1="235" x2="1066" y2="290" marker-end="url(#a)"/>
+    <line x1="1015" y1="415" x2="1066" y2="372" marker-end="url(#a)"/>
+    <line x1="502" y1="320" x2="578" y2="320" stroke-dasharray="2 7" stroke-linecap="round" stroke-width="3" marker-start="url(#a)" marker-end="url(#a)"/>
+    <path d="M415 570 V615 H695 V572" stroke-dasharray="2 7" stroke-linecap="round" stroke-width="3" marker-end="url(#a)"/>
+  </g>
+</svg>

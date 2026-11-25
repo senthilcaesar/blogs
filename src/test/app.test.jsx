@@ -316,6 +316,18 @@ describe('blog app', () => {
     ).toBeGreaterThan(0);
   });
 
+  it('renders the NAMS + Agentic GraphRAG article with its diagrams and sections', () => {
+    renderRoutes(['/posts/nams-agentic-graphrag']);
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: /Neo4j Agentic GraphRAG \+ Memory/i }),
+    ).toBeInTheDocument();
+    for (const name of [/What the Diagram Shows/i, /Two Graphs, Not One/i, /How They Talk/i]) {
+      expect(screen.getByRole('heading', { level: 2, name })).toBeInTheDocument();
+    }
+    expect(screen.getAllByRole('img', { name: /NAMS plus Agentic GraphRAG architecture|Tuesday's path/i }).length).toBe(2);
+  });
+
   it('renders the Neo4j Intro Workshop article correctly', () => {
     renderRoutes(['/posts/neo4j-intro-workshop']);
 

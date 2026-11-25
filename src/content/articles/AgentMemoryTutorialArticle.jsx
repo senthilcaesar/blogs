@@ -308,6 +308,12 @@ const tocGroups = [
     items: [
       { id: 'why-graph', label: 'Why a graph at all?' },
       { id: 'own-agent', label: 'Your own agent' },
+    ],
+  },
+  {
+    id: 'reference',
+    label: 'Reference',
+    items: [
       { id: 'troubleshooting', label: 'Troubleshooting' },
       { id: 'commands', label: 'Command cheat sheet' },
       { id: 'cleanup', label: 'Clean up' },
@@ -549,7 +555,10 @@ export function AgentMemoryTutorialArticle() {
 
       <div className='article-panel am-banner'>
         <p className='article-lead' style={{ margin: 0, fontWeight: 500 }}>
-          This tutorial assumes you've never heard of a knowledge graph, a
+          By the end of this tutorial, a support bot that asks a customer for her
+          email address twice will know who she is, explain every refund it
+          issues and teach its method to another agent. This tutorial assumes
+          you've never heard of a knowledge graph, a
           context graph or agent memory. If you can copy a command into a
           terminal, you can finish it. You won't write any code: you'll run a
           working app and watch it improve one stage at a time. The sections
@@ -570,8 +579,12 @@ export function AgentMemoryTutorialArticle() {
             to run it, how to check the result and where to read the code.
           </li>
           <li>
-            <strong>Finishing up</strong>: applying this to your own agent,
-            fixes for common errors and a command cheat sheet.
+            <strong>Finishing up</strong>: why a graph at all, and applying
+            this to your own agent.
+          </li>
+          <li>
+            <strong>Reference</strong>: fixes for common errors, a command
+            cheat sheet and how to clean up.
           </li>
         </ul>
         <p className='am-credit'>
@@ -673,7 +686,7 @@ export function AgentMemoryTutorialArticle() {
         </p>
         <ul className='bullet-list'>
           <li>
-            <strong>Node:</strong> a thing, drawn as a circle. Maya is a node,
+            <strong>Node:</strong> a thing. Diagrams draw it as a circle. Maya is a node,
             and so is the Pro plan.
           </li>
           <li>
@@ -725,6 +738,10 @@ export function AgentMemoryTutorialArticle() {
           message where Maya mentioned Pro, the refund the agent issued and the
           tool it used. In this tutorial, the context graph is that one graph
           holding conversations, entities and the record of the agent's actions.
+          The business facts themselves stay in the company's own database, and
+          module 3 copies the ones the agent needs onto the graph. The app's
+          panel calls the result the <strong>memory graph</strong>, and that's
+          the name we'll use from here on.
         </p>
         <p>
           Why does the connection matter? Suppose someone asks, a month later,
@@ -733,7 +750,9 @@ export function AgentMemoryTutorialArticle() {
           context graph, you start at the refund and follow the arrows back to
           the policy check and to the message that asked for it. In practice,
           you can always ask where a piece of knowledge came from, which is
-          known as <strong>provenance</strong>.
+          known as <strong>provenance</strong>. You might wonder why that needs
+          a graph rather than an ordinary database. We'll come back to that at
+          the end, once module 5 has shown what the connections buy you.
         </p>
 
         <h3 id='three-memories' className='sub-heading'>
@@ -1126,7 +1145,7 @@ export function AgentMemoryTutorialArticle() {
           for the company's real systems: accounts, products and policies.{' '}
           <strong>Neo4j</strong> holds what the agent learned. Hold on to this
           boundary, because it's a safety rule: if memory says Maya's refund
-          limit is $250 but the live policy says $150, the live policy wins.
+          limit is $400 but the live policy says $250, the live policy wins.
           Memory is evidence and never permission.
         </p>
       </section>
@@ -1247,8 +1266,8 @@ export function AgentMemoryTutorialArticle() {
         <p>
           The email is right there on your screen, yet the agent can't see it.
           The chat window is a picture for you, and it isn't what gets sent to
-          the model. In the slide's phrase, the visible chat isn't the model's
-          context. The first answer was only possible because the message
+          the model. As the workshop slide below puts it, the visible chat isn't
+          the model's context. The first answer was only possible because the message
           contained the email, and a tool could use it. That's lookup, and it
           isn't memory.
         </p>
@@ -1699,6 +1718,14 @@ export function AgentMemoryTutorialArticle() {
           <strong>Query</strong> tool:
         </p>
         <CodeCard code={m3Query} lang='cypher' file='Aura Query tool' />
+        <p>
+          Notice how the connections are stored. Each extracted connection is a
+          generic <code>RELATED_TO</code> relationship with a <code>type</code>{' '}
+          property, such as <code>WORKS_AT</code>, rather than its own
+          relationship type. That's the "little differently" promised back in
+          Part 1, and why its <code>SUBSCRIBES_TO</code> query was only an
+          illustration.
+        </p>
       </section>
 
       <section className='article-panel'>
@@ -1739,11 +1766,9 @@ export function AgentMemoryTutorialArticle() {
         <CodeCard code={m3Tools} file='module_3/app/memory_tools.py' />
         <p>
           So memory now reaches the agent by two routes: some is placed in its
-          context up front, and some it goes looking for. In the database,
-          extracted connections are stored as a generic{' '}
-          <code>RELATED_TO</code> relationship with a <code>type</code> property,
-          such as <code>WORKS_AT</code>, which is why the Cypher example back in
-          Part 1 was only an illustration.
+          context up front, and some it goes looking for. (The{' '}
+          <code>RELATED_TO</code> relationships you saw in the Query tool are how
+          the package stores every extracted connection.)
         </p>
       </section>
 
@@ -1774,12 +1799,14 @@ export function AgentMemoryTutorialArticle() {
         </p>
         <p>
           A <strong>trace</strong> is that record, like the black box on an
-          aircraft or a receipt that lists every step. Each turn opens a{' '}
+          aircraft. Each turn opens a{' '}
           <code>ReasoningTrace</code> connected to the message that started it.
           Every tool call adds a <code>ReasoningStep</code> and a{' '}
           <code>ToolCall</code> holding its inputs, outputs and the SQL it ran. A{' '}
           <code>TOUCHED</code> relationship links the step to the customer and
-          plan involved, and the trace finishes with its outcome.
+          plan involved, and the trace finishes with its outcome. This is the
+          context graph from Part 1 at last: the agent's action, linked to the
+          facts it acted on.
         </p>
         <Figure
           src={traceImg}
@@ -2232,7 +2259,7 @@ export function AgentMemoryTutorialArticle() {
         </h3>
         <p>
           A viewer asked this at the end of the workshop: why not store memories
-          in Postgres, a relational database? The presenter noted that many
+          in Postgres, a relational database? Will Lyon noted that many
           agents start with Markdown files, which are simple formatted text, and that the first reason to
           move to any database is having several agents or users read and write
           at once. The case for a graph specifically was the last module: you can
@@ -2240,7 +2267,8 @@ export function AgentMemoryTutorialArticle() {
           beneath them and flagging the specific step that goes stale.
         </p>
         <p>
-          To be sure, you could model those connections in other databases, and
+          This is the provenance argument from Part 1, now with module 5 as the
+          evidence. To be sure, you could model those connections in other databases, and
           the Neo4j documentation itself says that graph storage involves
           trade-offs and doesn't guarantee faster queries. What the graph gives
           you is that the connections are part of the data, so asking "where did
@@ -2281,6 +2309,11 @@ export function AgentMemoryTutorialArticle() {
           tutorial can't tell you. But you do now have a scorecard.
         </p>
       </section>
+
+      <PartBanner id='reference' title='Reference'>
+        Come back to these when you need them: fixes for common errors, every
+        command in one table, how to clean up, and where to read more.
+      </PartBanner>
 
       <section className='article-panel'>
         <h3 id='troubleshooting' className='sub-heading'>
