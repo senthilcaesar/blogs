@@ -34,6 +34,9 @@ export function ClaudeMdFileArticle() {
         <p style={{ marginTop: '1rem' }}>
           <code>CLAUDE.md</code> solves this. It&apos;s a Markdown file you add to the root of your project, and Claude Code reads it automatically every time you start a session. Think of it as an onboarding script for your codebase. The contents of the <code>CLAUDE.md</code> file are appended to your prompt.
         </p>
+        <p style={{ marginTop: '1rem' }}>
+          The key thing to understand is that <code>CLAUDE.md</code> is not enforced configuration. It&apos;s guidance. Every line competes with every other line for Claude&apos;s attention. The longer the file gets, the more it competes with itself, and the less reliably Claude follows any single rule. So the goal isn&apos;t to write down everything. The goal is to keep the file tight. The leaner the file, the more of it Claude actually follows.
+        </p>
       </section>
 
       <section className="article-panel">
@@ -60,6 +63,66 @@ export function ClaudeMdFileArticle() {
             <strong>User-level <code>CLAUDE.md</code></strong> lives in your configuration folder. This one is just for you and applies across all your projects. Put your personal preferences here.
           </li>
         </ul>
+      </section>
+
+      <section className="article-panel">
+        <h2>Guidance vs. Hard Rules</h2>
+        <p>
+          Before you write a rule, ask whether it belongs in <code>CLAUDE.md</code> at all. Some rules are guidance, and some rules are hard lines that must never be crossed. Those are two different jobs.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Take a rule like &quot;never push to main.&quot; If you put that in <code>CLAUDE.md</code>, you&apos;re hoping Claude reads it and respects it. Most of the time it will. But &quot;most of the time&quot; isn&apos;t good enough for something that dangerous. A hard rule like that belongs in a pre-tool-use hook instead.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The difference matters. A hook is code that runs before Claude takes an action, and it can actually block the action. So even if Claude does try to push to main, the hook stops it. That&apos;s real enforcement, not a polite request. Move your hard rules to hooks and let <code>CLAUDE.md</code> handle the softer conventions.
+        </p>
+      </section>
+
+      <section className="article-panel">
+        <h2>Writing Rules Claude Follows</h2>
+        <p>
+          Once you&apos;ve decided a rule belongs in <code>CLAUDE.md</code>, whether Claude actually obeys it comes down to how you phrase it. Most rules fail because they&apos;re vague. Here&apos;s how to fix that.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>Be specific and checkable</h3>
+        <p>
+          Don&apos;t write &quot;follow best practices.&quot; Do you even know exactly what that means? If you can&apos;t check whether it was followed, neither can Claude. Compare these two:
+        </p>
+        <ul className="bullet-list" style={{ marginTop: '0.75rem' }}>
+          <li>
+            <strong>Vague:</strong> &quot;Follow best practices for API routes.&quot;
+          </li>
+          <li>
+            <strong>Specific:</strong> &quot;Put new API routes in <code>src/api/handlers</code>, one per file.&quot;
+          </li>
+        </ul>
+        <p style={{ marginTop: '1rem' }}>
+          The second one is explicit. You can look at the result and immediately tell if it was done right. That&apos;s the bar every rule should clear.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>Name the replacement, don&apos;t just ban something</h3>
+        <p>
+          When you tell Claude not to do something, say what to do instead. Otherwise you&apos;ve left the door open.
+        </p>
+        <ul className="bullet-list" style={{ marginTop: '0.75rem' }}>
+          <li>
+            <strong>Leaves it open:</strong> &quot;Don&apos;t use default exports.&quot; Okay, but then what?
+          </li>
+          <li>
+            <strong>Closes it:</strong> &quot;Use named exports, not default exports.&quot;
+          </li>
+        </ul>
+        <p style={{ marginTop: '1rem' }}>
+          The second version names the replacement, so there&apos;s nothing left to misinterpret.
+        </p>
+
+        <h3 style={{ marginTop: '1.5rem' }}>Keep the file under revision</h3>
+        <p>
+          Your <code>CLAUDE.md</code> file is never finished. Treat it like living code that keeps getting edited.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          When Claude does the wrong thing, don&apos;t just sigh and fix it by hand. Treat it as a bug report against your <code>CLAUDE.md</code> file. You can even tell Claude directly: &quot;add that to the <code>CLAUDE.md</code> file,&quot; and it&apos;ll write the rule for you. That way the file gets better every time something goes wrong.
+        </p>
       </section>
 
       <section className="article-panel">
