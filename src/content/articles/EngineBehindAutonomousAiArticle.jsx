@@ -1,3 +1,5 @@
+import { ArticleToc } from '../../components/ArticleToc';
+
 const harnessImg = new URL('../../../images/harness.webp', import.meta.url)
   .href;
 const aiAgentImg = new URL('../../../images/ai-agent.webp', import.meta.url)
@@ -22,16 +24,31 @@ function YoutubeIcon() {
   );
 }
 
+const tocGroups = [
+  { id: "ai-agent", label: "1. The AI agent" },
+  {
+    id: "harness",
+    label: "2. The harness",
+    items: [
+      { id: "harness-engineering", label: "What is harness engineering?" },
+    ],
+  },
+  { id: "autoresearch", label: "3. Autoresearch loops" },
+  { id: "references", label: "References" },
+];
+
 export function EngineBehindAutonomousAiArticle() {
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className='article-lead'>
         Let&apos;s break down three core concepts driving this shift: AI Agents,
         the Harness that controls them, and Autoresearch.
       </p>
 
       <section className='article-panel'>
-        <h2>1. The AI Agent</h2>
+        <h2 id="ai-agent">1. The AI Agent</h2>
         <p>
           Think of a standard language model as a very smart encyclopedia. You
           ask a question, and it gives you an answer.
@@ -75,7 +92,7 @@ export function EngineBehindAutonomousAiArticle() {
       </section>
 
       <section className='article-panel'>
-        <h2>2. The Harness: Making It All Work</h2>
+        <h2 id="harness">2. The Harness: Making It All Work</h2>
         <p>
           An AI agent doesn&apos;t just work on its own out of nowhere. It needs
           a framework to operate. We call this the &quot;harness.&quot; An AI
@@ -87,7 +104,7 @@ export function EngineBehindAutonomousAiArticle() {
           a loop.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>What Is AI Harness Engineering?</h3>
+        <h3 id="harness-engineering" style={{ marginTop: '1.5rem' }}>What Is AI Harness Engineering?</h3>
         <p style={{ marginTop: '1rem' }}>
           A useful formula has emerged across the AI engineering community in
           the past few months (<a href='https://docs.langchain.com/oss/python/langchain/agents' target='_blank' rel='noreferrer'>I found this explanation better</a>):
@@ -241,7 +258,7 @@ export function EngineBehindAutonomousAiArticle() {
       </div>
 
       <section className='article-panel'>
-        <h2>3. Autoresearch Loops</h2>
+        <h2 id="autoresearch">3. Autoresearch Loops</h2>
         <p>
           So, what happens when you put agents to work at scale? You get things
           like autoresearch.
@@ -304,7 +321,7 @@ export function EngineBehindAutonomousAiArticle() {
       </section>
 
       <section className='article-panel'>
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul className='bullet-list' style={{ marginTop: '1rem' }}>
           <li>
             <a

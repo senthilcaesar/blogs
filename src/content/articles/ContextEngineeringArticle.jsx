@@ -1,3 +1,5 @@
+import { ArticleToc } from '../../components/ArticleToc';
+
 const img1 = new URL('../../../images/ce-1.webp', import.meta.url).href;
 const img2 = new URL('../../../images/ce-2.webp', import.meta.url).href;
 const memoryStackImg = new URL('../../../images/memory_stack.webp', import.meta.url).href;
@@ -5,9 +7,27 @@ const context1Img = new URL('../../../images/context1.png', import.meta.url).hre
 const context18Img = new URL('../../../images/context18.png', import.meta.url).href;
 const agentTurnImg = new URL('../../../images/context-agent-turn.png', import.meta.url).href;
 
+const tocGroups = [
+  {
+    id: "what-is-context",
+    label: "What is context?",
+    items: [
+      { id: "what-counts", label: "What counts as context" },
+    ],
+  },
+  { id: "context-window", label: "The context window" },
+  { id: "context-rot", label: "Context rot" },
+  { id: "good-context", label: "Seven traits of good context" },
+  { id: "takeaway", label: "The takeaway" },
+  { id: "memory-stack", label: "Agent memory stack" },
+  { id: "references", label: "References" },
+];
+
 export function ContextEngineeringArticle() {
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         Beyond the Prompt: A Beginner’s Guide to Context Engineering
       </p>
@@ -25,7 +45,7 @@ export function ContextEngineeringArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>What is &quot;Context&quot;?</h2>
+        <h2 id="what-is-context">What is &quot;Context&quot;?</h2>
         <p>
           For an AI, context is everything the model can &quot;see&quot; at the moment it generates a response - all the information present in its working window at inference time.
         </p>
@@ -62,7 +82,7 @@ export function ContextEngineeringArticle() {
           For a simple chatbot, context is mostly just the conversation so far. But for an AI agent - a system that takes a series of actions to complete a task - context is broader: it&apos;s all the information the agent uses to decide what to do next and how to respond, at every step along the way, not just at the start.
         </p>
 
-        <h3 style={{ marginTop: '1.75rem' }}>What counts as context</h3>
+        <h3 id="what-counts" style={{ marginTop: '1.75rem' }}>What counts as context</h3>
         <p>
           Context is everything an Agent sees on a given turn:
         </p>
@@ -94,7 +114,7 @@ export function ContextEngineeringArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>The Context Window: AI&apos;s Working Memory</h2>
+        <h2 id="context-window">The Context Window: AI&apos;s Working Memory</h2>
         <p>
           The key thing to understand is that this context isn&apos;t infinite - it&apos;s a fixed-size window the model works within. So what gets included, how it&apos;s organized, and when it&apos;s introduced all directly shape how well the model performs, which is exactly why &quot;context engineering&quot; exists as its own discipline.
         </p>
@@ -109,7 +129,7 @@ export function ContextEngineeringArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>The Problem: Context Rot</h2>
+        <h2 id="context-rot">The Problem: Context Rot</h2>
         <p>
           You might think that giving an AI more information will make it smarter. This is a common trap. AI models have a finite capacity.
         </p>
@@ -122,7 +142,7 @@ export function ContextEngineeringArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>What Makes &quot;Good&quot; Context? Seven Characteristics</h2>
+        <h2 id="good-context">What Makes &quot;Good&quot; Context? Seven Characteristics</h2>
         <p>
           If dumping everything into the context window is a bad idea, what should you actually be doing? The talk laid out several key characteristics of well-engineered context. Here&apos;s each one explained in plain terms:
         </p>
@@ -191,7 +211,7 @@ export function ContextEngineeringArticle() {
       </div>
 
       <section className="article-panel">
-        <h2>The Takeaway</h2>
+        <h2 id="takeaway">The Takeaway</h2>
         <p>
           Writing a good prompt is a great start, but it is only half the battle. By managing the context - keeping it clean, organized, and highly relevant - you set the AI up for success. It clears the muddy waters and helps the model give you exactly what you need.
         </p>
@@ -214,7 +234,7 @@ export function ContextEngineeringArticle() {
         />
       </div>
 
-      <h2 style={{ marginTop: '2.5rem', marginBottom: '1rem' }}>Agent Memory Stack</h2>
+      <h2 id="memory-stack" style={{ marginTop: '2.5rem', marginBottom: '1rem' }}>Agent Memory Stack</h2>
 
       <div style={{ marginBottom: '2rem' }}>
         <img
@@ -225,7 +245,7 @@ export function ContextEngineeringArticle() {
       </div>
 
       <section className="article-panel">
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <div className="ce-recommended">
           <span className="ce-recommended__label">Recommended reading</span>
           <a

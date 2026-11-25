@@ -1,4 +1,5 @@
 import { CodeCard } from "../../components/CodeCard";
+import { ArticleToc } from '../../components/ArticleToc';
 
 const skillsImg = new URL(
   "../../../images/ai-skills-framework.webp",
@@ -119,9 +120,22 @@ If any postcondition fails: run the down-migration, then report the failed asser
 // Each snippet constant must be byte-identical to the markup rendered inside
 // its CodeCard; src/test/snippet-parity.test.jsx enforces it.
 
+const tocGroups = [
+  { id: "why-unstructured", label: "Why unstructured prompts fail" },
+  { id: "yaml-markdown", label: "1. YAML + Markdown" },
+  { id: "xml-schemas", label: "2. XML & few-shot schemas" },
+  { id: "react-loops", label: "3. ReAct loops" },
+  { id: "json-schema", label: "4. JSON Schema" },
+  { id: "design-by-contract", label: "5. Design-by-contract" },
+  { id: "format-selector", label: "Format selector guide" },
+  { id: "references", label: "References" },
+];
+
 export function StructuredAiSkillsArticle() {
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         As AI agents transition from simple conversational bots to autonomous
         software engineering partners, unstructured text prompts quickly hit a
@@ -130,7 +144,7 @@ export function StructuredAiSkillsArticle() {
       </p>
 
       <section className="article-panel">
-        <h2>Why Unstructured Prompts Fail at Scale</h2>
+        <h2 id="why-unstructured">Why Unstructured Prompts Fail at Scale</h2>
         <p>
           When you give an LLM a wall of informal text prose, three major
           failure modes occur:
@@ -159,7 +173,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>1. YAML Frontmatter + Structured Markdown (SKILL.md)</h2>
+        <h2 id="yaml-markdown">1. YAML Frontmatter + Structured Markdown (SKILL.md)</h2>
         <p>
           This is the convention agent frameworks have converged on: YAML
           frontmatter for machine-readable capability routing, plain Markdown
@@ -263,7 +277,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>2. XML &amp; Few-Shot Instruction Schemas</h2>
+        <h2 id="xml-schemas">2. XML &amp; Few-Shot Instruction Schemas</h2>
         <p>
           Wrapping instructions in distinct XML tags creates clear contextual
           boundaries — the model can tell a hard rule from background material
@@ -391,7 +405,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>3. ReAct (Reason + Act) Loop Specifications</h2>
+        <h2 id="react-loops">3. ReAct (Reason + Act) Loop Specifications</h2>
         <p>
           For interactive skills that execute terminal commands or inspect code
           repositories, the ReAct pattern (Yao et al., 2023) prescribes a rigid
@@ -451,7 +465,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>4. JSON Schema / Function Calling Definitions</h2>
+        <h2 id="json-schema">4. JSON Schema / Function Calling Definitions</h2>
         <p>
           When skill invocation happens at the model API level, JSON Schema
           describes the shape of the arguments the model should produce. It is
@@ -561,7 +575,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>5. Design-by-Contract (Pre &amp; Post-Condition Verification)</h2>
+        <h2 id="design-by-contract">5. Design-by-Contract (Pre &amp; Post-Condition Verification)</h2>
         <p>
           For critical autonomous operations like production builds or database
           migrations, skills use formal contract checks:
@@ -633,7 +647,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Format Selector Guide</h2>
+        <h2 id="format-selector">Format Selector Guide</h2>
         <p style={{ marginBottom: "1rem" }}>
           Choose the right skill format based on the nature of your agent task:
         </p>
@@ -723,7 +737,7 @@ export function StructuredAiSkillsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul className="bullet-list" style={{ marginTop: "0.75rem" }}>
           <li>
             Yao et al.,{" "}

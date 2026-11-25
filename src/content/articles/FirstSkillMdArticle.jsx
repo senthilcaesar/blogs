@@ -1,6 +1,7 @@
 import { useId } from "react";
 import { CodeCard as CodeWindow } from '../../components/CodeCard';
 import { highlight as sharedHighlight } from '../../lib/highlight';
+import { ArticleToc } from '../../components/ArticleToc';
 
 const step1Img = new URL("../../../images/skill-step-1.webp", import.meta.url).href;
 const step2Img = new URL("../../../images/skill-step-2.webp", import.meta.url).href;
@@ -177,6 +178,42 @@ function CodeCard({ label, lang, snippet }) {
   );
 }
 
+const tocGroups = [
+  {
+    id: "step-1",
+    label: "Step 1: Project & folders",
+    items: [{ id: "compact-folders", label: "Disable compact folders" }],
+  },
+  {
+    id: "step-2",
+    label: "Step 2: First SKILL.md",
+    items: [{ id: "invoke-skill", label: "Invoke the skill in chat" }],
+  },
+  {
+    id: "step-3",
+    label: "Step 3: Reference files",
+    items: [
+      { id: "output-content", label: "Add output formatting" },
+      { id: "wire-reference", label: "Wire it into SKILL.md" },
+      { id: "test-output", label: "Test the output" },
+    ],
+  },
+  {
+    id: "step-4",
+    label: "Step 4: disable-model-invocation",
+    items: [
+      { id: "invocation-true", label: "Testing with true" },
+      { id: "invocation-false", label: "Testing with false" },
+    ],
+  },
+  {
+    id: "summary",
+    label: "Summary",
+    items: [{ id: "takeaways", label: "Key takeaways" }],
+  },
+  { id: "references", label: "References" },
+];
+
 const progressiveDisclosureTip =
   "Think of it like a library. Without progressive disclosure, you would have to read every book on the shelves before picking one. Progressive disclosure gives you a catalog with a title and short summary for each book, so you only open the one you need.";
 
@@ -207,6 +244,8 @@ export function FirstSkillMdArticle() {
 
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         A Skill is a set of instructions packaged as a simple folder that teaches Claude how to handle specific tasks or workflows. The folder can include scripts, assets, and other resources that agents can discover and use to apply the right knowledge and procedures for a specific task.
       </p>
@@ -216,7 +255,7 @@ export function FirstSkillMdArticle() {
 
       {/* STEP 1 */}
       <section className="article-panel">
-        <h2>Step 1 · Create the Project and Folder Structure</h2>
+        <h2 id="step-1">Step 1 · Create the Project and Folder Structure</h2>
         <p>
           First, create a project folder called <code>learn-skills</code> on your computer, open it in VS Code, and create the hidden agent skill directory hierarchy: <code>.agents/skills/greet/</code>.
         </p>
@@ -246,7 +285,7 @@ export function FirstSkillMdArticle() {
         />
 
         <div style={{ marginTop: "1.5rem" }}>
-          <h3 className="accent-heading">Pro Tip: Disable VS Code Compact Folders</h3>
+          <h3 id="compact-folders" className="accent-heading">Pro Tip: Disable VS Code Compact Folders</h3>
           <p>
             By default, VS Code collapses single child folders into a single compressed line (e.g. <code>.agents/skills/greet</code>).
             If you want VS Code&apos;s Explorer to display each folder individually in a proper nested tree hierarchy:
@@ -269,7 +308,7 @@ export function FirstSkillMdArticle() {
 
       {/* STEP 2 */}
       <section className="article-panel">
-        <h2>Step 2 · Write and Test your First SKILL.md File</h2>
+        <h2 id="step-2">Step 2 · Write and Test your First SKILL.md File</h2>
         <p>
           Inside the <code>greet</code> folder, create a file named <code>SKILL.md</code>. Copy and paste the following contents into it and save the file:
         </p>
@@ -308,7 +347,7 @@ export function FirstSkillMdArticle() {
           </ul>
         </div>
 
-        <h3 style={{ marginTop: "2rem" }}>Invoke the Skill in Chat</h3>
+        <h3 id="invoke-skill" style={{ marginTop: "2rem" }}>Invoke the Skill in Chat</h3>
         <p>
           Now open the agent chat window in VS Code and invoke the skill directly using the slash command <code>/greet</code> Hello.
         </p>
@@ -325,7 +364,7 @@ export function FirstSkillMdArticle() {
 
       {/* STEP 3 */}
       <section className="article-panel">
-        <h2>Step 3 · Format Output & Progressive Disclosure using Reference Files</h2>
+        <h2 id="step-3">Step 3 · Format Output & Progressive Disclosure using Reference Files</h2>
         <p>
           Now let&apos;s learn how to format the agent&apos;s output. Suppose we want the greeting to carry the current date and time in a specific two-line format.
         </p>
@@ -354,7 +393,7 @@ export function FirstSkillMdArticle() {
           maxWidth="380px"
         />
 
-        <h3 style={{ marginTop: "2rem" }}>Add Output Formatting Content</h3>
+        <h3 id="output-content" style={{ marginTop: "2rem" }}>Add Output Formatting Content</h3>
         <p>
           Copy and paste the following output format specifications into <code>references/output_format.md</code> and save:
         </p>
@@ -374,7 +413,7 @@ export function FirstSkillMdArticle() {
           caption="Step 6: Content of output_format.md specifying layout template, shell date command, and concrete example."
         />
 
-        <h3 style={{ marginTop: "2rem" }}>Wire the Reference File into SKILL.md</h3>
+        <h3 id="wire-reference" style={{ marginTop: "2rem" }}>Wire the Reference File into SKILL.md</h3>
         <p>
           Update the <code>description</code> field in <code>SKILL.md</code> so the always-loaded frontmatter reflects the new date/time behavior. Then add an <code>## Output Format</code> section that links directly to <code>[references/output_format.md](references/output_format.md)</code>:
         </p>
@@ -394,7 +433,7 @@ export function FirstSkillMdArticle() {
           caption="Step 7: SKILL.md updated with modified description and relative link to output_format.md."
         />
 
-        <h3 style={{ marginTop: "2rem" }}>Test the Formatted Output</h3>
+        <h3 id="test-output" style={{ marginTop: "2rem" }}>Test the Formatted Output</h3>
         <p>
           Invoke the <code>/greet</code> Hello command again in the chat window. The agent reads the reference file, executes the shell date command, and responds with the precise formatted output:
         </p>
@@ -408,7 +447,7 @@ export function FirstSkillMdArticle() {
 
       {/* STEP 4 */}
       <section className="article-panel">
-        <h2>Step 4 · Control Automated Triggers with disable-model-invocation</h2>
+        <h2 id="step-4">Step 4 · Control Automated Triggers with disable-model-invocation</h2>
         <p>
           By default, AI agents inspect all loaded skill descriptions and automatically trigger a skill whenever your chat prompt matches its description. However, for administrative or sensitive skills, you may want to prevent automatic model triggering.
         </p>
@@ -426,7 +465,7 @@ export function FirstSkillMdArticle() {
           })}
         </div>
 
-        <h3 style={{ marginTop: "2rem" }}>Testing with disable-model-invocation: true</h3>
+        <h3 id="invocation-true" style={{ marginTop: "2rem" }}>Testing with disable-model-invocation: true</h3>
         <p>
           Save <code>SKILL.md</code> with <code>disable-model-invocation: true</code> and type <code>Hello</code> in a chat window without using the <code>/greet</code> slash command:
         </p>
@@ -441,7 +480,7 @@ export function FirstSkillMdArticle() {
           As shown above, the agent does not trigger the skill automatically and instead responds with standard conversational text: <em>&quot;Hello! How can I help you today?&quot;</em>.
         </p>
 
-        <h3 style={{ marginTop: "2rem" }}>Testing with disable-model-invocation: false</h3>
+        <h3 id="invocation-false" style={{ marginTop: "2rem" }}>Testing with disable-model-invocation: false</h3>
         <p>
           Now change the parameter back to <code>disable-model-invocation: false</code> (or omit it, as <code>false</code> is the default behavior):
         </p>
@@ -468,7 +507,7 @@ export function FirstSkillMdArticle() {
 
       {/* SUMMARY & BEST PRACTICES */}
       <section className="article-panel">
-        <h2>Summary of Key Concepts</h2>
+        <h2 id="summary">Summary of Key Concepts</h2>
 
         <div className="table-wrap table-wrap--shaded-head" style={{ marginTop: "1.5rem" }}>
           <table>
@@ -510,7 +549,7 @@ export function FirstSkillMdArticle() {
         </div>
 
         <div style={{ marginTop: "1.5rem" }}>
-          <h3 style={{ marginTop: 0 }}>Key Takeaways</h3>
+          <h3 id="takeaways" style={{ marginTop: 0 }}>Key Takeaways</h3>
           <ul className="bullet-list" style={{ marginTop: "0.75rem" }}>
             <li><strong>Folder Name = Command Name:</strong> The directory name <code>greet</code> determines the slash command <code>/greet</code>.</li>
             <li><strong>Progressive Disclosure Saves Context:</strong> By placing heavy schemas or templates in <code>references/</code>, you keep your main agent prompt lightweight.</li>
@@ -521,7 +560,7 @@ export function FirstSkillMdArticle() {
 
       {/* REFERENCES */}
       <section className="article-panel">
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul className="bullet-list" style={{ marginTop: "0.75rem" }}>
           <li>
             <a href="https://agentskills.io/home" target="_blank" rel="noreferrer">

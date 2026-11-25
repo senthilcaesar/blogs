@@ -1,4 +1,5 @@
 import { CodeCard } from '../../components/CodeCard';
+import { ArticleToc } from '../../components/ArticleToc';
 
 const hookInputSnippet = `{
   "hook_event_name": "PreToolUse",
@@ -83,15 +84,27 @@ const redactSettingsSnippet = `{
   }
 }`;
 
+const tocGroups = [
+  { id: "why-hooks", label: "Why use hooks" },
+  { id: "how-they-work", label: "How they work" },
+  { id: "practical-example", label: "A practical example" },
+  { id: "blocking", label: "Blocking with PreToolUse" },
+  { id: "redact", label: "Redact instead of block" },
+  { id: "sharing", label: "Sharing with your team" },
+  { id: "recap", label: "Recap" },
+];
+
 export function HooksInClaudeArticle() {
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         Hooks let you run commands at specific points in Claude Code&apos;s lifecycle. The key difference between hooks and everything else is that hooks are deterministic - they always run.
       </p>
 
       <section className="article-panel">
-        <h2>Why Use Hooks</h2>
+        <h2 id="why-hooks">Why Use Hooks</h2>
         <p>
           Here&apos;s the problem with telling Claude to do something in a <code>CLAUDE.md</code> file: it&apos;s a request, not a guarantee. You can write &quot;always format after editing&quot; and Claude will usually listen. Usually. But on a long run you&apos;re not watching, &quot;usually&quot; isn&apos;t good enough. A hook fixes that. A hook is deterministic code that runs at a fixed point in the loop, so it can guarantee behavior instead of hoping for it. It turns a rule from &quot;Claude usually listens&quot; into &quot;Claude can&apos;t skip it.&quot;
         </p>
@@ -108,7 +121,7 @@ export function HooksInClaudeArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>How They Work</h2>
+        <h2 id="how-they-work">How They Work</h2>
         <p>
           Hooks are configured in your <code>settings.json</code>. You pick an event, optionally set a matcher for which tools it applies to, and provide a command to run. Some of the most common events are:
         </p>
@@ -142,14 +155,14 @@ export function HooksInClaudeArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>A Practical Example</h2>
+        <h2 id="practical-example">A Practical Example</h2>
         <p>
           The most common hook: auto-formatting after edits. Set a <code>PostToolUse</code> hook with a matcher of <code>&quot;Edit|Write&quot;</code> so it fires after Claude uses the Edit or Write tool. The command checks the file extension and runs the appropriate formatter: Prettier for TypeScript, gofmt for Go, whatever your project uses.
         </p>
       </section>
 
       <section className="article-panel">
-        <h2>Blocking with PreToolUse</h2>
+        <h2 id="blocking">Blocking with PreToolUse</h2>
         <p>
           A <code>PreToolUse</code> hook is a checkpoint between Claude deciding to do something and that thing actually happening. Every time Claude reaches for a tool - running a shell command, editing a file, making a commit - your script gets to look at the request first and decide whether it goes ahead. If the answer is no, the tool never runs.
         </p>
@@ -204,7 +217,7 @@ export function HooksInClaudeArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>A Real Guardrail: Redact Instead of Block</h2>
+        <h2 id="redact">A Real Guardrail: Redact Instead of Block</h2>
         <p>
           Let&apos;s tie it together with something practical. Say you want a <code>PreToolUse</code> guardrail on the Bash tool. The matcher picks the tool to watch, and an optional <code>if</code> clause can narrow it to a specific command.
         </p>
@@ -235,14 +248,14 @@ export function HooksInClaudeArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Sharing Hooks with Your Team</h2>
+        <h2 id="sharing">Sharing Hooks with Your Team</h2>
         <p>
           Hooks configured in <code>.claude/settings.json</code> are project-level and can be checked into your repo. This means your entire team gets the same hooks automatically. Use the <code>CLAUDE_PROJECT_DIR</code> environment variable in your commands to reference scripts stored in your project, so they work regardless of Claude&apos;s current working directory.
         </p>
       </section>
 
       <section className="article-panel">
-        <h2>Recap</h2>
+        <h2 id="recap">Recap</h2>
         <p>
           Hooks give you deterministic control over Claude Code&apos;s behavior. Use <code>PostToolUse</code> for auto-formatting and logging. Use <code>PreToolUse</code> to block dangerous operations. Configure them in <code>settings.json</code> and view them with <code>/hooks</code>. And check them into your repo so your team gets them too.
         </p>

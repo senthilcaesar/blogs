@@ -1,4 +1,5 @@
 import { CodeCard as CodeWindow } from '../../components/CodeCard';
+import { ArticleToc } from '../../components/ArticleToc';
 
 const evalImg1 = new URL("../../../images/agent-evaluations-1.webp", import.meta.url).href;
 const evalImg2 = new URL("../../../images/agent-evaluations-2.webp", import.meta.url).href;
@@ -223,11 +224,70 @@ function CodeCard({ label, lang, snippet }) {
   );
 }
 
+const tocGroups = [
+  {
+    id: "det-vs-prob",
+    label: "Deterministic vs. probabilistic",
+    items: [
+      { id: "compounding-error", label: "The compounding-error number" },
+    ],
+  },
+  {
+    id: "where-agents-fail",
+    label: "Where agents fail",
+    items: [
+      { id: "context-precision", label: "Context precision and recall" },
+    ],
+  },
+  { id: "vocabulary", label: "Five pieces of vocabulary" },
+  {
+    id: "what-to-measure",
+    label: "Three things to measure",
+    items: [
+      { id: "grade-trajectory", label: "Grade trajectory lightly" },
+    ],
+  },
+  {
+    id: "anatomy",
+    label: "Anatomy of one case",
+    items: [
+      { id: "first-cases", label: "The first twenty cases" },
+    ],
+  },
+  { id: "four-ways", label: "Four ways to grade" },
+  {
+    id: "llm-judge",
+    label: "LLM-as-judge",
+    items: [
+      { id: "evaluate-judge", label: "Evaluate the judge" },
+    ],
+  },
+  {
+    id: "metrics",
+    label: "Run it more than once",
+    items: [
+      { id: "small-movements", label: "Don't over-read small moves" },
+    ],
+  },
+  { id: "five-mistakes", label: "Five costly mistakes" },
+  { id: "feedback-loop", label: "Closing the feedback loop" },
+  {
+    id: "start-here",
+    label: "Start here",
+    items: [
+      { id: "one-idea", label: "The one idea to keep" },
+    ],
+  },
+  { id: "references", label: "References" },
+];
+
 export function AgentEvaluationsArticle() {
   const card = (props) => <CodeCard {...props} />;
 
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         The biggest problem with agents is that we do not know how well they are
         performing. You ship one, it demos well, and then the honest questions
@@ -242,7 +302,7 @@ export function AgentEvaluationsArticle() {
       </p>
 
       <section className="article-panel">
-        <h2>Deterministic software vs. probabilistic agents</h2>
+        <h2 id="det-vs-prob">Deterministic software vs. probabilistic agents</h2>
         <p>
           Traditional software is deterministic. The same input always produces
           the same output, which is exactly why unit tests and integration tests
@@ -360,7 +420,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>The compounding-error number is the whole argument</h3>
+          <h3 id="compounding-error">The compounding-error number is the whole argument</h3>
           <p>
             0.95<sup>20</sup> ≈ 0.36. This is why you cannot evaluate an agent
             by evaluating its prompt. The failure mode you are hunting is not a
@@ -379,7 +439,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>So where does an agent actually fail?</h2>
+        <h2 id="where-agents-fail">So where does an agent actually fail?</h2>
         <p>
           &quot;The agent failed&quot; is not a finding you can act on. Before
           you can build a feedback loop, you need to know what the loop is
@@ -488,7 +548,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>Context precision and recall, concretely</h3>
+          <h3 id="context-precision">Context precision and recall, concretely</h3>
           <p>
             Both borrow from information retrieval, and the distinction is worth
             keeping straight because they fail for different reasons and cost
@@ -544,7 +604,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>The five pieces of vocabulary</h2>
+        <h2 id="vocabulary">The five pieces of vocabulary</h2>
         <p>
           Nearly every eval framework — homegrown or off-the-shelf — is these
           five nouns wearing different names. Learn them once and every tool
@@ -622,7 +682,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>The three things you are allowed to measure</h2>
+        <h2 id="what-to-measure">The three things you are allowed to measure</h2>
         <p>
           Teams argue about eval design far longer than they need to because
           they have not separated these. They are independent, they fail
@@ -671,7 +731,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>Grade trajectory with a light touch</h3>
+          <h3 id="grade-trajectory">Grade trajectory with a light touch</h3>
           <p>
             Asserting the exact sequence of tool calls turns your eval into a
             change-detector: every legitimate improvement fails it. Assert
@@ -684,7 +744,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Anatomy of one case</h2>
+        <h2 id="anatomy">Anatomy of one case</h2>
         <p>
           Cases are data, not code — put them in JSON or YAML so non-engineers
           can add them and so you can diff them in review. Everything the run
@@ -746,7 +806,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>Where the first twenty cases come from</h3>
+          <h3 id="first-cases">Where the first twenty cases come from</h3>
           <p>
             Not from brainstorming. Open the last month of real transcripts,
             find the ones that went wrong, and write each one up as a case. A
@@ -758,7 +818,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Four ways to grade, and when each is right</h2>
+        <h2 id="four-ways">Four ways to grade, and when each is right</h2>
         <p>
           The instinct is to reach for a model judge immediately. Resist it —
           the cheapest grader that can decide the question is always the right
@@ -853,7 +913,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>LLM-as-judge, done so you can trust it</h2>
+        <h2 id="llm-judge">LLM-as-judge, done so you can trust it</h2>
         <p>
           A model judge is the only practical way to grade prose at volume, and
           it is where most eval suites quietly stop being meaningful. Four rules
@@ -897,7 +957,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>The judge is a model, so evaluate the judge</h3>
+          <h3 id="evaluate-judge">The judge is a model, so evaluate the judge</h3>
           <p>
             Hand-label fifty runs yourself, then run the judge over the same
             fifty and measure agreement. Below roughly 80–85% you are not
@@ -930,7 +990,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Metrics: run it more than once</h2>
+        <h2 id="metrics">Metrics: run it more than once</h2>
         <p>
           Because agents are stochastic, a single pass over your suite gives you
           one sample from a distribution. Run every case <code>k</code> times —
@@ -1014,7 +1074,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>Do not over-read small movements</h3>
+          <h3 id="small-movements">Do not over-read small movements</h3>
           <p>
             Know what one flip is worth in whatever metric you are quoting. On
             20 cases run 3 times, a single rollout changing verdict moves the
@@ -1036,7 +1096,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>The five mistakes that cost the most time</h2>
+        <h2 id="five-mistakes">The five mistakes that cost the most time</h2>
 
         <div className="ev-compare">
           <div className="ev-compare__item ev-compare__item--dont">
@@ -1101,7 +1161,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Closing the feedback loop</h2>
+        <h2 id="feedback-loop">Closing the feedback loop</h2>
         <p>
           Everything so far builds one instrument. The loop is what makes it
           useful: <strong>run → grade → diagnose → change → run again</strong>,
@@ -1183,7 +1243,7 @@ export function AgentEvaluationsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Start here</h2>
+        <h2 id="start-here">Start here</h2>
         <p>
           A first useful eval suite is an afternoon of work, not a quarter. In
           order:
@@ -1224,7 +1284,7 @@ export function AgentEvaluationsArticle() {
           className="article-panel article-panel--accent"
           style={{ marginTop: "1.5rem" }}
         >
-          <h3>The one idea to keep</h3>
+          <h3 id="one-idea">The one idea to keep</h3>
           <p>
             An eval is not a test that proves your agent works. It is an
             instrument that makes changes in behaviour <em>visible</em>. Its
@@ -1270,7 +1330,7 @@ export function AgentEvaluationsArticle() {
       </div>
 
       <section className="article-panel">
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <ul className="bullet-list" style={{ marginTop: "1rem" }}>
           <li>
             <a

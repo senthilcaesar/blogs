@@ -1,4 +1,5 @@
 import { CodeCard } from '../../components/CodeCard';
+import { ArticleToc } from '../../components/ArticleToc';
 
 const complexImg = new URL('../../../images/complex.webp', import.meta.url).href;
 const contextFailureImg = new URL('../../../images/context-failure.webp', import.meta.url).href;
@@ -20,9 +21,32 @@ The project management team went ahead and scheduled the kickoff meeting for nex
 Rewrite the input text to be active and concise.
 </task>`;
 
+const tocGroups = [
+  { id: "seeing-navigating", label: "Seeing and navigating" },
+  { id: "wrong-fix", label: "The obvious (wrong) fix" },
+  {
+    id: "toolkit",
+    label: "The toolkit",
+    items: [
+      { id: "ui-discovery", label: "0. UI discovery agents" },
+      { id: "xml-prompting", label: "1. Prompting with XML tags" },
+      { id: "subagents", label: "2. Subagents" },
+      { id: "effective-skills", label: "3. Effective skills" },
+      { id: "goldilocks", label: "4. The Goldilocks zone" },
+      { id: "progressive-disclosure", label: "5. Progressive disclosure" },
+      { id: "code-first", label: "6. Code-first skills" },
+      { id: "ast-graphs", label: "7. AST graphs" },
+    ],
+  },
+  { id: "together", label: "Bringing it all together" },
+  { id: "razorpay", label: "RazorPay's approach" },
+];
+
 export function AgentsForComplexWorkflowsArticle() {
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         If you&apos;ve built anything with AI agents, you&apos;ve probably hit two walls pretty quickly:
       </p>
@@ -43,7 +67,7 @@ export function AgentsForComplexWorkflowsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Problem 1 &amp; 2: Agents Are Bad at Seeing and Bad at Navigating</h2>
+        <h2 id="seeing-navigating">Problem 1 &amp; 2: Agents Are Bad at Seeing and Bad at Navigating</h2>
         <p>
           At a basic level, large language models are trained on text. They&apos;re reasonably good at reading code line-by-line, but two things trip them up:
         </p>
@@ -58,7 +82,7 @@ export function AgentsForComplexWorkflowsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>The Obvious (Wrong) Fix: Just Add More Context</h2>
+        <h2 id="wrong-fix">The Obvious (Wrong) Fix: Just Add More Context</h2>
         <p>
           The instinctive fix for both problems is: give the agent more information. Feed it the UI screenshots, dump in the whole codebase, describe everything in exhaustive detail.
         </p>
@@ -84,14 +108,14 @@ export function AgentsForComplexWorkflowsArticle() {
       </div>
 
       <section className="article-panel">
-        <h2>The Toolkit: Precision Over Volume</h2>
+        <h2 id="toolkit">The Toolkit: Precision Over Volume</h2>
 
-        <h3 style={{ marginTop: '1.5rem' }}>0. UI Discovery Agents &mdash; Treat the UI as Ground Truth</h3>
+        <h3 id="ui-discovery" style={{ marginTop: '1.5rem' }}>0. UI Discovery Agents &mdash; Treat the UI as Ground Truth</h3>
         <p style={{ marginTop: '0.5rem' }}>
           Instead of trying to reconstruct what a UI does by reading the underlying codebase (which is slow and error-prone), a UI Discovery Agent flips the source of truth: it treats the actual rendered UI as the authoritative reference, not the code that generated it. This matters because code can be messy, outdated, or abstracted in ways that obscure real behavior &mdash; but the UI a user actually interacts with doesn&apos;t lie.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>1. Effective Prompting with XML Tags</h3>
+        <h3 id="xml-prompting" style={{ marginTop: '1.5rem' }}>1. Effective Prompting with XML Tags</h3>
         <p style={{ marginTop: '0.5rem' }}>
           Rather than writing prompts as unstructured prose, wrapping different parts of a prompt in XML-style tags (like <code className="xml-tag-context">&lt;context&gt;</code>, <code className="xml-tag-task">&lt;task&gt;</code>, <code className="xml-tag-constraints">&lt;constraints&gt;</code>) gives the model a clear structural map of the prompt. This isn&apos;t cosmetic &mdash; it measurably helps the model distinguish &quot;this is background info&quot; from &quot;this is the actual instruction&quot; from &quot;this is a hard rule to follow.&quot;
         </p>
@@ -112,7 +136,7 @@ export function AgentsForComplexWorkflowsArticle() {
             <span className="xml-tag-task">&lt;/task&gt;</span>
         </CodeCard>
 
-        <h3 style={{ marginTop: '1.5rem' }}>2. Subagents &mdash; Divide and Conquer Across Context Windows</h3>
+        <h3 id="subagents" style={{ marginTop: '1.5rem' }}>2. Subagents &mdash; Divide and Conquer Across Context Windows</h3>
         <p style={{ marginTop: '0.5rem' }}>
           One of the biggest structural ideas in the blog: instead of asking a single agent to do a large, multi-part task in one giant context window, break the task into a team of subagents, each operating in its own separate context window.
         </p>
@@ -120,12 +144,12 @@ export function AgentsForComplexWorkflowsArticle() {
           Why this matters: context windows aren&apos;t just size-limited, they&apos;re attention-limited. A single agent juggling five different subtasks in one context has to hold all of it in its head at once. Split into subagents, each one gets a clean, focused context &mdash; dramatically reducing noise and improving reliability, similar to how a human team divides work instead of one person trying to do everything simultaneously.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>3. Writing Effective Skills</h3>
+        <h3 id="effective-skills" style={{ marginTop: '1.5rem' }}>3. Writing Effective Skills</h3>
         <p style={{ marginTop: '0.5rem' }}>
           &quot;Skills&quot; here refers to packaged, reusable capabilities you give an agent &mdash; instructions, scripts, and context bundled together for a specific kind of task. The blog emphasizes that how you write these skills matters as much as what they contain.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>4. The Goldilocks Zone &mdash; Calibrating the System Prompt</h3>
+        <h3 id="goldilocks" style={{ marginTop: '1.5rem' }}>4. The Goldilocks Zone &mdash; Calibrating the System Prompt</h3>
         <p style={{ marginTop: '0.5rem' }}>
           This is a really useful mental model: your system prompt (or skill instructions) can be:
         </p>
@@ -138,12 +162,12 @@ export function AgentsForComplexWorkflowsArticle() {
           Finding this zone is iterative &mdash; it&apos;s not something you get right on the first try, and it&apos;s specific to each task.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>5. Progressive Disclosure</h3>
+        <h3 id="progressive-disclosure" style={{ marginTop: '1.5rem' }}>5. Progressive Disclosure</h3>
         <p style={{ marginTop: '0.5rem' }}>
           Rather than dumping all possible context upfront &quot;just in case,&quot; progressive disclosure means giving the agent a minimal starting point and letting it pull in more detail as needed, layer by layer. This mirrors good UX design (where you don&apos;t show a user every setting at once) and directly fights the &quot;too much context&quot; problem from earlier.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>6. Code-First Skills &mdash; Know What&apos;s Deterministic</h3>
+        <h3 id="code-first" style={{ marginTop: '1.5rem' }}>6. Code-First Skills &mdash; Know What&apos;s Deterministic</h3>
         <p style={{ marginTop: '0.5rem' }}>
           This is a subtle but important distinction the blog draws out: within any complex task, some sub-tasks are deterministic (there&apos;s one correct, mechanical way to do them &mdash; e.g., &quot;parse this file and extract imports&quot;) and some are non-deterministic (they require judgment, reasoning, or creativity &mdash; e.g., &quot;decide whether this UI change is a good idea&quot;).
         </p>
@@ -151,7 +175,7 @@ export function AgentsForComplexWorkflowsArticle() {
           The insight: deterministic tasks shouldn&apos;t be left to the LLM&apos;s judgment at all &mdash; they should be handled by actual code/scripts. Let the agent reason where reasoning is needed, and let deterministic scripts handle the parts that don&apos;t need a language model&apos;s guesswork. This saves context, saves cost, and is more reliable.
         </p>
 
-        <h3 style={{ marginTop: '1.5rem' }}>7. AST Graphs &mdash; Structural Understanding of Code</h3>
+        <h3 id="ast-graphs" style={{ marginTop: '1.5rem' }}>7. AST Graphs &mdash; Structural Understanding of Code</h3>
         <p style={{ marginTop: '0.5rem' }}>
           This ties directly back to Problem 2 (bad codebase understanding). An AST (Abstract Syntax Tree) graph is a hierarchical, tree-like representation of a codebase&apos;s syntactic structure &mdash; essentially a structured map of how the code is organized, rather than a flat pile of text.
         </p>
@@ -169,7 +193,7 @@ export function AgentsForComplexWorkflowsArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Bringing It All Together</h2>
+        <h2 id="together">Bringing It All Together</h2>
         <p>Here&apos;s how the pieces connect into one coherent story:</p>
         <ol className="resource-list" style={{ marginTop: '1rem' }}>
           <li>
@@ -199,7 +223,7 @@ export function AgentsForComplexWorkflowsArticle() {
       </div>
 
       <section className="article-panel">
-        <h2>Large codebase understanding: RazorPay approach</h2>
+        <h2 id="razorpay">Large codebase understanding: RazorPay approach</h2>
         <p>
           One of the challenges they highlighted was large codebase understanding. A codebase is not just a collection of files - it is a network of imports, dependencies, and relationships that evolve over years. An agent that only sees one file at a time has very limited understanding of the overall structure.
         </p>

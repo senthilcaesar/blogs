@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { CodeCard } from '../../components/CodeCard';
+import { ArticleToc } from '../../components/ArticleToc';
 
 const architectureImg = new URL('../../../images/skills-over-mcp-architecture.jpg', import.meta.url).href;
 const flowImg = new URL('../../../images/skills-over-mcp-flow.svg', import.meta.url).href;
@@ -132,9 +133,30 @@ function highlightMarkdown(source) {
   });
 }
 
+const tocGroups = [
+  { id: "two-halves", label: "Two halves of one job" },
+  { id: "why-not-new", label: "Why not invent something new?" },
+  {
+    id: "following-a-skill",
+    label: "Following one skill",
+    items: [
+      { id: "step-1", label: "Step 1: Server offers skills" },
+      { id: "step-2", label: "Step 2: Host lists skills" },
+      { id: "step-3", label: "Step 3: Skill waits" },
+      { id: "step-4", label: "Step 4: Host loads the skill" },
+      { id: "step-5", label: "Step 5: Checklist on demand" },
+    ],
+  },
+  { id: "riskier", label: "A skill is riskier than a tool" },
+  { id: "whats-next", label: "What's next" },
+  { id: "references", label: "References" },
+];
+
 export function SkillsOverMcpArticle() {
   return (
     <>
+      <ArticleToc groups={tocGroups} />
+
       <p className="article-lead">
         <mark className="highlight highlight-green">Skills over MCP</mark> is an approach for giving AI agents both the tools to do a job and the instruction manual on how to do it right, delivered through a single standardized connection. Instead of just handing the agent bare tools, Skills over MCP lets the MCP server package and serve Skills directly over the same protocol.
       </p>
@@ -151,7 +173,7 @@ export function SkillsOverMcpArticle() {
       </p>
 
       <section className="article-panel">
-        <h2>Two halves of one job</h2>
+        <h2 id="two-halves">Two halves of one job</h2>
         <p>
           An AI agent is a language model that can take actions, not just chat: open a file, search the web, leave a comment on some code. To do real work it needs two different things. The first is tools it can call.
         </p>
@@ -195,7 +217,7 @@ export function SkillsOverMcpArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Why not invent something new?</h2>
+        <h2 id="why-not-new">Why not invent something new?</h2>
         <p>
           Once people agreed that MCP servers should serve skills, the next question was how. MCP already gives a server a few basic kinds of thing it can offer an agent, known as primitives. An earlier proposal, SEP-2076, suggested adding skills to the list as a brand-new fourth one:
         </p>
@@ -238,7 +260,7 @@ export function SkillsOverMcpArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>Following one skill from server to agent</h2>
+        <h2 id="following-a-skill">Following one skill from server to agent</h2>
         <p>
           So far this has all been description. To see how it actually works, let&apos;s follow one skill from the server to the agent, step by step. We&apos;ll use the small example from the spec itself: a server that offers the <code>code-review</code> skill we&apos;ve been following, plus one supporting file, the checklist.
         </p>
@@ -246,7 +268,7 @@ export function SkillsOverMcpArticle() {
           Two terms help here. The host is the app the agent runs in, such as a chat app or a code editor; it does the talking to the server on the agent&apos;s behalf. The model is the AI itself, and it only sees what the host passes to it.
         </p>
 
-        <h3>Step 1: The server says it can serve skills</h3>
+        <h3 id="step-1">Step 1: The server says it can serve skills</h3>
         <p>
           When the host first connects, it asks the server what it supports, a bit like asking a shop which payment cards it takes. A server that offers skills includes this in its answer:
         </p>
@@ -257,7 +279,7 @@ export function SkillsOverMcpArticle() {
           The important part is <code>io.modelcontextprotocol/skills</code>. It tells the host that this server follows the Skills over MCP extension, so it&apos;s worth asking for skills. A server without that line simply doesn&apos;t offer any.
         </p>
 
-        <h3>Step 2: The host asks for the list of skills</h3>
+        <h3 id="step-2">Step 2: The host asks for the list of skills</h3>
         <p>
           Next, the host sends <code>skills/list</code>, which asks &quot;what skills do you have?&quot; The server replies with one entry per skill. Here&apos;s the entry for code-review, trimmed for length:
         </p>
@@ -271,12 +293,12 @@ export function SkillsOverMcpArticle() {
           A digest, made here with a method called SHA-256, is a fingerprint of the file&apos;s exact contents. Change even one character in the file and the fingerprint comes out completely different. That lets the host check later that the file it downloads is exactly the one the server listed.
         </p>
 
-        <h3>Step 3: The skill waits until it&apos;s needed</h3>
+        <h3 id="step-3">Step 3: The skill waits until it&apos;s needed</h3>
         <p>
           At this point the model sees only the skill&apos;s name and description: the card in the catalogue, not the book. The full instructions stay on the server, and nothing more happens until a task calls for this skill.
         </p>
 
-        <h3>Step 4: A user asks for a review, and the host loads the skill</h3>
+        <h3 id="step-4">Step 4: A user asks for a review, and the host loads the skill</h3>
         <p>
           When a user asks for a code review, the host fetches <code>skill://code-review/SKILL.md</code> using <code>resources/read</code>, MCP&apos;s ordinary request for reading a file. Before using it, the host checks the file against the manifest, comparing fingerprints to make sure it&apos;s the exact file the server listed. Then it hands the instructions to the model, labelled with the server they came from, so the model knows where they originated. Here&apos;s the whole file:
         </p>
@@ -284,7 +306,7 @@ export function SkillsOverMcpArticle() {
           {highlightMarkdown(skillSnippet)}
         </CodeCard>
 
-        <h3>Step 5: The checklist is read only if the instructions call for it</h3>
+        <h3 id="step-5">Step 5: The checklist is read only if the instructions call for it</h3>
         <p>
           Notice the line telling the model to read <code>references/checklist.md</code>. That&apos;s a relative path, an address written relative to the skill&apos;s own folder, much like saying &quot;the file next door&quot;. The host turns it into the full address <code>skill://code-review/references/checklist.md</code> and reads it from the same server, but only when the model actually follows that instruction.
         </p>
@@ -303,7 +325,7 @@ export function SkillsOverMcpArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>A skill is riskier than a tool</h2>
+        <h2 id="riskier">A skill is riskier than a tool</h2>
         <p>
           That sounds backwards at first. Tools are the part that actually does things, so surely they&apos;re the dangerous bit? The answer lies in <em>where</em> each one runs. When the agent calls a tool, the work happens on the server, out of reach of your computer. A skill is different: it&apos;s a set of instructions telling <em>your</em> agent what to do on <em>your</em> machine, and it can even include scripts for the agent to run.
         </p>
@@ -330,7 +352,7 @@ export function SkillsOverMcpArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>What&apos;s next: progressive discovery</h2>
+        <h2 id="whats-next">What&apos;s next: progressive discovery</h2>
         <p>
           Progressive disclosure makes sure the agent reads a skill&apos;s full instructions only when a task needs them, but it doesn&apos;t shrink the catalogue: an agent still sees a card for every tool and resource a server offers. Back in our library, a catalogue of titles and short summaries works well when the library is small. In one with millions of books, just reading the catalogue becomes the problem. That&apos;s where progressive discovery comes in. Where progressive disclosure decides <em>how much</em> of a skill the agent reads, progressive discovery decides <em>which</em> tools and resources (and so which skills, since skills are served as resources) the agent hears about at all. It&apos;s more like asking a librarian, who listens to what you need and comes back with a handful of books worth reading.
         </p>
@@ -340,7 +362,7 @@ export function SkillsOverMcpArticle() {
       </section>
 
       <section className="article-panel">
-        <h2>References</h2>
+        <h2 id="references">References</h2>
         <div className="som-recommended">
           <span className="som-recommended__label">Recommended reading</span>
           <a href="https://www.bloomberg.com/company/stories/skills-over-mcp-how-bloomberg-helped-standardize-agent-skills-at-scale/" target="_blank" rel="noreferrer">
