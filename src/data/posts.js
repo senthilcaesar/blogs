@@ -363,6 +363,29 @@ export const posts = [
     },
   },
   {
+    title: 'Claude Plugins',
+    slug: 'claude-plugins',
+    category: 'AI',
+    tags: ['ai', 'claude-code', 'plugins', 'marketplace', 'teams'],
+    excerpt:
+      'A plugin packages your skills, subagents, hooks and MCP configs into one installable unit, so the Claude Code setup you trust reaches your whole team.',
+    image: imageUrl('plugins.png'),
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/claude-plugins',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Claude Code',
+      summary:
+        'Install plugins and add a team marketplace, read what a plugin runs before you turn it on, and package your own .claude directory with a manifest.',
+    },
+  },
+  {
     title: 'RLHF: Teaching Models What We Prefer',
     slug: 'rlhf',
     category: 'AI',
