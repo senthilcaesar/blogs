@@ -76,6 +76,12 @@ export function ClaudeMdFileArticle() {
         <p style={{ marginTop: '1rem' }}>
           The difference matters. A hook is code that runs before Claude takes an action, and it can actually block the action. So even if Claude does try to push to main, the hook stops it. That&apos;s real enforcement, not a polite request. Move your hard rules to hooks and let <code>CLAUDE.md</code> handle the softer conventions.
         </p>
+        <p style={{ marginTop: '1rem' }}>
+          Conventions that apply all the time, things like naming rules or where files go, belong in your <code>CLAUDE.md</code> file. Procedures and reference material tied to a particular kind of task belong in a skill.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          There&apos;s a third case. A rule that Claude must not be able to skip belongs in a hook, not in either of the above. That&apos;s because <code>CLAUDE.md</code> and skills are both instructions that Claude follows, while a hook is code that actually runs. If skipping the rule isn&apos;t acceptable, don&apos;t leave it up to instruction-following.
+        </p>
       </section>
 
       <section className="article-panel">
