@@ -35,6 +35,54 @@ const blockSettingsSnippet = `{
   }
 }`;
 
+const redactBeforeAfterSnippet = `# What Claude asked to run
+curl -H "Authorization: Bearer sk_live_abc123XYZ" https://api.stripe.com/v1/charges
+
+# What actually ran
+curl -H "Authorization: Bearer [REDACTED]" https://api.stripe.com/v1/charges`;
+
+const redactScriptSnippet = `#!/bin/bash
+# Read the request from stdin and pull out the command Claude wants to run
+input=$(cat)
+command=$(echo "$input" | jq -r '.tool_input.command')
+
+# No secret in the command? Let it through untouched.
+if ! echo "$command" | grep -qE 'sk_live_[A-Za-z0-9]+'; then
+  exit 0
+fi
+
+# Swap the secret for a placeholder
+redacted=$(echo "$command" | sed -E 's/sk_live_[A-Za-z0-9]+/[REDACTED]/g')
+
+# updatedInput replaces the whole tool input, so keep the other fields
+# and overwrite only the command. "ask" shows you the rewritten command;
+# "allow" would also skip the permission prompt.
+echo "$input" | jq --arg cmd "$redacted" '{
+  hookSpecificOutput: {
+    hookEventName: "PreToolUse",
+    permissionDecision: "ask",
+    permissionDecisionReason: "Live secret redacted from the command",
+    updatedInput: (.tool_input + {command: $cmd})
+  }
+}'`;
+
+const redactSettingsSnippet = `{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(curl *)",
+            "command": "\\"$CLAUDE_PROJECT_DIR\\"/.claude/hooks/redact-secrets.sh"
+          }
+        ]
+      }
+    ]
+  }
+}`;
+
 export function HooksInClaudeArticle() {
   return (
     <>
@@ -45,6 +93,9 @@ export function HooksInClaudeArticle() {
       <section className="article-panel">
         <h2>Why Use Hooks</h2>
         <p>
+          Here&apos;s the problem with telling Claude to do something in a <code>CLAUDE.md</code> file: it&apos;s a request, not a guarantee. You can write &quot;always format after editing&quot; and Claude will usually listen. Usually. But on a long run you&apos;re not watching, &quot;usually&quot; isn&apos;t good enough. A hook fixes that. A hook is deterministic code that runs at a fixed point in the loop, so it can guarantee behavior instead of hoping for it. It turns a rule from &quot;Claude usually listens&quot; into &quot;Claude can&apos;t skip it.&quot;
+        </p>
+        <p style={{ marginTop: '1rem' }}>
           You can tell Claude in your <code>CLAUDE.md</code> to run Prettier after every file edit. Most of the time it will. But sometimes it won&apos;t. A hook makes it happen every single time, no exceptions.
         </p>
         <p style={{ marginTop: '1rem' }}>Common use cases include:</p>
@@ -149,6 +200,37 @@ export function HooksInClaudeArticle() {
         </p>
         <p style={{ marginTop: '1rem' }}>
           The same pattern enforces any hard rule: read the request, check it, exit 2 with a reason when it breaks the rule. Block writes to a production config directory. Block commits to main. Whatever your team needs to be guaranteed, not suggested.
+        </p>
+      </section>
+
+      <section className="article-panel">
+        <h2>A Real Guardrail: Redact Instead of Block</h2>
+        <p>
+          Let&apos;s tie it together with something practical. Say you want a <code>PreToolUse</code> guardrail on the Bash tool. The matcher picks the tool to watch, and an optional <code>if</code> clause can narrow it to a specific command.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          The obvious move is to return <code>deny</code> and stop a dangerous call. That&apos;s good. But the lesser-known and more interesting move is to return <code>updatedInput</code> to rewrite the call. That&apos;s how you strip a secret out of a command and still let it run, instead of just refusing.
+        </p>
+        <p style={{ marginTop: '1rem' }}>
+          Here&apos;s what that looks like in practice. Claude is asked to run a command that includes a live-looking secret. The hook intercepts it, spots the <code>sk_live_</code> pattern, and swaps it for a placeholder before the command ever executes.
+        </p>
+        <div style={{ marginTop: '1.25rem' }}>
+          <CodeCard code={redactBeforeAfterSnippet} lang="bash" title="Before and after the hook" />
+        </div>
+        <p style={{ marginTop: '1.25rem' }}>
+          Instead of an exit code, this hook answers by printing JSON to stdout and exiting 0:
+        </p>
+        <div style={{ marginTop: '1.25rem' }}>
+          <CodeCard code={redactScriptSnippet} lang="bash" title=".claude/hooks/redact-secrets.sh" />
+        </div>
+        <p style={{ marginTop: '1.25rem' }}>
+          The <code>if</code> clause in <code>settings.json</code> narrows the hook to <code>curl</code> commands, where API keys tend to show up:
+        </p>
+        <div style={{ marginTop: '1.25rem' }}>
+          <CodeCard code={redactSettingsSnippet} lang="json" title=".claude/settings.json" />
+        </div>
+        <p style={{ marginTop: '1.25rem' }}>
+          The command still ran. The work still got done. But the secret never made it through. That&apos;s the difference between blocking and redacting, and it&apos;s the kind of thing a hook can enforce every single time.
         </p>
       </section>
 
