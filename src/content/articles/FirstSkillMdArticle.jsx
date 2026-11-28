@@ -193,6 +193,7 @@ const tocGroups = [
     id: "step-3",
     label: "Step 3: Reference files",
     items: [
+      { id: "progressive-disclosure", label: "Progressive disclosure" },
       { id: "output-content", label: "Add output formatting" },
       { id: "wire-reference", label: "Wire it into SKILL.md" },
       { id: "test-output", label: "Test the output" },
@@ -262,7 +263,7 @@ export function FirstSkillMdArticle() {
 
         <div style={{ marginTop: "1.25rem" }}>
           {card({
-            label: "Terminal — Create folder structure",
+            label: "Terminal - Create folder structure",
             lang: "bash",
             snippet: mkdirSnippet,
             sectionKey: "mkdir",
@@ -315,7 +316,7 @@ export function FirstSkillMdArticle() {
 
         <div style={{ marginTop: "1.25rem" }}>
           {card({
-            label: ".agents/skills/greet/SKILL.md — Initial Version",
+            label: ".agents/skills/greet/SKILL.md - Initial Version",
             lang: "markdown",
             snippet: initialSkillSnippet,
             sectionKey: "initial-skill",
@@ -365,12 +366,31 @@ export function FirstSkillMdArticle() {
       {/* STEP 3 */}
       <section className="article-panel">
         <h2 id="step-3">Step 3 · Format Output & Progressive Disclosure using Reference Files</h2>
+
+        <h3 id="progressive-disclosure">Progressive Disclosure</h3>
         <p>
-          Now let&apos;s learn how to format the agent&apos;s output. Suppose we want the greeting to carry the current date and time in a specific two-line format.
+          Skills share Claude&apos;s context window with your conversation. When Claude activates a skill, it loads the contents of that <code>SKILL.md</code> into context. But sometimes you need references, examples, or utility scripts that the skill depends on.
+        </p>
+        <p style={{ marginTop: "1rem" }}>
+          Cramming everything into one 2,000-line file has two problems: it takes up a lot of context window space, and it&apos;s not fun to maintain.
+        </p>
+        <p style={{ marginTop: "1rem" }}>
+          <TermTip tip={progressiveDisclosureTip}><strong>Progressive disclosure</strong></TermTip> solves this. Keep essential instructions in <code>SKILL.md</code> and put detailed reference material in separate files that Claude reads only when needed.
+        </p>
+        <p style={{ marginTop: "1rem" }}>
+          The open standard suggests organizing your skill directory with:
+        </p>
+        <ul className="bullet-list" style={{ marginTop: "0.5rem" }}>
+          <li><code>scripts/</code> - Executable code</li>
+          <li><code>references/</code> - Additional documentation</li>
+          <li><code>assets/</code> - Images, templates, or other data files</li>
+        </ul>
+        <p style={{ marginTop: "1rem" }}>
+          Then, in <code>SKILL.md</code>, link to the supporting files with clear instructions about when to load them.
         </p>
 
-        <p style={{ marginTop: "1rem" }}>
-          To keep <code>SKILL.md</code> lightweight and modular, we place detailed instructions and templates into a <code>references</code> subfolder. This pattern is called <TermTip tip={progressiveDisclosureTip}><strong>progressive disclosure</strong></TermTip> — reference files are loaded by the agent only when needed.
+        <p style={{ marginTop: "1.5rem" }}>
+          Now let&apos;s learn how to format the agent&apos;s output. Suppose we want the greeting to carry the current date and time in a specific two-line format.
         </p>
 
         <p style={{ marginTop: "1rem" }}>
@@ -379,7 +399,7 @@ export function FirstSkillMdArticle() {
 
         <div style={{ marginTop: "1.25rem" }}>
           {card({
-            label: "Terminal — Create reference file",
+            label: "Terminal - Create reference file",
             lang: "bash",
             snippet: mkdirRefSnippet,
             sectionKey: "mkdir-ref",
@@ -420,7 +440,7 @@ export function FirstSkillMdArticle() {
 
         <div style={{ marginTop: "1.25rem" }}>
           {card({
-            label: ".agents/skills/greet/SKILL.md — Updated with Reference Link",
+            label: ".agents/skills/greet/SKILL.md - Updated with Reference Link",
             lang: "markdown",
             snippet: updatedSkillSnippet,
             sectionKey: "updated-skill",
@@ -458,7 +478,7 @@ export function FirstSkillMdArticle() {
 
         <div style={{ marginTop: "1.25rem" }}>
           {card({
-            label: "SKILL.md — Model Invocation Disabled",
+            label: "SKILL.md - Model Invocation Disabled",
             lang: "markdown",
             snippet: disableInvocationSnippet,
             sectionKey: "disable-invocation",
@@ -487,7 +507,7 @@ export function FirstSkillMdArticle() {
 
         <div style={{ marginTop: "1.25rem" }}>
           {card({
-            label: "SKILL.md — Model Invocation Enabled",
+            label: "SKILL.md - Model Invocation Enabled",
             lang: "markdown",
             snippet: enableInvocationSnippet,
             sectionKey: "enable-invocation",
@@ -566,7 +586,7 @@ export function FirstSkillMdArticle() {
             <a href="https://agentskills.io/home" target="_blank" rel="noreferrer">
               Agent Skills Documentation
             </a>{" "}
-            — Learn more about open specifications and standards for agent skills.
+            - Learn more about open specifications and standards for agent skills.
           </li>
         </ul>
         <div style={{ marginTop: "1.5rem" }}>
