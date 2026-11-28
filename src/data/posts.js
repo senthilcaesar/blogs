@@ -724,8 +724,7 @@ export const posts = [
     tags: ['claude-code', 'delivery', 'pilot', 'roi', 'metrics', 'leadership'],
     excerpt:
       'Name the use case in one sentence. State what Claude Code will do in the context of a specific codebase or workflow.',
-    image: imageUrl('pilot-principle-impact.png'),
-    imageFit: 'contain',
+    image: imageUrl('pilot-principle-exp.png'),
     date: 'Nov 2026',
     priority: 'High',
     type: 'local',
