@@ -1,3 +1,4 @@
+import { DeliveryMethodologyArticle } from './DeliveryMethodologyArticle';
 import { ExpressingThoughtsClearlyArticle } from './ExpressingThoughtsClearlyArticle';
 import { PullRequestArticle } from './PullRequestArticle';
 import { RlhfArticle } from './RlhfArticle';
@@ -52,6 +53,7 @@ export const articleRegistry = {
   'your-claude-md-file': ClaudeMdFileArticle,
   'formulating-thoughts-to-expressing-them-clearly':
     ExpressingThoughtsClearlyArticle,
+  'the-pilot-principle': DeliveryMethodologyArticle,
   traces: TracesArticle,
   'agent-memory-tutorial': AgentMemoryTutorialArticle,
   'skills-you-still-need-ai-agents': SkillsYouStillNeedArticle,

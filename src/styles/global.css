@@ -731,7 +731,7 @@ body:has(.home-layout) .site-header__inner {
 ───────────────────────────────────────────── */
 .post-grid--grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
 }
 
@@ -2396,6 +2396,23 @@ body[data-theme='dark'] .highlight-sea {
   border-bottom: 0;
 }
 
+mark.highlight-violet,
+.highlight-violet {
+  background: color-mix(in srgb, #8b5cf6 12%, transparent);
+  color: inherit;
+  padding: 0.12em 0.3em;
+  border-radius: 3px;
+  border-bottom: 0;
+  font-weight: 600;
+}
+
+body[data-theme='dark'] mark.highlight-violet,
+body[data-theme='dark'] .highlight-violet {
+  background: color-mix(in srgb, #c4b5fd 20%, transparent);
+  color: inherit;
+  border-bottom: 0;
+}
+
 /* ─────────────────────────────────────────────
    Comments Section & Threaded Comments
 ───────────────────────────────────────────── */
@@ -3821,4 +3838,242 @@ button.code-window__tab {
 
 .code-window__tab--idle:hover {
   color: var(--cw-text);
+}
+
+/* Raised container with a soft shadow, for highlighting a block inside an article */
+.shadow-box {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 6px 6px 14px -6px rgba(61, 47, 36, 0.18);
+  padding: 1.25rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.shadow-box > :last-child {
+  margin-bottom: 0;
+}
+
+.shadow-box li::marker {
+  color: #8b5a2b;
+}
+
+body[data-theme='dark'] .shadow-box li::marker {
+  color: #c8955f;
+}
+
+body[data-theme='dark'] .shadow-box {
+  box-shadow: 6px 6px 14px -6px rgba(0, 0, 0, 0.55);
+}
+
+/* ─────────────────────────────────────────────
+   Tab card: file-divider tabs (left, centre, right) over one shared box
+───────────────────────────────────────────── */
+.tab-card__tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+}
+
+.tab-card__tab {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -1px;
+  padding: 0.5rem 2.4rem 0.55rem 1.1rem;
+  font-family: var(--font-article);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: var(--text-soft);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  justify-self: start;
+}
+
+.tab-card__tab:nth-child(2) {
+  justify-self: center;
+  padding: 0.5rem 2rem 0.55rem;
+}
+
+.tab-card__tab:nth-child(3) {
+  justify-self: end;
+  padding: 0.5rem 1.1rem 0.55rem 2.4rem;
+}
+
+/* The tab shape: square on the outer edge, sloping toward the box */
+.tab-card__tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 8px 10px 0 0;
+  transform: perspective(48px) rotateX(4deg);
+  transform-origin: bottom left;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms ease;
+}
+
+.tab-card__tab:nth-child(2)::before {
+  border-radius: 10px 10px 0 0;
+  transform-origin: bottom center;
+}
+
+.tab-card__tab:nth-child(3)::before {
+  border-radius: 10px 8px 0 0;
+  transform-origin: bottom right;
+}
+
+/* Selected tab: aluminium grey, opaque, and joined to the box */
+.tab-card__tab.is-active {
+  color: var(--text);
+}
+
+.tab-card__tab.is-active::before {
+  background: linear-gradient(var(--card-title-box-bg), var(--card-title-box-bg)), var(--surface-strong);
+}
+
+/* Hover: the tab stretches up a touch from its base and deepens slightly */
+.tab-card__tab:hover {
+  color: var(--text);
+}
+
+.tab-card__tab:hover::before {
+  transform: perspective(48px) rotateX(4deg) scaleY(1.12);
+  box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, 0.035);
+}
+
+body[data-theme='dark'] .tab-card__tab:hover::before {
+  box-shadow: inset 0 0 0 100vmax rgba(255, 255, 255, 0.04);
+}
+
+.tab-card__tab:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.tab-card__panel {
+  margin-top: 0;
+}
+
+/* Square the box corner under the selected outer tab */
+.tab-card[data-active='0'] .tab-card__panel {
+  border-top-left-radius: 0;
+}
+
+.tab-card[data-active='2'] .tab-card__panel {
+  border-top-right-radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-card__tab::before {
+    transition: none;
+  }
+
+  .tab-card__tab:hover::before {
+    transform: perspective(48px) rotateX(4deg);
+  }
+}
+
+/* Narrow screens: tabs shrink to fit side by side */
+@media (max-width: 640px) {
+  .tab-card__tab,
+  .tab-card__tab:nth-child(2),
+  .tab-card__tab:nth-child(3) {
+    font-size: 0.95rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+}
+
+/* Sub-list marked with a plain dash */
+.dash-list {
+  margin: 0.35rem 0 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.dash-list li {
+  margin-bottom: 0.15rem;
+}
+
+.dash-list li::marker {
+  content: '-  ';
+}
+
+/* Hover / focus pop-up explaining a term */
+.term-tip {
+  position: relative;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 0.25em;
+  outline: none;
+}
+
+.term-tip:focus-visible {
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.term-tip__popup {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  z-index: 20;
+  width: max-content;
+  max-width: 340px;
+  padding: 0.75rem 0.95rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-4px, -50%);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    visibility 0s linear 160ms;
+}
+
+.term-tip:hover .term-tip__popup,
+.term-tip:focus .term-tip__popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -50%);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-tip__popup {
+    transition: none;
+  }
+}
+
+/* Narrow screens: open below the term instead of beside it */
+@media (max-width: 640px) {
+  .term-tip__popup {
+    left: 0;
+    top: calc(100% + 8px);
+    max-width: min(300px, 80vw);
+    transform: translateY(-4px);
+  }
+
+  .term-tip:hover .term-tip__popup,
+  .term-tip:focus .term-tip__popup {
+    transform: translateY(0);
+  }
 }

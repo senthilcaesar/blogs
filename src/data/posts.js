@@ -718,6 +718,30 @@ export const posts = [
     },
   },
   {
+    title: 'The Pilot Principle: Demonstrate Measurable Impact Before You Scale',
+    slug: 'the-pilot-principle',
+    category: 'Brainstorm',
+    tags: ['claude-code', 'delivery', 'pilot', 'roi', 'metrics', 'leadership'],
+    excerpt:
+      'Name the use case in one sentence. State what Claude Code will do in the context of a specific codebase or workflow.',
+    image: imageUrl('pilot-principle-impact.png'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/the-pilot-principle',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'The Pilot Principle',
+      summary:
+        'Name the use case in one sentence. State what Claude Code will do in the context of a specific codebase or workflow.',
+    },
+  },
+  {
     title: 'Mongo DB Atlas for React Apps',
     slug: 'mongodb-atlas-for-react-apps',
     category: 'Data',

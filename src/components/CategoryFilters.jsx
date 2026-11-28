@@ -16,6 +16,7 @@ import {
   Database,
   Globe,
   HeartPulse,
+  Lightbulb,
   LayoutGrid,
   Ship,
   Users,
@@ -30,6 +31,7 @@ const iconByCategory = {
   Statistics: BarChart3,
   Data: Database,
   Leadership: Users,
+  Brainstorm: Lightbulb,
   'Web Dev': Globe,
   Export: Ship,
 };

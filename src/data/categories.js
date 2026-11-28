@@ -7,6 +7,7 @@ export const categories = [
   'Statistics',
   'Data',
   'Leadership',
+  'Brainstorm',
   'Web Dev',
   'Export',
 ];
