@@ -949,6 +949,29 @@ export const posts = [
     },
   },
   {
+    title: 'Are Ontologies Having Their Main Character Moment?',
+    slug: 'ontologies-main-character-moment',
+    category: 'Data',
+    tags: ['ontology', 'knowledge-graph', 'semantics', 'agentic-ai', 'enterprise-ai'],
+    excerpt:
+      'AI didn\'t invent the need for ontologies. It just made the consequences of not having shared business meaning a whole lot more obvious.',
+    image: imageUrl('semantic-model-ontology-knowledge-graph-cover.png'),
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/ontologies-main-character-moment',
+    author: {
+      name: 'Sabrina Rashiq (Stardog)',
+      role: 'Stardog',
+      initials: 'SR',
+    },
+    hero: {
+      eyebrow: 'Ontologies & Knowledge Graphs',
+      summary:
+        'Ontologies didn\'t suddenly become useful. AI just made their absence a LOT harder to ignore.',
+    },
+  },
+  {
     title: 'Career Move Advice: Market, Company, Job',
     slug: 'career-move-advice-andy-kofoid',
     category: 'Career',

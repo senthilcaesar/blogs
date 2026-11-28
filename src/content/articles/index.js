@@ -44,8 +44,10 @@ import { HooksInClaudeArticle } from './HooksInClaudeArticle';
 import { ClaudePluginsArticle } from './ClaudePluginsArticle';
 import { NamsAgenticGraphRagArticle } from './NamsAgenticGraphRagArticle';
 import { MicrosoftLearnMcpClaudeCodeArticle } from './MicrosoftLearnMcpClaudeCodeArticle';
+import { OntologiesMainCharacterArticle } from './OntologiesMainCharacterArticle';
 
 export const articleRegistry = {
+  'ontologies-main-character-moment': OntologiesMainCharacterArticle,
   'microsoft-learn-mcp-server-in-claude-code': MicrosoftLearnMcpClaudeCodeArticle,
   'hooks-in-claude': HooksInClaudeArticle,
   'claude-plugins': ClaudePluginsArticle,

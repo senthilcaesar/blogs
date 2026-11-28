@@ -1619,6 +1619,42 @@ body[data-theme='dark'] .video-panel__icon {
   color: var(--accent);
 }
 
+/* Numbered question list: one question per row, muted number badge */
+.article-content .question-list {
+  list-style: none;
+  counter-reset: question;
+  padding: 0;
+  margin: 1.25rem 0 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.article-content .question-list li {
+  counter-increment: question;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0.95rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+.article-content .question-list li::before {
+  content: counter(question);
+  flex: 0 0 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transform: translateY(-0.1rem);
+}
+
 blockquote {
   margin: 1.5rem 0;
   padding: 2px 0 2px 16px;
