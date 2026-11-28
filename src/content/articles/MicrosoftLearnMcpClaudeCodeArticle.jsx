@@ -1,5 +1,7 @@
 import { CodeCard } from '../../components/CodeCard';
 
+const listToolsImg = new URL('../../../images/mcp-list-tools-request-result.png', import.meta.url).href;
+
 const openCode = `claude`;
 
 const installCode = `/plugin marketplace add microsoftdocs/mcp
@@ -86,6 +88,14 @@ export function MicrosoftLearnMcpClaudeCodeArticle() {
           <strong>ListToolsRequest/ListToolsResult:</strong> The client asks the server
           &ldquo;What tools do you provide?&rdquo; and gets back a list of available tools.
         </p>
+
+        <figure>
+          <img
+            src={listToolsImg}
+            alt="MCP communication: the MCP client in our server sends a ListToolsRequest (give me a list of tools you provide) to the MCP server for Microsoft Learn, which replies with a ListToolsResult (here are the tools I can run)."
+            loading="lazy"
+          />
+        </figure>
 
         <p style={{ marginTop: '1.25rem' }}>
           The Microsoft Learn MCP Server currently exposes three tools that allow Claude Code to
