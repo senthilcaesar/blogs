@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Check, Copy, Maximize2, Minimize2 } from 'lucide-react';
 import { highlight } from '../lib/highlight';
 
 const LANG_LABELS = {
@@ -43,9 +44,11 @@ const labelFor = (lang) => LANG_LABELS[lang?.toLowerCase()] || lang || 'Code';
  * - `tall`     caps the body height and scrolls
  * - `tabs`     [{ label, code, lang, content? }] shows one tab per snippet;
  *              the copy button copies the active one
+ * - `expandable` adds a button that opens the card full screen (Esc closes it)
  */
-export function CodeCard({ code = '', lang, file, title, tall = false, children, style, className = '', tabs }) {
+export function CodeCard({ code = '', lang, file, title, tall = false, children, style, className = '', tabs, expandable = false }) {
   const [copied, setCopied] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [active, setActive] = useState(0);
   const preRef = useRef(null);
 
@@ -65,8 +68,29 @@ export function CodeCard({ code = '', lang, file, title, tall = false, children,
     }
   };
 
-  return (
-    <figure className={`code-window ${className}`.trim()} style={style}>
+  useEffect(() => {
+    if (!expanded) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setExpanded(false);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [expanded]);
+
+  const renderWindow = (full) => (
+    <figure
+      className={`code-window ${full ? 'code-window--full' : ''} ${className}`.trim()}
+      style={full ? undefined : style}
+      role={full ? 'dialog' : undefined}
+      aria-modal={full ? 'true' : undefined}
+      aria-label={full ? label : undefined}
+      onClick={full ? (e) => e.stopPropagation() : undefined}
+    >
       <div className="code-window__bar">
         <span className="code-window__dots" aria-hidden="true">
           <span />
@@ -103,10 +127,38 @@ export function CodeCard({ code = '', lang, file, title, tall = false, children,
         >
           {copied ? <Check size={16} strokeWidth={2.25} /> : <Copy size={16} strokeWidth={2.25} />}
         </button>
+        {expandable && (
+          <button
+            type="button"
+            className="code-window__copy code-window__expand"
+            onClick={() => setExpanded(!full)}
+            title={full ? 'Exit full screen (Esc)' : 'Full screen'}
+            aria-label={full ? 'Exit full screen' : `Open ${label} full screen`}
+            autoFocus={full}
+          >
+            {full ? <Minimize2 size={16} strokeWidth={2.25} /> : <Maximize2 size={16} strokeWidth={2.25} />}
+          </button>
+        )}
       </div>
-      <pre ref={preRef} className={`code-block ${tall ? 'code-block--tall' : ''}`.trim()}>
+      <pre
+        ref={full ? undefined : preRef}
+        className={`code-block ${tall && !full ? 'code-block--tall' : ''}`.trim()}
+      >
         <code>{pane.content ?? highlight(pane.code ?? '', pane.lang)}</code>
       </pre>
     </figure>
+  );
+
+  return (
+    <>
+      {renderWindow(false)}
+      {expanded &&
+        createPortal(
+          <div className="code-window-overlay" onClick={() => setExpanded(false)}>
+            {renderWindow(true)}
+          </div>,
+          document.body,
+        )}
+    </>
   );
 }

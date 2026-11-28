@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400..700&family=Belgrano&family=Libre+Baskerville:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400..700&family=Belgrano&family=Libre+Baskerville:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600;700&display=swap');
 
 /* ─────────────────────────────────────────────
    Editorial Paper Design System
@@ -360,12 +360,19 @@ body:has(.home-layout) .site-header {
 }
 
 .brand h1 {
-  font-family: 'Libre Baskerville', var(--font-display);
+  font-family: 'Faculty Glyphic', var(--font-display);
   font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  font-weight: 400;
+  letter-spacing: 0;
   margin: 0;
   line-height: 1;
+  /* Deep take on Apple's iPhone 17 Pro "Cosmic Orange" */
+  color: #d9611e;
+  transition: filter 150ms ease;
+}
+
+.brand:hover h1 {
+  filter: brightness(1.15);
 }
 
 .brand:hover {
@@ -3515,6 +3522,43 @@ body[data-theme='dark'] {
 
 .code-window__copy--copied {
   background: #a6d189;
+}
+
+/* Full-screen button sits beside the copy button */
+.code-window__copy + .code-window__expand {
+  margin-left: 0;
+}
+
+/* Expanded code card: an overlay above the page */
+.code-window-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  padding: 24px;
+  background: rgba(13, 17, 23, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.code-window.code-window--full {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.code-window--full pre.code-block {
+  flex: 1;
+  overflow: auto;
+  font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+  .code-window-overlay {
+    padding: 12px;
+  }
 }
 
 .article-content .code-window pre,

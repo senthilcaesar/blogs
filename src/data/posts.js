@@ -3,6 +3,30 @@ const imageUrl = (fileName) =>
 
 export const posts = [
   {
+    title: 'Install Microsoft Learn MCP Server in Claude Code',
+    slug: 'microsoft-learn-mcp-server-in-claude-code',
+    category: 'AI',
+    tags: ['ai', 'mcp', 'claude-code', 'plugins', 'microsoft-learn', 'tutorial'],
+    excerpt:
+      'The Microsoft Learn MCP Server currently exposes three tools that allow Claude Code to interact with official Microsoft documentation.',
+    image: imageUrl('microsoft-learn-mcp-claude-code.png'),
+    imageFit: 'contain',
+    date: 'Nov 2026',
+    priority: 'High',
+    type: 'local',
+    route: '/posts/microsoft-learn-mcp-server-in-claude-code',
+    author: {
+      name: 'Senthil Palanivelu',
+      role: 'AI Architecture Explainer',
+      initials: 'SP',
+    },
+    hero: {
+      eyebrow: 'Model Context Protocol',
+      summary:
+        'The Microsoft Learn MCP Server currently exposes three tools that allow Claude Code to interact with official Microsoft documentation.',
+    },
+  },
+  {
     title: 'Neo4j Intro Workshop',
     slug: 'neo4j-intro-workshop',
     category: 'Data',

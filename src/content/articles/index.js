@@ -42,8 +42,10 @@ import { ClaudeMdFileArticle } from './ClaudeMdFileArticle';
 import { HooksInClaudeArticle } from './HooksInClaudeArticle';
 import { ClaudePluginsArticle } from './ClaudePluginsArticle';
 import { NamsAgenticGraphRagArticle } from './NamsAgenticGraphRagArticle';
+import { MicrosoftLearnMcpClaudeCodeArticle } from './MicrosoftLearnMcpClaudeCodeArticle';
 
 export const articleRegistry = {
+  'microsoft-learn-mcp-server-in-claude-code': MicrosoftLearnMcpClaudeCodeArticle,
   'hooks-in-claude': HooksInClaudeArticle,
   'claude-plugins': ClaudePluginsArticle,
   'nams-agentic-graphrag': NamsAgenticGraphRagArticle,
