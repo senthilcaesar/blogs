@@ -26,6 +26,10 @@ export function ClaudeMdFileArticle() {
         One of the most useful features in Claude Code is the <code>CLAUDE.md</code> file. It gives Claude Code persistent memory about your project.
       </p>
 
+      <p style={{ marginTop: '1rem' }}>
+        <strong><code>CLAUDE.md</code> is not documentation. It is institutional memory Claude reads every session.</strong>
+      </p>
+
       <section className="article-panel">
         <h2>The Problem It Solves</h2>
         <p>
@@ -149,6 +153,10 @@ export function ClaudeMdFileArticle() {
 
       <p style={{ marginTop: '1.5rem' }}>
         The difference between a frustrating Claude Code session and a productive one often comes down to context - and the <code>CLAUDE.md</code> file is how you provide that context. Start with your stack, your preferences, and your commands, then build from there as you go.
+      </p>
+
+      <p style={{ marginTop: '1rem' }}>
+        A team that invests 30 minutes a week in evolving their <code>CLAUDE.md</code> files gets compounding returns. Claude&apos;s behavior at the start of every session reflects the quality of what the team has written. A generic <code>CLAUDE.md</code> produces a generic Claude. A well-maintained <code>CLAUDE.md</code> encodes the team&apos;s conventions, patterns, preferred tools, and domain context.
       </p>
     </>
   );
