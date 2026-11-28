@@ -1,5 +1,10 @@
 import { ArticleToc } from '../../components/ArticleToc';
 
+const ontologyDeckPdf = new URL(
+  '../../../files/ontology-driven-semantic-layer-stardog.pdf',
+  import.meta.url,
+).href;
+
 const vendorQuestions = [
   'What kinds of business relationships and rules can it represent?',
   'Can that knowledge be shared across different applications and AI agents?',
@@ -16,6 +21,7 @@ const tocGroups = [
   { id: 'same-thing', label: 'But Are We All Talking About the Same Thing?' },
   { id: 'funny-thing', label: 'The Funny Thing About All of This…' },
   { id: 'main-character-moment', label: 'So, Are Ontologies Having Their Main Character Moment?' },
+  { id: 'resources', label: 'Resources' },
 ];
 
 export function OntologiesMainCharacterArticle() {
@@ -262,6 +268,28 @@ export function OntologiesMainCharacterArticle() {
             AI didn&apos;t invent the need for ontologies. It just made the consequences of not having shared business meaning a whole lot more obvious.
           </p>
         </blockquote>
+      </section>
+
+      <section className="article-panel">
+        <h2 id="resources">Resources</h2>
+        <ul className="bullet-list" style={{ marginTop: '1rem' }}>
+          <li>
+            <a href={ontologyDeckPdf} target="_blank" rel="noreferrer">
+              Building Enterprise AI Agents with Claude and an Ontology-Driven Semantic Layer
+            </a>{' '}
+            (PDF, Navin Sharma, Stardog)
+          </li>
+          <li>
+            <a
+              href="https://info.stardog.com/building-enterprise-ai-agents-with-claude"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Building Enterprise AI Agents with Claude
+            </a>{' '}
+            (Stardog)
+          </li>
+        </ul>
       </section>
     </>
   );
